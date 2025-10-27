@@ -23,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={`${inter.variable} ${inter.variable} antialiased`}
+        className={inter.className}
       >
         {children}
       </body>

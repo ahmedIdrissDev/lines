@@ -1,9 +1,11 @@
+import Chat from '@/components/Chat'
+import Title from '@/components/section'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-      
+      <Chat/>
     </div>
   )
 }

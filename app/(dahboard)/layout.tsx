@@ -1,3 +1,4 @@
+import Navbar from '@/components/Navbar';
 import React from 'react'
 
 const layout = ({
@@ -6,21 +7,11 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='grid grid-cols-[200px_1fr] h-dvh'>
-      <div className="w-full flex items-start bg-tgcc-50/45 h-full">
-        <div className="flex w-full justify-center items-center">
+    <div className='flex w-full flex-col gap-1 h-dvh'>
+      
+    <Navbar/>
 
-<svg className='w-34' width="402" height="131" viewBox="0 0 402 131" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M401.1 69.9568V55H335.3H318V69.9568V115.01V130.058H335.3H401.1V115.01H335.3V69.9568H401.1Z" fill="#363636"/>
-<path d="M300.1 69.9568V55H234.4H217V69.9568V115.01V130.058H234.4H300.1V115.01H234.4V69.9568H300.1Z" fill="#363636"/>
-<path d="M133.5 115.01V69.9568H199.3V55H133.5H117V69.9568V115.01V130.058H133.5H182.8H199.3V115.01V99.9616V85.0048V84.9136H182.8V85.0048H149.8V99.9616H182.8V115.01H133.5Z" fill="#363636"/>
-<path d="M0 30.9V129.5H40.6V63.8H7.7V47.2H90.2V63.8H57.7V129.5H99.3V0L0 30.9Z" fill="#0B5ECC"/>
-</svg>
-        </div>
-
-
-      </div>
-      <div className="w-full h-full">
+      <div className="w-full p-2 h-full">
         {children}
       </div>
 
