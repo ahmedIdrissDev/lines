@@ -21,21 +21,21 @@ import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 
 export const description = "A radial chart with text"
 
-const chartData = [
-  { browser: "safari", visitors: 1, fill: "var(--color-safari)" },
-]
-
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  safari: {
-    label: "Safari",
-    color: "#b85b16",
-  },
-} satisfies ChartConfig
 
 export function ChartRadialText() {
+  const chartData = [
+    { browser: "safari", visitors: 1, fill: "var(--color-safari)" },
+  ]
+  
+  const chartConfig = {
+    visitors: {
+      label: "Visitors",
+    },
+    safari: {
+      label: "Safari",
+      color: "#b85b16",
+    },
+  } satisfies ChartConfig
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">

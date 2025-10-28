@@ -1,5 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 interface Employee {
   Matricule: string;
@@ -28,29 +37,35 @@ const Employees = () => {
   } ,[])
   console.log(employee)
   return (
-    <div className='w-full py-3 flex flex-col space-y-2 h-dvh'>
-      <div className="w-full h-full p-2.5 rounded-2xl border border-neutral-200">
+    <>
+    <div className="border border-neutral-200 rounded-2xl">
+    <Table className=''>
+  <TableHeader>
+    <TableRow>
+      <TableHead className="w-[100px]">Matricule</TableHead>
+      <TableHead>function</TableHead>
+      <TableHead>status</TableHead>
+      <TableHead className="text-right">Project</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
       {
         employee?.map(({Matricule ,Project ,function:fun ,status ,fullname} , index)=>(
-          <div key={index} className="w-full px-3 flex justify-between items-center border border-neutral-100 h-10 rounded-md">
-            <span>{Matricule} </span>
-            <span>{fullname} </span>
-
-
-            <span>{fun} </span>
-            <span className='bg-green-300 rounded-full px-1.5'>{status} </span>
-            <span>{Project} </span>
-
-
-
-          </div>
+         <TableRow>
+      <TableCell className="font-medium">{Matricule} </TableCell>
+      <TableCell>{fun} </TableCell>
+      <TableCell>{fullname} </TableCell>
+      <TableCell className="text-right">{Project} </TableCell>
+    </TableRow>
 
         ))
       }
     
-      </div>
-
+    
+  </TableBody>
+</Table>
     </div>
+    </>
   )
 }
 
