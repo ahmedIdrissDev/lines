@@ -11,7 +11,7 @@ const Project = () => {
   return (
    <Select>
   <SelectTrigger className="w-[180px]">
-    <SelectValue placeholder="Theme" />
+    <SelectValue placeholder="Project" />
   </SelectTrigger>
   <SelectContent>
     <SelectItem value="light">CHU RABAT</SelectItem>

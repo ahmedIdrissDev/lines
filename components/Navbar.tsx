@@ -6,7 +6,7 @@ import Project from './Project'
 
 const Navbar = () => {
   return (
-    <div className='flex h-12 justify-between items-center w-full  px-2'>
+    <div className='flex h-12 justify-between items-center w-full  py-3 px-2'>
   <h1 className='text-2xl'>Tgcc teames</h1>
 
     <div className=" flex items-center gap-2">

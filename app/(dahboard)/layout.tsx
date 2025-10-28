@@ -10,10 +10,10 @@ const layout = ({
     <div className='flex w-full flex-col gap-1 h-dvh'>
       
     <Navbar/>
-
-      <div className="w-full p-2 h-full">
+      <div className="w-full p-2 h-dvh">
         {children}
       </div>
+
 
     </div>
   )
