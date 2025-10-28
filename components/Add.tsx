@@ -14,13 +14,23 @@ const Add = () => {
         {
           open && 
           <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
-            <div className="bg-white p-2 w-1/2 h-1/2 rounded-2xl">
+            <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-1/2 rounded-2xl">
               <h1>Add new </h1>
-              <form action="">
-                <input type="text" placeholder='Code' />
-                <input type="text" placeholder='Full name' />
-                <input type="text" placeholder='function' />
-                <input type="text" placeholder='status' />
+              <form className='flex flex-col gap-2' action="">
+                <input className='input' type="text" placeholder='Code' />
+                <input className='input' type="text" placeholder='Full name' />
+                <input className='input' type="text" placeholder='function' />
+                <input className='input' type="text" placeholder='status' />
+            <input list="fruits" id="fruit" className='input' name="fruit" />
+
+<datalist id="fruits">
+  <option value="Apple">Ads Acess</option>
+  <option value="Apple">Ads Acess</option>
+  <option value="Apple">Ads Acess</option>
+  <option value="Apple">Ads Acess</option>
+
+</datalist>
+
               </form>
             </div>
           </div>
