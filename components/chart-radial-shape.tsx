@@ -18,24 +18,28 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+import { store } from "@/store"
 
 export const description = "A radial chart with a custom shape"
 
-const chartData = [
-  { browser: "safari", visitors: 10, fill: "var(--color-safari)" },
-]
+
 
 const chartConfig = {
   visitors: {
-    label: "Visitors",
+    label: "employees",
   },
   safari: {
     label: "Safari",
-    color: "#ec9023",
+      color: 'var(--color-tgcc-300)',
   },
 } satisfies ChartConfig
 
 export function ChartTootal() {
+  const {data} = store()
+  const ads = data.filter(({function:fun})=> fun==='ads access')
+  const chartData = [
+  { browser: "safari", visitors: ads.length, fill: "var(--color-safari)" },
+]
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -97,7 +101,7 @@ export function ChartTootal() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 leading-none font-medium">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+          this Showing the total  of you Employee <TrendingUp className="h-4 w-4" />
         </div>
         <div className="text-muted-foreground leading-none">
           Showing total visitors for the last 6 months

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import {
   Select,
@@ -6,10 +7,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { store } from '@/store'
 
 const Project = () => {
+  const {setProject} = store()
   return (
-   <Select>
+   <Select onValueChange={e=>setProject(e)}>
   <SelectTrigger className="w-[180px]">
     <SelectValue placeholder="Project" />
   </SelectTrigger>

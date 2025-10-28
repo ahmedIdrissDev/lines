@@ -16,7 +16,12 @@ const Add = () => {
           <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
             <div className="bg-white p-2 w-1/2 h-1/2 rounded-2xl">
               <h1>Add new </h1>
-            
+              <form action="">
+                <input type="text" placeholder='Code' />
+                <input type="text" placeholder='Full name' />
+                <input type="text" placeholder='function' />
+                <input type="text" placeholder='status' />
+              </form>
             </div>
           </div>
         }

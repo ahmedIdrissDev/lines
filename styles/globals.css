@@ -7,17 +7,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
- --color-tgcc-50: #fef9ee;
---color-tgcc-100: #fdf2d7;
---color-tgcc-200: #f9e1af;
---color-tgcc-300: #f7d391;
---color-tgcc-400: #f0aa47;
---color-tgcc-500: #ec9023;
---color-tgcc-600: #de7718;
---color-tgcc-700: #b85b16;
---color-tgcc-800: #92481a;
---color-tgcc-900: #763d18;
---color-tgcc-950: #401d0a;
+--color-tgcc-50: #f3f1ff;
+--color-tgcc-100: #eae5ff;
+--color-tgcc-200: #d6cfff;
+--color-tgcc-300: #b9a8ff;
+--color-tgcc-400: #9877ff;
+--color-tgcc-500: #7940ff;
+--color-tgcc-600: #6a19ff;
+--color-tgcc-700: #6819fa;
+--color-tgcc-800: #4d06d1;
+--color-tgcc-900: #4107ab;
+--color-tgcc-950: #240075;
+
+
 
 
 --color-sidebar-ring: var(--sidebar-ring);

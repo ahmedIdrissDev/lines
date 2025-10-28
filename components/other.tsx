@@ -20,30 +20,31 @@ import {
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { store } from "@/store"
 
-export const description = "A radial chart with text"
+export const description = "A radial chart with a custom shape"
 
 
-export function ChartRadialText() {
-    const {data} = store()
-  
+
+const chartConfig = {
+  visitors: {
+    label: "employees",
+  },
+  safari: {
+    label: "Safari",
+      color: 'var(--color-tgcc-300)',
+  },
+} satisfies ChartConfig
+
+export function Other() {
+  const {data} = store()
+  const Responsible  = data.filter(({function:fun})=> fun==='Responsible')
   const chartData = [
-    { browser: "safari", visitors: data.length , fill: "var(--color-safari)" },
-  ]
-  
-  const chartConfig = {
-    visitors: {
-      label: "employees",
-    },
-    safari: {
-      label: "Safari",
-      color: 'var(--color-tgcc-500)',
-    },
-  } satisfies ChartConfig
+  { browser: "safari", visitors: Responsible .length, fill: "var(--color-safari)" },
+]
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Team Size Summary</CardTitle>
-        <CardDescription>total number of employees in team</CardDescription>
+        <CardTitle>Responsible </CardTitle>
+        <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -52,10 +53,9 @@ export function ChartRadialText() {
         >
           <RadialBarChart
             data={chartData}
-            startAngle={0}
-            endAngle={250}
+            endAngle={100}
             innerRadius={80}
-            outerRadius={110}
+            outerRadius={140}
           >
             <PolarGrid
               gridType="circle"
@@ -64,7 +64,7 @@ export function ChartRadialText() {
               className="first:fill-muted last:fill-background"
               polarRadius={[86, 74]}
             />
-            <RadialBar dataKey="visitors" background cornerRadius={10} />
+            <RadialBar dataKey="visitors" background />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
