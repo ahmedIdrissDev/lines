@@ -13,17 +13,16 @@ interface StoreProps{
    data: Employee[] ,
    Project:string ,
    setdata:(data:Employee[] )=> void ,
-   setProject:(argm:string)=> void
+   setProject:(argm:Employee[])=> void
 }
 export const store = create<StoreProps>((set)=>({
     data:[] ,
-    Project:'' ,
+    Project:'',
     setProject(argm) {
-        set((state)=>({data:[ ...state.data.filter(({Project})=> Project===argm)]}))
+        set((state)=>({data :[...argm]}))
     },
     setdata(data) {
-
-         set((state)=>({data: [...data]}))
+         set(()=>({data: [...data]}))
     },
    
 }))

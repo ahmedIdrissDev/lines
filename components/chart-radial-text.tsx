@@ -35,7 +35,7 @@ export function ChartRadialText() {
       label: "employees",
     },
     safari: {
-      label: "Safari",
+      label: "employees",
       color: 'var(--color-tgcc-500)',
     },
   } satisfies ChartConfig
@@ -64,7 +64,7 @@ export function ChartRadialText() {
               className="first:fill-muted last:fill-background"
               polarRadius={[86, 74]}
             />
-            <RadialBar dataKey="visitors" background cornerRadius={10} />
+            <RadialBar dataKey="visitors" background cornerRadius={0} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
