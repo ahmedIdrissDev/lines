@@ -6,7 +6,7 @@ import Project from './Project'
 
 const Navbar = () => {
   return (
-    <div className='flex px-6 h-12 justify-between items-center w-full  py-3 '>
+    <div className='flex px-3 md:px-6 h-12 justify-between items-center w-full  py-3 '>
 <svg className='w-20' width="402" height="131" viewBox="0 0 402 131" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M401.1 69.9568V55H335.3H318V69.9568V115.01V130.058H335.3H401.1V115.01H335.3V69.9568H401.1Z" fill="black"/>
 <path d="M300.1 69.9568V55H234.4H217V69.9568V115.01V130.058H234.4H300.1V115.01H234.4V69.9568H300.1Z" fill="black"/>
