@@ -26,7 +26,7 @@ const Project = () => {
   }
   return (
    <Select onValueChange={selectProject}>
-  <SelectTrigger className="w-12 md:w-[180px]">
+  <SelectTrigger className="w-12 md:w-[180px] bg-white">
     <SelectValue placeholder="Project" />
   </SelectTrigger>
   <SelectContent>
