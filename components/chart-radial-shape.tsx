@@ -64,7 +64,7 @@ export function ChartTootal() {
               className="first:fill-muted last:fill-background"
               polarRadius={[86, 74]}
             />
-            <RadialBar dataKey="visitors" background />
+            <RadialBar dataKey="employees" background />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
@@ -88,7 +88,7 @@ export function ChartTootal() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Ads 
                         </tspan>
                       </text>
                     )

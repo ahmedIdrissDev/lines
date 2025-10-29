@@ -1,4 +1,3 @@
-'use client'
 import Chat from '@/components/Chat'
 import Employees from '@/components/employees'
 import Access from '@/components/kits/Access'

@@ -88,7 +88,7 @@ export function ChartRadialText() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Employees
                         </tspan>
                       </text>
                     )
