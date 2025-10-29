@@ -38,75 +38,75 @@ export function ChartTootal() {
   const {data} = store()
   const ads = data.filter(({function:fun})=> fun==='ads access')
   const chartData = [
-  { browser: "safari", visitors: ads.length, fill: "var(--color-safari)" },
+  { browser: "safari", visitors: ads.length , fill: "var(--color-safari)" },
 ]
   return (
     <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Ads Access</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-          <RadialBarChart
-            data={chartData}
-            endAngle={100}
-            innerRadius={80}
-            outerRadius={140}
-          >
-            <PolarGrid
-              gridType="circle"
-              radialLines={false}
-              stroke="none"
-              className="first:fill-muted last:fill-background"
-              polarRadius={[86, 74]}
-            />
-            <RadialBar dataKey="employees" background />
-            <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
-              <Label
-                content={({ viewBox }) => {
-                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                    return (
-                      <text
-                        x={viewBox.cx}
-                        y={viewBox.cy}
-                        textAnchor="middle"
-                        dominantBaseline="middle"
-                      >
-                        <tspan
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          className="fill-foreground text-4xl font-bold"
-                        >
-                          {chartData[0].visitors.toLocaleString()}
-                        </tspan>
-                        <tspan
-                          x={viewBox.cx}
-                          y={(viewBox.cy || 0) + 24}
-                          className="fill-muted-foreground"
-                        >
-                          Ads 
-                        </tspan>
-                      </text>
-                    )
-                  }
-                }}
-              />
-            </PolarRadiusAxis>
-          </RadialBarChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 leading-none font-medium">
-          this Showing the total  of you Employee <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="text-muted-foreground leading-none">
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
-    </Card>
+         <CardHeader className="items-center pb-0">
+           <CardTitle>Security guard </CardTitle>
+           <CardDescription> total of JSecurity guard </CardDescription>
+         </CardHeader>
+         <CardContent className="flex-1 pb-0">
+           <ChartContainer
+             config={chartConfig}
+             className="mx-auto aspect-square max-h-[250px]"
+           >
+             <RadialBarChart
+               data={chartData}
+               endAngle={100}
+               innerRadius={80}
+               outerRadius={140}
+             >
+               <PolarGrid
+                 gridType="circle"
+                 radialLines={false}
+                 stroke="none"
+                 className="first:fill-muted last:fill-background"
+                 polarRadius={[86, 74]}
+               />
+               <RadialBar dataKey="visitors" background />
+               <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                 <Label
+                   content={({ viewBox }) => {
+                     if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                       return (
+                         <text
+                           x={viewBox.cx}
+                           y={viewBox.cy}
+                           textAnchor="middle"
+                           dominantBaseline="middle"
+                         >
+                           <tspan
+                             x={viewBox.cx}
+                             y={viewBox.cy}
+                             className="fill-foreground text-4xl font-bold"
+                           >
+                             {chartData[0].visitors.toLocaleString()}
+                           </tspan>
+                           <tspan
+                             x={viewBox.cx}
+                             y={(viewBox.cy || 0) + 24}
+                             className="fill-muted-foreground"
+                           >
+                             Security guard
+                           </tspan>
+                         </text>
+                       )
+                     }
+                   }}
+                 />
+               </PolarRadiusAxis>
+             </RadialBarChart>
+           </ChartContainer>
+         </CardContent>
+         <CardFooter className="flex-col gap-2 text-sm">
+           <div className="flex items-center gap-2 leading-none font-medium">
+             Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+           </div>
+           <div className="text-muted-foreground leading-none">
+             Showing total visitors for the last 6 months
+           </div>
+         </CardFooter>
+       </Card>
   )
 }

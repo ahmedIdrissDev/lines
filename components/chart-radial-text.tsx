@@ -35,7 +35,7 @@ export function ChartRadialText() {
       label: "employees",
     },
     safari: {
-      label: "employees",
+      label: "Safari",
       color: 'var(--color-tgcc-500)',
     },
   } satisfies ChartConfig
