@@ -36,7 +36,7 @@ const Employees = () => {
     <Table className=''>
   <TableHeader>
     <TableRow className=''>
-      <TableHead className="w-[100px]">Matricule</TableHead>
+      <TableHead className="w-[100px]">Registration number</TableHead>
       <TableHead>function</TableHead>
       <TableHead>Full name</TableHead>
       <TableHead>Status</TableHead>
