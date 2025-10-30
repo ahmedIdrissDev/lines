@@ -88,7 +88,7 @@ export function Other() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Responsible
+                          Absent
                         </tspan>
                       </text>
                     )

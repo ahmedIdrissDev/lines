@@ -10,7 +10,6 @@ const page = () => {
  
   return (
    <>
-       <UsersList/>
        <AI/>
          <Chat/>
          <div className=""></div>
