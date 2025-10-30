@@ -1,3 +1,4 @@
+import AI from '@/components/ai'
 import Chat from '@/components/Chat'
 import Employees from '@/components/employees'
 import Access from '@/components/kits/Access'
@@ -10,7 +11,7 @@ const page = () => {
   return (
    <>
        <UsersList/>
-       <Title/>
+       <AI/>
          <Chat/>
          <div className=""></div>
 <Employees/>

@@ -42,23 +42,41 @@ const Add = () => {
         {
           open && 
           <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
-            <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-1/2 rounded-2xl">
+            <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-1/2 rounded-md border border-neutral-200">
               <h1>Add new </h1>
               <form className='flex flex-col gap-2' onSubmit={HendleAddEmployes}>
-                <input className='input' type="text" placeholder='Code' />
-                <input className='input' type="text" placeholder='Full name' />
-                <input className='input' type="text" placeholder='function' />
-                <input className='input' type="text" placeholder='status' />
-            <input list="fruits" id="fruit" className='input' name="fruit" />
+                <div className="flex flex-col gap-1">
+                   <label htmlFor="">Code</label>
+                <input className='input' required minLength={1} type="number" placeholder='Code' />
+                </div>
+                  <div className="flex flex-col gap-1">
+                   <label htmlFor="">Full name</label>
+                   <div className="flex justify-between items-center gap-2">
+                   <input className='input' required minLength={1} type="text" placeholder='Full name' />
+                                      <input className='input' required minLength={1} type="text" placeholder='Full name' />
 
-<datalist id="fruits">
-  <option value="Apple">Ads Acess</option>
-  <option value="Apple">Ads Acess</option>
-  <option value="Apple">Ads Acess</option>
-  <option value="Apple">Ads Acess</option>
+                   </div>
+                </div>
+                  <div className="flex flex-col gap-1">
+                   <label htmlFor="">Lot</label>
+                   <input className='input' required minLength={1} type="text" placeholder='lot' />
+                </div>
+                 <div className="flex flex-col gap-1">
+                   <label htmlFor="">function</label>
+<select name=''  className='input' id="fruits" >
+  <option className='w-full bg-amber-300' value="Apple">Ads Acess</option>
+  <option value="Apple">Bo</option>
+  <option value="Apple">Ma</option>
+  <option value="Apple">HR</option>
 
-</datalist>
-   <button className='w-full h-11 bg-blue-700 text-white rounded-2xl '>Add new Employee</button>
+</select>
+                </div>
+
+<div className="flex justify-between gap-2 items-center">
+      <button onClick={openclose} className='w-[20%] h-11 border border-neutral-200  rounded-md cursor-pointer '>cancel</button>
+
+   <button className='w-full h-11 bg-blue-950 text-white rounded-md cursor-pointer '>Add new Employee</button>
+</div>
               </form>
             </div>
           </div>

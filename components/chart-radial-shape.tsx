@@ -36,7 +36,7 @@ const chartConfig = {
 
 export function ChartTootal() {
   const {data} = store()
-  const ads = data.filter(({function:fun})=> fun==='ads access')
+  const ads = data.filter(({function:fun})=> fun==='Ads Accès')
   const chartData = [
   { browser: "safari", visitors: ads.length , fill: "var(--color-safari)" },
 ]

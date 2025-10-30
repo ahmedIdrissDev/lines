@@ -138,10 +138,14 @@
     @apply bg-background text-foreground;
 
   }
+  label{
+    @apply text-sm opacity-80
+  }
 
 }
 @layer components{
   .input{
-    @apply w-full px-2 border border-neutral-200 rounded-2xl h-11 outline-0 focus:outline-1 focus:outline-tgcc-600
+    @apply w-full px-2 border border-neutral-200 rounded-md h-11 outline-0 focus:outline-1 focus:outline-tgcc-600
   }
+  
 }
