@@ -32,7 +32,7 @@ const Employees = () => {
   } ,[])
   return (
     <>
-    <div className="border border-neutral-200 rounded-2xl">
+    <div className="border bg-white border-neutral-200 rounded-2xl">
     <Table className=''>
   <TableHeader>
     <TableRow className=''>

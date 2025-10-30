@@ -27,7 +27,7 @@ export function ChartRadialText() {
     const {data} = store()
   
   const chartData = [
-    { browser: "safari", visitors: data.length , fill: "var(--color-safari)" },
+    { browser: "safari", visitors: data.length , fill: "var(--color-tgcc-300)" },
   ]
   
   const chartConfig = {

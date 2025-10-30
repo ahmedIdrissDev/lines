@@ -30,7 +30,7 @@ const chartConfig = {
   },
   safari: {
     label: "Safari",
-      color: 'var(--color-tgcc-300)',
+      color: 'var(--color-tgcc-600)',
   },
 } satisfies ChartConfig
 
@@ -38,7 +38,7 @@ export function ChartTootal() {
   const {data} = store()
   const ads = data.filter(({status})=> status==='active')
   const chartData = [
-  { browser: "safari", visitors: ads.length , fill: "var(--color-safari)" },
+  { browser: "safari", visitors: ads.length , fill: "var(--color-tgcc-500)" },
 ]
   return (
     <Card className="flex flex-col">

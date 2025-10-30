@@ -38,7 +38,7 @@ export function Other() {
   const {data} = store()
   const Responsible  = data.filter(({status})=> status!=='active')
   const chartData = [
-  { browser: "safari", visitors: Responsible .length, fill: "var(--color-safari)" },
+  { browser: "safari", visitors: Responsible .length, fill: "var(--color-tgcc-300)" },
 ]
   return (
     <Card className="flex flex-col">
