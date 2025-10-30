@@ -5,7 +5,7 @@ export interface Employee {
   lastname: string;
   firstname: string;
   function: string;
-  tol:string ,
+  lot:string ,
   id: string; 
   status: 'active' | 'inactive';
 }

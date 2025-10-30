@@ -5,7 +5,6 @@ const UsersList = async () => {
 
     const client = await clerkClient()
     const users = await client.users.getUserList()
-    console.log(users)
   return (
     <div>
       

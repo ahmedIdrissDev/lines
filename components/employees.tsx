@@ -30,6 +30,10 @@ const Employees = () => {
   
    })()
   } ,[])
+  const grup = Object.groupBy(data , ({lot})=> lot)  
+  const key = Object.keys(grup)
+  console.log(key)
+  
   return (
     <>
     <div className="border bg-white border-neutral-200 rounded-2xl">

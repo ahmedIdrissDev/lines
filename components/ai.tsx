@@ -7,7 +7,7 @@ const AI = () => {
           <h1 className='text-2xl '>Tgcc AI</h1>
           <p className='text-neutral-700'>Speed up your analysis with TGCC AI.</p>
        </div>
-       <button className='w-40 h-11 bg-tgcc-500 text-white rounded-2xl'>Get started</button>
+       <button className='w-40 h-11 bg-tgcc-500 text-white rounded-md'>Get started</button>
     </div>
   )
 }
