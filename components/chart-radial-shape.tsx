@@ -36,15 +36,15 @@ const chartConfig = {
 
 export function ChartTootal() {
   const {data} = store()
-  const ads = data.filter(({function:fun})=> fun==='Ads Accès')
+  const ads = data.filter(({status})=> status==='active')
   const chartData = [
   { browser: "safari", visitors: ads.length , fill: "var(--color-safari)" },
 ]
   return (
     <Card className="flex flex-col">
          <CardHeader className="items-center pb-0">
-           <CardTitle>Security guard </CardTitle>
-           <CardDescription>total number of Security guard </CardDescription>
+           <CardTitle>Present </CardTitle>
+           <CardDescription>Total number of employees currently available </CardDescription>
          </CardHeader>
          <CardContent className="flex-1 pb-0">
            <ChartContainer
@@ -88,8 +88,7 @@ export function ChartTootal() {
                              y={(viewBox.cy || 0) + 24}
                              className="fill-muted-foreground"
                            >
-                             Security guard
-                           </tspan>
+Present                           </tspan>
                          </text>
                        )
                      }

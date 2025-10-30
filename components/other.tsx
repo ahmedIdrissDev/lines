@@ -36,15 +36,15 @@ const chartConfig = {
 
 export function Other() {
   const {data} = store()
-  const Responsible  = data.filter(({function:fun})=> fun==='Responsible')
+  const Responsible  = data.filter(({status})=> status!=='active')
   const chartData = [
   { browser: "safari", visitors: Responsible .length, fill: "var(--color-safari)" },
 ]
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Responsible </CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Absent </CardTitle>
+        <CardDescription>Total number of employees currently not available</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer

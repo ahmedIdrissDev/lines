@@ -1,14 +1,6 @@
+import { Employee } from '@/types'
 import {create} from 'zustand'
-interface Employee {
-  Matricule: string;
-  Project: string;
-  Responsable: string;
-  fullname: string;
-  function: string;
-  id: string;
-  status: 'active' | 'inactive';
-  
-}
+
 interface StoreProps{
    data: Employee[] ,
    Project:string ,

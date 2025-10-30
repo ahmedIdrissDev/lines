@@ -38,20 +38,22 @@ const Employees = () => {
     <TableRow className=''>
       <TableHead className="w-[100px]">Registration number</TableHead>
       <TableHead>function</TableHead>
-      <TableHead>Full name</TableHead>
+      <TableHead>first name</TableHead>
+      <TableHead>last name</TableHead>
+
       <TableHead>Status</TableHead>
       <TableHead className="text-right">Project</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
       {
-        data?.map(({Matricule ,Project ,function:fun ,status ,fullname} , index)=>(
+        data?.map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
          <TableRow key={index}>
       <TableCell className="font-medium">{Matricule} </TableCell>
       <TableCell>{fun} </TableCell>
-      <TableCell>{fullname} </TableCell>
-      <TableCell>{status==='active' ? <div className='w-3 h-3 bg-green-400 rounded-full'></div>:<span className='w-3 h-3 bg-yellow-400 rounded-full'>j</span>} </TableCell>
-
+      <TableCell>{firstname} </TableCell>
+      <TableCell>{lastname} </TableCell>
+      <TableCell>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </TableCell>
       <TableCell className="text-right">{Project} </TableCell>
     </TableRow>
 

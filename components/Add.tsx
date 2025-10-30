@@ -42,7 +42,7 @@ const Add = () => {
         {
           open && 
           <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
-            <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-1/2 rounded-md border border-neutral-200">
+            <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-max rounded-md border border-neutral-200">
               <h1>Add new </h1>
               <form className='flex flex-col gap-2' onSubmit={HendleAddEmployes}>
                 <div className="flex flex-col gap-1">
