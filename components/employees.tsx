@@ -21,7 +21,7 @@ const Employees = () => {
   useEffect(()=>{
    (async()=>{
     try {
-      const response = await fetch('https://sheetdb.io/api/v1/s6vt0lc3cghvn',{cache:'no-cache'});
+      const response = await fetch('https://sheetdb.io/api/v1/64phcp112fjkc',{cache:'no-cache'});
       const data = await response.json()
       setdata(data)
     } catch (error) {

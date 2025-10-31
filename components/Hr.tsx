@@ -22,7 +22,7 @@
         ) as Employee[];
         setdata(updateuser);
         const responseTodelet = await fetch(
-          "https://sheetdb.io/api/v1/s6vt0lc3cghvn/all",
+          "https://sheetdb.io/api/v1/64phcp112fjkc/all",
           {
             method: "DELETE",
           }
@@ -30,7 +30,7 @@
         const isok = await responseTodelet.json();
         console.log(isok);
         const responseToUpdate = await fetch(
-          "https://sheetdb.io/api/v1/s6vt0lc3cghvn",
+          "https://sheetdb.io/api/v1/64phcp112fjkc",
           {
             method: "POST",
             cache: "no-cache",
