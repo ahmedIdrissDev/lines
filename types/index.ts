@@ -8,4 +8,5 @@ export interface Employee {
   lot:string ,
   id: string; 
   status: 'active' | 'inactive';
+  date:Date 
 }

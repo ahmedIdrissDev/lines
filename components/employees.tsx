@@ -17,15 +17,15 @@ import { Employee } from '@/types';
 const Employees = () => {
   const [employee , setemployess] = useState< Employee[] >()
   const  {setdata ,data} = store()
-  console.log('data from zustand ', data)
+
   useEffect(()=>{
    (async()=>{
     try {
       const response = await fetch('https://sheetdb.io/api/v1/s6vt0lc3cghvn',{cache:'no-cache'});
       const data = await response.json()
-      // console.log(data)
       setdata(data)
     } catch (error) {
+      console.log(error)
     }
   
    })()

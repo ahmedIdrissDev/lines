@@ -3,6 +3,7 @@ import { UserButton } from '@clerk/nextjs'
 import Add from './Add'
 import Search from './search'
 import Project from './Project'
+import Hr from './Hr'
 
 const Navbar = () => {
   return (
