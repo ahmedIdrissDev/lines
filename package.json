@@ -9,15 +9,20 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.26",
+    "@ai-sdk/react": "^2.0.86",
     "@clerk/nextjs": "^6.34.0",
     "@radix-ui/react-select": "^2.2.6",
+    "ai": "^5.0.86",
     "appwrite": "^21.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.548.0",
+    "motion": "^12.23.24",
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "react-markdown": "^10.1.0",
     "recharts": "2.15.4",
     "tailwind-merge": "^3.3.1",
     "zustand": "^5.0.8"
