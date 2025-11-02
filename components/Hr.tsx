@@ -115,7 +115,7 @@ const Hr = () => {
             )}
             {!initailized && <Welcome />}
           <div className="w-full relative h-20">
-            <motion.div  className={`bg-linear-120 py-1 flex gap-1.5 from-tgcc-950 to-tgcc-950/15  text-white px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
+            <motion.div  className={`bg-linear-120 py-1 flex gap-1.5 from-yellow-500 to-yellow-300 text-black px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
                  <File/> 
                <span className="">{files?.length} files</span>
             </motion.div>
@@ -153,7 +153,7 @@ const Hr = () => {
             </form>
           </div>
           <div className="flex py-6 justify-center items-center">
-              <span>TGCC AI may make mistakes, so you should always validate the data.</span>
+              <span className="text-sm opacity-75">TGCC AI may make mistakes, so you should always validate the data.</span>
           </div>
           </motion.div>
         </motion.div>
