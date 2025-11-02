@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/table"
 import { store } from '@/store';
 import { Employee } from '@/types';
+import { baseUrl } from '@/constants';
 
 
 
@@ -21,7 +22,7 @@ const Employees = () => {
   useEffect(()=>{
    (async()=>{
     try {
-      const response = await fetch('https://sheetdb.io/api/v1/64phcp112fjkc',{cache:'no-cache'});
+      const response = await fetch('/fd',{cache:'no-cache'});
       const data = await response.json()
       setdata(data)
     } catch (error) {

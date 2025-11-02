@@ -4,6 +4,8 @@
   import { Employee } from "@/types";
   import { UserRoundPlus } from "lucide-react";
   import React, { FormEvent, useState } from "react";
+import Welcome from "./kits/welcome";
+import Form from "./kits/from";
 
   const Hr = () => {
     const [open, setOpen] = useState(false);
@@ -52,33 +54,10 @@
               <button onClick={openclose} className='w-40 cursor-pointer h-11 bg-tgcc-500 text-white rounded-md'>Get started</button>
 
         {open && (
-          <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
-            <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-max rounded-md border border-neutral-200">
-              <h1>Add new </h1>
-              <div className="flex flex-col gap-2">
-                <textarea
-                  onChange={(e) => settext(e.currentTarget.value)}
-                  className="w-full h-28 resize-none input"
-                  name="data"
-                  id=""
-                ></textarea>
-
-                <div className="flex justify-between gap-2 items-center">
-                  <button
-                    onClick={openclose}
-                    className="w-[20%] h-11 border border-neutral-200  rounded-md cursor-pointer "
-                  >
-                    cancel
-                  </button>
-
-                  <button
-                    onClick={HendleAddEmployes}
-                    className="w-full h-11 bg-blue-500 text-white rounded-md cursor-pointer "
-                  >
-                    Run 
-                  </button>
-                </div>
-              </div>
+          <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-end items-center inset-0">
+            <div className="bg-white flex p-3 flex-col gap-1.5   w-1/2 h-full rounded-md border border-neutral-200">
+              <Welcome/>
+              <Form/>
             </div>
           </div>
         )}

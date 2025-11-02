@@ -16,23 +16,16 @@ const Add = () => {
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fromdata = new FormData(e.currentTarget);
-    const data = {
-      Matricule: fromdata.get("Matricule") || "hajhajs",
-      Project: fromdata.get("Matricule") || "hajhajs",
-      Responsable: fromdata.get("Responsable") || "hajhajs", // could be 'TRUE' | 'FALSE' if it's always like that
-      fullname: fromdata.get("fullname") || "hajhajs",
-      function: fromdata.get("function") || "hajhajs",
-      id: "873487384734",
-      status: true,
-    };
-    const response = await fetch("https://sheetdb.io/api/v1/s6vt0lc3cghvn", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const req = await response.json();
+     const data = Object.fromEntries(fromdata.entries())
+     console.log(data)
+    // const response = await fetch("https://sheetdb.io/api/v1/s6vt0lc3cghvn", {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
+    // const req = await response.json();
     try {
     } catch (error) {}
   }
@@ -55,6 +48,7 @@ const Add = () => {
                 <input
                   className="input"
                   required
+                  name="M"
                   minLength={1}
                   type="number"
                   placeholder="Code"
@@ -66,6 +60,7 @@ const Add = () => {
                   <input
                     className="input"
                     required
+                    name="hhe"
                     minLength={1}
                     type="text"
                     placeholder="Full name"
@@ -74,6 +69,7 @@ const Add = () => {
                     className="input"
                     required
                     minLength={1}
+                    name="kjak"
                     type="text"
                     placeholder="Full name"
                   />
@@ -81,7 +77,7 @@ const Add = () => {
               </div>
               <div className="flex flex-col gap-1">
                 <label htmlFor="">Lot</label>
-                <select name=""  className="input text-blue-700" id="fruits">
+                <select name="hello"  className="input text-blue-700" id="fruits">
                   {key.map((ke) => (
                     <option className="text-blue-500" key={ke} value={ke}>
                       {" "}
