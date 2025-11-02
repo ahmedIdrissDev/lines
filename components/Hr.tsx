@@ -3,12 +3,13 @@ import { store } from "@/store";
 import { Employee } from "@/types";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import Welcome from "./kits/welcome";
-import Form from "./kits/from";
+
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Message from "./kits/message";
-import { ArrowUp, Paperclip } from "lucide-react";
+import { ArrowUp, File, Paperclip, X } from "lucide-react";
+
 async function convertFilesToDataURLs(
   files: FileList
 ): Promise<
@@ -80,14 +81,25 @@ const Hr = () => {
     <>
       <button
         onClick={openclose}
-        className="w-40 cursor-pointer h-11 bg-tgcc-500 text-white rounded-md"
+        className="w-40 cursor-pointer h-11 bg-tgcc-950 text-white rounded-md"
       >
         Get started
       </button>
+   <AnimatePresence>
 
       {open && (
-        <div className="w-full fixed z-20 p-5 bg-neutral-900/5 flex justify-end items-center inset-0">
-          <div className="bg-white flex justify-between  p-3 flex-col gap-1.5   w-[90%] h-full rounded-md border border-neutral-200">
+        <motion.div className="w-full  fixed z-20  bg-neutral-900/10 flex justify-end items-center inset-0">
+          <motion.div
+             initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+
+          className="bg-white relative flex justify-between  p-3 flex-col gap-1.5   w-[70%] h-full rounded-md border border-neutral-200">
+            <div onClick={openclose} className="">
+              <button className="w-20 absolute top-3.5 left-2.5 h-10 bg-tgcc-950 text-white rounded-full cursor-pointer">
+                <X/>
+              </button>
+            </div>
             {initailized && (
               <motion.div
                 layout
@@ -102,15 +114,19 @@ const Hr = () => {
               </motion.div>
             )}
             {!initailized && <Welcome />}
-
+          <div className="w-full relative h-20">
+            <motion.div  className={`bg-linear-120 py-1 flex gap-1.5 from-tgcc-950 to-tgcc-950/15  text-white px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
+                 <File/> 
+               <span className="">{files?.length} files</span>
+            </motion.div>
             <form
               onSubmit={handlesendMessage}
-              className="w-full p-1 h-30 rounded-2xl bg-tgcc-50 border border-tgcc-400"
+              className="w-full p-1 mt-5 h-full absolute flex justify-between items-center z-10 rounded-2xl bg-white border border-tgcc-400"
             >
               <input
-                name="text"
+                name="text" 
                 type="text"
-                className="w-full h-[50%] outline-0 resize-none"
+                className="w-full px-2 h-[50%] outline-0 resize-none"
                 placeholder="asking about something "
                 id=""
               />
@@ -136,8 +152,14 @@ const Hr = () => {
               </div>
             </form>
           </div>
-        </div>
+          <div className="flex py-6 justify-center items-center">
+              <span>TGCC AI may make mistakes, so you should always validate the data.</span>
+          </div>
+          </motion.div>
+        </motion.div>
       )}
+         </AnimatePresence>
+
     </>
   );
 };

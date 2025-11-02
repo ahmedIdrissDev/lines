@@ -18,6 +18,8 @@ Example prompts you should handle:
 
 Your responses should be actionable, accurate, and easy to understand.
 markdown use table h1 p etc...
+tools :
+  when you call a tool please just write a small description
 `
 export {
    baseUrl ,

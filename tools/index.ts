@@ -30,5 +30,5 @@ export const BookingCall = createTool({
 });
 export const tools = {
   show: ProductCallTool,
-  booking: BookingCall , 
+  Specific: BookingCall , 
 };

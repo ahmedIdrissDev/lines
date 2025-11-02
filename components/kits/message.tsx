@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import { motion } from "motion/react";
 import Image from "next/image";
 import remarkGfm from 'remark-gfm';
+import { FunctionCall } from "../chart-radial-text";
 const Message = ({ id, role, parts }: UIMessage) => {
   switch (role) {
     case "user":
@@ -28,31 +29,34 @@ const Message = ({ id, role, parts }: UIMessage) => {
     default:
       return (
         <div className="flex items-start gap-2.5 justify-start w-full">
-            <div className="w-14 h-14 ">
-                <Image  src={'/logoicon.svg'} width={1000} height={1000} alt="logo" />
+            <div className="w-8 h-8 ">
+                <Image  src={'/logoicon.svg'} className="w-10" width={1000} height={1000} alt="logo" />
 
             </div>
-          <div className=" h-max min-h-30 w-max max-1/2 ">
+          <div className=" h-[80%] min-h-30 w-max max-1/2 ">
             <span>
               {parts.map((part, index) => {
                 if (part.type === "text") {
                   return <Markdown remarkPlugins={[remarkGfm]} key={`${index}-text`}>{part.text}</Markdown>;
                 }
-                if (part.type === "tool-prodcut") {
+                if (part.type === "tool-show") {
                   switch (part.state) {
                     case "input-available":
                       return <span>loading</span>;
                     case "output-available":
                       return (
-                        <div className="">loading ..</div>
+                        <div className="w-max h-max border rounded-2xl">
+                            <FunctionCall data={part.output} />
+                             </div>
                       );
                   }
                 }
-                if (part.type === "tool-booking") {
+                if (part.type === "tool-Specific") {
                   switch (part.state) {
                     case "output-available":
                       return (
-                       <></>
+                       <>                             <FunctionCall data={part.output} />
+ </>
                       );
                     case "input-available":
                       return (

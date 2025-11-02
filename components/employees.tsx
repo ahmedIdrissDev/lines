@@ -52,7 +52,7 @@ const Employees = () => {
   </TableHeader>
   <TableBody>
       {
-        data?.map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
+        data.splice(0 , 20)?.map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
          <TableRow key={index}>
       <TableCell className="font-medium">{Matricule} </TableCell>
       <TableCell>{fun} </TableCell>

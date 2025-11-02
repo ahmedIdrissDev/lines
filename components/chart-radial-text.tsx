@@ -19,15 +19,17 @@ import {
 } from "@/components/ui/card"
 import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import { store } from "@/store"
+import { Employee } from "@/types"
 
 export const description = "A radial chart with text"
+interface ChartProps{
+  data:Employee[]
+}
 
-
-export function ChartRadialText() {
-    const {data} = store()
+export function FunctionCall({data}:ChartProps) {
   
   const chartData = [
-    { browser: "safari", visitors: data.length , fill: "var(--color-tgcc-300)" },
+    { browser: "safari", visitors: data.length > 0 ? data.length: 0 , fill: "var(--color-tgcc-300)" },
   ]
   
   const chartConfig = {
@@ -40,7 +42,7 @@ export function ChartRadialText() {
     },
   } satisfies ChartConfig
   return (
-    <Card className="flex flex-col">
+    <Card className="flex  w-96 flex-col">
       <CardHeader className="items-center pb-0">
         <CardTitle>Team Size Summary</CardTitle>
         <CardDescription>total number of employees in team</CardDescription>
