@@ -22,7 +22,7 @@ const Employees = () => {
   useEffect(()=>{
    (async()=>{
     try {
-      const response = await fetch('/fd',{cache:'no-cache'});
+      const response = await fetch(baseUrl,{cache:'no-cache'});
       const data = await response.json()
       setdata(data)
     } catch (error) {

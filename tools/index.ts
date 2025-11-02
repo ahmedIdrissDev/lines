@@ -1,32 +1,34 @@
+import { baseUrl } from '@/constants';
+import { Employee } from '@/types';
 import { tool as createTool } from 'ai';
 import { z } from 'zod';
 
 export const ProductCallTool = createTool({
-  description: 'add new works ',
+  description: 'Show me all employees , tolal etc... ',
   inputSchema: z.object({
-    keywords: z.string().describe('the keyour from the function of the contasrtor'),
-    isall:z.boolean().describe('if true if the keywords is not provided')
+    keywords: z.string().describe('the keyour from the function of the contasrtor').optional(),
+    isall:z.boolean().describe('if true if the keywords is not provided').optional()
   }),
   execute: async function ({ keywords  , isall }) {
-    return { products:'h' };
+    const response = await fetch(baseUrl,{cache:'no-cache'});
+    const data = await response.json()
+    return data
   },
 });
 
 export const BookingCall = createTool({
-  description: 'book a call with our sales team to discuss your prodcuts needs ',
+  description: 'Answering Specific Queries ',
   inputSchema: z.object({
-    fullname: z.string().describe('take the user full name'),
-    email: z.string().describe('take the user email'),
-    phone: z.string().describe('take the user full name'),
-    company:z.string().describe('this is the company email wecom@gmail.com'),
-    message: z.string().describe('you well write a message'),
-
+       keywords: z.string().describe('Answering Specific Queries get the data and them look to keys').optional(),
   }),
-  execute: async function (data) {
-    return { data};
+  execute: async function ({keywords}) {
+  const response = await fetch(baseUrl,{cache:'no-cache'});
+    const data : Employee [] = await response.json()
+    const getbyfunction = data.filter(({function:fun })=> fun=== keywords )
+    return getbyfunction
   },
 });
 export const tools = {
-  prodcut: ProductCallTool,
+  show: ProductCallTool,
   booking: BookingCall , 
 };

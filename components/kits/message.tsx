@@ -3,7 +3,7 @@ import React from "react";
 import Markdown from "react-markdown";
 import { motion } from "motion/react";
 import Image from "next/image";
-
+import remarkGfm from 'remark-gfm';
 const Message = ({ id, role, parts }: UIMessage) => {
   switch (role) {
     case "user":
@@ -12,12 +12,12 @@ const Message = ({ id, role, parts }: UIMessage) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-max max-w-1/2 bg-barnd-500  rounded-2xl p-2"
+            className="w-max max-w-1/2 bg-tgcc-500 text-white rounded-2xl p-2"
           >
             <span>
               {parts.map((part, index) => {
                 if (part.type === "text") {
-                  return <Markdown key={`${index}-text`}>{part.text}</Markdown>;
+                  return <Markdown remarkPlugins={[remarkGfm]} key={`${index}-text`}>{part.text}</Markdown>;
                 }
               })}{" "}
             </span>
@@ -36,7 +36,7 @@ const Message = ({ id, role, parts }: UIMessage) => {
             <span>
               {parts.map((part, index) => {
                 if (part.type === "text") {
-                  return <Markdown key={`${index}-text`}>{part.text}</Markdown>;
+                  return <Markdown remarkPlugins={[remarkGfm]} key={`${index}-text`}>{part.text}</Markdown>;
                 }
                 if (part.type === "tool-prodcut") {
                   switch (part.state) {
