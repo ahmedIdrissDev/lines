@@ -44,16 +44,18 @@ export const Adding = createTool({
   This tool ensures data integrity and confirms every update or insertion made to the system.
   `,
   inputSchema: z.object({
-      data:z.array({
-      Matricule: z.string().describe('Unique employee identification number'),
-      Project: z.string().describe('The project the employee is assigned to'),
-      lastname: z.string().describe('Employee’s last name'),
-      firstname: z.string().describe('Employee’s first name'),
-      function: z.string().describe('Employee’s role or position in the company'),
-      lot: z.string().describe('Work lot or section the employee belongs to'),
-      status: z.enum(['active', 'inactive']).describe('Current employment status'),
+data: z.array(
+  z.object({
+    Matricule: z.string().describe('Unique employee identification number'),
+    Project: z.string().describe('The project the employee is assigned to'),
+    lastname: z.string().describe('Employee’s last name'),
+    firstname: z.string().describe('Employee’s first name'),
+    function: z.string().describe('Employee’s role or position in the company'),
+    lot: z.string().describe('Work lot or section the employee belongs to'),
+    status: z.enum(['active', 'inactive']).describe('Current employment status'),
+  })
+)
 
-    })
   }),
   execute: async function ({data}) {
     const response = await fetch(baseUrl, {
