@@ -92,9 +92,9 @@ const Hr = () => {
       {open && (
         <motion.div className="w-full   fixed z-20  bg-neutral-900/10 flex justify-end items-center inset-0">
           <motion.div
-             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+             initial={{ opacity: 0 ,  translateX:20 }}
+            animate={{ opacity: 1 ,  translateX:0 }}
+            exit={{ opacity: 0 ,  translateX:20 }}
 
           className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5   w-[70%] h-full rounded-md border border-neutral-200">
             <div onClick={openclose} className="">
@@ -113,7 +113,7 @@ const Hr = () => {
                 {messages.map((message) => (
                   <Message key={message.id} {...message} />
                 ))}
-                {status==='submitted' && <span> wait a moment</span>}
+                {status==='submitted' && <span> Please wait a moment...</span>}
               </motion.div>
             )}
             {!initailized && <Welcome />}
