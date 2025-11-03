@@ -35,8 +35,7 @@ const Add = () => {
         onClick={openclose}
         className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-9 bg-tgcc-700 text-white"
       >
-        <UserRoundPlus />
-        <span> Employee </span>
+        <span> Add Employee </span>
       </button>
       {open && (
         <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">

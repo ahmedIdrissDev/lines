@@ -3,32 +3,72 @@ import { Employee } from '@/types';
 import { tool as createTool } from 'ai';
 import { z } from 'zod';
 
-export const ProductCallTool = createTool({
-  description: 'Show me all employees , tolal etc... ',
+
+export const handelProvideData = createTool({
+  description: `
+  Retrieve workforce information including employee lists, total counts, 
+  and relevant HR data. Use this tool to fetch a complete overview or 
+  search results filtered by specific keywords (such as project names or roles).
+  `,
   inputSchema: z.object({
-    keywords: z.string().describe('the keyour from the function of the contasrtor').optional(),
-    isall:z.boolean().describe('if true if the keywords is not provided').optional()
+    keywords: z.string().describe('Keyword or term used to filter employee data (e.g. project name, role)').optional(),
   }),
-  execute: async function ({ keywords  , isall }) {
-    const response = await fetch(baseUrl,{cache:'no-cache'});
-    const data = await response.json()
-    return data
+  execute: async function ({ keywords}) {
+    const response = await fetch(baseUrl, { cache: 'no-cache' });
+    const data = await response.json();
+    return data;
   },
 });
 
-export const BookingCall = createTool({
-  description: 'Answering Specific Queries ',
+
+export const Answering = createTool({
+  description: `
+  Analyze and respond to specific queries about employees, roles, or departments.
+  It searches for data that matches the given keyword and provides concise, accurate answers.
+  `,
   inputSchema: z.object({
-       keywords: z.string().describe('Answering Specific Queries get the data and them look to keys').optional(),
+    keywords: z.string().describe('Keyword related to the employee function or HR field to search for'),
   }),
-  execute: async function ({keywords}) {
-  const response = await fetch(baseUrl,{cache:'no-cache'});
-    const data : Employee [] = await response.json()
-    const getbyfunction = data.filter(({function:fun })=> fun=== keywords )
-    return getbyfunction
+  execute: async function ({ keywords }) {
+    const response = await fetch(baseUrl, { cache: 'no-cache' });
+    const data: Employee[] = await response.json();
+    const getByFunction = data.filter(({ function: fun }) => fun === keywords);
+    return getByFunction;
   },
 });
+
+
+export const Adding = createTool({
+  description: `
+  Add new employee information or update existing HR records. 
+  This tool ensures data integrity and confirms every update or insertion made to the system.
+  `,
+  inputSchema: z.object({
+      data:z.array({
+      Matricule: z.string().describe('Unique employee identification number'),
+      Project: z.string().describe('The project the employee is assigned to'),
+      lastname: z.string().describe('Employee’s last name'),
+      firstname: z.string().describe('Employee’s first name'),
+      function: z.string().describe('Employee’s role or position in the company'),
+      lot: z.string().describe('Work lot or section the employee belongs to'),
+      status: z.enum(['active', 'inactive']).describe('Current employment status'),
+
+    })
+  }),
+  execute: async function ({data}) {
+    const response = await fetch(baseUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    return { message: 'Employee data added successfully.', result };
+  },
+});
+
+
 export const tools = {
-  show: ProductCallTool,
-  Specific: BookingCall , 
+  show:  handelProvideData,
+  specific: Answering,
+  add: Adding,
 };
