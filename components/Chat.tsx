@@ -1,9 +1,8 @@
 'use client'
 import React from 'react'
-import { ChartRadialText } from './chart-radial-text'
-import { ChartTootal } from './chart-radial-shape'
-import { Other } from './other'
-import { Total } from './chart-radial-stacked'
+import { ChartTootal } from './charts/chart-radial-shape'
+import { Other } from './charts/other'
+import { Total } from './charts/chart-radial-stacked'
 
 const Chat = () => {
   return (

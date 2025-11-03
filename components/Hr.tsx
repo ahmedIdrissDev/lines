@@ -116,7 +116,15 @@ const Hr = () => {
                 {status==='submitted' && <span> Please wait a moment...</span>}
               </motion.div>
             )}
-            {!initailized && <Welcome />}
+            {!initailized && <Welcome fun={e=>{
+              setiinitailized(true);
+               sendMessage({
+      role: "user",
+      parts: [{ type: "text", text: e } , ],
+
+    });
+
+            }} />}
           <div className="w-full relative h-20">
             <motion.div  className={`bg-linear-120 py-1 flex gap-1.5 from-yellow-500 to-yellow-300 text-black px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
                  <File className="w-7"/> 

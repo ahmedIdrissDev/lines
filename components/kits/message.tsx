@@ -4,7 +4,7 @@ import Markdown from "react-markdown";
 import { motion } from "motion/react";
 import Image from "next/image";
 import remarkGfm from 'remark-gfm';
-import { FunctionCall } from "../chart-radial-text";
+import { FunctionCall } from "../charts/chart-radial-text";
 import Loading from "./loading";
 import { Employee } from "@/types";
 const Message = ({ id, role, parts }: UIMessage) => {
