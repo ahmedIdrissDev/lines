@@ -81,22 +81,22 @@ const Hr = () => {
     <>
       <button
         onClick={openclose}
-        className="w-40 cursor-pointer h-11 bg-tgcc-950 text-white rounded-md"
+        className="w-40 cursor-pointer h-11 bg-white text-black rounded-md"
       >
         Get started
       </button>
    <AnimatePresence>
 
       {open && (
-        <motion.div className="w-full  fixed z-20  bg-neutral-900/10 flex justify-end items-center inset-0">
+        <motion.div className="w-full   fixed z-20  bg-neutral-900/10 flex justify-end items-center inset-0">
           <motion.div
              initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
 
-          className="bg-white relative flex justify-between  p-3 flex-col gap-1.5   w-[70%] h-full rounded-md border border-neutral-200">
+          className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5   w-[70%] h-full rounded-md border border-neutral-200">
             <div onClick={openclose} className="">
-              <button className="w-20 absolute top-3.5 left-2.5 h-10 bg-tgcc-950 text-white rounded-full cursor-pointer">
+              <button className="w-20 z-20 absolute top-3.5 left-2.5 h-8  rounded-full cursor-pointer">
                 <X/>
               </button>
             </div>
@@ -116,7 +116,7 @@ const Hr = () => {
             {!initailized && <Welcome />}
           <div className="w-full relative h-20">
             <motion.div  className={`bg-linear-120 py-1 flex gap-1.5 from-yellow-500 to-yellow-300 text-black px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
-                 <File/> 
+                 <File className="w-7"/> 
                <span className="">{files?.length} files</span>
             </motion.div>
             <form
@@ -127,7 +127,7 @@ const Hr = () => {
                 name="text" 
                 type="text"
                 className="w-full px-2 h-[50%] outline-0 resize-none"
-                placeholder="asking about something "
+                placeholder="Message "
                 id=""
               />
               <div className="flex justify-end gap-2 items-center">

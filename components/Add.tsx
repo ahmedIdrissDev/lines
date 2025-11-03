@@ -79,7 +79,7 @@ const Add = () => {
                 <label htmlFor="">Lot</label>
                 <select name="hello"  className="input text-blue-700" id="fruits">
                   {key.map((ke) => (
-                    <option className="text-blue-500" key={ke} value={ke}>
+                    <option className="text-tgcc-200" key={ke} value={ke}>
                       {" "}
                       {ke}.CHU@tgcc{" "}
                     </option>
@@ -107,7 +107,7 @@ const Add = () => {
                   cancel
                 </button>
 
-                <button className="w-full h-11 bg-blue-950 text-white rounded-md cursor-pointer ">
+                <button className="w-full h-11 bg-tgcc-900 text-white rounded-md cursor-pointer ">
                   Add new Employee
                 </button>
               </div>
