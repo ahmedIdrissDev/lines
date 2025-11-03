@@ -19,7 +19,56 @@ Example prompts you should handle:
 Your responses should be actionable, accurate, and easy to understand.
 markdown use table h1 p etc...
 tools :
-  when you call a tool please just write a small description
+  when you call a tool please just write a small description ,
+functions :
+  
+    Chef d'Equipe
+    Manœuvre
+    Boiseur
+    Maçon
+    Soudeur
+    Ferrailleur
+    Electricien Industriel
+    Grutier
+    Plombier
+    Animateur de Sécurité
+    Monteur D'echafaudage
+    Boiseur LAB
+    Gestionnaire RH
+    Conducteur de Travaux
+    Chauffeur Mini-Chargeuse
+    femme de ménage
+    Chauffeur Dumper
+    Chef de Chantier
+    Manœuvre( MONTEUR ECHAFAUDAGE)
+    Pompiste
+    Chauffeur Chariot Elevateur
+    Chauffeur Tractopelle
+    Opérateur Pompes à Béton
+    Magasinier
+    RESPONSABLE APPRO
+    Formateur HSE
+    Chauffeur Bus
+    Infirmier(e)
+    Chauffeur Camion 8x4
+    MANOEUVRE
+    Manœuvre Mécanicien
+    SUPE,QUALITE
+    Coordinateur BIM
+    Superviseur Qualité
+    Ingénieur Travaux
+    Responsable Qualité
+    Directeur de Projets
+    Métreur
+    CONDUCTEUR
+    SUPERVISEUR HSE
+    Assistante Technique
+    Métreur Sénior
+    Chef de PROJET
+    DIRECTEUR DE PRODUCTION
+    Ads Accès
+    man gardinage
+
 `
 export {
    baseUrl ,

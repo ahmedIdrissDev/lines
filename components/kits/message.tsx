@@ -5,6 +5,8 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import remarkGfm from 'remark-gfm';
 import { FunctionCall } from "../chart-radial-text";
+import Loading from "./loading";
+import { Employee } from "@/types";
 const Message = ({ id, role, parts }: UIMessage) => {
   switch (role) {
     case "user":
@@ -13,7 +15,7 @@ const Message = ({ id, role, parts }: UIMessage) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-max max-w-1/2 bg-tgcc-500 text-white rounded-2xl p-2"
+            className="w-max max-w-1/2 bg-tgcc-950 text-white rounded-2xl p-2"
           >
             <span>
               {parts.map((part, index) => {
@@ -42,11 +44,11 @@ const Message = ({ id, role, parts }: UIMessage) => {
                 if (part.type === "tool-show") {
                   switch (part.state) {
                     case "input-available":
-                      return <span>loading</span>;
+                      return <Loading key={index}/>;
                     case "output-available":
                       return (
                         <div className="w-max h-max border rounded-2xl">
-                            <FunctionCall data={part.output} />
+                            <FunctionCall key={index} data={part.output as Employee[]} />
                              </div>
                       );
                   }
@@ -55,17 +57,12 @@ const Message = ({ id, role, parts }: UIMessage) => {
                   switch (part.state) {
                     case "output-available":
                       return (
-                       <>                             <FunctionCall data={part.output} />
+                       <>                             <FunctionCall key={index} data={part.output as Employee[]} />
  </>
                       );
                     case "input-available":
                       return (
-                        <div
-                          key={index}
-                          className="w-1/2 h-12 bg-neutral-200 animate-pulse"
-                        >
-                          <h1>loading</h1>
-                        </div>
+                      <Loading/>
                       );
                   }
                 }

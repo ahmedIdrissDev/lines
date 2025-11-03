@@ -8,7 +8,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { AnimatePresence, motion } from "motion/react";
 import Message from "./kits/message";
-import { ArrowUp, File, Paperclip, X } from "lucide-react";
+import { ArrowUp, CirclePause, File, Paperclip, Pause, X } from "lucide-react";
 
 async function convertFilesToDataURLs(
   files: FileList
@@ -59,7 +59,7 @@ const Hr = () => {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
   }, [messages]);
-
+   const formRef = useRef<HTMLFormElement>(null)
   async function handlesendMessage(e: FormEvent) {
     e.preventDefault();
     setiinitailized(true);
@@ -75,6 +75,8 @@ const Hr = () => {
     });
 
     setFiles(undefined);
+    formRef.current?.reset()
+    
   }
 
   return (
@@ -96,7 +98,7 @@ const Hr = () => {
 
           className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5   w-[70%] h-full rounded-md border border-neutral-200">
             <div onClick={openclose} className="">
-              <button className="w-20 z-20 absolute top-3.5 left-2.5 h-8  rounded-full cursor-pointer">
+              <button className="w-20 z-20 absolute top-0 left-0 p-2.5 opacity-60 h-8  rounded-full cursor-pointer">
                 <X/>
               </button>
             </div>
@@ -111,6 +113,7 @@ const Hr = () => {
                 {messages.map((message) => (
                   <Message key={message.id} {...message} />
                 ))}
+                {status==='submitted' && <span> wait a moment</span>}
               </motion.div>
             )}
             {!initailized && <Welcome />}
@@ -120,6 +123,7 @@ const Hr = () => {
                <span className="">{files?.length} files</span>
             </motion.div>
             <form
+              ref={formRef}
               onSubmit={handlesendMessage}
               className="w-full p-1 mt-5 h-full absolute flex justify-between items-center z-10 rounded-2xl bg-white border border-tgcc-400"
             >
@@ -146,9 +150,15 @@ const Hr = () => {
                   hidden
                   id="file"
                 />
-                <button className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
+                {status==='submitted' ? 
+                 <button onClick={stop} className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
+                  <CirclePause />
+                </button> :
+                                 <button className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
                   <ArrowUp />
                 </button>
+              }
+                
               </div>
             </form>
           </div>
