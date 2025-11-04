@@ -59,18 +59,22 @@ functions :
     SUPE,QUALITE
     Coordinateur BIM
     Superviseur Qualité
+    
     Ingénieur Travaux
     Responsable Qualité
     Directeur de Projets
     Métreur
+
     CONDUCTEUR
     SUPERVISEUR HSE
     Assistante Technique
     Métreur Sénior
+
     Chef de PROJET
     DIRECTEUR DE PRODUCTION
     Ads Accès
     man gardinage
+
 
 `
 export {
