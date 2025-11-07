@@ -43,7 +43,7 @@ const Moderh = () => {
     <>
       <button
         onClick={openclose}
-        className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-11 bg-tgcc-700 text-white"
+        className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-11 bg-linear-90 from-tgcc-600 to-tgcc-500 text-white"
       >
         <span> Ajouter </span>
       </button>

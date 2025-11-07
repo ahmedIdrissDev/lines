@@ -83,7 +83,7 @@ const Hr = () => {
     <>
       <button
         onClick={openclose}
-        className="w-40 cursor-pointer h-11 bg-white text-black rounded-md"
+        className="w-40 cursor-pointer h-11 bg-neutral-950 text-white rounded-md"
       >
 Démarrer
       </button>
