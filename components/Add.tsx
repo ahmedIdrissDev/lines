@@ -1,6 +1,7 @@
 "use client";
 import { store } from "@/store";
 import { User, UserRoundPlus } from "lucide-react";
+import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
 
 const Add = () => {
@@ -35,11 +36,18 @@ const Add = () => {
         onClick={openclose}
         className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-9 bg-tgcc-700 text-white"
       >
-        <span> Add Employee </span>
+        <span> Ajouter </span>
       </button>
+      <AnimatePresence>
+
+
       {open && (
         <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
-          <div className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-max rounded-md border border-neutral-200">
+          <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.7, opacity: 0 }}
+           className="bg-white flex flex-col gap-1.5  p-2 w-1/2 h-max rounded-md border border-neutral-200">
             <h1>Add new </h1>
             <form className="flex flex-col gap-2" onSubmit={HendleAddEmployes}>
               <div className="flex flex-col gap-1">
@@ -111,9 +119,11 @@ const Add = () => {
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       )}
+            </AnimatePresence>
+
     </>
   );
 };

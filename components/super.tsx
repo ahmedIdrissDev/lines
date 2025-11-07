@@ -17,7 +17,7 @@ const Super = () => {
   return (
     <>
 
-    <div className='w-full gap-2.5   grid  grid-cols-3 '>
+    <div className='w-full h-max gap-2.5   grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 '>
         {mapped.splice(0 , 8).map((data , index)=>(
           <Customchart key={index} {...data} />
         ) )}

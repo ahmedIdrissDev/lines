@@ -85,7 +85,7 @@ const Hr = () => {
         onClick={openclose}
         className="w-40 cursor-pointer h-11 bg-white text-black rounded-md"
       >
-        Get started
+Démarrer
       </button>
    <AnimatePresence>
 
