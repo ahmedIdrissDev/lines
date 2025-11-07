@@ -43,8 +43,8 @@ export function ChartTootal() {
   return (
     <Card className="flex flex-col">
          <CardHeader className="items-center pb-0">
-           <CardTitle>Present </CardTitle>
-           <CardDescription>Total number of employees currently available </CardDescription>
+           <CardTitle>Présence </CardTitle>
+           <CardDescription>Effectif total actuellement disponible </CardDescription>
          </CardHeader>
          <CardContent className="flex-1 pb-0">
            <ChartContainer

@@ -45,8 +45,8 @@ export function Total() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Team Size Summary</CardTitle>
-        <CardDescription>total number of employees in team</CardDescription>
+<CardTitle>Résumé des effectifs</CardTitle>
+        <CardDescription>Effectif total de l’équipe</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-1 items-center pb-0">
         <ChartContainer

@@ -1,10 +1,8 @@
 import AI from '@/components/ai'
 import Chat from '@/components/Chat'
 import Employees from '@/components/employees'
-import Access from '@/components/kits/Access'
 import Title from '@/components/section'
-import UsersList from '@/components/UsersList'
-import React from 'react'
+import Super from '@/components/super'
 
 const page = () => {
  
@@ -12,7 +10,8 @@ const page = () => {
    <>
        <AI/>
          <Chat/>
-         <div className=""></div>
+         <Title/>
+         <Super/>
 <Employees/>
    </>
   )
