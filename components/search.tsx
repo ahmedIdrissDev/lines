@@ -1,5 +1,5 @@
 "use client"
-import { SearchIcon } from 'lucide-react'
+import { SearchIcon, X } from 'lucide-react'
 import { AnimatePresence  , motion} from 'motion/react'
 import { useState } from 'react';
 
@@ -20,8 +20,13 @@ const Search = () => {
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} className="bg-white flex justify-between h-1/2  flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
-             hh
+            exit={{ scale: 0.7, opacity: 0 }} className=" gap-2 flex h-1/2  flex-col p-4 w-1/2  rounded-md ">
+              <div className="w-full flex justify-between items-center px-2 h-12 bg-white border border-neutral-200 rounded-md ">
+                <input type="text" className='outline-0 border-0 w-full h-full' autoFocus placeholder='Trouver des employés' />
+                <X onClick={openclose} className='scale-75 opacity-70 cursor-pointer'/>
+              </div>
+             <div className="w-full min-h-60 bg-white border border-neutral-200 rounded-md ">
+              </div>
             </motion.div>
           </div>
         )}
