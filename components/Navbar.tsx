@@ -1,8 +1,8 @@
 
-import { UserButton } from '@clerk/nextjs'
 import Add from './Add'
 import Search from './search'
 import Project from './Project'
+import UserButton from './kits/UserButton'
 
 const Navbar = () => {
   return (
@@ -18,7 +18,7 @@ const Navbar = () => {
     <div className=" flex items-center gap-2">
             <Add/>
             <Project/>
-     <UserButton/>
+            <UserButton/>
     </div>
     </div>
   )

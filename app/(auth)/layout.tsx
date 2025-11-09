@@ -6,8 +6,13 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='flex justify-center items-center h-dvh '>
-      {children}
+    <div className=' grid grid-cols-2 w-full h-dvh '>
+      <div className="w-full h-full">
+              {children}
+
+      </div>
+      <div className="w-full bg h-full"></div>
+
     </div>
   )
 }

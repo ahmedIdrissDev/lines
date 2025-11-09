@@ -49,13 +49,13 @@ const Moderh = () => {
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }}
+          <div
             className="w-full   fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0"
           >
-            <div className="bg-white h-1/2 flex flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
+            <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-1/2 flex flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
               <h1>Valide la présence</h1>
               <textarea
                 onInput={e=> settext(e.currentTarget.value)}
@@ -78,19 +78,19 @@ const Moderh = () => {
                   <span> Ajouter </span>
                 </button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
       <AnimatePresence>
         {opentr && (
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }}
+          <div
             className="w-full   fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0"
           >
-            <div className="bg-white h-40 flex  justify-center items-center flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
+            <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-40 flex  justify-center items-center flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
               <DatabaseZap />
               <h1>asynchrone avec votre base de données</h1>
 
@@ -105,8 +105,8 @@ const Moderh = () => {
                   <span> continue </span>
                 </button>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </>
