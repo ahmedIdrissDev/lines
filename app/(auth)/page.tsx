@@ -15,7 +15,10 @@ export default function Home() {
         <h1 className="text-2xl">TGCC My Team</h1>
         <p>Smart HR Management Platform </p>
       </div>
-        <button onClick={()=> signIn('google')} className="w-full flex justify-center items-center h-12 border border-neutral-200     rounded-2xl cursor-pointer">continue avec google</button>
+        <button onClick={()=> signIn('google')} className="w-full flex  gap-2 justify-center items-center h-12 border border-neutral-200     rounded-2xl cursor-pointer">
+                  <Image src={'/google.png'} className="w-7" width={400} height={400} alt='logo' />
+                  <span>continue avec google</span>
+          </button>
      </div>
    </div>
 

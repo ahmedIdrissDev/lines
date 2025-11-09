@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react'
 
 const layout = ({
@@ -11,7 +12,9 @@ const layout = ({
               {children}
 
       </div>
-      <div className="w-full bg h-full"></div>
+      <div className="w-full p-4 bg-blue-700 flex justify-center items-center h-full">
+        <Image src={'/demo.svg'} width={1000} height={1000} alt='logo' />
+      </div>
 
     </div>
   )
