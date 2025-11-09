@@ -6,7 +6,7 @@ import { Total } from './charts/chart-radial-stacked'
 
 const Chat = () => {
   return (
-    <div className='grid  bg-white grid-cols-1 md:grid-cols-3 gap-2 h-max'>
+    <div className='grid  grid-cols-1 md:grid-cols-4 gap-2 h-max'>
          <Total/>
         <ChartTootal/>
         <Other/>
