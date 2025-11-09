@@ -126,7 +126,7 @@ Démarrer
 
             }} />}
           <div className="w-full relative h-20">
-            <motion.div  className={`bg-linear-120 py-1 flex gap-1.5 from-yellow-500 to-yellow-300 text-black px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
+            <motion.div  className={`text-white py-1 flex gap-1.5 bg-tgcc-500  px-2 duration-100 rounded-2xl ${files?.length > 0 ? 'opacity-100 -mt-3':'opacity-0 mt-0'}  absolute w-full h-full `}>
                  <File className="w-7"/> 
                <span className="">{files?.length} files</span>
             </motion.div>
