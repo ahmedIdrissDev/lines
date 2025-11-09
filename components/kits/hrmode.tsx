@@ -50,7 +50,7 @@ const Moderh = () => {
       <AnimatePresence>
         {open && (
           <div
-            className="w-full   fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0"
+            className="w-full   fixed z-20 bg-neutral-900/10 flex justify-center items-center inset-0"
           >
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -85,7 +85,7 @@ const Moderh = () => {
       <AnimatePresence>
         {opentr && (
           <div
-            className="w-full   fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0"
+            className="w-full   fixed z-20 bg-neutral-900/110 flex justify-center items-center inset-0"
           >
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}

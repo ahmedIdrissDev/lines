@@ -10,6 +10,7 @@ const Chat = () => {
          <Total/>
         <ChartTootal/>
         <Other/>
+      
     </div>
   )
 }

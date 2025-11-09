@@ -1,6 +1,7 @@
 
 import Add from './Add'
 import Project from './Project'
+import UsersList from './UsersList'
 import UserButton from './kits/UserButton'
 
 const Navbar = () => {
