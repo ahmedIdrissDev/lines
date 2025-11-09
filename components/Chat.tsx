@@ -10,7 +10,10 @@ const Chat = () => {
          <Total/>
         <ChartTootal/>
         <Other/>
-      
+        <div className="w-full h-full p-4  border flex flex-col justify-center relative items-center border-neutral-200 bg-white rounded-2xl">
+        
+            <button className='w-full h-12 bg-black rounded-xl'>tak a look</button>
+        </div>
     </div>
   )
 }

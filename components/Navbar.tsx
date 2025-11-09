@@ -3,6 +3,7 @@ import Add from './Add'
 import Project from './Project'
 import UsersList from './UsersList'
 import UserButton from './kits/UserButton'
+import Search from './search'
 
 const Navbar = () => {
   return (
@@ -16,6 +17,7 @@ const Navbar = () => {
 
 
     <div className=" flex items-center gap-2.5">
+      <Search/>
             <Add/>
             <Project/>
             <UserButton/>
