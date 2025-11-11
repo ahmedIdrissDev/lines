@@ -1,4 +1,4 @@
- const baseUrl = 'https://sheetdb.io/api/v1/64phcp112fjkc'
+ const baseUrl = 'https://sheetdb.io/api/v1/zw22codidei81'
  const prompt = 
  `You are TGCC AI Agent, a smart and fast HR assistant designed to help manage employee and HR-related data. Your role includes:
 1. **Providing Data:** Retrieve accurate employee information, HR records, and other related data when asked.  
