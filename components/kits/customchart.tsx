@@ -34,7 +34,7 @@ const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
              <div className=" rounded-md  gap-2 flex justify-center border border-neutral-200 items-center w-full text-tgcc-950 h-full">
                  <TrendingDown/>
 
-                {Absent.length} Absent
+                {Absent.length} Absence
             </div>
          </div>
          <div className="w-full h-full p-2 rounded-md border border-neutral-200">

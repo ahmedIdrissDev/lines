@@ -12,7 +12,7 @@ const layout = ({
               {children}
 
       </div>
-      <div className="w-full p-1 bg-blue-50 flex justify-center items-center h-full">
+      <div className="w-full p-1 bg-tgcc-50 flex justify-center items-center h-full">
         <Image src={'/demo.svg'} quality={1000} width={1000} height={1000} alt='logo' />
       </div>
 

@@ -1,77 +1,59 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
---color-tgcc-50: #f0f0ff;
---color-tgcc-100: #e4e4ff;
---color-tgcc-200: #cdcdff;
---color-tgcc-300: #a9a6ff;
---color-tgcc-400: #7e73ff;
---color-tgcc-500: #563bff;
---color-tgcc-600: #4214ff;
---color-tgcc-700: #2f00ff;
---color-tgcc-800: #2801d6;
---color-tgcc-900: #2303af;
---color-tgcc-950: #110077;
+  --color-tgcc-50: #fffaea;
+  --color-tgcc-100: #fff2c5;
+  --color-tgcc-200: #ffe386;
+  --color-tgcc-300: #ffcf47;
+  --color-tgcc-400: #ffb91d;
+  --color-tgcc-500: #fd9909;
+  --color-tgcc-600: #e06f00;
+  --color-tgcc-700: #ba4b03;
+  --color-tgcc-800: #963a0a;
+  --color-tgcc-900: #7c300b;
+  --color-tgcc-950: #471601;
 
+  --modern-color: color(display-p3 0.5 0.5 0.5);
+  --fallback-color: rgb(128, 128, 128);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---color-sidebar-ring: var(--sidebar-ring);
---color-sidebar-border: var(--sidebar-border);
---color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
---color-sidebar-accent: var(--sidebar-accent);
---color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
---color-sidebar-primary: var(--sidebar-primary);
---color-sidebar-foreground: var(--sidebar-foreground);
---color-sidebar: var(--sidebar);
---color-chart-5: var(--chart-5);
---color-chart-4: var(--chart-4);
---color-chart-3: var(--chart-3);
---color-chart-2:#0c1fff ;
---color-chart-1: var(--chart-1);
---color-ring: var(--ring);
---color-input: var(--input);
---color-border: var(--border);
---color-destructive: var(--destructive);
---color-accent-foreground: var(--accent-foreground);
---color-accent: var(--accent);
---color-muted-foreground: var(--muted-foreground);
---color-muted: var(--muted);
---color-secondary-foreground: var(--secondary-foreground);
---color-secondary: var(--secondary);
---color-primary-foreground: var(--primary-foreground);
---color-primary: var(--primary);
---color-popover-foreground: var(--popover-foreground);
---color-popover: var(--popover);
---color-card-foreground: var(--card-foreground);
---color-card: var(--card);
---radius-sm: calc(var(--radius) - 4px);
---radius-md: calc(var(--radius) - 2px);
---radius-lg: var(--radius);
---radius-xl: calc(var(--radius) + 4px);
-
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: #0c1fff;
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 :root {
@@ -107,30 +89,24 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-
 }
-
-
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-
   }
   body {
     @apply bg-tgcc-50/35;
-
   }
-  label{
-    @apply text-sm opacity-80
+  label {
+    @apply text-sm opacity-80;
   }
-  button{
-    @apply rounded-full
+  button {
+    @apply rounded-full;
   }
 }
-@layer components{
-  .input{
-    @apply w-full px-2 border border-neutral-200 rounded-md h-11 outline-0 focus:outline-1 focus:outline-tgcc-600
+@layer components {
+  .input {
+    @apply w-full px-2 border border-neutral-200 rounded-md h-11 outline-0 focus:outline-1 focus:outline-tgcc-600;
   }
-  
 }
