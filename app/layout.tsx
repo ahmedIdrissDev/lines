@@ -4,7 +4,7 @@ import "../styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/hooks/auth";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils";
+import { authOptions } from "@/auth";
 
 const inter = Inter({
   variable: "--font-geist-sans",

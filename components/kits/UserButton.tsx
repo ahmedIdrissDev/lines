@@ -9,7 +9,7 @@ const UserButton = () => {
     const {data} = useSession()
   return (
     <>
-    <img onClick={openclose} src={data?.user?.image as string} className='w-9 h-9 rounded-full cursor-pointer' />
+                  <img onClick={openclose}  src={data?.user?.image ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 border border-neutral-200 rounded-full cursor-pointer' />
  <AnimatePresence>
         {open && (
           <div
@@ -23,14 +23,14 @@ const UserButton = () => {
 
               <h1>Paramètres du compte</h1>
                    <div className="flex items-center gap-2">
-                  <img  src={data?.user?.image as string} className='w-9 h-9 rounded-full cursor-pointer' />
+                  <img  src={data?.user?.image ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
                    <h1>{data?.user?.name} </h1>
                    </div>
                    <div className="w-full px-3 border border-neutral-100 bg-neutral-50 rounded-2xl h-6 flex items-center">
                     <span className='opacity-70'>   email :                  {data?.user?.email}</span>
                    </div>
                                       <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
-                    <span className='opacity-70'>role : admin </span>
+                    <span className='opacity-70'>role : {data?.user?.role } </span>
                    </div>
                         <button onClick={()=> signOut({redirect:true , callbackUrl:'/'})} className='w-20 h-11 text-red-950 border border-red-400  rounded-md'>logout</button>
 

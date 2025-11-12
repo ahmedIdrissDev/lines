@@ -2,8 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
+import { FormEvent } from "react";
 export default function Home() {
   const { status } = useSession();
+  function login(e:FormEvent<HTMLFormElement>){
+           e.preventDefault()
+           const formdata = new FormData(e.currentTarget)
+           const data =  Object.fromEntries(formdata.entries())
+           signIn('credentials' ,{...data , redirect:true , callbackUrl:'/dashboard'})
+  }
   return (
     <div className="flex justify-center items-center w-full h-dvh">
       <div className="w-90 flex  p-3 justify-center items-center gap-2 flex-col h-96 rounded-2xl">
@@ -32,10 +39,11 @@ export default function Home() {
         )}
         {status == "unauthenticated" && (
           <>
-            <form className="w-full flex gap-2 flex-col" action="">
+            <form onSubmit={login} className="w-full flex gap-2 flex-col" action="">
               <input
                 className="w-full h-10 rounded-md outline-0 focus:outline-1 focus:outline-tgcc-500 border border-neutral-200 px-2"
                 type="text"
+                name="email"
                 placeholder="Email "
               />
               <button className="h-10 cursor-pointer w-full bg-tgcc-700 text-white rounded-md">
