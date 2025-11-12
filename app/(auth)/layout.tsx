@@ -7,13 +7,13 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className=' grid grid-cols-2 w-full h-dvh '>
+    <div className=' grid grid-cols-[600px_1fr] w-full h-dvh '>
       <div className="w-full h-full">
               {children}
 
       </div>
-      <div className="w-full p-1 bg-tgcc-50 flex justify-center items-center h-full">
-        <Image src={'/demo.svg'} quality={1000} width={1000} height={1000} alt='logo' />
+        <Image src={'/bgs.webp'} quality={1000} width={1000} height={1000} alt='logo' className="w-full object-cover p-1 bg-tgcc-100 stify-center items-center h-full" />
+      <div >
       </div>
 
     </div>

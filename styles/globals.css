@@ -6,17 +6,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-tgcc-50: #fffaea;
-  --color-tgcc-100: #fff2c5;
-  --color-tgcc-200: #ffe386;
-  --color-tgcc-300: #ffcf47;
-  --color-tgcc-400: #ffb91d;
-  --color-tgcc-500: #fd9909;
-  --color-tgcc-600: #e06f00;
-  --color-tgcc-700: #ba4b03;
-  --color-tgcc-800: #963a0a;
-  --color-tgcc-900: #7c300b;
-  --color-tgcc-950: #471601;
+ --color-tgcc-50: #f3f1ff;
+--color-tgcc-100: #eae5ff;
+--color-tgcc-200: #d6cfff;
+--color-tgcc-300: #b9a8ff;
+--color-tgcc-400: #9877ff;
+--color-tgcc-500: #7940ff;
+--color-tgcc-600: #6a19ff;
+--color-tgcc-700: #6819fa;
+--color-tgcc-800: #4d06d1;
+--color-tgcc-900: #4107ab;
+--color-tgcc-950: #240075;
+
+
 
   --modern-color: color(display-p3 0.5 0.5 0.5);
   --fallback-color: rgb(128, 128, 128);

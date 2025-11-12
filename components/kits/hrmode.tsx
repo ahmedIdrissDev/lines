@@ -27,13 +27,13 @@ const Moderh = () => {
   
       try {
         if(text.length < 2) return false
-        const Updateddata = data.map(data=> {
-            if(text.includes(data.Matricule)){
-                return  {...data , status:'inactive'}
-            } else {
-              return     { ...data , status:'active'} 
-            }
-        }  ) as Employee[]
+        const cleanText = text.replace(/\s+/g, ' '); // collapse all spaces/tabs/newlines
+const Updateddata = data.map(item => {
+  const matched = cleanText.includes(item.Matricule);
+  return { ...item, status: matched ? 'inactive' : 'active' };
+});
+
+
         setdata(Updateddata)
         openclose();
         opens();
@@ -58,7 +58,7 @@ const Moderh = () => {
             exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-1/2 flex flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
               <h1>Valide la présence</h1>
               <textarea
-                onInput={e=> settext(e.currentTarget.value)}
+                onChange={e=> settext(e.currentTarget.value)}
                 className="p-2.5 h-full resize-none rounded-2xl border border-dashed border-neutral-200"
                 placeholder="Matricules "
                 name=""

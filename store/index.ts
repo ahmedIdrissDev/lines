@@ -14,7 +14,7 @@ export const store = create<StoreProps>((set)=>({
         set((state)=>({data :[...argm]}))
     },
     setdata(data) {
-         set(()=>({data: [...data]}))
+         set(()=>({data: data}))
     },
    
 }))
