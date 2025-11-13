@@ -5,6 +5,7 @@ import { AnimatePresence } from "motion/react";
 import React, { FormEvent, useState } from "react";
 import { motion } from "motion/react";
 import { Employee } from "@/types";
+import { baseUrl } from "@/constants";
 const Moderh = () => {
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
@@ -22,19 +23,19 @@ const Moderh = () => {
   const opens = () => (opentr ? setOpentr(false) : setOpentr(true));
 
   const { data  , setdata} = store();
-
   async function HendleAddEmployes() {
+    data.map((e)=>{
+      console.log('test', e)
+    })
   
       try {
         if(text.length < 2) return false
-        const cleanText = text.replace(/\s+/g, ' '); // collapse all spaces/tabs/newlines
-const Updateddata = data.map(item => {
-  const matched = cleanText.includes(item.Matricule);
-  return { ...item, status: matched ? 'inactive' : 'active' };
-});
+          const update = data.map(item=> text.includes(item.Matricule) ? {...item , status:"inactive"} :  {...item , status:"active"}) as Employee[]
+      
+      setdata(update)
+    
 
 
-        setdata(Updateddata)
         openclose();
         opens();
     } catch (error) {}
