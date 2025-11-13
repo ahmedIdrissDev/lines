@@ -17,7 +17,7 @@ const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
   
 }));
   return (
-    <div className='w-full flex rounded-md cursor-pointer duration-150 hover:border-tgcc-400 flex-col gap-1.5 border border-neutral-200 bg-white p-2 min-h-80  h-max'>
+    <div className={`'w-full flex rounded-md cursor-pointer duration-150 hover:border-tgcc-400 flex-col gap-1.5 border border-neutral-200  bg-white p-2 h-full  `}>
       <div className="w-full rounded-md flex items-center px-2 bg-tgcc-300/5 h-10">
          <h1 className='font-semibold'>{lot ? lot : 'Project'} </h1>
       </div>
@@ -38,10 +38,9 @@ const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
             </div>
          </div>
          <div className="w-full h-full p-2 rounded-md border border-neutral-200">
-            {data.splice(0 , 3).map(({count ,func } , index)=>(
+            {data.map(({count ,func } , index)=>(
           <div key={index} className="">  {count}  {func} </div>
             ))}
-            <button className='text-red-500 '> show all</button>
 
          </div>
     </div>
