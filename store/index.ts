@@ -5,16 +5,19 @@ interface StoreProps{
    data: Employee[] ,
    Project:string ,
    setdata:(data:Employee[] )=> void ,
-   setProject:(argm:Employee[])=> void
+    Updatedata:(argm:string)=> void
 }
 export const store = create<StoreProps>((set)=>({
     data:[] ,
     Project:'',
-    setProject(argm) {
-        set((state)=>({data :[...argm]}))
-    },
+   
     setdata(data) {
-         set(()=>({data: data}))
+         set(()=>({data:[...data] }))
+    },
+    Updatedata(argm) {
+        set((state)=>({
+            data: []
+        }))
     },
    
 }))

@@ -2,13 +2,15 @@
 import { store } from "@/store";
 import { DatabaseZap, User, UserRoundPlus } from "lucide-react";
 import { AnimatePresence } from "motion/react";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Employee } from "@/types";
 import { baseUrl } from "@/constants";
 const Moderh = () => {
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
+  const [dataupdated , setUpdated]= useState<Employee[]> ([])
+
   const [text , settext] =useState<string>('')
   const openclose = () => {
     if (open) {
@@ -20,22 +22,20 @@ const Moderh = () => {
       setOpen(true);
     }
   };
+  const {setdata} = store()
   const opens = () => (opentr ? setOpentr(false) : setOpentr(true));
-
-  const { data  , setdata} = store();
+  useEffect(()=>{
+     setdata(dataupdated)
+  } , [dataupdated])
   async function HendleAddEmployes() {
-    data.map((e)=>{
-      console.log('test', e)
-    })
+  
   
       try {
         if(text.length < 2) return false
-          const update = data.map(item=> text.includes(item.Matricule) ? {...item , status:"inactive"} :  {...item , status:"active"}) as Employee[]
-      
-      setdata(update)
-    
-
-
+            const response = await fetch(baseUrl,{cache:'no-cache'});
+              const data : Employee[] = await response.json()
+              const update = data.map(item=> text.includes(item.Matricule) ? {...item , status:"inactive"} :  {...item , status:"active"}) as Employee[]
+              setUpdated(e=>[...update])
         openclose();
         opens();
     } catch (error) {}
@@ -93,6 +93,7 @@ const Moderh = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-40 flex  justify-center items-center flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
               <DatabaseZap />
+              {dataupdated?.length}
               <h1>asynchrone avec votre base de données</h1>
 
               <div className="w-full h-12 gap-2 flex justify-center items-center">
