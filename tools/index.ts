@@ -42,12 +42,12 @@ export const DocBuilder = createTool({
   inputSchema: z.object({
     data: z.string().describe('get the data'),
     docModel: z.string().describe('this can be a data without fill '),
-    fullMode:  z.string().describe('mix the data and doc model and return the full text doc '),
+    fulldoc:  z.string().describe('mix the data and doc model and return the full text doc  the show be a nice doc use markdown to clone the origin model'),
   }),
-  execute: async function ({ data ,docModel ,fullMode }) {
+  execute: async function ({ data ,docModel ,fulldoc }) {
 
     return {
-      fullMode
+      fulldoc
     };
   },
 });

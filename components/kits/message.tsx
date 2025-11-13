@@ -1,3 +1,4 @@
+"use client"
 import { UIMessage } from "ai";
 import React from "react";
 import Markdown from "react-markdown";
@@ -8,6 +9,8 @@ import { FunctionCall } from "../charts/chart-radial-text";
 import Loading from "./loading";
 import { Employee } from "@/types";
 import { FileText } from "lucide-react";
+import Doc from "./doc";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 const Message = ({ id, role, parts }: UIMessage) => {
   switch (role) {
     case "user":
@@ -67,19 +70,23 @@ const Message = ({ id, role, parts }: UIMessage) => {
                   if (part.type === "tool-generateDoc") {
                   switch (part.state) {
                     case "output-available":
+                      console.log(part.output)
                       return (
                        <>
-                       <div className="w-96 h-70 border gap-2 border-neutral-200 p-3  flex flex-col justify-between rounded-2xl">
+                       <div key={index} className="w-96 h-70 border gap-2 border-neutral-200 p-3  flex flex-col justify-between rounded-2xl">
                         <div className="flex border border-neutral-200 h-full rounded-xl justify-center items-center">
                           <FileText/>
                         </div>
+                        <PDFDownloadLink document={<Doc markdown={'hhhh'} />}>
+
                        <button className="w-full cursor-pointer h-12 bg-tgcc-600 text-white rounded-md">save as pdf</button>
+      </PDFDownloadLink>
                        </div>
                        </>
                       );
                     case "input-available":
                       return (
-                      <Loading/>
+                      <Loading key={index}/>
                       );
                   }
                 }
