@@ -36,6 +36,21 @@ export const Answering = createTool({
     return getByFunction;
   },
 });
+export const DocBuilder = createTool({
+  description: `
+  Analyze and respond to specific queries about employees, roles, or departments.
+  It searches for data that matches the given keyword and provides concise, accurate answers.
+  `,
+  inputSchema: z.object({
+    data: z.string().describe('Keyword related to the employee function or HR field to search fo'),
+  }),
+  execute: async function ({ keywords }) {
+    const response = await fetch(baseUrl, { cache: 'no-cache' });
+    const data: Employee[] = await response.json();
+    const getByFunction = data.filter(({ function: fun }) => fun === keywords);
+    return getByFunction;
+  },
+});
 
 
 export const Adding = createTool({

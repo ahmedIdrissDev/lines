@@ -14,7 +14,7 @@ const Welcome = ({fun}:{fun:(e:string)=> void}) => {
       <p className='opacity-90'>Smart, fast, AI-powered HR assistant — what do you need today?</p>
 
 </div>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         {option.map(({icon , description ,label})=>(
              <div onClick={()=> fun(label)} className="w-full cursor-pointer h-50 border border-neutral-200 p-2 rounded-2xl">
               <div className="flex justify-center items-center h-11 w-11 bg-tgcc-300 rounded-2xl ">

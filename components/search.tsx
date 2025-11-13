@@ -24,7 +24,7 @@ const Search = () => {
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} className=" gap-2 flex h-max  flex-col p-4 w-1/2  rounded-md ">
+            exit={{ scale: 0.7, opacity: 0 }} className=" gap-2 flex h-max  flex-col p-4 w-full md:w-1/2  rounded-md ">
               <motion.div 
                           layout
     
@@ -39,19 +39,19 @@ const Search = () => {
              <motion.div
               layout
               layoutId='result'
-              initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} 
+              initial={{ scale: 0.9, opacity: 0 , translateY:-6 }}
+            animate={{ scale: 1, opacity: 1 , translateY:0}}
+            exit={{ scale: 0.9, opacity: 0 , translateY:-6 }} 
              
              className="w-full flex flex-col gap-2 p-2 h-96 bg-white border border-neutral-200 rounded-md ">
               <div className="w-full p-2.5 h-11 border border-neutral-200 rounded-md">
-                <span>Résumé des effectifs par function </span>
+                <span>Résumé des effectifs par fonction </span>
                 {result.length}
               </div>
               {result.splice(0 , 7) .map(({firstname , Matricule , function:fun  , lastname})=>(
 
                 <div className="flex items-center  gap-2">
-                  <img  src={'/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
+                  <img  src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
                   <div className="">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
                   <span className='w-max cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{fun}    </span>

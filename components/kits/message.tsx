@@ -31,10 +31,7 @@ const Message = ({ id, role, parts }: UIMessage) => {
     default:
       return (
         <div className="flex items-start gap-2.5 justify-start w-full">
-            <div className="w-8 h-8 ">
-                <Image  src={'/logoicon.svg'} className="w-10" width={1000} height={1000} alt="logo" />
-
-            </div>
+           
           <div className=" h-[80%] min-h-30 w-max max-1/2 ">
             <span>
               {parts.map((part, index) => {

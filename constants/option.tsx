@@ -21,7 +21,7 @@ export const option : optionProps[] =[
 
   {
     icon: <Zap/>,
-    label: "Answering Specific Queries",
-    description: "Respond clearly and concisely to any question about employees, projects, statuses, or HR operations."
+    label: "Generate Doc",
+    description: "Generate Doc allows you to automatically create professional documents from templates."
   }
 ]

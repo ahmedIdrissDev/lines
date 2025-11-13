@@ -83,7 +83,7 @@ const Hr = () => {
     <>
       <button
         onClick={openclose}
-        className="w-40 cursor-pointer h-11 bg-neutral-950 text-white rounded-md"
+        className="w-30 md:w-40 cursor-pointer h-11 bg-neutral-950 text-white rounded-md"
       >
 Démarrer
       </button>
@@ -96,7 +96,7 @@ Démarrer
             animate={{ opacity: 1 ,  translateX:0 }}
             exit={{ opacity: 0 ,  translateX:20 }}
 
-          className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5   w-[70%] h-full rounded-md border border-neutral-200">
+          className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5  w-full  md:w-[70%] h-full rounded-md border border-neutral-200">
             <div onClick={openclose} className="">
               <button className="w-20 z-20 absolute top-0 left-0 p-2.5 opacity-60 h-8  rounded-full cursor-pointer">
                 <X/>
