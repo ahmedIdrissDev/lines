@@ -37,18 +37,18 @@ export const Answering = createTool({
   },
 });
 export const DocBuilder = createTool({
-  description: `
-  Analyze and respond to specific queries about employees, roles, or departments.
-  It searches for data that matches the given keyword and provides concise, accurate answers.
+  description: ` this function build to fill the doc models with data to make it fast , you shoull fill the model of the book with data
   `,
   inputSchema: z.object({
-    data: z.string().describe('Keyword related to the employee function or HR field to search fo'),
+    data: z.string().describe('get the data'),
+    docModel: z.string().describe('this can be a data without fill '),
+    fullMode:  z.string().describe('mix the data and doc model and return the full text doc '),
   }),
-  execute: async function ({ keywords }) {
-    const response = await fetch(baseUrl, { cache: 'no-cache' });
-    const data: Employee[] = await response.json();
-    const getByFunction = data.filter(({ function: fun }) => fun === keywords);
-    return getByFunction;
+  execute: async function ({ data ,docModel ,fullMode }) {
+
+    return {
+      fullMode
+    };
   },
 });
 
@@ -88,4 +88,5 @@ export const tools = {
   show:  handelProvideData,
   specific: Answering,
   add: Adding,
+  generateDoc:DocBuilder
 };

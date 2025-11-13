@@ -9,6 +9,7 @@ import { DefaultChatTransport } from "ai";
 import { AnimatePresence, motion } from "motion/react";
 import Message from "./kits/message";
 import { ArrowUp, CirclePause, File, Paperclip, Pause, X } from "lucide-react";
+import Loading from "./ui/loading";
 
 async function convertFilesToDataURLs(
   files: FileList
@@ -113,7 +114,7 @@ Démarrer
                 {messages.map((message) => (
                   <Message key={message.id} {...message} />
                 ))}
-                {status==='submitted' && <span> Please wait a moment...</span>}
+                {status==='submitted' && <Loading/>}
               </motion.div>
             )}
             {!initailized && <Welcome fun={e=>{

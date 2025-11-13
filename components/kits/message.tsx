@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { FunctionCall } from "../charts/chart-radial-text";
 import Loading from "./loading";
 import { Employee } from "@/types";
+import { FileText } from "lucide-react";
 const Message = ({ id, role, parts }: UIMessage) => {
   switch (role) {
     case "user":
@@ -56,6 +57,25 @@ const Message = ({ id, role, parts }: UIMessage) => {
                       return (
                        <>                             <FunctionCall key={index} data={part.output as Employee[]} />
  </>
+                      );
+                    case "input-available":
+                      return (
+                      <Loading/>
+                      );
+                  }
+                }
+                  if (part.type === "tool-generateDoc") {
+                  switch (part.state) {
+                    case "output-available":
+                      return (
+                       <>
+                       <div className="w-96 h-70 border gap-2 border-neutral-200 p-3  flex flex-col justify-between rounded-2xl">
+                        <div className="flex border border-neutral-200 h-full rounded-xl justify-center items-center">
+                          <FileText/>
+                        </div>
+                       <button className="w-full cursor-pointer h-12 bg-tgcc-600 text-white rounded-md">save as pdf</button>
+                       </div>
+                       </>
                       );
                     case "input-available":
                       return (
