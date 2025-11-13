@@ -42,7 +42,8 @@ export default function Home() {
             <form onSubmit={login} className="w-full flex gap-2 flex-col" action="">
               <input
                 className="w-full h-10 rounded-md outline-0 focus:outline-1 focus:outline-tgcc-500 border border-neutral-200 px-2"
-                type="text"
+                type="email"
+                required
                 name="email"
                 placeholder="Email "
               />
