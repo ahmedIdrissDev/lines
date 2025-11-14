@@ -13,7 +13,7 @@ export default function Home() {
   }
   return (
     <div className="flex justify-center items-center w-full h-dvh">
-      <div className="w-[70%] flex  p-3 justify-center items-center gap-2 flex-col h-96 rounded-2xl">
+      <div className=" w-full md:w-[70%] flex  p-3 justify-center items-center gap-2 flex-col h-96 rounded-2xl">
         <div className="flex justify-center items-center">
           <Image
             src={"/icon.png"}
@@ -60,7 +60,7 @@ export default function Home() {
               onClick={() =>
                 signIn("google", { redirect: true, callbackUrl: "/dashboard" })
               }
-              className="w-full flex  gap-2 justify-center items-center h-11 border border-neutral-200     rounded-xl cursor-pointer"
+              className="w-full flex  px-1 gap-2 justify-center items-center h-11 border border-neutral-200     rounded-xl cursor-pointer"
             >
               <Image
                 src={"/google.png"}
