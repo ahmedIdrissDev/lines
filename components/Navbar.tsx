@@ -2,6 +2,7 @@
 import Add from './Add'
 import Project from './Project'
 import UsersList from './UsersList'
+import Hello from './kits/Hello'
 import UserButton from './kits/UserButton'
 import Search from './search'
 
@@ -17,6 +18,7 @@ const Navbar = () => {
 
 
     <div className=" flex items-center gap-2.5">
+      <Hello/>
       <Search/>
             <Add/>
             <UserButton/>

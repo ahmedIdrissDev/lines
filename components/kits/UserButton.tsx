@@ -7,6 +7,7 @@ const UserButton = () => {
     const [open, setOpen] = useState(false);
     const openclose = ()=> open ? setOpen(false) : setOpen(true)
     const {data} = useSession()
+    console.log(data?.user?.role)
   return (
     <>
                   <img onClick={openclose}  src={data?.user?.image ?  data.user.image : '/avatar.png'} className='w-10 bg-white h-10 border border-neutral-200 rounded-full cursor-pointer' />
@@ -27,12 +28,12 @@ const UserButton = () => {
                    <h1>{data?.user?.name} </h1>
                    </div>
                    <div className="w-full px-3 border border-neutral-100 bg-neutral-50 rounded-2xl h-6 flex items-center">
-                    <span className='opacity-70'>   email :                  {data?.user?.email}</span>
+                    <span className='opacity-70'>               {data?.user?.email}</span>
                    </div>
-                                      <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
-                    <span className='opacity-70'>role : {data?.user?.role } </span>
+                     <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
+                    <span className='opacity-70'>{data?.user?.role} </span>
                    </div>
-                        <button onClick={()=> signOut({redirect:true , callbackUrl:'/'})} className='w-20 h-11 text-red-950 border border-red-400  rounded-md'>logout</button>
+                  <button onClick={()=> signOut({redirect:true , callbackUrl:'/'})} className='w-20 h-11 text-red-950 border border-red-400  rounded-md'>logout</button>
 
               </div>
                    <div className="flex w-full justify-end">

@@ -45,10 +45,7 @@ export const DocBuilder = createTool({
     fulldoc:  z.string().describe('mix the data and doc model and return the full text doc  the show be a nice doc use markdown to clone the origin model'),
   }),
   execute: async function ({ data ,docModel ,fulldoc }) {
-
-    return {
-      fulldoc
-    };
+    return  fulldoc
   },
 });
 

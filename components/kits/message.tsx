@@ -73,7 +73,7 @@ const Message = ({ id, role, parts }: UIMessage) => {
                     case "output-available":
                       return (
                        <>
-                           <Export key={index} {...part.output as any} />
+                       <span> {part.output as string} </span>
                        </>
                       );
                     case "input-available":

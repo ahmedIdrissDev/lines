@@ -16,6 +16,13 @@ const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
    
   
 }));
+  const  newfun = Object.groupBy(present , ({function:fun})=> fun )
+  const Absents = Object.entries(newfun).map(([func ,data]) => ({
+  func,
+  count: data?.filter(({status})=> status==='inactive' ).length,
+   
+  
+}));
   return (
     <div className={`'w-full flex rounded-md cursor-pointer duration-150 hover:border-tgcc-400 flex-col gap-1.5 border border-neutral-200  bg-white p-2 h-full  `}>
       <div className="w-full rounded-md flex items-center px-2 bg-tgcc-300/5 h-10">
@@ -37,10 +44,25 @@ const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
                 {Absent.length} Absence
             </div>
          </div>
-         <div className="w-full h-full p-2 rounded-md border border-neutral-200">
+         <div className="w-full grid grid-cols-2 h-full p-2 rounded-md border border-neutral-200">
+          <div className="w-full h-full">
             {data.map(({count ,func } , index)=>(
           <div key={index} className="">  {count}  {func} </div>
             ))}
+
+          </div>
+            <div className="w-full h-full">
+            {Absents.map(({count ,func } , index)=>{
+              if(count != 0){
+                return (
+          <div key={index} className="">  {count}  {func} </div>
+            )
+                
+              }
+            }
+            )}
+
+          </div>
 
          </div>
     </div>

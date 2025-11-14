@@ -13,7 +13,7 @@ export default function Home() {
   }
   return (
     <div className="flex justify-center items-center w-full h-dvh">
-      <div className="w-90 flex  p-3 justify-center items-center gap-2 flex-col h-96 rounded-2xl">
+      <div className="w-[70%] flex  p-3 justify-center items-center gap-2 flex-col h-96 rounded-2xl">
         <div className="flex justify-center items-center">
           <Image
             src={"/icon.png"}
@@ -25,15 +25,15 @@ export default function Home() {
         </div>
         <div className="text-center">
           <h1 className="text-2xl">Tgcc teams</h1>
-          <p>Plateforme intelligente de gestion des ressources humaines </p>
+          <p className="text-sm">Plateforme intelligente de gestion des ressources humaines </p>
         </div>
         {status == "authenticated" && (
           <>
             <Link
               href={"/dashboard"}
-              className="h-10 cursor-pointer flex justify-center items-center w-full bg-tgcc-700 text-white rounded-md"
+              className="h-11 cursor-pointer flex justify-center items-center w-full bg-tgcc-700 text-white rounded-md"
             >
-              <span>dashboard</span>
+              <span>Dashboard</span>
             </Link>
           </>
         )}
