@@ -8,7 +8,6 @@ const AI = () => {
           <h1 className='font-[17px] '> Agent IA</h1>
           <p className=' text-sm'>Optimisez vos analyses grâce à TGCC IA.</p>
        </div>
-     <Hr/>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "motion/react";
 import Message from "./kits/message";
 import { ArrowUp, CirclePause, File, Paperclip, Pause, X } from "lucide-react";
 import Loading from "./ui/loading";
+import Image from "next/image";
 
 async function convertFilesToDataURLs(
   files: FileList
@@ -82,11 +83,8 @@ const Hr = () => {
 
   return (
     <>
-      <button
-        onClick={openclose}
-        className="w-30 md:w-40 cursor-pointer h-11 bg-neutral-950 text-white rounded-xl"
-      >
-Démarrer
+       <button onClick={openclose} className='w-11 h-11 rounded-2xl border border-neutral-200 p-2 '>
+         <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10' />
       </button>
    <AnimatePresence>
 
