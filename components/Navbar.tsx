@@ -19,7 +19,6 @@ const Navbar = () => {
     <div className=" flex items-center gap-2.5">
       <Search/>
             <Add/>
-            <Project/>
             <UserButton/>
     </div>
     </div>

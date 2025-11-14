@@ -12,9 +12,8 @@ const Search = () => {
       const result = data.filter(item=> item.function.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
   return (
     <>
-     <button onClick={openclose} className='w-max bg-white px-2   rounded-xl  cursor-pointer   flex  items-center gap-1.5 h-10 border-2 border-neutral-100'>
-            <SearchIcon className='opacity-60'/>
-            <span className='opacity-70'>Trouver des employés</span>
+     <button onClick={openclose} className='  px-2  text-white  rounded-xl  cursor-pointer  justify-center  flex w-10  items-center gap-1.5 h-10 bg-neutral-950'>
+            <SearchIcon className=''/>
         </button>
     <AnimatePresence>
         {open && (

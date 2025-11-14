@@ -84,7 +84,7 @@ const Hr = () => {
     <>
       <button
         onClick={openclose}
-        className="w-30 md:w-40 cursor-pointer h-11 bg-neutral-950 text-white rounded-md"
+        className="w-30 md:w-40 cursor-pointer h-11 bg-neutral-950 text-white rounded-xl"
       >
 Démarrer
       </button>

@@ -41,13 +41,13 @@ export default function Home() {
           <>
             <form onSubmit={login} className="w-full flex gap-2 flex-col" action="">
               <input
-                className="w-full h-10 rounded-md outline-0 focus:outline-1 focus:outline-tgcc-500 border border-neutral-200 px-2"
+                className="w-full h-11 rounded-xl outline-0 focus:outline-1 focus:outline-tgcc-500 border border-neutral-200 px-2"
                 type="email"
                 required
                 name="email"
-                placeholder="Email "
+                placeholder="email "
               />
-              <button className="h-10 cursor-pointer w-full bg-tgcc-700 text-white rounded-md">
+              <button className="h-11 cursor-pointer w-full bg-tgcc-700 text-white rounded-xl">
                 login
               </button>
             </form>
@@ -60,7 +60,7 @@ export default function Home() {
               onClick={() =>
                 signIn("google", { redirect: true, callbackUrl: "/dashboard" })
               }
-              className="w-full flex  gap-2 justify-center items-center h-10 border border-neutral-200     rounded-md cursor-pointer"
+              className="w-full flex  gap-2 justify-center items-center h-11 border border-neutral-200     rounded-xl cursor-pointer"
             >
               <Image
                 src={"/google.png"}

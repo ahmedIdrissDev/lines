@@ -34,7 +34,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-9 bg-tgcc-700 text-white"
+        className="w-30 hidden cursor-pointer rounded-xl  md:flex justify-center items-center gap-1.5 h-10 bg-tgcc-700 text-white"
       >
         <span> Ajouter </span>
       </button>
