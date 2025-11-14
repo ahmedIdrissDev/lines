@@ -20,7 +20,7 @@ const Message = ({ id, role, parts }: UIMessage) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="w-max max-w-1/2 bg-tgcc-950 text-white rounded-2xl p-2"
+            className="w-max max-w-1/2 bg-tgcc-500 text-white rounded-2xl p-2"
           >
             <span>
               {parts.map((part, index) => {

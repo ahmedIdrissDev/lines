@@ -14,12 +14,12 @@ const UserButton = () => {
  <AnimatePresence>
         {open && (
           <div
-            className="w-full   fixed z-20 bg-neutral-900/10 flex justify-center items-center inset-0"
+            className="w-full   fixed z-20 bg-neutral-900/10 p-4 flex justify-center items-center inset-0"
           >
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} className="bg-white flex justify-between h-1/2  flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
+            exit={{ scale: 0.7, opacity: 0 }} className="bg-white flex justify-between h-1/2  flex-col gap-1.5  p-4 w-full md:w-1/2  rounded-md border border-neutral-200">
               <div className="flex flex-col gap-1.5">
 
               <h1>Paramètres du compte</h1>

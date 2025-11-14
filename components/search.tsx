@@ -53,7 +53,7 @@ const Search = () => {
                   <img  src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
                   <div className="">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
-                  <span className='w-max cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{fun}    </span>
+                  <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{fun}    </span>
 
                   </div>
 

@@ -83,7 +83,7 @@ const Hr = () => {
 
   return (
     <>
-       <button onClick={openclose} className='w-11 h-11 rounded-2xl border border-neutral-200 p-2 '>
+       <button onClick={openclose} className='w-11 cursor-pointer h-11 rounded-2xl border border-neutral-200 p-2 '>
          <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10' />
       </button>
    <AnimatePresence>
