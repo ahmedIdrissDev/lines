@@ -24,7 +24,7 @@ function Hello() {
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} className="  gap-2 flex h-96  bg-white  justify-center flex-col p-4 w-full md:w-80 rounded-md ">
+            exit={{ scale: 0.7, opacity: 0 }} className="  gap-2 flex h-96  bg-white  justify-center flex-col p-4 w-full md:w-96 rounded-md ">
                   <div className="text-center flex justify-center items-center flex-col gap-2">
                     <Image src={'/hand.png'} className='w-20' width={200} height={200} alt='hand'/>
                     <div className="text-center">
@@ -32,6 +32,7 @@ function Hello() {
                     <p>bienvenue sur la plateforme RH sécurisée de TGCC.</p>
 
                     </div>
+                    <button onClick={openclose} className='w-30 h-11 bg-tgcc-600 text-white rounded-2xl cursor-pointer'>Merci</button>
                   </div>
             
             </motion.div>

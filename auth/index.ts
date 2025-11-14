@@ -9,7 +9,7 @@ const authorized = [
         {
       email:'kbidaAbedelmjid@tgcc.teams',
       name:'kbida Abedelmjid',
-      role:'chef'
+      role:'Chef-de-Chantier'
     }
 ]
 export const authOptions = {
