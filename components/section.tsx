@@ -1,4 +1,3 @@
-'use client'
 import { FileChartLine } from 'lucide-react'
 import Moderh from './kits/hrmode'
 import PDF from './kits/pdf'

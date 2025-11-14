@@ -2,7 +2,7 @@
 import { UIMessage } from "ai";
 import React from "react";
 import Markdown from "react-markdown";
-import { motion } from "motion/react";
+import { inertia, motion } from "motion/react";
 import Image from "next/image";
 import remarkGfm from 'remark-gfm';
 import { FunctionCall } from "../charts/chart-radial-text";
@@ -73,7 +73,7 @@ const Message = ({ id, role, parts }: UIMessage) => {
                     case "output-available":
                       return (
                        <>
-                           <Export text={part.output as string} />
+                           <Export key={index} {...part.output as any} />
                        </>
                       );
                     case "input-available":
