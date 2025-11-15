@@ -14,14 +14,14 @@ const Welcome = ({fun}:{fun:(e:string)=> void}) => {
       <p className='opacity-90'>Smart, fast, AI-powered HR assistant — what do you need today?</p>
 
 </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+      <div className="grid   overflow-x-scroll grid-cols-3 gap-2">
         {option.map(({icon , description ,label})=>(
-             <div key={label} onClick={()=> fun(label)} className="w-full cursor-pointer duration-150 hover:border-tgcc-800 h-50 border border-neutral-200 p-2 rounded-2xl">
+             <div key={label} onClick={()=> fun(label)} className="w-full cursor-pointer duration-150 hover:border-tgcc-800 min-h-50 border border-neutral-200 p-2 rounded-2xl">
               <div className="flex justify-center items-center h-11 w-11 bg-tgcc-300 rounded-2xl ">
                 {icon}
               </div>
               <div className="">
-                  <h1 className='text-2xl'>{label} </h1>
+                  <h1 className='text-md md:text-2xl'>{label} </h1>
                   <p className='text-sm opacity-75'> {description} </p>
               </div>
              </div>

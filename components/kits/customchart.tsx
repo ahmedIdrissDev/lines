@@ -41,16 +41,16 @@ const Customchart = ({count ,lot , present }:customchartProps) => {
             </div>
              <div className=" rounded-md  gap-2 flex justify-center border border-neutral-200 items-center w-full text-tgcc-950 h-full">
                  <TrendingDown/>
-
                 {Absent.length} Absence
             </div>
          </div>
          <div className="w-full grid grid-cols-2 h-full p-2 rounded-md border border-neutral-200">
           <div className="w-full h-full">
             {data.map(({count ,func ,countabsent } , index)=>(
-          <div key={index} className="">  {count}  {func} {countabsent} </div>
+          <div key={index} className=""> 
+               {count}  {func} {countabsent}
+          </div>
             ))}
-
           </div>
          </div>
     </div>
