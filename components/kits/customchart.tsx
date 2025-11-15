@@ -44,14 +44,22 @@ const Customchart = ({count ,lot , present }:customchartProps) => {
                 {Absent.length} Absence
             </div>
          </div>
-         <div className="w-full grid grid-cols-2 h-full p-2 rounded-md border border-neutral-200">
-          <div className="w-full h-full">
-            {data.map(({count ,func ,countabsent } , index)=>(
-          <div key={index} className=""> 
-               {count}  {func} {countabsent}
+         <div className="w-full h-full flex flex-col gap-2 p-2 rounded-md border border-neutral-200">
+           {data.map(({count ,func ,countabsent } , index)=>(
+          <div key={index} className="grid w-full grid-cols-3 gap-1.5"> 
+               {func}
+               <span className='w-full flex justify-center items-center h-10 bg-amber-300/5  rounded-2xl'>
+                {count}
+
+               </span>   
+               <span className='w-full flex justify-center items-center h-10 bg-red-50 text-red-700  rounded-2xl'>
+                {countabsent}
+
+               </span>                
+               
+
           </div>
             ))}
-          </div>
          </div>
     </div>
   )

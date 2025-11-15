@@ -47,6 +47,13 @@ export default function Home() {
                 name="email"
                 placeholder="email "
               />
+               <input
+                className="w-full h-11 rounded-xl outline-0 focus:outline-1 focus:outline-tgcc-500 border border-neutral-200 px-2"
+                type="password"
+                required
+                name="password"
+                placeholder=" Mode de pass"
+              />
               <button className="h-11 cursor-pointer w-full bg-tgcc-700 text-white rounded-xl">
                 login
               </button>
@@ -60,7 +67,7 @@ export default function Home() {
               onClick={() =>
                 signIn("google", { redirect: true, callbackUrl: "/dashboard" })
               }
-              className="w-full flex  px-1 gap-2 justify-center items-center h-11 border border-neutral-200     rounded-xl cursor-pointer"
+              className="w-full flex  py-2 px-1 gap-2 justify-center items-center h-11 border border-neutral-200     rounded-xl cursor-pointer"
             >
               <Image
                 src={"/google.png"}
@@ -69,6 +76,7 @@ export default function Home() {
                 height={400}
                 alt="logo"
               />
+              
               <span>Connexion avec Google</span>
             </button>
           </>
