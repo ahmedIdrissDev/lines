@@ -7,7 +7,7 @@ const Welcome = ({fun}:{fun:(e:string)=> void}) => {
   return (
     <div className='flex justify-center gap-6 h-full flex-col items-center'>
     
-   <Image src={'/ai.svg'} width={1000} height={1000} className="w-14 animate-caret-blink" alt="logo" />
+   <Image src={'/ai.svg'} width={1000} height={1000} className="w-14 " alt="logo" />
 
 <div className="text-center">
       <h1 className='text-2xl'>Welcome I <span className='w-max px-3 border bg-linear-60 text-transparent bg-clip-text from-tgcc-700 to-yellow-300 border-neutral-200 rounded-full'> Tgcc ai </span></h1>
