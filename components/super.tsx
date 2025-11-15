@@ -9,7 +9,7 @@ const Super = () => {
     const mapped = Object.entries(newdata).map(([lot, data]) => ({
   lot,
   count: data?.length,
-  present: data?.filter( ({status}) => status==='active') ,
+  present: data ,
   Absent: data?.filter( ({status}) => status==='inactive'),
 }));
     console.log(newdata)

@@ -6,14 +6,15 @@ interface  customchartProps{
   lot : string,
   count: number,
   present: Employee[] ,
-  Absent  :Employee[] ,
 }
-const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
+const Customchart = ({count ,lot , present }:customchartProps) => {
      const  func = Object.groupBy(present , ({function:fun})=> fun )
+     const Absent = present.filter((items)=>  items.status ==='inactive')
   const data = Object.entries(func).map(([func ,data]) => ({
   func,
   count: data?.filter(({status})=> status==='active' ).length,
-   
+  countabsent: data?.filter(({status})=> status==='inactive' ).length,
+
   
 }));
   const  newfun = Object.groupBy(present , ({function:fun})=> fun )
@@ -46,24 +47,11 @@ const Customchart = ({Absent ,count ,lot , present }:customchartProps) => {
          </div>
          <div className="w-full grid grid-cols-2 h-full p-2 rounded-md border border-neutral-200">
           <div className="w-full h-full">
-            {data.map(({count ,func } , index)=>(
-          <div key={index} className="">  {count}  {func} </div>
+            {data.map(({count ,func ,countabsent } , index)=>(
+          <div key={index} className="">  {count}  {func} {countabsent} </div>
             ))}
 
           </div>
-            <div className="w-full h-full">
-            {Absents.map(({count ,func } , index)=>{
-              if(count != 0){
-                return (
-          <div key={index} className="">  {count}  {func} </div>
-            )
-                
-              }
-            }
-            )}
-
-          </div>
-
          </div>
     </div>
   )
