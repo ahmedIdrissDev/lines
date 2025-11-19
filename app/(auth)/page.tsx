@@ -2,14 +2,30 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
+import { redirect } from "next/navigation";
+import * as z from "zod";
 export default function Home() {
   const { status } = useSession();
-  function login(e:FormEvent<HTMLFormElement>){
+  const [errors , seterrors] = useState<Boolean>(false)
+
+  const User = z.object({
+  email: z.email(),
+  password: z.string().min(7)
+});
+ async function login(e:FormEvent<HTMLFormElement>){
            e.preventDefault()
            const formdata = new FormData(e.currentTarget)
            const data =  Object.fromEntries(formdata.entries())
-           signIn('credentials' ,{...data , redirect:true , callbackUrl:'/dashboard'})
+           const res =  await signIn('credentials' ,{...data , redirect:false })
+           console.log(res?.error)
+           if(res?.error){
+               seterrors(true)
+           }
+           if(res?.ok){
+              seterrors(false)
+              redirect('/dashboard')
+           }
   }
   return (
     <div className="flex justify-center items-center w-full h-dvh">
@@ -27,11 +43,16 @@ export default function Home() {
           <h1 className="text-2xl">Tgcc teams</h1>
           <p className="text-sm">Plateforme intelligente de gestion des ressources humaines </p>
         </div>
+        {errors && 
+          <div className="flex justify-center items-center text-red-500">
+            <p>Oups ! Une erreur s’est produite. Veuillez réessayer</p>
+          </div>
+        }
         {status == "authenticated" && (
           <>
             <Link
               href={"/dashboard"}
-              className="h-11 cursor-pointer flex justify-center items-center w-full bg-tgcc-700 text-white rounded-md"
+              className="h-11 cursor-pointer flex justify-center items-center w-full bg-tgcc-700 text-white rounded-2xl"
             >
               <span>Dashboard</span>
             </Link>
@@ -76,7 +97,7 @@ export default function Home() {
                 height={400}
                 alt="logo"
               />
-              
+
               <span>Connexion avec Google</span>
             </button>
           </>
