@@ -11,8 +11,9 @@ export default function Home() {
 
   const User = z.object({
   email: z.email(),
-  password: z.string().min(7)
+  password: z.string().regex(/^[a-z0-9]{6,20}$/,{message:'error '}).min(7).max(10)
 });
+
  async function login(e:FormEvent<HTMLFormElement>){
            e.preventDefault()
            const formdata = new FormData(e.currentTarget)
@@ -63,7 +64,7 @@ export default function Home() {
             <form onSubmit={login} className="w-full flex gap-2 flex-col" action="">
               <input
                 className="w-full h-11 rounded-xl outline-0 focus:outline-1 focus:outline-tgcc-500 border border-neutral-200 px-2"
-                type="email"
+                type="text"
                 required
                 name="email"
                 placeholder="email "

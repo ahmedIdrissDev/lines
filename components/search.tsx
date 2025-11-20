@@ -6,7 +6,10 @@ import { useState } from 'react';
 
 const Search = () => {
   const [open, setOpen] = useState(false);
+  const [openEmployee , setopenEmployee] = useState(false)
       const openclose = ()=> open ? setOpen(false) : setOpen(true)
+      const HendleOpenEmployee = ()=> openEmployee ? setopenEmployee(false) : setopenEmployee(true)
+
       const [text , settext]= useState('')
       const {data} = store()
       const result = data.filter(item=> item.function.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
@@ -47,15 +50,54 @@ const Search = () => {
                 <span>Résumé des effectifs par fonction </span>
                 {result.length}
               </div>
-              {result.splice(0 , 7) .map(({firstname , Matricule , function:fun  , lastname})=>(
+              {result.splice(0 , 7) .map(({firstname , Matricule , function:fun  , lastname , status , lot})=>(
 
                 <div className="flex items-center  gap-2">
-                  <img  src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
-                  <div className="">
+                  <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
+                  <div className="flex items-center gap-1.5">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
                   <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{fun}    </span>
+                        <p>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </p>
 
                   </div>
+                  <AnimatePresence>
+
+
+                  {
+                    openEmployee && 
+
+
+                <div className="fixed inset-0 bg-neutral-950/5 flex justify-center items-center">
+
+                  <motion.div
+                  layout
+              layoutId='profile'
+              initial={{ scale: 0.9, opacity: 0 , translateY:-6 }}
+            animate={{ scale: 1, opacity: 1 , translateY:0}}
+            exit={{ scale: 0.9, opacity: 0 , translateY:-6 }} 
+                  
+                  className="w-1/2 flex flex-col gap-2 h-1/2 bg-white p-3 rounded-2xl">
+                  <div className="flex justify-between items-center w-full">
+                    <div className="flex items-center gap-1">
+                                    <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
+                    <h1>         {firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </h1>
+
+                    </div>
+                                 <X onClick={HendleOpenEmployee} className='scale-75 opacity-70 cursor-pointer'/>
+
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                                        <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '> function : {fun}    </span>
+                                        <span>Matricule: {Matricule} </span>
+                                        <p>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </p>
+                                                                                                        <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{lot}    </span>
+
+                  </div>
+
+                  </motion.div>
+                </div>
+                  }
+                                    </AnimatePresence>
 
                 </div>
               ))}
