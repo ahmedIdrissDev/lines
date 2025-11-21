@@ -10,7 +10,6 @@ const page = () => {
    <>
        <AI/>
          <Chat/>
-         <Title/>
          <Super/>
 <Employees/>
    </>

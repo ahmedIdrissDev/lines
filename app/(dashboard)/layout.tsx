@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import Sidebar from '@/components/sidebar';
 import React from 'react'
 
 const layout = ({
@@ -7,9 +8,10 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='flex w-full flex-col gap-1 h-dvh'>
+    <div className='grid grid-cols-[200px_1fr] h-dvh'>
+      <Sidebar/>
+      <div className="w-full border-l bg-tgcc-50/35 border-neutral-200 flex flex-col gap-2 p-3 md:px-2 h-dvh">
     <Navbar/>
-      <div className="w-full flex flex-col gap-2 p-3 md:p-6 h-dvh">
         {children}
       </div>
 

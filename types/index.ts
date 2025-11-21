@@ -10,3 +10,8 @@ export interface Employee {
   status: 'active' | 'inactive';
   date:Date 
 }
+export interface linksProps{
+    icon: React.ReactNode ,
+    path:string ,
+    label:string
+}
