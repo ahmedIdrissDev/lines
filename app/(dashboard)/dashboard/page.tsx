@@ -10,9 +10,7 @@ const page = () => {
    const users = useQuery(api.functions.login.get);
    console.log('users',users)
 
-   if (users === undefined) return <div>Loading...</div>
-   if (users.length === 0) return <div>No users found</div>
-
+   
   return (
    <>
    

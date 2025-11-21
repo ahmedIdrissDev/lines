@@ -11,7 +11,7 @@ path:'/dashboard'
     {
 icon:<Calendar/>,
 label:"Tâches",
-path:'/tasks'
+path:'/taches'
     } ,
     {
 icon:<Users/>,
@@ -21,7 +21,7 @@ path:'/effectifs'
      {
 icon:<FileMinus/>,
 label:"Rapport",
-path:'/Rapport'
+path:'/rapport'
     }
 
 ]
