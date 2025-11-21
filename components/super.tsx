@@ -12,7 +12,6 @@ const Super = () => {
   present: data ,
   Absent: data?.filter( ({status}) => status==='inactive'),
 }));
-    console.log(newdata)
   return (
     <>
 

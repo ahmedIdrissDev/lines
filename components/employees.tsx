@@ -32,8 +32,6 @@ const Employees = () => {
    })()
   } ,[])
   const grup = Object.groupBy(data , ({lot})=> lot)  
-  const key = Object.keys(grup)
-  console.log(key)
   
   return (
     <>
