@@ -2,13 +2,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import * as z from "zod";
 export default function Home() {
   const { status } = useSession();
   const [errors , seterrors] = useState<Boolean>(false)
-
+   useEffect(()=>{
+     if(status=='authenticated'){
+        redirect('/dashboard')
+     }
+   } ,[])
   const User = z.object({
   email: z.email(),
   password: z.string().regex(/^[a-z0-9]{6,20}$/,{message:'error '}).min(7).max(10)
@@ -41,24 +45,15 @@ export default function Home() {
           />
         </div>
         <div className="text-center">
-          <h1 className="text-2xl">Tgcc teams</h1>
-          <p className="text-sm">Plateforme intelligente de gestion des ressources humaines </p>
+          <h1 className="text-2xl">tgcc teams</h1>
+          <p className="text-sm">Plateforme intelligente de gestion de projets </p>
         </div>
         {errors && 
           <div className="flex justify-center items-center text-red-500">
             <p>Oups ! Une erreur s’est produite. Veuillez réessayer</p>
           </div>
         }
-        {status == "authenticated" && (
-          <>
-            <Link
-              href={"/dashboard"}
-              className="h-11 cursor-pointer flex justify-center items-center w-full bg-tgcc-700 text-white rounded-2xl"
-            >
-              <span>Dashboard</span>
-            </Link>
-          </>
-        )}
+        
         {status == "unauthenticated" && (
           <>
             <form onSubmit={login} className="w-full flex gap-2 flex-col" action="">
@@ -76,7 +71,7 @@ export default function Home() {
                 name="password"
                 placeholder=" Mode de pass"
               />
-              <button className="h-11 cursor-pointer w-full bg-tgcc-700 text-white rounded-xl">
+              <button className="h-11 cursor-pointer w-full bg-tgcc-500 text-white rounded-xl">
                 login
               </button>
             </form>

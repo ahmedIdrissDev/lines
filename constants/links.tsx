@@ -1,5 +1,5 @@
 import { linksProps } from "@/types"
-import { Calendar, Home, Users } from "lucide-react"
+import { Calendar, FileMinus, Home, Users } from "lucide-react"
 
 
 export const links:linksProps[] =[
@@ -17,5 +17,11 @@ path:'/tasks'
 icon:<Users/>,
 label:"effectifs",
 path:'/effectifs'
+    } ,
+     {
+icon:<FileMinus/>,
+label:"Rapport",
+path:'/Rapport'
     }
+
 ]

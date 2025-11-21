@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/hooks/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
+import { ConvexClientProvider } from "@/hooks/ConvexClientProvider";
 
 const inter = Inter({
   variable: "--font-geist-sans",
@@ -32,10 +33,11 @@ export default async function RootLayout({
       <body
         className={inter.className}
       >
+        <ConvexClientProvider>
         <Provider session={SessionProvider}>
-
         {children}
         </Provider>
+        </ConvexClientProvider>
       </body>
     </html>
   );
