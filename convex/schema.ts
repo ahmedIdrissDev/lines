@@ -8,4 +8,8 @@ export default defineSchema({
     name: v.string(),
     role: v.string(),
   }),
+  tasks: defineTable({
+    text: v.string(),
+    isCompleted: v.boolean(),
+  }),
 });

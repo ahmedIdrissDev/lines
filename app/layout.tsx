@@ -33,11 +33,10 @@ export default async function RootLayout({
       <body
         className={inter.className}
       >
-        <ConvexClientProvider>
         <Provider session={SessionProvider}>
         {children}
         </Provider>
-        </ConvexClientProvider>
+        
       </body>
     </html>
   );

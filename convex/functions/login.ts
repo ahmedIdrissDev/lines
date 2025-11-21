@@ -1,8 +1,8 @@
 import { query } from "../_generated/server";
 
-export const get =query({
+export const get = query({
+  args: {},
   handler: async (ctx) => {
-    console.log("Write and test your query function here!");
     return await ctx.db.query("users").collect();
   },
-})
+});
