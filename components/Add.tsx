@@ -47,18 +47,26 @@ const Add = () => {
           initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }}
-           className="bg-white border-t-8 border-t-tgcc-500 flex flex-col gap-1.5  p-2 w-1/2 h-max min-h-90 rounded-md border border-neutral-200">
-            <h1>Ajouter un tache </h1>
+           className="bg-white border-t-[44px] border-t-tgcc-500 flex flex-col gap-1.5  p-2 w-1/2 h-max min-h-90 rounded-md border border-neutral-200">
+            <h1>Ajouter une tâche au projet </h1>
             <form className="flex  h-full flex-col gap-2" action="">
-              <input type="text"  className="input h-11"  placeholder="title"/>
+              <input type="text"  className="input h-11"  placeholder="titre"/>
               <div className="grid gap-2 grid-cols-2">
+                <div className="w-full flex flex-col gap-1">
+                  <span>Date de début</span>
               <input type="date"  className="input"  placeholder="title"/>
+                </div>
+                  <div className="w-full flex flex-col gap-1">
+                  <span>Date de fin</span>
               <input type="date"  className="input"  placeholder="title"/>
+                </div>
 
               </div>
-              <textarea name="" className="input h-full p-3.5 resize-none" id=""></textarea>
-              <div className="flex justify-end items-center">
-                <button className="w-00 h-1">Ajouter</button>
+              <textarea name="" className="input h-60 p-3.5 resize-none" id="" placeholder="description"></textarea>
+              <div className="flex h-12 justify-end items-center">
+               <button onClick={openclose} className="w-30 bg-amber-300/5  rounded-md cursor-pointer h-11">Ajouter</button>
+
+                <button type="submit" className="w-30 bg-tgcc-600 text-white rounded-md cursor-pointer h-11">Ajouter</button>
               </div>
             </form>
            

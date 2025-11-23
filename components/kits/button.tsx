@@ -10,7 +10,7 @@ const Button = ({icon , label ,path}:linksProps) => {
     const isActive = routeParams.startsWith(path) ? true : false
     const handleNavigation = ()=> route.replace(path)
   return (
-   <button onClick={handleNavigation} className={twMerge('w-full h-10 px-1.5 flex rounded-2xl cursor-pointer items-center justify-start  gap-2' , isActive ? 'text-tgcc-950 border  border-tgcc-500/80 ':"border opacity-70 border-neutral-200")}>
+   <button onClick={handleNavigation} className={twMerge('w-full h-10 px-1.5 flex rounded-2xl cursor-pointer items-center justify-start  gap-2' , isActive ? 'bg-tgcc-50':" opacity-60 ")}>
        {icon}
        <span className=''>
 
