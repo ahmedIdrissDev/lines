@@ -7,9 +7,14 @@ export default defineSchema({
     func: v.string(),
     name: v.string(),
     role: v.string(),
+    password:v.string(),
   }),
   tasks: defineTable({
-    text: v.string(),
-    isCompleted: v.boolean(),
+  userId: v.string(),
+    title: v.string(),
+    description: v.string(),
+    dirtask: v.string(),
+    date_of_start: v.string(),
+    date_of_end: v.string(),
   }),
 });

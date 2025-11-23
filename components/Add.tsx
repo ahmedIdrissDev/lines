@@ -10,10 +10,10 @@ const Add = () => {
   const { data } = store();
   const grup = Object.groupBy(data, ({ lot }) => lot);
   const fun = Object.groupBy(data, ({ function: fun }) => fun);
-
+   
   const key = Object.keys(grup);
   const funs = Object.keys(fun);
-
+   
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fromdata = new FormData(e.currentTarget);
@@ -49,7 +49,7 @@ const Add = () => {
             exit={{ scale: 0.7, opacity: 0 }}
            className="bg-white border-t-[44px] border-t-tgcc-500 flex flex-col gap-1.5  p-2 w-1/2 h-max min-h-90 rounded-md border border-neutral-200">
             <h1>Ajouter une tâche au projet </h1>
-            <form className="flex  h-full flex-col gap-2" action="">
+            <form onSubmit={HendleAddEmployes} className="flex  h-full flex-col gap-2" action="">
               <input type="text"  className="input h-11"  placeholder="titre"/>
               <div className="grid gap-2 grid-cols-2">
                 <div className="w-full flex flex-col gap-1">

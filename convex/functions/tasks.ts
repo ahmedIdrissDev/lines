@@ -1,8 +1,24 @@
-import { query } from "../_generated/server";
+import { v } from "convex/values";
+import { mutation, query } from "../_generated/server";
 
 export const get = query({
   args: {},
   handler: async (ctx) => {
     return await ctx.db.query("tasks").collect();
+  },
+});
+
+
+export const createTask = mutation({
+  args: {   userId: v.string(),
+    title: v.string(),
+    description: v.string(),
+    dirtask: v.string(),
+    date_of_start: v.string(),
+    date_of_end: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const newTaskId = await ctx.db.insert("tasks",  args);
+    return newTaskId;
   },
 });
