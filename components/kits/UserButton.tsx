@@ -25,7 +25,7 @@ const UserButton = () => {
 
               <h1 className='font-semibold'>Paramètres du compte</h1>
                    <div className="flex items-center gap-2">
-                  <img  src={data?.user?.image ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
+                  <img  src={data?.user?.image?.trim() ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
                    <h1>{data?.user?.name} </h1>
                    </div>
                    <div className="w-full px-3 border border-neutral-100 bg-neutral-50 rounded-2xl h-6 flex items-center">
