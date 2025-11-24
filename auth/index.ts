@@ -1,5 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { email } from "zod";
+import Login from "@/functions";
 const authorized = [
     {
       email:'YassineBerred@tgcc.teams',
@@ -18,12 +20,16 @@ export const authOptions = {
     name: "Credentials",
     credentials: {
       email: { label: "email", type: "text", placeholder: "kbida@tgcc.teams" },
+      password: { label: "password", type: "password", placeholder: "kbida@tgcc.teams" },
+
     },
     async authorize(credentials, req) {
-       const  userEmail = credentials?.email as string
-       const user = authorized.find(({email})=> email=== userEmail)
+       const data ={
+           email: credentials?.email as string ,
+           password: credentials?.password as string
+       }
+       const user = await Login(data)
       if (user) {
-        // Any object returned will be saved in `user` property of the JWT
         return user
       } else {
         // If you return null then an error will be displayed advising the user to check their details.

@@ -10,13 +10,7 @@ const Add = () => {
   const [open, setOpen] = useState(false);
   const openclose = () => (open ? setOpen(false) : setOpen(true));
   const hendleaddTask = useMutation(api.functions.tasks.createTask)
-  const { data } = store();
-  const grup = Object.groupBy(data, ({ lot }) => lot);
-  const fun = Object.groupBy(data, ({ function: fun }) => fun);
-   
-  const key = Object.keys(grup);
-  const funs = Object.keys(fun);
-   
+      
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fromdata = new FormData(e.currentTarget);
@@ -64,7 +58,7 @@ const Add = () => {
               </div>
               <textarea name="description" className="input h-60 p-3.5 resize-none" id="" placeholder="description"></textarea>
               <div className="flex h-12 justify-end items-center">
-               <button onClick={openclose} className="w-30 bg-amber-300/5  rounded-md cursor-pointer h-11">Ajouter</button>
+               <button onClick={openclose} className="w-30 bg-amber-300/5  rounded-md cursor-pointer h-11">annuler</button>
 
                 <button type="submit" className="w-30 bg-tgcc-600 text-white rounded-md cursor-pointer h-11">Ajouter</button>
               </div>

@@ -8,7 +8,7 @@ const UserButton = () => {
     const [open, setOpen] = useState(false);
     const openclose = ()=> open ? setOpen(false) : setOpen(true)
     const {data} = useSession()
-    console.log(data?.user?.role)
+    console.log(data?.user._id)
   return (
     <>
                   <img onClick={openclose}  src={data?.user?.image ?  data.user.image : '/avatar.png'} className='w-10 bg-white h-10 border border-neutral-200 rounded-full cursor-pointer' />
