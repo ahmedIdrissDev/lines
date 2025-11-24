@@ -16,9 +16,10 @@ export const createTask = mutation({
     dirtask: v.string(),
     date_of_start: v.string(),
     date_of_end: v.string(),
+   project:v.string(),
+
   },
   handler: async (ctx, args) => {
-    const newTaskId = await ctx.db.insert("tasks",  args);
-    return newTaskId;
+     await ctx.db.insert("tasks",  args);
   },
 });

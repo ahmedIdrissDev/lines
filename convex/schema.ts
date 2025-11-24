@@ -8,6 +8,7 @@ export default defineSchema({
     name: v.string(),
     role: v.string(),
     password:v.string(),
+    project:v.string(),
   }),
   tasks: defineTable({
   userId: v.string(),
@@ -16,5 +17,6 @@ export default defineSchema({
     dirtask: v.string(),
     date_of_start: v.string(),
     date_of_end: v.string(),
+    project:v.string()
   }),
 });
