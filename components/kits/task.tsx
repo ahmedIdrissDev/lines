@@ -41,11 +41,11 @@ const Task = () => {
           
           
                 {open && (
-                  <div className="w-full p-12 fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
+                  <div className="w-full pt-12 fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
                     <motion.div 
-                    initial={{  opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{  opacity: 0 }}
+                    initial={{  opacity: 0 , translateY:22  }}
+                      animate={{ opacity: 1 , translateY:0 }}
+                      exit={{  opacity: 0 , translateY:22 }}
                      className="bg-white  flex flex-col gap-1.5  p-2 w-full h-full min-h-90 rounded-md border border-neutral-200">
                       <h1>Ajouter une tâche au projet </h1>
                     
