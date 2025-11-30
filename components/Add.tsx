@@ -28,7 +28,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-11 border border-neutral-200 hidden cursor-pointer rounded-xl  md:flex justify-center items-center gap-1. h-10"
+        className="w-11 border border-neutral-200 hidden cursor-pointer rounded-none  md:flex justify-center items-center gap-1. h-10"
       >
         <Calendar className="opacity-70"/>
       </button>
