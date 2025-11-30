@@ -19,4 +19,14 @@ export default defineSchema({
     date_of_end: v.string(),
     project:v.string()
   }),
+   works: defineTable({
+    Matricule: v.number(),
+    firstname: v.string(),
+    lastname: v.string(),
+    function: v.string(),
+    lot: v.string(),
+    status: v.union(v.literal("active"), v.literal("inactive")),
+    Project: v.string(),
+    createdAt: v.number(),
+  })
 });

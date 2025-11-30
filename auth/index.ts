@@ -1,19 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { email } from "zod";
 import Login from "@/functions";
-const authorized = [
-    {
-      email:'YassineBerred@tgcc.teams',
-      name:'Yassine Berred',
-      role:'Admin'
-    } ,
-        {
-      email:'kbidaAbedelmjid@tgcc.teams',
-      name:'kbida Abedelmjid',
-      role:'Chef-de-Chantier'
-    }
-]
+
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -58,12 +46,8 @@ export const authOptions = {
     return session
   }
 } ,
-  
 
-  
-
-  
-  secret: process.env.NEXTAUTH_SECRET,
+secret: process.env.NEXTAUTH_SECRET,
   pages:{
     signIn:'/'
   } ,
