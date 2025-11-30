@@ -12,7 +12,7 @@ const Search = () => {
 
       const [text , settext]= useState('')
       const {data} = store()
-      const result = data.filter(item=> item.function.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
+      const result = data.filter(item=> item.function?.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
   return (
     <>
      <button onClick={openclose} className='  px-2  text-white  rounded-xl  cursor-pointer  justify-center  flex w-10  items-center gap-1.5 h-10 bg-neutral-950'>

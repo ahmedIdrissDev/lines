@@ -12,25 +12,25 @@ import {
 import { store } from '@/store';
 import { Employee } from '@/types';
 import { baseUrl } from '@/constants';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
 
 
 const Employees = () => {
-  const [employee , setemployess] = useState< Employee[] >()
+  const [employee , setemployess] = useState< Employee[]>()
   const  {setdata ,data} = store()
-
+  const fetchData = useQuery(api.functions.employees.employees)
   useEffect(()=>{
-   (async()=>{
-    try {
-      const response = await fetch(baseUrl,{cache:'no-cache'});
-      const data = await response.json()
-      setdata(data)
+    (async()=>{
+      try {
+      setdata(fetchData)
     } catch (error) {
       console.log(error)
     }
   
    })()
-  } ,[])
+  } ,[fetchData])
   const grup = Object.groupBy(data , ({lot})=> lot)  
   
   return (

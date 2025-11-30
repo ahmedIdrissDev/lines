@@ -8,6 +8,7 @@ import UserButton from './kits/UserButton'
 import Search from './search'
 import Hr from './Hr'
 import Hs from './hs'
+import Moderh from './kits/hrmode'
 
 const Navbar = () => {
   return (
@@ -16,7 +17,9 @@ const Navbar = () => {
 
 
     <div className=" flex items-center gap-2.5">
+      <Moderh/>
      <Hr/>
+
      <Add/>      
       <Search/>
             <UserButton/>

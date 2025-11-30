@@ -1,14 +1,15 @@
 export interface Employee {
-  Matricule: string;
+  _id:string ,
+  Matricule: number;
   Project: string;
   Responsable: string; 
   lastname: string;
   firstname: string;
   function: string;
   lot:string ,
-  id: string; 
   status: 'active' | 'inactive';
-  date:Date 
+  createdAt:number ,
+  _creationTime:number
 }
 export interface linksProps{
     icon: React.ReactNode ,

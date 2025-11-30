@@ -10,7 +10,6 @@ const Moderh = () => {
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
   const [dataupdated , setUpdated]= useState<Employee[]> ([])
-
   const [text , settext] =useState<string>('')
   const openclose = () => {
     if (open) {
@@ -22,7 +21,7 @@ const Moderh = () => {
       setOpen(true);
     }
   };
-  const {setdata} = store()
+  const {setdata , data} = store()
   const opens = () => (opentr ? setOpentr(false) : setOpentr(true));
   useEffect(()=>{
      setdata(dataupdated)
@@ -32,8 +31,7 @@ const Moderh = () => {
   
       try {
         if(text.length < 2) return false
-            const response = await fetch(baseUrl,{cache:'no-cache'});
-              const data : Employee[] = await response.json()
+              
               const update = data.map(item=> text.includes(item.Matricule) ? {...item , status:"inactive"} :  {...item , status:"active"}) as Employee[]
               setUpdated(e=>[...update])
         openclose();
@@ -44,9 +42,9 @@ const Moderh = () => {
     <>
       <button
         onClick={openclose}
-        className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-11  bg-tgcc-500 text-white"
+        className="w-30 hidden cursor-pointer rounded-2xl  md:flex justify-center items-center gap-1.5 h-11  bg-tgcc-500 text-white"
       >
-        <span> Ajouter </span>
+        <span> Manage la présence </span>
       </button>
       <AnimatePresence>
         {open && (

@@ -2,20 +2,15 @@
 import AI from '@/components/ai'
 import Chat from '@/components/Chat'
 import Employees from '@/components/employees'
-import Super from '@/components/super'
-import { api } from '@/convex/_generated/api'
-import { useQuery } from "convex/react";
-
+import { EffectifGeneral } from '@/components/kits/ParMonth'
 const page = () => {
 
-   
   return (
    <>
-   
-<AI/>
+         <AI/>
          <Chat/>
-         <Super/>
-<Employees/> 
+         <EffectifGeneral/>
+         <Employees/> 
    </>
   )
 }

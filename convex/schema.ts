@@ -11,7 +11,7 @@ export default defineSchema({
     project:v.string(),
   }),
   tasks: defineTable({
-  userId: v.string(),
+    userId: v.string(),
     title: v.string(),
     description: v.string(),
     dirtask: v.string(),
@@ -21,12 +21,12 @@ export default defineSchema({
   }),
    works: defineTable({
     Matricule: v.number(),
-    firstname: v.string(),
-    lastname: v.string(),
-    function: v.string(),
-    lot: v.string(),
+    firstname: v.optional(v.string()),
+    lastname: v.optional(v.string()),
+    function:v.optional(v.string()),
+lot: v.optional(v.string()),
     status: v.union(v.literal("active"), v.literal("inactive")),
-    Project: v.string(),
+    Project:v.optional(v.string()),
     createdAt: v.number(),
   })
 });
