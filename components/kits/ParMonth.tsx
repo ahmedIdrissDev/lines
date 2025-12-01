@@ -59,26 +59,14 @@ const chartConfig = {
 export function EffectifGeneral() {
   const [timeRange, setTimeRange] = React.useState("90d")
     const fetchData = useQuery(api.functions.presnt.Presents) 
-    const [data , setData] = React.useState<ChartProps[]> ([
-      {
-        date:'20-11-2025',
-        desktop:0 ,
-        mobile:44
-      } ,
-        {
-        date:'20-12-2025',
-        desktop:4,
-        mobile:0
-      }
-    ])
-  //   React.useEffect(()=>{
-  //     if(!fetchData) return 
    
-  //     // setData(convertToReadbleFromt)
-  // } , [fetchData])
+
    const convertToReadbleFromt = fetchData?.map(({date ,employees})=>{
           const random= Math.floor(Math.random() * 1022)
-          return {  date ,  desktop:22  ,  mobile: random }
+          return {  
+            date ,  
+            desktop:employees.length , 
+            mobile:  0}
     }) as ChartProps[]
   const filteredData = convertToReadbleFromt?.filter((item) => {
     const date = new Date(item.date)

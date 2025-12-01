@@ -14,23 +14,30 @@ import { Employee } from '@/types';
 import { baseUrl } from '@/constants';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import { getToday, handlePresentsUpdate } from '@/utils';
 
 
 
 const Employees = () => {
   const [employee , setemployess] = useState< Employee[]>()
   const  {setdata ,data} = store()
-  const fetchData = useQuery(api.functions.employees.employees)
+  const fetchemployees = useQuery(api.functions.employees.employees)
+      const fetchPresents = useQuery(api.functions.presnt.Presents) 
+  
+  const today = getToday()
+  console.log(today)
   useEffect(()=>{
     (async()=>{
       try {
-      setdata(fetchData)
+      const Matricule = fetchPresents?.find(({date})=> date===today)
+      const Updated = handlePresentsUpdate({Matricule:Matricule?.employees , data:fetchemployees } )
+      setdata(Updated)
     } catch (error) {
       console.log(error)
     }
   
    })()
-  } ,[fetchData])
+  } ,[fetchemployees , fetchPresents])
   const grup = Object.groupBy(data , ({lot})=> lot)  
   
   return (

@@ -2,7 +2,7 @@
 import { api } from "@/convex/_generated/api";
 import { store } from "@/store";
 import { useMutation } from "convex/react";
-import { Calendar, Mail, User, UserRoundPlus } from "lucide-react";
+import { Calendar, Mail, Send, SendHorizonal, User, UserRoundPlus, X } from "lucide-react";
 import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
 
@@ -28,7 +28,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-11 border border-neutral-200 hidden cursor-pointer rounded-none  md:flex justify-center items-center gap-1. h-10"
+        className="w-11  border-neutral-200 hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10"
       >
         <Mail className="opacity-70"/>
       </button>
@@ -41,26 +41,22 @@ const Add = () => {
           initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }}
-           className="bg-white border-t-[14px] border-t-tgcc-500 flex flex-col gap-1.5  p-2 w-1/2 h-max min-h-90  border border-neutral-200">
-            <h1>Ajouter une tâche au projet </h1>
+           className="bg-white relative flex flex-col gap-1.5 rounded-xl  p-2 w-1/2 h-max min-h-90  border border-neutral-200">
+            <h1>Nouveau message </h1>
             <form onSubmit={HendleAddEmployes} className="flex  h-full flex-col gap-2" action="">
-              <input type="text" name="title"  className="input h-11"  placeholder="titre"/>
-              <div className="grid gap-2 grid-cols-2">
+              <input type="text" name="title"  className="input h-11"  placeholder="to:"/>
                 <div className="w-full flex flex-col gap-1">
-                  <span>Date de début</span>
-              <input type="date" name="date_of_start"  className="input"  placeholder="title"/>
+                  <input type="text" name="date_of_start"  className="input"  placeholder="title"/>
                 </div>
-                  <div className="w-full flex flex-col gap-1">
-                  <span>Date de fin</span>
-              <input type="date" name="date_of_end" className="input"  placeholder="title"/>
-                </div>
+              
 
-              </div>
-              <textarea name="description" className="input h-60 p-3.5 resize-none" id="" placeholder="description"></textarea>
+              <textarea name="description" className="input h-60 p-3.5 resize-none" id="" placeholder="Message"></textarea>
               <div className="flex h-12 justify-end items-center">
-               <button onClick={openclose} className="w-30 bg-amber-300/5  rounded-md cursor-pointer h-11">annuler</button>
-
-                <button type="submit" className="w-30 bg-tgcc-600 text-white rounded-none cursor-pointer h-11">Ajouter</button>
+               <X className="absolute right-1 top-1 opacity-70 size-4" onClick={openclose}/>
+                <button type="submit" className="w-30 flex gap-2 justify-center items-center bg-tgcc-600 text-white rounded-full cursor-pointer h-11">
+                  <SendHorizonal/>
+                  Ajouter
+                  </button>
               </div>
             </form>
            

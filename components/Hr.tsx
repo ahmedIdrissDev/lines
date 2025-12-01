@@ -83,8 +83,8 @@ const Hr = () => {
 
   return (
     <>
-       <button onClick={openclose} className='w-11 cursor-pointer h-11 rounded-none border border-neutral-200 p-2 '>
-         <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10' />
+       <button onClick={openclose} className='w-11 group cursor-pointer h-11 rounded-none  border-neutral-200 p-2 '>
+         <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10 group-hover:rotate-90 duration-150' />
       </button>
    <AnimatePresence>
 
@@ -132,7 +132,7 @@ const Hr = () => {
             <form
               ref={formRef}
               onSubmit={handlesendMessage}
-              className="w-full p-1 mt-5 h-full absolute flex justify-between items-center z-10  bg-white border border-tgcc-400"
+              className="w-full p-1 mt-5 h-full absolute flex justify-between items-center z-10  bg-white border rounded-2xl border-tgcc-400"
             >
               <input
                 name="text" 
@@ -158,10 +158,10 @@ const Hr = () => {
                   id="file"
                 />
                 {status==='submitted' ? 
-                 <button onClick={stop} className="w-9 h-9 bg-black rounded-none text-white flex justify-center items-center">
+                 <button onClick={stop} className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
                   <CirclePause />
                 </button> :
-                                 <button className="w-9 h-9 bg-black rounded-none text-white flex justify-center items-center">
+                                 <button className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
                   <ArrowUp />
                 </button>
               }

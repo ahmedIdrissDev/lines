@@ -17,11 +17,11 @@ const Navbar = () => {
 
 
     <div className=" flex items-center gap-2.5">
-      <Moderh/>
      <Hr/>
 
      <Add/>      
       <Search/>
+      <Moderh/>
             <UserButton/>
     </div>
     </div>

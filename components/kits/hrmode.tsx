@@ -5,15 +5,17 @@ import { AnimatePresence } from "motion/react";
 import React, { FormEvent, useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { Employee } from "@/types";
-import { useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { handlePrents } from "@/utils";
 
 const Moderh = () => {
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
   const [dataupdated , setUpdated]= useState<Employee[]> ([])
   const [text , settext] =useState<string>('')
-    const data = useQuery(api.functions.employees.employees)
+  const data = useQuery(api.functions.employees.employees)
+  const setPresnt = useMutation(api.functions.presnt.SetPresents)
   
   const openclose = () => {
     if (open) {
@@ -35,9 +37,8 @@ const Moderh = () => {
   
       try {
         if(text.length < 2) return false
-              
-              const update = data.map(item=> text.includes(item.Matricule) ? {...item , status:"inactive"} :  {...item , status:"active"}) as Employee[]
-              setUpdated(e=>[...update])
+              const result = handlePrents({text , data})
+              setPresnt(result)
         openclose();
         opens();
     } catch (error) {}
@@ -46,7 +47,7 @@ const Moderh = () => {
     <>
       <button
         onClick={openclose}
-        className="w-50 hidden cursor-pointer rounded-none  md:flex justify-center items-center gap-1.5 h-11  bg-tgcc-500 text-white"
+        className="w-50 hidden cursor-pointer  md:flex justify-center items-center gap-1.5 h-11  bg-tgcc-500 text-white"
       >
         <span> Manage la présence </span>
       </button>
