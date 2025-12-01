@@ -12,7 +12,7 @@ const Search = () => {
 
       const [text , settext]= useState('')
       const {data} = store()
-      const result = data.filter(item=> item.function?.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
+      const result = data.filter(item=> item.Matricule?.toString().startsWith(text.toLocaleLowerCase())  )
   return (
     <>
      <button onClick={openclose} className='  px-2  text-white    cursor-pointer  justify-center  flex w-10  items-center gap-1.5 h-10 bg-neutral-950'>
@@ -56,7 +56,7 @@ const Search = () => {
                   <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
                   <div className="flex items-center gap-1.5">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
-                  <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{fun}    </span>
+                  <span className='w-max text-sm cursor-pointer p-1.5 border border-tgcc-500 rounded-full  '>{fun}    </span>
                         <p>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </p>
 
                   </div>

@@ -7,7 +7,7 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className=' grid grid-cols-1 bg-tgcc-50  md:grid-cols-[600px_1fr] w-full h-dvh  '>
+    <div className=' grid grid-cols-1  md:grid-cols-[600px_1fr] w-full h-dvh  '>
       <div className="w-full h-full">
               {children}
 

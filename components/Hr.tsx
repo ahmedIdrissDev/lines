@@ -84,7 +84,7 @@ const Hr = () => {
   return (
     <>
        <button onClick={openclose} className='w-11 group cursor-pointer h-11 rounded-none  border-neutral-200 p-2 '>
-         <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10 group-hover:rotate-90 duration-150' />
+         <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10 opacity-90 group-hover:rotate-90 duration-150' />
       </button>
    <AnimatePresence>
 
