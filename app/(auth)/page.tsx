@@ -79,11 +79,11 @@ export default function Home() {
                 type={type}
                 required
                 name="password"
-                placeholder=" Mode de pass"
+                placeholder="mot de passe"
               />
               <div className="flex items-center gap-2">
                 <input className="accent-tgcc-400 rounded-none border border-neutral-200" onChange={handleChange} type="checkbox" name="" id="" />
-                <span className="text-sm opacity-90">show password</span>
+                <span className="text-sm opacity-90">Afficher le mot de passe</span>
               </div>
               <button className="h-11 cursor-pointer w-full bg-tgcc-500 text-white rounded-none">
                 login
