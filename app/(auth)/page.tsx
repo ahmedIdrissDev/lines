@@ -38,7 +38,7 @@ export default function Home() {
   }
   return (
     <div className="flex justify-center items-center w-full h-dvh">
-      <div className=" w-full border relative border-tgcc-500/15 md:w-[70%] flex gap-3  p-3 justify-center items-center flex-col min-h-96 rounded-none">
+      <div className=" w-full border relative border-dashed border-tgcc-500/15 md:w-[70%] flex gap-3  p-3 justify-center items-center flex-col min-h-96 rounded-none">
       <div className="w-6 h-6 border-l border-t top-0 left-0  absolute border-amber-500"/>
       <div className="w-6 h-6 border-r border-t right-0 top-0  absolute border-amber-500"/>
       <div className="w-6 h-6 border-l border-b  bottom-0 left-0  absolute border-amber-500"/>
@@ -82,7 +82,7 @@ export default function Home() {
                 placeholder=" Mode de pass"
               />
               <div className="flex items-center gap-2">
-                <input className="checked:bg-amber-400 rounded-none border border-neutral-200" onChange={handleChange} type="checkbox" name="" id="" />
+                <input className="accent-tgcc-400 rounded-none border border-neutral-200" onChange={handleChange} type="checkbox" name="" id="" />
                 <span className="text-sm opacity-90">show password</span>
               </div>
               <button className="h-11 cursor-pointer w-full bg-tgcc-500 text-white rounded-none">

@@ -78,12 +78,7 @@ export function EffectifGeneral() {
   // } , [fetchData])
    const convertToReadbleFromt = fetchData?.map(({date ,employees})=>{
           const random= Math.floor(Math.random() * 1022)
-          const obj={
-              date , 
-              desktop:employees.length  ,
-              mobile: random 
-          }
-          return obj
+          return {  date ,  desktop:22  ,  mobile: random }
     }) as ChartProps[]
   const filteredData = convertToReadbleFromt?.filter((item) => {
     const date = new Date(item.date)

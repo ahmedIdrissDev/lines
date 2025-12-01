@@ -95,7 +95,7 @@ const Hr = () => {
             animate={{ opacity: 1 ,  translateX:0 }}
             exit={{ opacity: 0 ,  translateX:20 }}
 
-          className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5  w-full  md:w-[70%] h-full rounded-md border border-neutral-200">
+          className="bg-white relative flex text-black justify-between  p-3 flex-col gap-1.5  w-full  md:w-[70%] h-full  border border-neutral-200">
             <div onClick={openclose} className="">
               <button className="w-20 z-20 absolute top-0 left-0 p-2.5 opacity-60 h-8  rounded-full cursor-pointer">
                 <X/>
@@ -132,7 +132,7 @@ const Hr = () => {
             <form
               ref={formRef}
               onSubmit={handlesendMessage}
-              className="w-full p-1 mt-5 h-full absolute flex justify-between items-center z-10 rounded-2xl bg-white border border-tgcc-400"
+              className="w-full p-1 mt-5 h-full absolute flex justify-between items-center z-10  bg-white border border-tgcc-400"
             >
               <input
                 name="text" 
@@ -158,10 +158,10 @@ const Hr = () => {
                   id="file"
                 />
                 {status==='submitted' ? 
-                 <button onClick={stop} className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
+                 <button onClick={stop} className="w-9 h-9 bg-black rounded-none text-white flex justify-center items-center">
                   <CirclePause />
                 </button> :
-                                 <button className="w-9 h-9 bg-black rounded-full text-white flex justify-center items-center">
+                                 <button className="w-9 h-9 bg-black rounded-none text-white flex justify-center items-center">
                   <ArrowUp />
                 </button>
               }

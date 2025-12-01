@@ -41,7 +41,7 @@ const Add = () => {
           initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.7, opacity: 0 }}
-           className="bg-white border-t-[14px] border-t-tgcc-500 flex flex-col gap-1.5  p-2 w-1/2 h-max min-h-90 rounded-md border border-neutral-200">
+           className="bg-white border-t-[14px] border-t-tgcc-500 flex flex-col gap-1.5  p-2 w-1/2 h-max min-h-90  border border-neutral-200">
             <h1>Ajouter une tâche au projet </h1>
             <form onSubmit={HendleAddEmployes} className="flex  h-full flex-col gap-2" action="">
               <input type="text" name="title"  className="input h-11"  placeholder="titre"/>
@@ -60,7 +60,7 @@ const Add = () => {
               <div className="flex h-12 justify-end items-center">
                <button onClick={openclose} className="w-30 bg-amber-300/5  rounded-md cursor-pointer h-11">annuler</button>
 
-                <button type="submit" className="w-30 bg-tgcc-600 text-white rounded-md cursor-pointer h-11">Ajouter</button>
+                <button type="submit" className="w-30 bg-tgcc-600 text-white rounded-none cursor-pointer h-11">Ajouter</button>
               </div>
             </form>
            
