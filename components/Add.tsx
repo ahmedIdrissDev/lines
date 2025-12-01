@@ -2,7 +2,7 @@
 import { api } from "@/convex/_generated/api";
 import { store } from "@/store";
 import { useMutation } from "convex/react";
-import { Calendar, User, UserRoundPlus } from "lucide-react";
+import { Calendar, Mail, User, UserRoundPlus } from "lucide-react";
 import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
 
@@ -30,13 +30,13 @@ const Add = () => {
         onClick={openclose}
         className="w-11 border border-neutral-200 hidden cursor-pointer rounded-none  md:flex justify-center items-center gap-1. h-10"
       >
-        <Calendar className="opacity-70"/>
+        <Mail className="opacity-70"/>
       </button>
       <AnimatePresence>
 
 
       {open && (
-        <div className="w-full fixed z-20 bg-neutral-900/5 flex justify-center items-center inset-0">
+        <div className="w-full fixed z-20 bg-neutral-900/10 flex justify-center items-center inset-0">
           <motion.div 
           initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
