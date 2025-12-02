@@ -29,7 +29,8 @@ const Employees = () => {
   useEffect(()=>{
     (async()=>{
       try {
-      const Matricule = fetchPresents?.find(({date})=> date===today)
+      const Matricule = fetchPresents?.find(({date})=> date===today) || fetchPresents?.find((item)=> item)
+      
       const Updated = handlePresentsUpdate({Matricule:Matricule?.employees , data:fetchemployees } )
       setdata(Updated)
     } catch (error) {
