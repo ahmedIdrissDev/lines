@@ -1,6 +1,6 @@
 
 import Image from 'next/image'
-import Add from './Add'
+import Add from './compose'
 import Project from './Project'
 import UsersList from './UsersList'
 import Hello from './kits/Hello'

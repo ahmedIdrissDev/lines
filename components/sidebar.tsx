@@ -1,7 +1,7 @@
 import { links } from '@/constants/links'
 import React from 'react'
 import Button from './kits/button'
-import Add from './Add'
+import Add from './compose'
 
 const Sidebar = () => {
   return (
