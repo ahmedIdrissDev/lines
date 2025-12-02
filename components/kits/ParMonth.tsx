@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select"
 import { useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
+import { store } from "@/store"
 
 export const description = "An interactive area chart"
 interface ChartProps{
@@ -59,14 +60,14 @@ const chartConfig = {
 export function EffectifGeneral() {
   const [timeRange, setTimeRange] = React.useState("90d")
     const fetchData = useQuery(api.functions.presnt.Presents) 
-   
+    const {data} =store()
 
    const convertToReadbleFromt = fetchData?.map(({date ,employees})=>{
           const random= Math.floor(Math.random() * 1022)
           return {  
             date ,  
             desktop:employees.length , 
-            mobile:  0}
+            mobile:  data.length - employees.length   }
     }) as ChartProps[]
   const filteredData = convertToReadbleFromt?.filter((item) => {
     const date = new Date(item.date)
