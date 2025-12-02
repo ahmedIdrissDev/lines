@@ -12,7 +12,7 @@ import Moderh from './kits/hrmode'
 
 const Navbar = () => {
   return (
-    <div className='flex px-3 md:px-6 h-12 justify-end items-center w-full   '>
+    <div className='flex  px-3 md:px-6 h-12 justify-end items-center w-full   '>
 
 
 

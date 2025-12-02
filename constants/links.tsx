@@ -15,13 +15,8 @@ path:'/taches'
     } ,
     {
 icon:<Users/>,
-label:"effectifs",
+label:"Effectifs",
 path:'/effectifs'
-    } ,
-     {
-icon:<FileMinus/>,
-label:"Rapport",
-path:'/rapport'
-    }
+    } 
 
 ]
