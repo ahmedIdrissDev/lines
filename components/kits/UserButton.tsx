@@ -10,7 +10,7 @@ const UserButton = () => {
     const {data} = useSession()
   return (
     <>
-                  <img onClick={openclose}  src={data?.user?.image?.trim() ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
+      <img onClick={openclose}  src={data?.user?.image?.trim() ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
  <AnimatePresence>
         {open && (
           <div

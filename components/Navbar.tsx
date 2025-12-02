@@ -9,6 +9,7 @@ import Search from './search'
 import Hr from './Hr'
 import Hs from './hs'
 import Moderh from './kits/hrmode'
+import PDF from './kits/pdf'
 
 const Navbar = () => {
   return (
@@ -21,6 +22,8 @@ const Navbar = () => {
 
       <Search/>
       <Moderh/>
+              <PDF/>
+
             <UserButton/>
     </div>
     </div>

@@ -1,8 +1,7 @@
 "use client";
-import { DatabaseZap, DockIcon, File, FileChartLine, FileText } from "lucide-react";
+import { FileChartLine } from "lucide-react";
 import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
-import Pdfgenerate from "./pdfbuilder";
 import Image from "next/image";
 import { store } from "@/store";
 import { Document, Page, PDFDownloadLink, View } from "@react-pdf/renderer";
@@ -25,7 +24,7 @@ const PDF = () => {
     
   return (
     <>
-      <button onClick={openclose} className='w-40 h-11 bg-white border border-neutral-200 rounded-md flex justify-center items-center gap-2'> <FileChartLine/> Export pdf</button>
+      <button onClick={openclose} className='w-40 h-11 bg-white border border-neutral-200  flex justify-center items-center gap-2'> <FileChartLine/> Export pdf</button>
 
       <AnimatePresence>
 
@@ -41,9 +40,10 @@ const PDF = () => {
             <h1>Créer un PDF facilement</h1>
             <div className="flex justify-center gap-2.5 items-center">
               <button onClick={openclose} className="w-30 h-10 border border-neutral-200 rounded-md">annuler</button>
-              <PDFDownloadLink document={<Doc/>} fileName="effi.pdf">
-              <button className="w-30 h-10 border border-neutral-100 bg-tgcc-700 text-white rounded-md">continue</button>
+              <PDFDownloadLink document={<Doc/>} className="w-40 h-10 flex justify-center items-center bg-tgcc-500 text-white rounded-2xl cursor-pointer" fileName="effi.pdf">
+                                    {({ loading }) => (loading ? "Preparing PDF..." : "Download PDF")}
 
+              
               </PDFDownloadLink>
  
             </div>
@@ -60,21 +60,21 @@ export default PDF;
 
 
 function Doc(){
-  const {data} = store()
-      const newdata = Object.groupBy(data , ({lot})=> lot )
-      const mapped = Object.entries(newdata).map(([lot, data]) => ({
-    lot,
-    count: data?.length,
-    present: data?.filter( ({status}) => status==='active') ,
-    Absent: data?.filter( ({status}) => status==='inactive'),
-  }));
+   const {data} = store()
+    const newdata = Object.groupBy(data , ({lot})=> lot )
+    const mapped = Object.entries(newdata).map(([lot, data]) => ({
+  lot,
+  count: data?.length,
+  present: data ,
+  Absent: data?.filter( ({status}) => status==='inactive'),
+}));
   
   return <>
   <Document  style={tw('w-full h-max')}>
 
 <Page  size="A3" style={tw('w-full h-max  w-full h-full flex flex-row flex-wrap  items-start gap-2 rounded-md p-3 rounded-md')}>
            {mapped.splice(0 , 8).map((data , index)=>(
-          <PDFtable key={index} {...data} />
+            <PDFtable key={index} {...data} />
         ) )}
 
 </Page>

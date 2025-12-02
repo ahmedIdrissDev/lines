@@ -25,12 +25,10 @@ const Employees = () => {
       const fetchPresents = useQuery(api.functions.presnt.Presents) 
   
   const today = getToday()
-  console.log(today)
   useEffect(()=>{
     (async()=>{
       try {
       const Matricule = fetchPresents?.find(({date})=> date===today) || fetchPresents?.find((item)=> item)
-      
       const Updated = handlePresentsUpdate({Matricule:Matricule?.employees , data:fetchemployees } )
       setdata(Updated)
     } catch (error) {
