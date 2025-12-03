@@ -59,10 +59,10 @@ const chartConfig = {
 
 export function EffectifGeneral() {
   const [timeRange, setTimeRange] = React.useState("90d")
-    const fetchData = useQuery(api.functions.presnt.Presents) 
+    const fetchData = useQuery(api.functions.present.Presents) 
     const {data} =store()
 
-   const convertToReadbleFromt = fetchData?.map(({date ,employees})=>{
+   const convertToReadbleFromt = fetchData?.map(({date ,employees ,Project})=>{
           const random= Math.floor(Math.random() * 1022)
           return {  
             date ,  
