@@ -13,7 +13,7 @@ const layout = ({
 
       </div>
       {/* <div className="w-full h-full bg-tgcc-500"></div> */}
-        <Image src={'/bgs.webp'} quality={1000} width={1000} height={1000} alt='logo' className="w-full hidden md:block object-cover  stify-center items-center h-full" />
+        <Image src={'/background.png'} quality={1000} width={1000} height={1000} alt='logo' className="w-full hidden md:block object-cover  stify-center items-center h-full" />
       <div >
       </div>
 
