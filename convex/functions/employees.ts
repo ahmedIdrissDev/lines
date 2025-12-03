@@ -3,6 +3,6 @@ import { query } from "../_generated/server";
 
 export  const employees = query({
   handler: async (ctx) => {
-    return await ctx.db.query("works").collect() ;
+    return await ctx.db.query("employees").collect() ;
   },
 })

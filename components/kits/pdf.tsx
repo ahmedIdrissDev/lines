@@ -7,6 +7,8 @@ import { store } from "@/store";
 import { Document, Page, PDFDownloadLink, View } from "@react-pdf/renderer";
 import PDFtable from "./pdfcomponent";
 import { createTw } from "react-pdf-tailwind";
+import { button } from "motion/react-client";
+import { fa } from "zod/v4/locales";
 
 const tw = createTw({
   fontFamily: {
@@ -19,8 +21,11 @@ const tw = createTw({
 
 const PDF = () => {
   const [open, setOpen] = useState(false);
-  const openclose = () => (open ? setOpen(false) : setOpen(true));
-  
+  const openclose = () =>{
+    setgenerate(false)
+    open ? setOpen(false) : setOpen(true)
+  } 
+  const [ generate , setgenerate ]= useState<Boolean>(false)
     
   return (
     <>
@@ -40,11 +45,19 @@ const PDF = () => {
             <h1>Créer un PDF facilement</h1>
             <div className="flex justify-center gap-2.5 items-center">
               <button onClick={openclose} className="w-30 h-10 border border-neutral-200 rounded-md">annuler</button>
-              <PDFDownloadLink document={<Doc/>} className="w-40 h-10 flex justify-center items-center bg-tgcc-500 text-white rounded-2xl cursor-pointer" fileName="effi.pdf">
+              {
+                generate ?
+              <PDFDownloadLink document={<Doc/>} className="w-40 h-10 flex justify-center items-center bg-tgcc-500 text-white rounded-md cursor-pointer" fileName="effi.pdf">
                                     {({ loading }) => (loading ? "Preparing PDF..." : "Download PDF")}
 
               
-              </PDFDownloadLink>
+              </PDFDownloadLink> :
+
+              <button onClick={e=> setgenerate(true)} className="w-40 h-10 flex justify-center items-center bg-tgcc-500 text-white rounded-md cursor-pointer" >
+                Créer un PDF 
+              </button>
+              }
+
  
             </div>
           </motion.div>
@@ -61,9 +74,9 @@ export default PDF;
 
 function Doc(){
    const {data} = store()
-    const newdata = Object.groupBy(data , ({lot})=> lot )
-    const mapped = Object.entries(newdata).map(([lot, data]) => ({
-  lot,
+    const newdata = Object.groupBy(data , ({siteManger})=> siteManger )
+    const mapped = Object.entries(newdata).map(([siteManger, data]) => ({
+  siteManger,
   count: data?.length,
   present: data ,
   Absent: data?.filter( ({status}) => status==='inactive'),

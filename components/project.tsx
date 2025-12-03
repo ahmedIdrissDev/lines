@@ -12,20 +12,9 @@ import { Employee } from '@/types'
 
 const Project = () => {
   const {setdata , data} = store()
-  const selectProject= async (e:string)=>{
-    try {
-      
-      const response = await fetch('https://sheetdb.io/api/v1/s6vt0lc3cghvn',{cache:'no-cache'});
- const data:Employee[] = await response.json()
-    const newArrayFromSelected = data.filter(({Project})=>Project.toLocaleUpperCase().trim()===e.toLocaleUpperCase().trim())
-    console.log(newArrayFromSelected)
-    setdata(newArrayFromSelected)
-    } catch (error) {
-        console.log(error)
-    }
-  }
+ 
   return (
-   <Select onValueChange={selectProject}>
+   <Select  >
   <SelectTrigger className="w-12 md:w-[180px] bg-white">
     <SelectValue placeholder="Project" />
   </SelectTrigger>

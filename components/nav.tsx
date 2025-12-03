@@ -1,7 +1,7 @@
 
 import Image from 'next/image'
 import Add from './compose'
-import Project from './Project'
+import Project from './project'
 import UsersList from './UsersList'
 import Hello from './kits/Hello'
 import UserButton from './kits/UserButton'
@@ -19,8 +19,9 @@ const Navbar = () => {
 
     <div className=" flex items-center gap-2.5">
      <Hr/>
-
+    
       <Search/>
+      <Project/>
       <Moderh/>
               <PDF/>
 

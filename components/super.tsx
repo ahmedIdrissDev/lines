@@ -5,9 +5,9 @@ import Customchart from './kits/customchart'
 
 const Super = () => {
     const {data} = store()
-    const newdata = Object.groupBy(data , ({lot})=> lot )
-    const mapped = Object.entries(newdata).map(([lot, data]) => ({
-  lot,
+    const newdata = Object.groupBy(data , ({siteManger})=> siteManger  )
+    const mapped = Object.entries(newdata).map(([siteManger, data]) => ({
+  siteManger,
   count: data?.length,
   present: data ,
   Absent: data?.filter( ({status}) => status==='inactive'),

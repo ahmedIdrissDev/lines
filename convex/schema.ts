@@ -1,5 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { employees } from "./functions/employees";
 
 export default defineSchema({
   
@@ -12,18 +13,18 @@ export default defineSchema({
     project:v.string(),
   }),
   
-   works: defineTable({
+   employees: defineTable({
     Matricule: v.number(),
     firstname: v.optional(v.string()),
     lastname: v.optional(v.string()),
     function:v.optional(v.string()),
-    lot: v.optional(v.string()),
+    siteManger: v.optional(v.string()),
     status: v.union(v.literal("active"), v.literal("inactive")),
     Project:v.optional(v.string()),
-    createdAt: v.number(),
+    createdAt: v.string(),
   }) ,
 
-  Presnt: defineTable({
+  Present: defineTable({
     date: v.string(),
     employees: v.array(v.number() )
   })

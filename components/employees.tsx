@@ -23,13 +23,14 @@ const Employees = () => {
   const  {setdata ,data} = store()
   const fetchemployees = useQuery(api.functions.employees.employees)
       const fetchPresents = useQuery(api.functions.presnt.Presents) 
-  
   const today = getToday()
+  console.log(data)
   useEffect(()=>{
     (async()=>{
       try {
       const Matricule = fetchPresents?.find(({date})=> date===today) || fetchPresents?.find((item)=> item)
       const Updated = handlePresentsUpdate({Matricule:Matricule?.employees , data:fetchemployees } )
+      console.log(Updated)
       setdata(Updated)
     } catch (error) {
       console.log(error)
@@ -37,7 +38,6 @@ const Employees = () => {
   
    })()
   } ,[fetchemployees , fetchPresents])
-  const grup = Object.groupBy(data , ({lot})=> lot)  
   
   return (
     <>

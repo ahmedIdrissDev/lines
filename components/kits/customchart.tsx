@@ -9,13 +9,14 @@ import {
   User2,
 } from "lucide-react";
 interface customchartProps {
-  lot: string;
+  siteManger: string;
   count: number;
   present: Employee[];
 }
-const Customchart = ({ count, lot, present }: customchartProps) => {
+const Customchart = ({ count , present , siteManger }: customchartProps) => {
   const func = Object.groupBy(present, ({ function: fun }) => fun);
   const Absent = present.filter((items) => items.status === "inactive");
+
   const data = Object.entries(func).map(([func, data]) => ({
     func,
     count: data?.filter(({ status }) => status === "active").length,
@@ -27,7 +28,7 @@ const Customchart = ({ count, lot, present }: customchartProps) => {
       className={`'w-full flex rounded-md cursor-pointer duration-150 hover:border-tgcc-400 flex-col gap-1.5 border border-neutral-200  bg-white p-2 h-full  `}
     >
       <div className="w-full rounded-md flex items-center px-2 bg-tgcc-300/5 h-10">
-        <h1 className="font-semibold">{lot ? lot : "Project"} </h1>
+        <h1 className="font-semibold">{siteManger ? siteManger : "Project"} </h1>
       </div>
       <div className="w-full items-center h-30 border border-neutral-200 rounded-md flex justify-center">
         <ChartNoAxesColumn />
