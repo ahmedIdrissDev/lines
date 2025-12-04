@@ -10,7 +10,6 @@ interface StoreProps{
 export const store = create<StoreProps>((set)=>({
     data:[] ,
     Project:'',
-   
     setdata(data) {
          set(()=>({data:[...data] }))
     },

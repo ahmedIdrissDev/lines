@@ -15,7 +15,7 @@ const Moderh = () => {
   const [dataupdated , setUpdated]= useState<Employee[]> ([])
   const [text , settext] =useState<string>('')
   const data = useQuery(api.functions.employees.employees)
-  const setPresnt = useMutation(api.functions.presnt.SetPresents)
+  const setPresnt = useMutation(api.functions.present.SetPresents)
   
   const openclose = () => {
     if (open) {
