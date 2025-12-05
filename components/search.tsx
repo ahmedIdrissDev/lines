@@ -1,18 +1,21 @@
 "use client"
 import { store } from '@/store';
-import { SearchIcon, X } from 'lucide-react'
+import { Repeat, SearchIcon, X } from 'lucide-react'
 import { AnimatePresence  , motion} from 'motion/react'
 import { useState } from 'react';
 
 const Search = () => {
   const [open, setOpen] = useState(false);
   const [openEmployee , setopenEmployee] = useState(false)
+  const [func , setfunction] = useState(false)
       const openclose = ()=> open ? setOpen(false) : setOpen(true)
-      const HendleOpenEmployee = ()=> openEmployee ? setopenEmployee(false) : setopenEmployee(true)
+      const setfunctions = ()=> func ? setfunction(false) : setfunction(true)
 
+      const HendleOpenEmployee = ()=> openEmployee ? setopenEmployee(false) : setopenEmployee(true)
+ 
       const [text , settext]= useState('')
       const {data} = store()
-      const result = data.filter(item=> item.Matricule?.toString().startsWith(text.toLocaleLowerCase())  )
+      const result = func ?  data.filter(item=> item.function?.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  ) : data.filter(item=> item.Matricule?.toString().toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
   return (
     <>
      <button onClick={openclose} className='  px-2  text-white    cursor-pointer  justify-center  flex w-10  items-center gap-1.5 h-10 bg-neutral-950'>
@@ -45,27 +48,33 @@ const Search = () => {
             animate={{ scale: 1, opacity: 1 , translateY:0}}
             exit={{ scale: 0.9, opacity: 0 , translateY:-6 }} 
              
-             className="w-full flex flex-col gap-2 p-2 h-96 bg-white border border-neutral-200 rounded-md ">
-              <div className="w-full p-2.5 h-11 border border-neutral-200 rounded-md">
-                <span>Résumé des effectifs par fonction </span>
+             className="w-full flex flex-col gap-2 p-2 min-h-96 bg-neutral-900 text-white border border-neutral-200/0 rounded-md ">
+              <div className="w-full p-2.5 flex items-center gap-1 h-11 border bg-neutral-800 border-neutral-200/5 rounded-md">
+                  <span>Résumé des effectifs par </span>
+
+                  <button onClick={setfunctions} className='w-30 flex items-center justify-center gap-2 h-7 bg-neutral-900 text-white rounded-md cursor-pointer'>
+                    <Repeat size={16}/>
+                   {func ? 'function':'Matricule'}
+                  </button> 
+                  <button className='w-7 h-7 rounded-md border border-neutral-100/5'>
                 {result.length}
+
+                  </button>
               </div>
-              {result.splice(0 , 7) .map(({firstname , Matricule , function:fun  , lastname , status , lot})=>(
+              {result.splice(0 , 8) .map(({firstname , Matricule , function:fun  , lastname , status , siteManger})=>(
 
                 <div className="flex items-center  gap-2">
                   <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
                   <div className="flex items-center gap-1.5">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
-                  <span className='w-max text-sm cursor-pointer p-1.5 border border-tgcc-500 rounded-full  '>{fun}    </span>
-                        <p>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </p>
-
+                  <span  className='w-max px-2  bg-tgcc-100/10 border text-tgcc-100 border-tgcc-800/5 text-sm cursor-pointer  rounded-full  '>{fun}    </span>
+                        <p>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-400 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </p>
                   </div>
                   <AnimatePresence>
 
 
                   {
                     openEmployee && 
-
 
                 <div className="fixed inset-0 p-4 bg-neutral-950/5 flex justify-center items-center">
 
@@ -90,8 +99,7 @@ const Search = () => {
                                         <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '> function : {fun}    </span>
                                         <span>Matricule: {Matricule} </span>
                                         <p>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </p>
-                                                                                                        <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{lot}    </span>
-
+                                                                                                        <span className='w-max text-sm cursor-pointer p-1.5 bg-tgcc-200 rounded-full  '>{siteManger}    </span>
                   </div>
 
                   </motion.div>
