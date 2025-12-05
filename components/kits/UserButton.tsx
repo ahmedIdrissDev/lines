@@ -33,6 +33,11 @@ const UserButton = () => {
                      <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
                     <span className='opacity-70'>{data?.user?.role} </span>
                    </div>
+                     <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
+                    <span className='opacity-70'>{data?.user?.project} </span>
+                   </div>
+                   
+                   
                   <button onClick={()=> signOut({redirect:true , callbackUrl:'/'})} className='w-full flex items-center cursor-pointer justify-start px-3 gap-2 border border-neutral-200 h-11 text-red-950 bg-tgcc-50  rounded-none'>
                     <LogOut/>
                     <span>logout</span>

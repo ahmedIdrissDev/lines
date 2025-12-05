@@ -5,7 +5,7 @@ import { Calendar, FileMinus, Home, Mail, Users } from "lucide-react"
 export const links:linksProps[] =[
     {
 icon:<Home/>,
-label:"Resume general",
+label:"Tableau de bord",
 path:'/dashboard'
     } ,
     {
