@@ -10,18 +10,23 @@ import {
 import { store } from '@/store'
 import { Employee } from '@/types'
 import { useSession } from 'next-auth/react'
-
+interface Proejct{
+  _id:string ,
+  name:string
+}
 const Project = () => {
   const {data:users} = useSession()
   const {setdata , data} = store()
+  const project = users?.user?.project as Proejct[]
   return (
    <Select  >
   <SelectTrigger className="w-12 md:w-[180px] bg-white">
-    <SelectValue placeholder={users?.user?.project} />
+    <SelectValue placeholder={project[0].name as string } />
   </SelectTrigger>
   <SelectContent>
-    <SelectItem value="CHU RABAT">CHU RABAT</SelectItem>
-    <SelectItem value="JINAN ">JINAN </SelectItem>
+    {project.map(({_id ,name} )=>(
+      <SelectItem value={_id} >{name} </SelectItem>
+    ))}
 
   </SelectContent>
 </Select>

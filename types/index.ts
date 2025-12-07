@@ -15,3 +15,7 @@ export interface linksProps{
     path:string ,
     label:string
 }
+export interface Proejct{
+  _id:string ,
+  name:string
+}

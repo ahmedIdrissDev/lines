@@ -4,11 +4,13 @@ import { useSession } from 'next-auth/react'
 import React, { useState } from 'react'
 import {signOut} from 'next-auth/react'
 import { LogOut, X } from 'lucide-react';
+import { Proejct } from '@/types';
 const UserButton = () => {
     const [open, setOpen] = useState(false);
     const openclose = ()=> open ? setOpen(false) : setOpen(true)
     const {data} = useSession()
-    console.log(data?.user)
+
+  const project = data?.user?.project as Proejct[]
   return (
     <>
       <img onClick={openclose}  src={data?.user?.image?.trim() ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
@@ -34,7 +36,17 @@ const UserButton = () => {
                      <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
                     <span className='opacity-70'>{data?.user?.role} </span>
                    </div>
-                     <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
+                     <div className="w-full  rounded-2xl h-12 flex items-center">
+                      <div className="w-full ">
+                        <p>Project</p>
+                        <div className="px-2 w-full">
+                          {project.map(({name} , index)=>(
+                              <div className='text-sm  border-l border-b h-8 w-full rounded-bl-xl p-2 border-neutral-200' key={index}>
+                                <span>{name} </span>
+                              </div>
+                          ))}
+                        </div>
+                      </div>
                     <span className='opacity-70'> </span>
                    </div>
                    
