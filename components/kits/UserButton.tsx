@@ -8,7 +8,7 @@ const UserButton = () => {
     const [open, setOpen] = useState(false);
     const openclose = ()=> open ? setOpen(false) : setOpen(true)
     const {data} = useSession()
-    console.log(data?.user?.project)
+    console.log(data?.user)
   return (
     <>
       <img onClick={openclose}  src={data?.user?.image?.trim() ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />
@@ -35,7 +35,7 @@ const UserButton = () => {
                     <span className='opacity-70'>{data?.user?.role} </span>
                    </div>
                      <div className="w-full px-3 border border-neutral-100 rounded-2xl h-12 flex items-center">
-                    <span className='opacity-70'>{data?.user?.project} </span>
+                    <span className='opacity-70'> </span>
                    </div>
                    
                    
