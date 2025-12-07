@@ -8,6 +8,7 @@ const UserButton = () => {
     const [open, setOpen] = useState(false);
     const openclose = ()=> open ? setOpen(false) : setOpen(true)
     const {data} = useSession()
+    console.log(data?.user?.project)
   return (
     <>
       <img onClick={openclose}  src={data?.user?.image?.trim() ?  data.user.image : '/avatar.png'} className='w-9 bg-white h-9 rounded-full cursor-pointer' />

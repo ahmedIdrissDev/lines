@@ -5,10 +5,19 @@ export const get = query({
   args: {email:v.string() , password:v.string()},
   handler: async (ctx , args) => {
     const users = await ctx.db.query("users").collect();
+
     const user = users.find(({email ,password})=> email ===args.email && password=== args.password)
     if(!user){
       return null
     }
-    return user
+    const userProject = await Promise.all(
+      user?.project.map((id)=>{
+          return  ctx.db.get(id)
+      })
+    )
+    return {
+      ...user ,
+      project: userProject.filter(Boolean) ,
+    }
   }
 });

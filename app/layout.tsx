@@ -27,7 +27,6 @@ export default async function RootLayout({
     <html lang="en">
       <head>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-
       </head>
       <body
         className={inter.className}

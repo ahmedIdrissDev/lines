@@ -1,6 +1,5 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
-import { employees } from "./functions/employees";
 
 export default defineSchema({
   
@@ -10,23 +9,28 @@ export default defineSchema({
     name: v.string(),
     role: v.string(),
     password:v.string(),
-    project:v.string(),
-  }),
+    project:v.array(v.id('Project')) ,
+  }).index("project_id", ["project"]),
   
    employees: defineTable({
     Matricule: v.number(),
     firstname: v.optional(v.string()),
     lastname: v.optional(v.string()),
     function:v.optional(v.string()),
-    siteManger: v.optional(v.string()),
+    siteManger: v.id('users') ,
     status: v.union(v.literal("active"), v.literal("inactive")),
-    Project:v.optional(v.string()),
+    Project:v.optional(v.id('Project')),
     createdAt: v.string(),
-  }) ,
+  }).index("siteManger_id", ["siteManger"]) 
+    .index("project_id", ["Project"]),
 
   Present: defineTable({
     date: v.string(),
     employees: v.array(v.number() ) ,
-    Project:v.optional(v.string()),
+    Project:v.optional(v.id("Project")),
+  }) ,
+
+  Project: defineTable({
+    name:v.string() ,
   })
 });
