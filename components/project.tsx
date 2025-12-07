@@ -25,7 +25,7 @@ const Project = () => {
   </SelectTrigger>
   <SelectContent>
     {project.map(({_id ,name} )=>(
-      <SelectItem value={_id} >{name} </SelectItem>
+      <SelectItem key={_id} value={_id} >{name} </SelectItem>
     ))}
 
   </SelectContent>

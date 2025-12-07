@@ -37,11 +37,11 @@ const UserButton = () => {
                     <span className='opacity-70'>{data?.user?.role} </span>
                    </div>
                      <div className="w-full  rounded-2xl h-12 flex items-center">
-                      <div className="w-full ">
+                      <div className="w-full px-2 h-full ">
                         <p>Project</p>
                         <div className="px-2 w-full">
                           {project.map(({name} , index)=>(
-                              <div className='text-sm  border-l border-b h-8 w-full rounded-bl-xl p-2 border-neutral-200' key={index}>
+                              <div className='text-sm  border-l border-b h-8 w-max rounded-bl-xl p-2 border-neutral-200' key={index}>
                                 <span>{name} </span>
                               </div>
                           ))}
@@ -51,12 +51,12 @@ const UserButton = () => {
                    </div>
                    
                    
-                  <button onClick={()=> signOut({redirect:true , callbackUrl:'/'})} className='w-full flex items-center cursor-pointer justify-start px-3 gap-2 border border-neutral-200 h-11 text-red-950 bg-tgcc-50  rounded-none'>
+
+              </div>
+                  <button onClick={()=> signOut({redirect:true , callbackUrl:'/'})} className='w-full rounded-2xl flex items-center cursor-pointer justify-start px-3 gap-2 border border-neutral-200 h-11 text-red-950 bg-tgcc-50  '>
                     <LogOut/>
                     <span>logout</span>
                   </button>
-
-              </div>
                    <X onClick={openclose}  className='absolute size-4 right-2 top-2 opacity-70 cursor-pointer'/>
             </motion.div>
           </div>
