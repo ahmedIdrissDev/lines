@@ -1,22 +1,26 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
+
 import { signIn, useSession } from "next-auth/react";
 import { FormEvent, useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import * as z from "zod";
 export default function Home() {
+
   const { status } = useSession();
   const [errors , seterrors] = useState<Boolean>(false)
   const [type , setType]= useState('password')
+
   function handleChange(){
-        type==='password' ? setType('text') : setType('password') 
+        type==='password'  ?  setType('text') : setType('password') 
   }
+
    useEffect(()=>{
      if(status=='authenticated'){
         redirect('/dashboard')
      }
    } ,[])
+   
   const User = z.object({
   email: z.email(),
   password: z.string().regex(/^[a-z0-9]{6,20}$/,{message:'error '}).min(7).max(10)
