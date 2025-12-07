@@ -7,22 +7,3 @@ export  const employees = query({
   },
 })
 
-// export const setNewEmployees = mutation(
-
-//   {
-//     args :{
-//     Matricule: v.number(),
-//     firstname: v.optional(v.string()),
-//     lastname: v.optional(v.string()),
-//     function:v.optional(v.string()),
-//     siteManger: v.optional(v.string()),
-//     status: v.union(v.literal("active"), v.literal("inactive")),
-//     Project:v.optional(v.id("")),
-//     createdAt: v.string(),
-//     },
-
-//     handler: async (ctx , args  ) => {
-//      return await ctx.db.insert("employees" ,args) ;
-//    },
-//   }
-// )

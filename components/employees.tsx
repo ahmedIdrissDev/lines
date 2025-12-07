@@ -24,6 +24,7 @@ const Employees = () => {
   const fetchPresents = useQuery(api.functions.present.Presents) 
   const today = getToday()
   // console.log(data)
+  
 
   useEffect(()=>{
     (async()=>{

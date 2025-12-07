@@ -61,9 +61,9 @@ const Search = () => {
 
                   </button>
               </div>
-              {result.splice(0 , 8) .map(({firstname , Matricule , function:fun  , lastname , status , siteManger})=>(
+              {result.splice(0 , 8) .map(({firstname , Matricule , function:fun  , lastname , status , siteManger} , index)=>(
 
-                <div className="flex items-center  gap-2">
+                <div key={index} className="flex items-center  gap-2">
                   <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
                   <div className="flex items-center gap-1.5">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
