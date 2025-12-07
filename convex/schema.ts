@@ -17,12 +17,11 @@ export default defineSchema({
     firstname: v.optional(v.string()),
     lastname: v.optional(v.string()),
     function:v.optional(v.string()),
-    siteManger: v.id('users') ,
+    siteManger: v.string() ,
     status: v.union(v.literal("active"), v.literal("inactive")),
     Project:v.optional(v.id('Project')),
     createdAt: v.string(),
-  }).index("siteManger_id", ["siteManger"]) 
-    .index("project_id", ["Project"]),
+  }).index("project_id", ["Project"]),
 
   Present: defineTable({
     date: v.string(),
