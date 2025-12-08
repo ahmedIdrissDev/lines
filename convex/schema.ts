@@ -26,7 +26,7 @@ export default defineSchema({
   Present: defineTable({
     date: v.string(),
     employees: v.array(v.number() ) ,
-    Project:v.id("Project"),
+    Project:v.optional(v.id("Project")),
   }) ,
 
   Project: defineTable({

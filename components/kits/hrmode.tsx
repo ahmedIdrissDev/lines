@@ -1,5 +1,4 @@
 "use client";
-import { store } from "@/store";
 import { DatabaseZap, User, UserRoundPlus } from "lucide-react";
 import { AnimatePresence } from "motion/react";
 import React, { FormEvent, useEffect, useState } from "react";
@@ -8,8 +7,10 @@ import { Employee } from "@/types";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { handlePrents } from "@/utils";
+import { store } from "@/store";
 
 const Moderh = () => {
+  const {PojectID} = store()
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
   const [dataupdated , setUpdated]= useState<Employee[]> ([])
@@ -23,7 +24,6 @@ const Moderh = () => {
       setOpen(false);
     } else {
       setOpentr(false);
-
       setOpen(true);
     }
   };
@@ -37,10 +37,12 @@ const Moderh = () => {
       try {
         if(text.length < 2) return false
               const result = handlePrents({text , data})
-              setPresnt(result)
+              setPresnt({...result , Project:PojectID})
         openclose();
         opens();
-    } catch (error) {}
+    } catch (error) {
+     console.log(error)
+    }
   }
   return (
     <>

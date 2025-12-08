@@ -1,4 +1,4 @@
-import { store } from "@/store";
+
 import { Employee } from "@/types";
 
 interface handlePrentsProps{
@@ -11,7 +11,6 @@ interface handlePresentsUpdateProps extends handlePrentsProps{
 }
 
 export function handlePrents({text  , data}:handlePrentsProps){
-    const {PojectID}=store()
     const today= getToday()
     const Matricule = text?.match(/\d+/g)?.map(Number).filter(Boolean)
     const employees = new Set(data.map(({Matricule})=>Matricule))
@@ -19,7 +18,7 @@ export function handlePrents({text  , data}:handlePrentsProps){
      return {  
      date: today,                                                                                                                                                           
      employees: output ,
-     Project:PojectID ,
+     Project:'' ,
      }
 }
 
