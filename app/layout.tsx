@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
 import Provider from "@/hooks/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
@@ -25,9 +24,7 @@ export default async function RootLayout({
   const SessionProvider =  await getServerSession(authOptions)
   return (
     <html lang="en">
-      <head>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-      </head>
+     
       <body
         className={inter.className}
       >
