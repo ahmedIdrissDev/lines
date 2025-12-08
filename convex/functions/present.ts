@@ -8,7 +8,8 @@ export  const  Presents= query({
 })
 export const SetPresents = mutation({
        args: { date: v.string(),
-         employees: v.array(v.number() )
+         employees: v.array(v.number() ) ,
+         Project:v.id("Project")
        },
   handler: async (ctx, args) => {
        const Presents = await ctx.db.query('Present').collect()
