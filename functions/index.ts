@@ -8,7 +8,6 @@ interface AuthProps{
 export default async function  Login(data :AuthProps) {
     try {
         return  await fetchQuery(api.functions.login.get , data);
-        
     } catch (error) {
         console.log(error)
     }
