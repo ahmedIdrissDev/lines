@@ -37,7 +37,7 @@ const Moderh = () => {
       try {
         if(text.length < 2) return false
               const result = handlePrents({text , data})
-              // setPresnt({})
+              setPresnt(result)
         openclose();
         opens();
     } catch (error) {}
