@@ -32,13 +32,12 @@ const Moderh = () => {
   useEffect(()=>{
      setdata(dataupdated)
   } , [dataupdated])
+  
   async function HendleAddEmployes() {
-  
-  
       try {
         if(text.length < 2) return false
               const result = handlePrents({text , data})
-              setPresnt({})
+              // setPresnt({})
         openclose();
         opens();
     } catch (error) {}
