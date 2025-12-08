@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useEffectEvent, useState } from 'react'
 import {
   Table,
   TableBody,
@@ -10,34 +10,17 @@ import {
 } from "@/components/ui/table"
 
 import { store } from '@/store';
-import { Employee } from '@/types';
+import { Employee, Proejct } from '@/types';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { getToday, handlePresentsUpdate } from '@/utils';
+import { useSession } from 'next-auth/react';
 
 
 
 const Employees = () => {
-  const [employee , setemployess] = useState< Employee[]>()
-  const  {setdata ,data} = store()
-  const fetchemployees = useQuery(api.functions.employees.employees)
-  const fetchPresents = useQuery(api.functions.present.Presents) 
-  const today = getToday()
-  // console.log(data)
+  const  {data} = store()
   
-
-  useEffect(()=>{
-    (async()=>{
-      try {
-      const Matricule = fetchPresents?.find(({date})=> date===today) || fetchPresents?.find((item)=> item)
-      const Updated = handlePresentsUpdate({Matricule:Matricule?.employees , data:fetchemployees } )
-      console.log(Updated)
-      setdata(Updated)
-    } catch (error) {
-      console.log(error)
-    }
-   })()
-  } ,[fetchemployees , fetchPresents])
   
   return (
     <>

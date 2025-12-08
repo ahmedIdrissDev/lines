@@ -5,7 +5,9 @@ interface StoreProps{
    data: Employee[] ,
    Project:string ,
    setdata:(data:Employee[] )=> void ,
-    Updatedata:(argm:string)=> void
+    Updatedata:(argm:string)=> void ,
+    PojectID?:string , 
+    setProjectId?:(id:string)=> void  ,
 }
 export const store = create<StoreProps>((set)=>({
     data:[] ,
@@ -17,6 +19,10 @@ export const store = create<StoreProps>((set)=>({
         set((state)=>({
             data: []
         }))
+    },
+    PojectID:"" ,
+    setProjectId(id) {
+        set({PojectID:id})
     },
    
 }))
