@@ -8,21 +8,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { store } from "@/store";
-import { Employee } from "@/types";
 import { useSession } from "next-auth/react";
 import { getToday, handlePresentsUpdate } from "@/utils";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+
 interface Proejct {
   _id: string;
   name: string;
 }
 const Project = () => {
   const { data: users } = useSession();
-  const { setdata, data, setProjectId } = store();
+  const { setdata, data, setProjectId  , PojectID} = store();
   const project = users?.user?.project as Proejct[];
-  const fetchemployees = useQuery(api.functions.employees.employees);
-  const fetchPresents = useQuery(api.functions.present.Presents);
+  const fetchemployees = useQuery(api.functions.employees.employees , {ProjectId:PojectID });
+  const fetchPresents = useQuery(api.functions.present.Presents , {ProjectId:PojectID });
   const today = getToday();
 
   const onUser = useEffectEvent(() => {
@@ -54,9 +54,9 @@ const Project = () => {
   }, [fetchemployees, fetchPresents]);
 
   return (
-    <Select>
-      <SelectTrigger className="w-12 md:w-[180px] bg-white">
-        <SelectValue placeholder={project[0].name as string} />
+    <Select onValueChange={e=> setProjectId(e)}>
+      <SelectTrigger  className="w-12 md:w-[180px] bg-white">
+        <SelectValue  placeholder={project[0].name as string} />
       </SelectTrigger>
       <SelectContent>
         {project.map(({ _id, name }) => (

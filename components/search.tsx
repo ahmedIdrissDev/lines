@@ -63,8 +63,8 @@ const Search = () => {
               </div>
               {result.splice(0 , 8) .map(({firstname , Matricule , function:fun  , lastname , status , siteManger} , index)=>(
 
-                <div key={index} className="flex items-center  gap-2">
-                  <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
+                <div key={index}  onClick={HendleOpenEmployee} className="flex p-2 rounded-md cursor-pointer hover:bg-neutral-800 items-center  gap-2">
+                  <img  src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />
                   <div className="flex items-center gap-1.5">
                   <span>{firstname.toLocaleLowerCase()}  {lastname.toLocaleLowerCase() }  </span>
                   <span  className='w-max px-2  bg-tgcc-100/10 border text-tgcc-100 border-tgcc-800/5 text-sm cursor-pointer  rounded-full  '>{fun}    </span>
@@ -85,7 +85,7 @@ const Search = () => {
             animate={{ scale: 1, opacity: 1 , translateY:0}}
             exit={{ scale: 0.9, opacity: 0 , translateY:-6 }} 
                   
-                  className="w-full md:w-1/2 flex flex-col gap-2 h-1/2 bg-white p-3 rounded-2xl">
+                  className="w-full md:w-1/2 flex text-black flex-col gap-2 h-1/2 bg-white p-3 rounded-2xl">
                   <div className="flex justify-between items-center w-full">
                     <div className="flex items-center gap-1">
                                     <img  onClick={HendleOpenEmployee} src={'/avatar.png'} className='w-9 border border-neutral-200 bg-white h-9 rounded-full cursor-pointer' />

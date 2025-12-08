@@ -27,7 +27,7 @@ export default defineSchema({
     date: v.string(),
     employees: v.array(v.number() ) ,
     Project:v.optional(v.id("Project")),
-  }) ,
+  }).index("project_id", ["Project"]) ,
 
   Project: defineTable({
     name:v.string() ,
