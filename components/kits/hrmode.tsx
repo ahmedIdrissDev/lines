@@ -8,14 +8,16 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { handlePrents } from "@/utils";
 import { store } from "@/store";
+import { Id } from "@/convex/_generated/dataModel";
 
 const Moderh = () => {
   const {PojectID} = store()
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
+  
   const [dataupdated , setUpdated]= useState<Employee[]> ([])
   const [text , settext] =useState<string>('')
-  const data = useQuery(api.functions.employees.employees)
+  const data = useQuery(api.functions.employees.employees , {Project:PojectID as Id<"Project">})
   const setPresnt = useMutation(api.functions.present.SetPresents)
   
   const openclose = () => {

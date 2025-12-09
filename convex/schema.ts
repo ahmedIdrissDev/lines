@@ -19,9 +19,10 @@ export default defineSchema({
     function:v.optional(v.string()),
     siteManger: v.string() ,
     status: v.union(v.literal("active"), v.literal("inactive")),
-    Project:v.optional(v.id('Project')),
+    Project:v.id("Project"),
     createdAt: v.string(),
   }).index("project_id", ["Project"]),
+
 
   Present: defineTable({
     date: v.string(),

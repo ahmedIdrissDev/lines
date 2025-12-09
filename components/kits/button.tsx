@@ -10,7 +10,7 @@ const Button = ({icon , label ,path}:linksProps) => {
     const handleNavigation = ()=> route.push(path)
 
   return (
-   <button onClick={handleNavigation} className={twMerge('w-full relative duration-100 h-11 px-1.5 flex rounded-md    cursor-pointer items-center justify-start  gap-2' , isActive ? 'bg-linear-30 from-neutral-100 to-tgcc-100  ':" opacity-60 ")}>
+   <button onClick={handleNavigation} className={twMerge('w-full relative duration-300 h-11 px-1.5 flex rounded-md    cursor-pointer items-center justify-start  gap-2' , isActive ? 'bg-linear-30 bg-white border  border-neutral-200  ':" opacity-60 ")}>
         {icon}
         {path.startsWith('/taches') && 
         <div className="absolute top-0 right-0 rounded-full text-white bg-red-500 w-2 h-2"> </div>

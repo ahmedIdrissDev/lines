@@ -3,11 +3,11 @@ import { mutation, query } from "../_generated/server";
 
 export const Presents = query({
   args: {
-    ProjectId:v.optional(v.id("Project")) ,
+    Project:v.id("Project") ,
   },
   handler: async (ctx , args) => {
-    return await ctx.db.query("Present").withIndex('project_id' , eq=> eq.eq('Project' ,args.ProjectId))
-    .collect();
+    const data = await ctx.db.query("Present").collect();
+    return data.filter(({Project})=> Project===args.Project)
   },
 });
 export const SetPresents = mutation({

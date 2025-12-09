@@ -7,9 +7,12 @@ import Hr from './Hr'
 import Moderh from './kits/hrmode'
 import PDF from './kits/pdf'
 import { useSession } from 'next-auth/react'
+import ProjectSelector from './project'
+import { store } from '@/store'
 
 const Navbar = () => {
-  const {data} = useSession()
+  const {data } = useSession()
+  const {PojectID} = store()
   const auth = ['HR' , 'ADMIN']
   const isincluds = new Set(auth.map((role)=> role))
   const isAuthorize = isincluds.has(data?.user?.role)
@@ -17,9 +20,9 @@ const Navbar = () => {
     <div className='flex  px-3 md:px-6 h-12 justify-end items-center w-full   '>
     <div className=" flex items-center gap-2.5">
      <Hr/>
-    
+    {PojectID}
       <Search/>
-      <Project/>
+      <ProjectSelector/>
       {isAuthorize &&        <Moderh/> }
               <PDF/>
 

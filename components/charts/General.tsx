@@ -28,6 +28,7 @@ import {
 import { useQuery } from "convex/react"
 import { api } from "@/convex/_generated/api"
 import { store } from "@/store"
+import { Id } from "@/convex/_generated/dataModel"
 
 export const description = "An interactive area chart"
 interface ChartProps{
@@ -58,8 +59,12 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function EffectifGeneral() {
+  const {PojectID} = store()
   const [timeRange, setTimeRange] = React.useState("90d")
-    const fetchData = useQuery(api.functions.present.Presents) 
+    const ProjectId = PojectID as Id<"Project">;
+   
+
+    const fetchData = useQuery(api.functions.present.Presents , {Project:ProjectId}) 
     const {data} =store()
 
    const convertToReadbleFromt = fetchData?.map(({date ,employees ,Project})=>{

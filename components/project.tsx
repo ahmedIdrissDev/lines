@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import { getToday, handlePresentsUpdate } from "@/utils";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 
 interface Proejct {
   _id: string;
@@ -19,12 +20,13 @@ interface Proejct {
 }
 const Project = () => {
   const { data: users } = useSession();
-  const { setdata, data, setProjectId  , PojectID} = store();
+  const { setdata , setProjectId  , PojectID} = store();
   const project = users?.user?.project as Proejct[];
-  const fetchemployees = useQuery(api.functions.employees.employees , {ProjectId:PojectID });
-  const fetchPresents = useQuery(api.functions.present.Presents , {ProjectId:PojectID });
+  const ProjectId = PojectID as Id<"Project">;
+  const fetchemployees = useQuery(api.functions.employees.employees ,   ProjectId ? { ProjectId: ProjectId } : "skip");
+  const fetchPresents = useQuery(api.functions.present.Presents , ProjectId ? { Project: ProjectId } : "skip");
   const today = getToday();
-
+  console.log(fetchemployees)
   const onUser = useEffectEvent(() => {
     try {
       if (project[0]._id) {
@@ -47,10 +49,11 @@ const Project = () => {
       console.log("error");
     }
   });
-
+  useEffect(()=>{
+    onUser()
+  } ,[users])
   useEffect(() => {
     ondata();
-    onUser();
   }, [fetchemployees, fetchPresents]);
 
   return (
