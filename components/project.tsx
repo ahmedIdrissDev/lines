@@ -20,10 +20,9 @@ interface Proejct {
 }
 const Project = () => {
   const { data: users } = useSession();
-  const { setdata  } = store();
+  const { setdata  ,PojectID ,setProjectId } = store();
   const project = users?.user?.project as Proejct[];
-  const [Project , setProjectId] = useState<string>('')
-  const ProjectId = Project as Id<"Project">
+  const ProjectId = PojectID as Id<"Project">
  /// get project data 
       const getEmployees =  useQuery(api.functions.employees.employees , ProjectId? {Project:ProjectId} :"skip")
       const getPresents =  useQuery(api.functions.present.Presents , ProjectId? {Project:ProjectId} :"skip")
@@ -60,7 +59,7 @@ const Project = () => {
 
   useEffect(() => {
     ondata();
-  }, [getEmployees , getPresents , Project]);
+  }, [getEmployees , getPresents , PojectID]);
 
   return (
     <>

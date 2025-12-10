@@ -61,7 +61,7 @@ const chartConfig = {
 export function EffectifGeneral() {
   const {PojectID} = store()
   const [timeRange, setTimeRange] = React.useState("90d")
-    const ProjectId = PojectID as Id<"Project">;
+  const ProjectId = PojectID as Id<"Project">;
    
 
     const fetchData = useQuery(api.functions.present.Presents ,  ProjectId? {Project:ProjectId} :"skip") 
