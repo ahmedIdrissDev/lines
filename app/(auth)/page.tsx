@@ -42,7 +42,7 @@ export default function Home() {
   }
   return (
     <div className="flex justify-center items-center w-full h-dvh">
-      <div className=" w-full border relative border-dashed border-tgcc-500/15 md:w-[70%] flex gap-3  p-3 justify-center items-center flex-col min-h-96 rounded-none">
+      <div className=" w-full  relative  border-tgcc-500/15 md:w-[70%] flex gap-3  p-3 justify-center items-center flex-col min-h-96 rounded-none">
       
         <div className="flex  justify-center items-center">
           <Image

@@ -14,7 +14,9 @@ const Moderh = () => {
   const {PojectID} = store()
   const [open, setOpen] = useState(false);
   const [opentr, setOpentr] = useState(false);
-    const [text , settext] =useState<string>('')
+  
+  const [dataupdated , setUpdated]= useState<Employee[]> ([])
+  const [text , settext] =useState<string>('')
   
   const data = useQuery(api.functions.employees.employees  , PojectID?  {Project:PojectID as Id<"Project">}:"skip" )
   const setPresnt = useMutation(api.functions.present.SetPresents)
@@ -30,6 +32,10 @@ const Moderh = () => {
   };
   const {setdata } = store()
   const opens = () => (opentr ? setOpentr(false) : setOpentr(true));
+  
+  useEffect(()=>{
+     setdata(dataupdated)
+  } , [dataupdated])
   
   async function HendleAddEmployes() {
       try {
