@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useEffectEvent } from "react";
+import React, { useEffect, useEffectEvent, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -20,46 +20,57 @@ interface Proejct {
 }
 const Project = () => {
   const { data: users } = useSession();
-  const { setdata , setProjectId  , PojectID} = store();
+  const { setdata  } = store();
   const project = users?.user?.project as Proejct[];
-  const ProjectId = PojectID as Id<"Project">;
-  const fetchemployees = useQuery(api.functions.employees.employees ,   ProjectId ? { ProjectId: ProjectId } : "skip");
-  const fetchPresents = useQuery(api.functions.present.Presents , ProjectId ? { Project: ProjectId } : "skip");
-  const today = getToday();
-  console.log(fetchemployees)
+  const [Project , setProjectId] = useState<string>('')
+  const ProjectId = Project as Id<"Project">
+ /// get project data 
+      const getEmployees =  useQuery(api.functions.employees.employees , ProjectId? {Project:ProjectId} :"skip")
+      const getPresents =  useQuery(api.functions.present.Presents , ProjectId? {Project:ProjectId} :"skip")
+
+
   const onUser = useEffectEvent(() => {
     try {
       if (project[0]._id) {
         setProjectId(project[0]._id);
       }
-    } catch (error) {}
-  });
-
-  const ondata = useEffectEvent(() => {
-    try {
-      const Matricule =
-        fetchPresents?.find(({ date }) => date === today) ||
-        fetchPresents?.find((item) => item);
-      const Updated = handlePresentsUpdate({
-        Matricule: Matricule?.employees,
-        data: fetchemployees,
-      });
-      setdata(Updated);
     } catch (error) {
       console.log("error");
     }
   });
-  useEffect(()=>{
-    onUser()
-  } ,[users])
+
+  const ondata = useEffectEvent(async () => {
+    try {
+
+        const today = getToday()
+         const Matricule = getPresents?.find(({ date }) => date === today) ||getPresents?.find((item) => item);
+                const Updated = handlePresentsUpdate({
+                Matricule: Matricule?.employees,
+                data: getEmployees,
+              });
+              setdata(Updated)
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  useEffect(() => {
+    onUser();
+  }, [users]);
+
   useEffect(() => {
     ondata();
-  }, [fetchemployees, fetchPresents]);
+  }, [getEmployees , getPresents , Project]);
 
   return (
-    <Select onValueChange={e=> setProjectId(e)}>
-      <SelectTrigger  className="w-12 md:w-[180px] bg-white">
-        <SelectValue  placeholder={project[0].name as string} />
+    <>
+   
+    <Select onValueChange={(e) => setProjectId(e)}>
+      <SelectTrigger
+      
+        className="w-12 md:w-[180px] bg-white"
+      >
+        <SelectValue placeholder={project[0].name as string} />
       </SelectTrigger>
       <SelectContent>
         {project.map(({ _id, name }) => (
@@ -69,6 +80,7 @@ const Project = () => {
         ))}
       </SelectContent>
     </Select>
+    </>
   );
 };
 

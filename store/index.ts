@@ -6,8 +6,8 @@ interface StoreProps{
    Project:string ,
    setdata:(data:Employee[] )=> void ,
     Updatedata:(argm:string)=> void ,
-    PojectID?:string , 
-    setProjectId?:(id:string)=> void  ,
+    PojectID:string , 
+    setProjectId:(id:string)=> void  ,
 }
 export const store = create<StoreProps>((set)=>({
     data:[] ,

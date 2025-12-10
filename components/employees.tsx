@@ -34,7 +34,6 @@ const Employees = () => {
       <TableHead>last name</TableHead>
 
       <TableHead>Status</TableHead>
-      <TableHead className="text-right">Project</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
@@ -46,7 +45,6 @@ const Employees = () => {
       <TableCell>{firstname} </TableCell>
       <TableCell>{lastname} </TableCell>
       <TableCell>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </TableCell>
-      <TableCell className="text-right">{Project} </TableCell>
     </TableRow>
 
         ))

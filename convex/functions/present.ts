@@ -2,12 +2,12 @@ import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
 
 export const Presents = query({
-  args: {
-    Project:v.id("Project") ,
-  },
+   args:{
+    Project: v.id("Project"), 
+   } ,
   handler: async (ctx , args) => {
-    const data = await ctx.db.query("Present").collect();
-    return data.filter(({Project})=> Project===args.Project)
+    const employees = await ctx.db.query("Present").withIndex('project_id' , (q)=> q.eq('Project',args.Project)).collect() ;
+     return employees
   },
 });
 export const SetPresents = mutation({

@@ -64,7 +64,7 @@ export function EffectifGeneral() {
     const ProjectId = PojectID as Id<"Project">;
    
 
-    const fetchData = useQuery(api.functions.present.Presents , {Project:ProjectId}) 
+    const fetchData = useQuery(api.functions.present.Presents ,  ProjectId? {Project:ProjectId} :"skip") 
     const {data} =store()
 
    const convertToReadbleFromt = fetchData?.map(({date ,employees ,Project})=>{
