@@ -3,7 +3,7 @@ import { mutation, query } from "../_generated/server";
 
 export  const employees = query({
   args:{
-    ProjectId:v.id("Project")
+    ProjectId:v.optional(v.id("Project")) 
   } ,
   handler: async (ctx , args) => {
     const employees= await ctx.db.query("employees").withIndex('project_id', eq=> eq.eq('Project',args.ProjectId )).collect() ;

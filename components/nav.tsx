@@ -20,7 +20,6 @@ const Navbar = () => {
     <div className='flex  px-3 md:px-6 h-12 justify-end items-center w-full   '>
     <div className=" flex items-center gap-2.5">
      <Hr/>
-    {PojectID}
       <Search/>
       <ProjectSelector/>
       {isAuthorize &&        <Moderh/> }

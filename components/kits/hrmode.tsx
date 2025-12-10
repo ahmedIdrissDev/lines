@@ -17,7 +17,9 @@ const Moderh = () => {
   
   const [dataupdated , setUpdated]= useState<Employee[]> ([])
   const [text , settext] =useState<string>('')
-  const data = useQuery(api.functions.employees.employees , {Project:PojectID as Id<"Project">})
+    const ProjectId = PojectID as Id<"Project">;
+  
+  const data = useQuery(api.functions.employees.employees , ProjectId ? { ProjectId: ProjectId } : "skip")
   const setPresnt = useMutation(api.functions.present.SetPresents)
   
   const openclose = () => {
