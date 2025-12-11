@@ -20,12 +20,13 @@ const UserButton = () => {
       />
       <AnimatePresence>
         {open && (
-          <div className="w-full   fixed z-20 bg-neutral-900/10 p-4 flex justify-end items-start  inset-0">
+          <div onClick={openclose} className="w-full cursor-pointer   fixed z-20 bg-neutral-900/10 p-4 flex justify-end items-start  inset-0">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
-              className="bg-linear-60 from-white to-90% to-tgcc-50 relative flex justify-between h-1/2  flex-col gap-1.5  p-4 w-full md:w-80 mt-12  rounded-xl border border-neutral-200"
+              onClick={(e)=>e.stopPropagation()}
+              className="bg-linear-60 cursor-auto from-white to-90% to-tgcc-50 relative flex justify-between h-[500px]  flex-col gap-1.5  p-4 w-full md:w-80 mt-12  rounded-xl border border-neutral-200"
             >
               <div className="flex flex-col gap-1.5">
                 <h1 className="font-semibold">Paramètres du compte</h1>
@@ -36,7 +37,7 @@ const UserButton = () => {
                         ? data.user.image
                         : "/avatar.png"
                     }
-                    className="w-9 bg-white h-9 rounded-full cursor-pointer"
+                    className="w-9 border border-tgcc-400 bg-white h-9 rounded-full cursor-pointer"
                   />
                   <h1>{data?.user?.name} </h1>
                 </div>
@@ -63,9 +64,10 @@ const UserButton = () => {
                   <span className="opacity-70"> </span>
                 </div>
               </div>
+
               <button
                 onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
-                className="w-full rounded-2xl flex items-center cursor-pointer justify-start px-3 gap-2 border border-neutral-200 h-11 text-red-950 bg-tgcc-50  "
+                className="w-full rounded-2xl flex items-center cursor-pointer justify-start px-3 gap-2 border border-neutral-200 h-11 text-red-950  "
               >
                 <LogOut />
                 <span>logout</span>

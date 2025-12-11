@@ -18,7 +18,7 @@ const Search = () => {
       const result = func ?  data.filter(item=> item.function?.toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  ) : data.filter(item=> item.Matricule?.toString().toLocaleLowerCase().startsWith(text.toLocaleLowerCase())  )
   return (
     <>
-     <button onClick={openclose} className='  px-2  text-white    cursor-pointer  justify-center  flex w-10  items-center gap-1.5 h-10 bg-neutral-950'>
+     <button onClick={openclose} className='  px-2  text-neutral-950    cursor-pointer  justify-center  flex w-10  items-center gap-1.5 h-10 '>
             <SearchIcon className=''/>
         </button>
     <AnimatePresence>

@@ -13,7 +13,7 @@ export const store = create<StoreProps>((set)=>({
     data:[] ,
     Project:'',
     setdata(data) {
-         set(()=>({data:[...data] }))
+         set({data:data})
     },
     Updatedata(argm) {
         set((state)=>({

@@ -1,5 +1,5 @@
 "use client";
-import { FileChartLine } from "lucide-react";
+import { ArrowUpFromLine, FileChartLine } from "lucide-react";
 import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
 import Image from "next/image";
@@ -29,7 +29,7 @@ const PDF = () => {
     
   return (
     <>
-      <button onClick={openclose} className='w-40 h-11 bg-white border border-neutral-200  flex justify-center items-center gap-2'> <FileChartLine/> Export pdf</button>
+      <button onClick={openclose} className='w-40 h-11 bg-white border border-neutral-200  flex justify-center items-center gap-2'> <ArrowUpFromLine/> Export pdf</button>
 
       <AnimatePresence>
 

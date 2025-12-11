@@ -15,7 +15,7 @@ path:'/taches'
     } ,
     {
 icon:<Users/>,
-label:"Effectifs",
+label:"tache",
 path:'/effectifs'
     } 
 
