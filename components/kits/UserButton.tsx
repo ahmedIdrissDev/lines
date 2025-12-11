@@ -26,7 +26,7 @@ const UserButton = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
               onClick={(e)=>e.stopPropagation()}
-              className="bg-linear-60 cursor-auto from-white to-90% to-tgcc-50 relative flex justify-between h-[500px]  flex-col gap-1.5  p-4 w-full md:w-80 mt-12  rounded-xl border border-neutral-200"
+              className="bg-linear-60 cursor-auto from-white to-90% to-tgcc-50 relative flex justify-between h-full  flex-col gap-1.5  p-4 w-full md:w-96  rounded-xl border border-neutral-200"
             >
               <div className="flex flex-col gap-1.5">
                 <h1 className="font-semibold">Paramètres du compte</h1>

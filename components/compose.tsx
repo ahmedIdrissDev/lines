@@ -28,7 +28,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-40  gap-2.5  border border-neutral-100   hidden cursor-pointer   md:flex justify-center items-center gap-1. h-11 rounded-xl"
+        className="w-40  gap-2.5  border border-neutral-100   hidden cursor-pointer   md:flex justify-center items-center gap-1. h-12 rounded-xl"
       >
         <Pen className=""/>
         <span>Compose</span>
