@@ -10,7 +10,7 @@ path:'/dashboard'
     } ,
     {
 icon:<Mail/>,
-label:"Boîte",
+label:"Message",
 path:'/taches'
     } ,
     {
