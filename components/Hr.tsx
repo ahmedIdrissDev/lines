@@ -41,7 +41,7 @@ async function convertFilesToDataURLs(
     )
   );
 }
-const Hr = () => {
+const Hr = ({fullbutton}:{fullbutton?:boolean}) => {
   const [files, setFiles] = useState<FileList | undefined>(undefined);
 
   const [open, setOpen] = useState(false);
@@ -82,10 +82,17 @@ const Hr = () => {
   }
 
   return (
-    <>
+    <> 
+    {fullbutton ?
+     <button onClick={openclose} className='w-full cursor-pointer h-11 bg-linear-90 from-tgcc-400 rounded-2xl to-tgcc-500 text-white'>
+            Get started
+        </button>
+     :
        <button onClick={openclose} className='w-11 group cursor-pointer h-11 rounded-none  border-neutral-200 p-2 '>
          <Image src={'/ai.svg'} width={200} height={200} alt='logo' className='w-10  opacity-90 group-hover:rotate-90 duration-150' />
       </button>
+
+  }
    <AnimatePresence>
 
       {open && (
