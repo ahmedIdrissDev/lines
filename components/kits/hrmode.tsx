@@ -9,6 +9,7 @@ import { api } from "@/convex/_generated/api";
 import { handlePrents } from "@/utils";
 import { store } from "@/store";
 import { Id } from "@/convex/_generated/dataModel";
+import { Toaster, toast } from 'sonner'
 
 const Moderh = () => {
   const {PojectID} = store()
@@ -43,8 +44,8 @@ const Moderh = () => {
               const result = handlePrents({text , data})
               const Project =PojectID as Id<"Project">
               setPresnt({...result , Project:Project})
+              
         openclose();
-        opens();
     } catch (error) {
      console.log(error)
     }
@@ -92,34 +93,7 @@ const Moderh = () => {
           </div>
         )}
       </AnimatePresence>
-      <AnimatePresence>
-        {opentr && (
-          <div
-            className="w-full   fixed z-20 bg-neutral-900/10 flex justify-center items-center inset-0"
-          >
-            <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-40 flex  justify-center items-center flex-col gap-1.5  p-4 w-1/2  rounded-md border border-neutral-200">
-              <DatabaseZap />
-              {dataupdated?.length}
-              <h1>asynchrone avec votre base de données</h1>
 
-              <div className="w-full h-12 gap-2 flex justify-center items-center">
-                <button
-                  onClick={opens}
-                  className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-9 bg-white border border-neutral-200"
-                >
-                  <span> annuler </span>
-                </button>
-                <button className="w-30 hidden cursor-pointer rounded-md  md:flex justify-center items-center gap-1.5 h-9 bg-tgcc-700 text-white">
-                  <span> continue </span>
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

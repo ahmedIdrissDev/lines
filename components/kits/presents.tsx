@@ -18,7 +18,6 @@ const Presents = () => {
      /// get project data 
           const getEmployees =  useQuery(api.functions.employees.employees , ProjectId? {Project:ProjectId} :"skip")
           const getPresents =  useQuery(api.functions.present.Presents , ProjectId? {Project:ProjectId} :"skip")
-         console.log(getEmployees)
     
       const onUser = useEffectEvent(() => {
         try {
@@ -32,7 +31,8 @@ const Presents = () => {
       const ondata = useEffectEvent(async () => {
         try {
     
-             const Matricule = getPresents?.find(({ date }) => date===date)  ;
+             const Matricule = getPresents?.find((present) => present.date===date) || []  ;
+             console.log(Matricule)
                     const Updated = handlePresentsUpdate({
                     Matricule: Matricule?.employees,
                     data: getEmployees,
@@ -53,10 +53,11 @@ const Presents = () => {
       
   return (
     <>
-    <div className="">
-        <input type="date" onChange={(e)=>  setdate(e.currentTarget.value)} name="" id="" />
+        <div className="h-12 border border-neutral-200 p-1.5 flex justify-between items-center w-full bg-white rounded-2xl">
+         <span>{project[0].name} </span>
+        <input type="date"  onChange={(e)=>  setdate(e.currentTarget.value)} name="" id="" />
+        </div>
        <Employees/>
-    </div>
     </>
   )
 }

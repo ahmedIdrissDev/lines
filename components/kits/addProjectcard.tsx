@@ -4,6 +4,7 @@ import React, { FormEvent, useState } from 'react'
 import { AnimatePresence , motion } from 'motion/react';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import { Toaster, toast } from 'sonner'
 
 interface fromProps {
     name:string , 
@@ -21,7 +22,9 @@ const Projectcard = () => {
                 const fromdata = new FormData(e.currentTarget)
                 const data:fromProps = Object.fromEntries(fromdata.entries() ) 
                 if(data){
-                    setPoject(data)
+                    // setPoject(data)
+                    toast('Project has been created')
+                    openclose()
                 }
                 
             } catch (error) {
@@ -30,6 +33,7 @@ const Projectcard = () => {
       }
   return (
     <>
+    <Toaster position="top-left"/>
      <button onClick={openclose} className='w-full flex justify-center items-center gap-1.5 cursor-pointer h-11 bg-linear-90 from-neutral-800 rounded-2xl to-neutral-950 text-white'>
         <FolderOpenDot/>
         <span>
