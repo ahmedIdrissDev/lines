@@ -42,7 +42,7 @@ const Project = () => {
     try {
 
         const today = getToday()
-        const curredlastdate =getPresents?.reverse() .find((item) => item)
+        const curredlastdate =getPresents?.reverse().find((item) => item)
         console.log("current last",curredlastdate)
          const Matricule = getPresents?.find(({ date }) => date === today) || curredlastdate ;
                 const Updated = handlePresentsUpdate({
