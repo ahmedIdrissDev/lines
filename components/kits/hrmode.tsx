@@ -44,14 +44,15 @@ const Moderh = () => {
               const result = handlePrents({text , data})
               const Project =PojectID as Id<"Project">
               setPresnt({...result , Project:Project})
-              
-        openclose();
+toast.success('present validation has been completed')
+             openclose();
     } catch (error) {
      console.log(error)
     }
   }
   return (
     <>
+    <Toaster richColors position="top-center"/>
       <button
         onClick={openclose}
         className="w-50 hidden cursor-pointer  md:flex justify-center items-center gap-1.5 h-11  bg-tgcc-500 text-white"

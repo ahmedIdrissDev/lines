@@ -23,7 +23,7 @@ const Projectcard = () => {
                 const data:fromProps = Object.fromEntries(fromdata.entries() ) 
                 if(data){
                     // setPoject(data)
-                    toast('Project has been created')
+                    toast.success('You are done')
                     openclose()
                 }
                 
@@ -33,7 +33,6 @@ const Projectcard = () => {
       }
   return (
     <>
-    <Toaster position="top-left"/>
      <button onClick={openclose} className='w-full flex justify-center items-center gap-1.5 cursor-pointer h-11 bg-linear-90 from-neutral-800 rounded-2xl to-neutral-950 text-white'>
         <FolderOpenDot/>
         <span>
