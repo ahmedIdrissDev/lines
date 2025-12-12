@@ -30,7 +30,7 @@ const Employees = () => {
   </TableHeader>
   <TableBody>
       {
-        data.map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
+        data.filter(({status})=>status==='active').map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
          <TableRow key={index}>
       <TableCell className="font-medium">{Matricule} </TableCell>
       <TableCell>{fun} </TableCell>

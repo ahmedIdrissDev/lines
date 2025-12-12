@@ -41,7 +41,7 @@ const Projectcard = () => {
     </button>
       <AnimatePresence>
         {open && (
-          <div onClick={openclose} className="w-full cursor-pointer fixed z-20 bg-neutral-900/10 p-4 flex justify-center items-center  inset-0">
+          <div onClick={openclose} className="w-full cursor-pointer fixed z-20 bg-neutral-900/50 p-4 flex justify-center items-center  inset-0">
             <motion.form
              onSubmit={handleProjectSubmition}
               initial={{ scale: 0.9, opacity: 0 }}
@@ -55,7 +55,7 @@ const Projectcard = () => {
                         <option value="Tgcc">Tgcc</option>
                         <option value="Sous-traitants">Sous-traitants</option>
                     </select>
-                    <button onClick={openclose} className='w-full flex justify-center items-center gap-1.5 cursor-pointer h-11 bg-linear-90 from-neutral-800 rounded-2xl to-neutral-950 text-white'>
+                    <button onClick={openclose} className='w-full flex justify-center items-center gap-1.5 cursor-pointer h-11 bg-linear-90 from-tgcc-400 rounded-2xl to-tgcc-600 text-white'>
         <span>
          Create the project
         </span>
