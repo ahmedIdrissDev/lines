@@ -7,7 +7,15 @@ export  const employees = query({
    } ,
   handler: async (ctx , args ) => {
    const present= await  ctx.db.query("employees").withIndex('project_id' , (q)=> q.eq('Project', args.Project)).collect() ;
-    return present
+    return Promise.all(
+      present.map( async (data )=>{
+        const Project = await  ctx.db.get(data.Project)
+        return {
+          ...data ,
+          Project:Project?.name
+        }
+      })
+    )
   },
 })
 
