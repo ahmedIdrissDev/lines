@@ -8,6 +8,7 @@ import { useQuery } from 'convex/react';
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useEffectEvent, useState } from 'react'
 import Employees from '../employees';
+import { toast } from 'sonner';
 
 const Presents = () => {
     const { data: users } = useSession();
@@ -31,14 +32,15 @@ const Presents = () => {
       const ondata = useEffectEvent(async () => {
         try {
     
-             const Matricule = getPresents?.find((present) => present.date===date) || []  ;
+             const Matricule = getPresents?.find((present) => present.date===date)  ;
+             if(!Matricule) return toast.error('عفاك اختار تاريخ صحيح.')
              console.log(Matricule)
                     const Updated = handlePresentsUpdate({
                     Matricule: Matricule?.employees,
                     data: getEmployees,
                   });
                   setdata(Updated)
-                  console.log(date)
+                  toast.success('مزيان، التاريخ صحيح.')
         } catch (error) {
           console.log(error);
         }
@@ -55,7 +57,7 @@ const Presents = () => {
     <>
         <div className="h-12 border border-neutral-200 p-1.5 flex justify-between items-center w-full bg-white rounded-2xl">
          <span>{project[0].name} </span>
-        <input type="date"  onChange={(e)=>  setdate(e.currentTarget.value)} name="" id="" />
+        <input type="date" className='outline-0' onChange={(e)=>  setdate(e.currentTarget.value)} name="" id="" />
         </div>
        <Employees/>
     </>

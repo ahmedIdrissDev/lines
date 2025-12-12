@@ -40,11 +40,13 @@ const Moderh = () => {
   
   async function HendleAddEmployes() {
       try {
+        toast.error('La validation du pointage n’a pas été effectuée.')
+
         if(text.length < 2) return false
               const result = handlePrents({text , data})
               const Project =PojectID as Id<"Project">
               setPresnt({...result , Project:Project})
-toast.success('present validation has been completed')
+              toast.success('La validation du pointage est terminée')
              openclose();
     } catch (error) {
      console.log(error)
