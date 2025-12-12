@@ -11,6 +11,7 @@
 import type * as functions_employees from "../functions/employees.js";
 import type * as functions_login from "../functions/login.js";
 import type * as functions_present from "../functions/present.js";
+import type * as functions_project from "../functions/project.js";
 
 import type {
   ApiFromModules,
@@ -22,6 +23,7 @@ declare const fullApi: ApiFromModules<{
   "functions/employees": typeof functions_employees;
   "functions/login": typeof functions_login;
   "functions/present": typeof functions_present;
+  "functions/project": typeof functions_project;
 }>;
 
 /**

@@ -65,11 +65,11 @@ const Moderh = () => {
             <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-1/2 flex flex-col gap-1.5  p-4 w-1/2  rounded-none border border-neutral-200">
+            exit={{ scale: 0.7, opacity: 0 }} className="bg-white h-1/2 flex flex-col gap-1.5  p-4 w-1/2  rounded-xl border border-neutral-200">
               <h1>Valide la présence</h1>
               <textarea
                 onChange={e=> settext(e.currentTarget.value)}
-                className="p-2.5 h-full outline-0 focus: resize-none rounded-none border border-dashed border-neutral-200"
+                className="p-2.5 h-full outline-0 focus: resize-none rounded-xl border border-dashed border-neutral-200"
                 placeholder="Matricules "
                 name=""
                 id=""
@@ -77,13 +77,13 @@ const Moderh = () => {
               <div className="w-full h-12 gap-2 flex justify-end items-center">
                 <button
                   onClick={openclose}
-                  className="w-30 hidden cursor-pointer rounded-none  md:flex justify-center items-center gap-1.5 h-9 bg-white border border-neutral-200"
+                  className="w-30 hidden cursor-pointer rounded-xl  md:flex justify-center items-center gap-1.5 h-9 bg-white border border-neutral-200"
                 >
                   <span> annuler </span>
                 </button>
                 <button
                   onClick={HendleAddEmployes}
-                  className="w-30 hidden cursor-pointer rounded-none  md:flex justify-center items-center gap-1.5 h-9 bg-tgcc-700 text-white"
+                  className="w-30 hidden cursor-pointer rounded-xl  md:flex justify-center items-center gap-1.5 h-9 bg-tgcc-700 text-white"
                 >
                   <span> Ajouter </span>
                 </button>

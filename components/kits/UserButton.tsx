@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { signOut } from "next-auth/react";
 import { LogOut, X } from "lucide-react";
 import { Proejct } from "@/types";
+import Projectcard from "./addProjectcard";
 const UserButton = () => {
   const [open, setOpen] = useState(false);
   const openclose = () => (open ? setOpen(false) : setOpen(true));
@@ -64,14 +65,17 @@ const UserButton = () => {
                   <span className="opacity-70"> </span>
                 </div>
               </div>
-
+              <div className="">
+              <Projectcard/>
               <button
                 onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
-                className="w-full rounded-2xl flex items-center cursor-pointer justify-start px-3 gap-2 border border-neutral-200 h-11 text-red-950  "
+                className="w-full rounded-2xl flex items-center cursor-pointer justify-center px-3 gap-2 border border-neutral-200 h-11 text-red-950  "
               >
                 <LogOut />
                 <span>logout</span>
               </button>
+
+              </div>
               <X
                 onClick={openclose}
                 className="absolute size-4 right-2 top-2 opacity-70 cursor-pointer"

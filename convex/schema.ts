@@ -32,5 +32,6 @@ export default defineSchema({
 
   Project: defineTable({
     name:v.string() ,
+    type:v.optional(v.string())
   })
 });
