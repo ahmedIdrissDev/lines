@@ -40,7 +40,6 @@ const onUser = useEffectEvent(() => {
   const ondata = useEffectEvent(async () => {
     try {
       
-      console.log( "iis",PojectID)
         const today = getToday()
         const curredlastdate =getPresents?.reverse().find((item) => item) || []
         console.log("current last",PojectID)
@@ -69,8 +68,8 @@ const onUser = useEffectEvent(() => {
     <>
    
     <Select onValueChange={(e) =>{
-      // setProjectId(e)
-setPoject(e)    } }>
+      setProjectId(e)
+  } }>
       <SelectTrigger
       
         className="w-12 md:w-[180px] bg-white"
