@@ -22,9 +22,8 @@ interface Proejct {
 const Project = () => {
   const { data: users } = useSession();
   const { setdata  ,PojectID ,setProjectId } = store();
-  const [projectdd , setPoject] = useState('')
   const project = users?.user?.project as Proejct[];
-  const ProjectId = projectdd as Id<"Project">
+  const ProjectId = PojectID as Id<"Project">
  /// get project data 
  const getPresents =  useQuery(api.functions.present.Presents , projectdd ? {Project:ProjectId} :"skip")
  const getEmployees =  useQuery(api.functions.employees.employees , projectdd ? {Project:ProjectId} :"skip")
