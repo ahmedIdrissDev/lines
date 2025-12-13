@@ -6,9 +6,9 @@ export  const employees = query({
     Project: v.id("Project"), 
    } ,
   handler: async (ctx , args ) => {
-   const present= await  ctx.db.query("employees").withIndex('project_id' , (q)=> q.eq('Project', args.Project)).collect() ;
+   const emaplyees= await  ctx.db.query("employees").withIndex('project_id' , (q)=> q.eq('Project', args.Project)).collect() ;
     return Promise.all(
-      present.map( async (data )=>{
+      emaplyees.map( async (data )=>{
         const Project = await  ctx.db.get(data.Project)
         return {
           ...data ,
