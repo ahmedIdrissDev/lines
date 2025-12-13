@@ -25,8 +25,8 @@ const Project = () => {
   const project = users?.user?.project as Proejct[];
   const ProjectId = PojectID as Id<"Project">
  /// get project data 
- const getPresents =  useQuery(api.functions.present.Presents , projectdd ? {Project:ProjectId} :"skip")
- const getEmployees =  useQuery(api.functions.employees.employees , projectdd ? {Project:ProjectId} :"skip")
+ const getPresents =  useQuery(api.functions.present.Presents , ProjectId ? {Project:ProjectId} :"skip")
+ const getEmployees =  useQuery(api.functions.employees.employees , ProjectId ? {Project:ProjectId} :"skip")
   
 const onUser = useEffectEvent(() => {
     try {
