@@ -85,7 +85,7 @@ const Hr = ({fullbutton}:{fullbutton?:boolean}) => {
     <> 
     {fullbutton ?
      <button onClick={openclose} className='w-full cursor-pointer h-11 bg-neutral-950 text-white'>
-            Get started
+      Démarrer
         </button>
      :
        <button onClick={openclose} className='w-11 group cursor-pointer h-11 rounded-none  border-neutral-200 p-2 '>
