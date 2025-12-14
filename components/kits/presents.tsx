@@ -9,6 +9,7 @@ import { useSession } from 'next-auth/react';
 import React, { useEffect, useEffectEvent, useState } from 'react'
 import Employees from '../employees';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 const Presents = () => {
     const { data: users } = useSession();
@@ -60,8 +61,8 @@ const Presents = () => {
         <input type="date" className='outline-0' onChange={(e)=>  setdate(e.currentTarget.value)} name="" id="" />
         </div>
         {date ? <Employees/>:
-        <div className="">
-          <h1>select a date </h1>
+        <div className="w-full h-full flex justify-center items-center">
+          <Image src={'/notfound.svg'} width={300} height={300} alt='logo'/>
         </div>
         }
     </>

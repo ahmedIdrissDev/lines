@@ -18,4 +18,27 @@ export  const employees = query({
     )
   },
 })
+export const addNewEmployyes= mutation({
+  args:{
+    Matricule: v.number(),
+    firstname: v.optional(v.string()),
+    lastname: v.optional(v.string()),
+    function:v.optional(v.string()),
+    siteManger: v.string() ,
+    status: v.union(v.literal("active"), v.literal("inactive")),
+    Project:v.id("Project"),
+    createdAt: v.string(),
+  } ,
+  handler:async (ctx ,args)=>{
+      try {
+        const employees =  await ctx.db.query('employees').filter(q=> q.eq(q.field('Matricule') , args.Matricule)).first()
+        if(employees) return  false;
+        await ctx.db.insert('employees' , args)
+        return true
+      } catch (error) {
+          console.log(error)
+      }
+
+  }
+})
 

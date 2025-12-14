@@ -30,13 +30,13 @@ const Employees = () => {
   </TableHeader>
   <TableBody>
       {
-        data.filter(({status})=>status==='active').map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
+        data.map(({Matricule ,Project ,function:fun ,status ,firstname ,lastname} , index)=>(
          <TableRow key={index}>
       <TableCell className="font-medium">{Matricule} </TableCell>
       <TableCell>{fun} </TableCell>
       <TableCell>{firstname} </TableCell>
       <TableCell>{lastname} </TableCell>
-      <TableCell>{status==='active' ? <div className='w-max px-2  bg-tgcc-100/10 border text-tgcc-950 border-tgcc-800 rounded-full'>Present</div>:<div className='w-max px-2  bg-neutral-100/10 border text-neutral-700 border-neutral-800 rounded-full'>Absent</div>} </TableCell>
+      <TableCell>{status==='active' ? <div className='h-3 w-3 bg-amber-400  rounded-full'/>:<div className='h-3 w-3 bg-neutral-500  rounded-full'/>} </TableCell>
       <TableCell>{Project} </TableCell>
     </TableRow>
 
