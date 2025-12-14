@@ -62,7 +62,7 @@ const Presents = () => {
         </div>
         {date ? <Employees/>:
         <div className="w-full h-full flex justify-center items-center">
-          <Image src={'find.svg'} width={300} height={300} alt='logo'/>
+          <Image src={'find.svg'} width={200} height={200} alt='logo'/>
         </div>
         }
     </>
