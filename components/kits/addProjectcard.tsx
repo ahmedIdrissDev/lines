@@ -34,7 +34,7 @@ const Projectcard = () => {
   return (
     <>
       <div onClick={openclose}
-                          className="text-sm  w-full border border-dashed h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
+                          className="text-sm cursor-pointer  w-full border border-dashed h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
                         
                         >
                           <span> Ajouter un projet 

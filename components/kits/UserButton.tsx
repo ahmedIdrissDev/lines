@@ -56,12 +56,13 @@ const UserButton = () => {
                                     <Projectcard/>
 
                                              
-                      {project.map(({ name }, index) => (
+                      {project.map(({ name , type }, index) => (
                         <div
-                          className="text-sm  bg-neutral-100 w-full border h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
+                          className="text-sm  flex-col gap-1.5 bg-neutral-100 w-full border h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
                           key={index}
                         >
                           <span>{name} </span>
+                          <span>{type} </span>
                         </div>
                       ))}
                     </div>

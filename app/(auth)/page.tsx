@@ -85,7 +85,7 @@ export default function Home() {
                 <input className="accent-tgcc-400 rounded-xl border border-neutral-200" onChange={handleChange} type="checkbox" name="" id="" />
                 <span className="text-sm opacity-90">Afficher le mot de passe</span>
               </div>
-              <button className="h-11 cursor-pointer w-full bg-tgcc-500 text-white rounded-xl">
+              <button className="h-12 cursor-pointer w-full bg-neutral-950 text-white rounded-xl">
                 login
               </button>
             </form>
