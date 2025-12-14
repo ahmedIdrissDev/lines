@@ -27,7 +27,7 @@ const UserButton = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
               onClick={(e)=>e.stopPropagation()}
-              className="bg-white cursor-auto relative flex justify-between h-full  flex-col gap-1.5  p-4 w-full md:w-96  rounded-xl border border-neutral-200"
+              className="bg-white cursor-auto relative flex justify-between h-full  flex-col gap-1.5  p-4 w-full full  rounded-xl border border-neutral-200"
             >
               <div className="flex flex-col gap-1.5">
                 <h1 className="font-semibold">Paramètres du compte</h1>
@@ -51,10 +51,14 @@ const UserButton = () => {
                 <div className="w-full  rounded-2xl h-12 flex items-center">
                   <div className="w-full px-2 h-full ">
                     <p>Project</p>
-                    <div className="px-2 w-full">
+
+                    <div className="grid gap-2 grid-cols-4 ">
+                                    <Projectcard/>
+
+                                             
                       {project.map(({ name }, index) => (
                         <div
-                          className="text-sm  border-l border-b h-8 w-max rounded-bl-xl p-2 border-neutral-200"
+                          className="text-sm  bg-neutral-100 w-full border h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
                           key={index}
                         >
                           <span>{name} </span>
@@ -66,7 +70,6 @@ const UserButton = () => {
                 </div>
               </div>
               <div className="">
-              <Projectcard/>
               <button
                 onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
                 className="w-full rounded-2xl flex items-center cursor-pointer justify-center px-3 gap-2 border border-neutral-200 h-11 text-red-950  "

@@ -33,12 +33,13 @@ const Projectcard = () => {
       }
   return (
     <>
-     <button onClick={openclose} className='w-full flex justify-center items-center gap-1.5 cursor-pointer h-11 bg-linear-90 from-neutral-800 rounded-2xl to-neutral-950 text-white'>
-        <FolderOpenDot/>
-        <span>
-         New Project
-        </span>
-    </button>
+      <div onClick={openclose}
+                          className="text-sm  w-full border border-dashed h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
+                        
+                        >
+                          <span> Ajouter un projet 
+</span>
+                        </div>
       <AnimatePresence>
         {open && (
           <div onClick={openclose} className="w-full cursor-pointer fixed z-20 bg-neutral-900/50 p-4 flex justify-center items-center  inset-0">

@@ -5,12 +5,7 @@ import React from 'react'
 const page = () => {
   return (
        <>
-       <div className="">
-       <Mail/>
-       <Mail/>
-       <Mail/>
-       <Mail/>
-       </div>
+       <Alert/>
 
        </>
 
