@@ -10,13 +10,13 @@ const Welcome = ({fun}:{fun:(e:string)=> void}) => {
    <Image src={'/ai.svg'} width={1000} height={1000} className="w-14 " alt="logo" />
 
 <div className="text-center">
-      <h1 className='text-2xl'>Welcome I <span className='w-max px-3 border bg-linear-60 text-transparent bg-clip-text from-tgcc-700 to-tgcc-300 border-neutral-200 rounded-full'> Tgcc ai </span></h1>
+      <h1 className='text-2xl'>Welcome I <span className='w-max px-3 border bg-linear-60 text-transparent bg-clip-text from-tgcc-700 to-tgcc-300 border-neutral-200 rounded-full'> Tgcc Alts </span></h1>
       <p className='opacity-90'>Smart, fast, AI-powered HR assistant — what do you need today?</p>
 
 </div>
-      <div className="flex mask-x-from-70% mask-x-to-40%  overflow-x-scroll   gap-2 ">
-        {/* {option.splice(0 , 1) .map(({icon , description ,label})=>(
-             <div key={label} onClick={()=> fun(label)} className=" w-90 bg-white  cursor-pointer duration-150 hover:border-tgcc-800 min-h-50 border border-neutral-200 p-2 rounded-2xl">
+      <div className=" grid grid-cols-3 gap-2  overflow-x-scroll   ">
+        {option.map(({icon , description ,label})=>(
+             <div key={label} onClick={()=> fun(label)} className=" w-full bg-white  cursor-pointer duration-150 hover:border-tgcc-800 min-h-50 border border-neutral-200 p-2 rounded-2xl">
               <div className="flex justify-center items-center h-11 w-11 bg-tgcc-300 rounded-2xl ">
                 {icon}
               </div>
@@ -25,7 +25,7 @@ const Welcome = ({fun}:{fun:(e:string)=> void}) => {
                   <p className='text-sm opacity-75'> {description} </p>
               </div>
             </div>
-        ))} */}
+        ))}
       </div>
     </div>
   )

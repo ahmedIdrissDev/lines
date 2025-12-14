@@ -12,13 +12,13 @@ import { toast } from 'sonner';
 
 const Presents = () => {
     const { data: users } = useSession();
+    const project = users?.user?.project as Proejct[];
     const [date , setdate] =useState('')
       const { setdata  ,PojectID ,setProjectId } = store();
-     const project = users?.user?.project as Proejct[];
       const ProjectId = PojectID as Id<"Project">
      /// get project data 
-          const getEmployees =  useQuery(api.functions.employees.employees , ProjectId? {Project:ProjectId} :"skip")
-          const getPresents =  useQuery(api.functions.present.Presents , ProjectId? {Project:ProjectId} :"skip")
+          const getEmployees =  useQuery(api.functions.employees.employees , ProjectId? {Project:ProjectId} :undefined)
+          const getPresents =  useQuery(api.functions.present.Presents , ProjectId? {Project:ProjectId} :undefined)
     
       const onUser = useEffectEvent(() => {
         try {
@@ -59,7 +59,11 @@ const Presents = () => {
          <span>{project[0].name} </span>
         <input type="date" className='outline-0' onChange={(e)=>  setdate(e.currentTarget.value)} name="" id="" />
         </div>
-       <Employees/>
+        {date ? <Employees/>:
+        <div className="">
+          <h1>select a date </h1>
+        </div>
+        }
     </>
   )
 }
