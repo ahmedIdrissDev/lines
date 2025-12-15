@@ -10,7 +10,9 @@ const UserButton = () => {
   const [open, setOpen] = useState(false);
   const openclose = () => (open ? setOpen(false) : setOpen(true));
   const { data } = useSession();
-
+  const auth = ['HR' , 'ADMIN']
+  const isincluds = new Set(auth.map((role)=> role))
+  const isAuthorize = isincluds.has(data?.user?.role)
   const project = data?.user?.project as Proejct[];
   return (
     <>
@@ -53,7 +55,10 @@ const UserButton = () => {
                     <p>Project</p>
 
                     <div className="grid gap-2 grid-cols-4 ">
+                      {isAuthorize && 
                                     <Projectcard/>
+                      
+                      }
 
                                              
                       {project.map(({ name , type }, index) => (
