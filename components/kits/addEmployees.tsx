@@ -60,7 +60,7 @@ const AddEmployees = () => {
         </div>
         <div className="flex flex-col gap-2 ">
           <span className="text-sm opacity-70">Responsable de site</span>
-          <input type="text" name="siteManger" id="" className="input" />
+          <input type="text" name="siteManger" readOnly value={users?.user?.name as string} id="" className="input" />
         </div>
         <div className="flex flex-col gap-2 ">
           <span className="text-sm opacity-70">chaniter</span>
