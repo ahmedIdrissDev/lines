@@ -1,5 +1,5 @@
 'use client'
-import { FolderGit2, FolderOpenDot, X } from 'lucide-react';
+import { FolderGit2, FolderOpenDot, Plus, X } from 'lucide-react';
 import React, { FormEvent, useState } from 'react'
 import { AnimatePresence , motion } from 'motion/react';
 import { useMutation } from 'convex/react';
@@ -34,9 +34,10 @@ const Projectcard = () => {
   return (
     <>
       <div onClick={openclose}
-                          className="text-sm cursor-pointer  w-full border border-dashed h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
+                          className="text-sm cursor-pointer gap-1.5  w-full border border-dashed h-60 flex justify-center items-center rounded-2xl p-2 border-neutral-200"
                         
                         >
+                          <Plus/>
                           <span> Ajouter un projet 
 </span>
                         </div>

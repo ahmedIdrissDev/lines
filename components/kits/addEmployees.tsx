@@ -77,8 +77,7 @@ const AddEmployees = () => {
           type="submit"
           className="w-full h-11 bg-tgcc-500 text-white rounded-md"
         >
-          add new
-        </button>
+        Ajouter        </button>
       </form>
     </div>
   );
