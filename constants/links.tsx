@@ -10,7 +10,7 @@ path:'/dashboard'
     } ,
     {
 icon:<Mail/>,
-label:"Message",
+label:"Workspace",
 path:'/taches'
     } ,
     {
