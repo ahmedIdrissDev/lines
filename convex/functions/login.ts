@@ -21,3 +21,19 @@ export const get = query({
     }
   }
 });
+
+export const getUsers= query({
+  args:{},
+  handler:async (ctx, args)=> {
+        const users = await ctx.db.query('users').collect();
+        const allusers = users.map(({email ,name ,func})=>{
+          return {
+             email ,
+             name , 
+             func
+          }
+
+        } )
+        return allusers
+    },
+})
