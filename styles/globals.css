@@ -101,7 +101,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-white text-tgcc-950;
+    @apply bg-white text-neutral-900;
   }
   label {
     @apply text-sm opacity-80;

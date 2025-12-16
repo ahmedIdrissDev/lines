@@ -2,7 +2,7 @@
 import { api } from "@/convex/_generated/api";
 import { store } from "@/store";
 import { useMutation } from "convex/react";
-import { Calendar, Mail, Pen, Send, SendHorizonal, User, UserRoundPlus, X } from "lucide-react";
+import { Calendar, Mail, Pen, Send, SendHorizonal, SquarePen, User, UserRoundPlus, X } from "lucide-react";
 import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
 import { fa } from "zod/v4/locales";
@@ -31,7 +31,7 @@ const Add = () => {
         onClick={openclose}
         className="w-full  gap-2.5     hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10 bg-neutral-900 text-white rounded-xl"
       >
-        <Pen className=""/>
+        <SquarePen/>
         <span>Compose</span>
       </button>
       <AnimatePresence>

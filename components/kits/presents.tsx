@@ -34,14 +34,13 @@ const Presents = () => {
         try {
     
              const Matricule = getPresents?.find((present) => present.date===date)  ;
-             if(!Matricule) return toast.error('عفاك اختار تاريخ صحيح.')
+             if(!Matricule) return toast.error('Veuillez choisir une date correcte')
              console.log(Matricule)
                     const Updated = handlePresentsUpdate({
                     Matricule: Matricule?.employees,
                     data: getEmployees,
                   });
                   setdata(Updated)
-                  toast.success('مزيان، التاريخ صحيح.')
         } catch (error) {
           console.log(error);
         }

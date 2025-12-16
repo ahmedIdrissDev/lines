@@ -15,7 +15,7 @@ const Sidebar = () => {
 </svg>
 <div className="flex  py-3.5 flex-col gap-4">
   <Add/>
-  <div className="w-full border-b border-neutral-200"/>
+  <div className="w-full flex flex-col gap-1  border-b border-neutral-100"/>
     {links.map((data , key)=>(
         <Button key={key} {...data} />
     ))}
