@@ -8,7 +8,7 @@ import { toast } from "sonner";
 
 const AddEmployees = () => {
   const { data: users } = useSession();
-  const project = users?.user?.project as Proejct[];
+  const project = (users?.user?.project || [] ) as Proejct[];
   const addnew = useMutation(api.functions.employees.addNewEmployyes);
   const formRef = useRef<HTMLFormElement>(null);
   async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
@@ -23,7 +23,7 @@ const AddEmployees = () => {
         createdAt: "",
       };
       const result = await addnew(employee);
-      result
+          result
         ? toast.success("Merci beaucoup !")
         : toast.error("Le matricule de l’employé existe déjà");
       formRef.current?.reset();

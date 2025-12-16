@@ -6,7 +6,7 @@ export const get = query({
   handler: async (ctx , args) => {
     const users = await ctx.db.query("users").collect();
 
-    const user = users.find(({email ,password})=> email ===args.email && password=== args.password)
+    const user = users.find(({email ,password})=> email ===args.email.trim() && password=== args.password.trim())
     if(!user){
       return null
     }
