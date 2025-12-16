@@ -13,7 +13,7 @@ const UserButton = () => {
   const auth = ['HR' , 'ADMIN']
   const isincluds = new Set(auth.map((role)=> role))
   const isAuthorize = isincluds.has(data?.user?.role)
-  const project = data?.user?.project as Proejct[];
+  const project = (data?.user?.project || []) as Project[];
   return (
     <>
       <img

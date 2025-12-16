@@ -26,9 +26,7 @@ export default function ProjectSelect() {
 
   const projects = (session?.user?.project || []) as Project[];
   const projectId = PojectID as Id<"Project"> | undefined;
-   if(!projectId) return (
-    <div className="w-30 h-11 bg-white animate-pulse rounded-full"></div>
-   )
+   
   const presents = useQuery(
     api.functions.present.Presents,
     projectId ? { Project: projectId } : undefined
