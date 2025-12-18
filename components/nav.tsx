@@ -12,6 +12,7 @@ import { store } from '@/store'
 import Link from 'next/link'
 import Button from './kits/button'
 import { useRouter } from 'next/navigation'
+import { UserPen } from 'lucide-react'
 
 const Navbar = () => {
   const {data } = useSession()
@@ -24,12 +25,11 @@ const Navbar = () => {
     <div className=" flex items-center gap-2.5">
      <Hr/>
       <Search/>
-      <ProjectSelector/>
-      <button onClick={()=> route.push("/dashboard/add") } className='bg-tgcc-950 cursor-pointer text-white h-11  px-3'> Ajouter un employé</button>
-      {isAuthorize &&    <Moderh/> }
               <PDF/>
+      <button onClick={()=> route.push("/dashboard/add") } className='cursor-pointer h-11  px-3'> <UserPen/></button>
+      <ProjectSelector/>
+      {isAuthorize &&    <Moderh/> }
 
-            <UserButton/>
     </div>
     </div>
   )

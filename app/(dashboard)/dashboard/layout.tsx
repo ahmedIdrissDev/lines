@@ -8,14 +8,13 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='grid bg-neutral-50 grid-cols-[240px_1fr] h-dvh'>
-      <Sidebar/>
-      <div className="w-full  flex flex-col gap-2  overflow-y-scroll  h-dvh">
+      
+      <div className="w-full  flex flex-col gap-2 p-3 overflow-y-scroll md:px-2 h-dvh">
+        <Navbar/>
         {children}
       </div>
 
 
-    </div>
   )
 }
 

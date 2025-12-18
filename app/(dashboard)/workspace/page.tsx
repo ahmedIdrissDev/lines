@@ -8,7 +8,9 @@ import Link from 'next/link'
 const page = () => {
   const data = useQuery(api.functions.login.getUsers)
   return (
-      <></>
+      <>
+      <Alert/>
+      </>
 
   )
 }

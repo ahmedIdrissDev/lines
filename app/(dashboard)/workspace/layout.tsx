@@ -1,0 +1,20 @@
+import Messages from '@/components/inbox/Messages';
+import Message from '@/components/kits/message';
+import React from 'react'
+
+const layout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  return (
+<div className='grid grid-cols-[300px_1fr] p-2 gap-2 h-dvh'>
+      <Messages/>
+      <div className="w-full border border-neutral-100 bg-white rounded-md  flex flex-col gap-2 p-3 overflow-y-scroll md:px-2 h-dvh">
+        {children}
+      </div>
+    </div> 
+    )
+}
+
+export default layout
