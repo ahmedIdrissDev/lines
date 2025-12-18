@@ -6,6 +6,7 @@ import { Calendar, Mail, Pen, Send, SendHorizonal, SquarePen, User, UserRoundPlu
 import { AnimatePresence  , motion} from "motion/react";
 import React, { FormEvent, useState } from "react";
 import { fa } from "zod/v4/locales";
+import TextArea from "./kits/TextEditor";
 
 const Add = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-full  gap-2.5     hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10 bg-neutral-900 text-white rounded-xl"
+        className="w-full  gap-2.5  border border-neutral-200    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-xl"
       >
         <SquarePen/>
         <span>Compose</span>
@@ -57,8 +58,7 @@ const Add = () => {
                   <input type="text" name="date_of_start"  className="w-full outline-0 border-b border-neutral-100 h-11"  placeholder="cc"/>
                 </div>
               
-
-              <textarea name="description" className=" w-full outline-0 border-b border-neutral-100 h-full p-3.5 resize-none" id="" placeholder="Message"></textarea>
+              <TextArea/>
               <div className="flex h-12 justify-end items-center">
                 <button type="submit" className="w-30 outline-0 flex gap-2 justify-center items-center bg-neutral-950 text-white rounded-md cursor-pointer h-10">
                   <SendHorizonal/>
