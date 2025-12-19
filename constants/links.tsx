@@ -5,12 +5,12 @@ import { Archive, Calendar, FileMinus, Home, Inbox, Mail, MonitorCloud, Settings
 export const links:linksProps[] =[
     {
 icon:<Home/>,
-label:"Tableau de bord",
+label:"dashboard",
 path:'/dashboard'
     } ,
     {
 icon:<Mail/>,
-label:"Espace de travail",
+label:"Workspace",
 path:'/workspace'
     } ,
     {

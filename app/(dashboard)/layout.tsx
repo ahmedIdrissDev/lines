@@ -1,5 +1,4 @@
-import Navbar from '@/components/nav';
-import Sidebar from '@/components/sidebar';
+import Sidebar from '@/components/sections/sidebar';
 import React from 'react'
 
 const layout = ({
@@ -8,13 +7,11 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='grid bg-neutral-50 grid-cols-[240px_1fr] h-dvh'>
+    <div className='grid p-2 bg-neutral-50 grid-cols-[240px_1fr] h-dvh'>
       <Sidebar/>
       <div className="w-full  flex flex-col gap-2  overflow-y-scroll  h-dvh">
         {children}
       </div>
-
-
     </div>
   )
 }

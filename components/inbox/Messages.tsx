@@ -1,4 +1,5 @@
 import React from 'react'
+import Loading from './ui/loading'
 
 const Messages = () => {
   return (
@@ -7,24 +8,13 @@ const Messages = () => {
             <h2>Inbox</h2>
         </div>
         <div className="border-t p-2 flex flex-col gap-2 border-neutral-100">
-            <div className="flex items-center w-full gap-1.5">
-                <div className="w-11 h-11 rounded-full bg-neutral-100"></div>
-                <div className="w-full flex flex-col gap-1">
-                            <div className="w-full h-4 bg-neutral-100 rounded-2xl"></div>
-                            <div className="w-1/2 h-2 bg-neutral-100 rounded-2xl"></div>
+        <Loading/>
+        <Loading/>
+        <Loading/>
+        <Loading/>
+        <Loading/>
+        <Loading/>
 
-                </div>
-
-            </div>
-                        <div className="flex items-center w-full gap-1.5">
-                <div className="w-11 h-11 rounded-full bg-neutral-100"></div>
-                <div className="w-full flex flex-col gap-1">
-                            <div className="w-full h-4 bg-neutral-100 rounded-2xl"></div>
-                            <div className="w-1/2 h-2 bg-neutral-100 rounded-2xl"></div>
-
-                </div>
-
-            </div>
 
         </div>
     </div>

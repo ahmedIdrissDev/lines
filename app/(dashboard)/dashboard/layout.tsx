@@ -1,5 +1,4 @@
-import Navbar from '@/components/nav';
-import Sidebar from '@/components/sidebar';
+import Navbar from '@/components/sections/nav';
 import React from 'react'
 
 const layout = ({

@@ -43,9 +43,7 @@ export default function TextArea() {
 
   return (
     <div>
-    <Tooltip open/>
-      <Editor
-      />
+      <textarea placeholder="write somthing"  name="body" className="w-full h-96  outline-0 resize-none "/>
     </div>
   )
 }
