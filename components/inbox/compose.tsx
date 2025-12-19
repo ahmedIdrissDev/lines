@@ -6,9 +6,11 @@ import { Paperclip, SendHorizonal, SquarePen, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import React, { FormEvent, useState } from "react";
 import TextArea from "../kits/TextEditor";
+import { reception } from "@/types";
+import { toast } from "sonner";
 
 
-interface reception {
+interface Userreception {
   name: string;
   email: string;
   func: string;
@@ -17,7 +19,7 @@ interface reception {
 const Add = () => {
   const [open, setOpen] = useState(false);
   const [text, settext] = useState<string>("");
-  const [reseption, setReception] = useState<reception[]>([]);
+  const [reseption, setReception] = useState<Userreception[]>([]);
 
   const openclose = () => (open ? setOpen(false) : setOpen(true));
   const user = useQuery(api.functions.login.getUsers) || [];
@@ -25,21 +27,26 @@ const Add = () => {
     name.toLowerCase().includes(text.toLowerCase())
   );
 
+  const CreateReception = useMutation(api.functions.reception.createReception)
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
-    const receptionEmails = formdata.getAll('emails')
+    const receptionEmails = formdata.getAll('receptionId') as string[] 
     const data = Object.fromEntries(formdata.entries());
-    const Message = {
+    const Message :reception = {
       ...data  ,
-      emails:receptionEmails , 
-      file:'',
+      receptionId:receptionEmails , 
+      file:['']
+
     }
-    console.log(Message);
+    console.log(Message)
+    CreateReception(Message)
+    toast.success('email has been sent')
+    openclose()
     try {
     } catch (error) {}
   }
-  function handleAddReception(data: reception) {
+  function handleAddReception(data: Userreception) {
     setReception((e) => [...e, data]);
     settext("");
   }
@@ -105,7 +112,7 @@ const Add = () => {
                         {name.charAt(0)}
                       </div>
                       <div className="">
-                        <input type="text" value={email} name="emails" hidden />
+                        <input type="text" readOnly value={email} name="receptionId" hidden />
                         <span className="text-sm opacity-90">{name.split(' ')[0].toLowerCase() } </span>
                       </div>
                     </div>
@@ -114,14 +121,14 @@ const Add = () => {
                     type="text"
                     onChange={(e) => settext(e.currentTarget.value)}
                     className="w-full outline-0   h-11"
-                    placeholder="to:"
+                    placeholder=""
                   />
                 </div>
                 <div className="w-full flex flex-col gap-1">
                   <input
                     type="text"
-                    name="title"
-                    className="w-full outline-0 border-b border-neutral-100 h-11"
+                    name="subject"
+                    className="w-full font-bold outline-0 border-b border-neutral-100 h-11"
                     placeholder="Subject"
                   />
                 </div>

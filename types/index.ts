@@ -20,3 +20,9 @@ export interface Proejct{
   name:string ,
   type:string
 }
+export interface reception{
+       receptionId: string[],
+       subject:string,
+       body:string ,
+       file?:string[]
+}
