@@ -19,6 +19,15 @@ const Reception = () => {
             <Loading/>
             <Loading/>
             <Loading/>
+            <Loading/>
+            <Loading/>
+            <Loading/>
+            <Loading/>
+            <Loading/>
+            <Loading/>
+            <Loading/>
+            <Loading/>
+
 
         </div>
     )
@@ -27,7 +36,7 @@ const Reception = () => {
       <div className="p-2  ">
         <input type="text" className='input border-0 bg-neutral-50' placeholder='search' />
       </div>
-      {emails.map(({subject ,_id ,_creationTime})=>{
+      {emails .map(({subject ,_id ,_creationTime})=>{
         const time = moment(_creationTime).fromNow() ;
         return(
           <Link href={`/workspace/${_id}`} key={_id} className="w-full relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start border-neutral-100  h-12 flex ">

@@ -105,8 +105,8 @@ const Add = () => {
                 className="flex p-2  h-full flex-col gap-2"
                 action=""
               >
-                <span>to:</span>
-                <div className="grid p-2  grid-cols-3 items-center border-b border-neutral-100 gap-1">
+                <p>groud by</p>
+                <div className="grid px-2 py-1  grid-cols-3 items-center border-b border-neutral-100 gap-1">
                   {reseption.map(({ name, email }, index) => (
                     <div
                       key={index}

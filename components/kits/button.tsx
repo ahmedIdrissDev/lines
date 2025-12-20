@@ -10,12 +10,9 @@ const Button = ({icon , label ,path}:linksProps) => {
     const handleNavigation = ()=> route.push(path)
 
   return (
-   <button onClick={handleNavigation} className={twMerge('w-full bg-white  relative duration-300 h-11 px-2 flex rounded-md    cursor-pointer items-center justify-start  gap-2' , isActive ? 'opacity-100 bg-tgcc-50 border-0  ':" opacity-60 ")}>
+   <button onClick={handleNavigation} className={twMerge('w-full   relative duration-300 h-11 px-2 flex rounded-xl    cursor-pointer items-center justify-start  gap-2' , isActive ? 'opacity-100 bg-linear-30 text-tgcc-900 border-0  ':" opacity-60 ")}>
         {icon}
-        {path.startsWith('/workspace') && 
-        <div className="absolute top-0 right-0 rounded-full flex justify-center items-center  w-9 h-9">
-          <span className='text-sm  text-tgcc-600'> +10</span> </div>
-        }
+       
        <span className=''>
          {label}
        </span>

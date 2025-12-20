@@ -5,7 +5,7 @@ import { Archive, Calendar, FileMinus, Home, Inbox, Mail, MonitorCloud, Settings
 export const links:linksProps[] =[
     {
 icon:<Home/>,
-label:"dashboard",
+label:"Dashboard",
 path:'/dashboard'
     } ,
     {

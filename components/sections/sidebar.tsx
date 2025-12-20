@@ -19,7 +19,6 @@ const Sidebar = () => {
     {links.map((data , key)=>(
         <Button key={key} {...data} />
     ))}
-    <UserButton/>
 
   </div>
 </div>
