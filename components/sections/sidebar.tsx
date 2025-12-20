@@ -8,14 +8,17 @@ import Add from '../inbox/compose'
 
 const Sidebar = () => {
   return (
-    <div className='w-full bg-white border border-neutral-100 rounded-2xl px-2  h-full flex flex-col justify-start gap-3 items-left px-3 py-2'>
-    <div className="w-full h-max  ">
+    <div className='w-full bg-white border border-neutral-100 rounded-2xl   h-full flex flex-col justify-start gap-3 items-left  py-2'>
+    <div className="w-full h-max p-2  ">
       <Logo/>
     </div>
-<div className="flex  h-full py-3.5 flex-col gap-4">
-  <Add/>
+<div className="flex   h-full flex-col gap-4">
   <div className="w-full flex flex-col border-b border-neutral-200"/>
-  <div className="flex flex-col gap-0.5">
+  <div className="px-2">
+  <Add/>
+
+  </div>
+  <div className="flex px-2 flex-col gap-0.5">
     {links.map((data , key)=>(
         <Button key={key} {...data} />
     ))}
@@ -23,8 +26,7 @@ const Sidebar = () => {
   </div>
 </div>
 <div className="w-full py-4 h-full flex flex-col justify-end items-center ">
-
-<CardAI/>
+ <UserButton/>
 </div>
     </div>
   )

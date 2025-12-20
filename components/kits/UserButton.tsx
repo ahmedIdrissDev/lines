@@ -16,13 +16,17 @@ const UserButton = () => {
   const project = (data?.user?.project || []) as Project[];
   return (
     <>
-    <div className="flex items-center gap-2.5 w-full h-11 rounded-xl p-2 border border-neutral-100">
+    <div className="flex h-20 items-center gap-2.5 w-full  border-neutral-100 shadow rounded-xl p-2 border ">
       <img
         onClick={openclose}
         src={data?.user?.image?.trim() ? data.user.image : "/avatar.png"}
         className="w-9 bg-white h-9 rounded-full cursor-pointer"
       />
+      <div className="">
       <span>{data?.user?.name} </span>
+      <span className="text-sm opacity-70">{data?.user?.email} </span>
+
+      </div>
 
     </div>
       <AnimatePresence>

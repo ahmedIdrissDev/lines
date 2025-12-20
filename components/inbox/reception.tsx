@@ -34,7 +34,7 @@ const Reception = () => {
   return (
     <div className="flex py-1.5 flex-col ">
       <div className="p-2  ">
-        <input type="text" className='input border-0 bg-neutral-50' placeholder='search' />
+        <input type="text" className='input shadow  bg-neutral-50/5' placeholder='search' />
       </div>
       {emails .map(({subject ,_id ,_creationTime})=>{
         const time = moment(_creationTime).fromNow() ;

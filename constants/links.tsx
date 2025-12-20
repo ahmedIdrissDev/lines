@@ -1,5 +1,5 @@
 import { linksProps } from "@/types"
-import { Archive, Calendar, FileMinus, Home, Inbox, Mail, MonitorCloud, Settings, Users } from "lucide-react"
+import { Archive, Bell, Calendar, FileMinus, Home, Inbox, Mail, MonitorCloud, Settings, Users } from "lucide-react"
 
 
 export const links:linksProps[] =[
@@ -14,9 +14,14 @@ label:"Workspace",
 path:'/workspace'
     } ,
     {
+    icon:<Bell/>,
+    label:"Notifiction",
+    path:'/effectifs'
+    }  ,
+    {
 icon:<Settings/>,
 label:"Settings",
 path:'/effectifs'
-    } 
+    } ,
 
 ]

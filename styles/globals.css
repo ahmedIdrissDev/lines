@@ -6,17 +6,19 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
---color-tgcc-50: #eff7ff;
---color-tgcc-100: #dbebfe;
---color-tgcc-200: #c0ddfd;
---color-tgcc-300: #94c8fc;
---color-tgcc-400: #61aaf9;
---color-tgcc-500: #3d88f4;
---color-tgcc-600: #1b62e8;
---color-tgcc-700: #1f55d6;
---color-tgcc-800: #1f46ae;
---color-tgcc-900: #1f3e89;
---color-tgcc-950: #182753;
+   --color-tgcc-50: #edf9ff;
+--color-tgcc-100: #d6efff;
+--color-tgcc-200: #b5e5ff;
+--color-tgcc-300: #83d6ff;
+--color-tgcc-400: #48beff;
+--color-tgcc-500: #1e9cff;
+--color-tgcc-600: #067cff;
+--color-tgcc-700: #0068ff;
+--color-tgcc-800: #0850c5;
+--color-tgcc-900: #0d479b;
+--color-tgcc-950: #0e2c5d;
+
+
 
 
 

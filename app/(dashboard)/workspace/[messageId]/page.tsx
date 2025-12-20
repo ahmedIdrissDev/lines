@@ -3,7 +3,8 @@ import Loading from '@/components/inbox/ui/loading'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useQuery } from 'convex/react'
-import { Reply, ReplyAll } from 'lucide-react'
+import { Reply, ReplyAll, Video } from 'lucide-react'
+import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import React from 'react'
 
@@ -25,26 +26,42 @@ const page = () => {
       <div className="flex w-full py-2 border-b border-neutral-100 items-center gap-1.5">
         <div className="w-10 h-10 rounded-full bg-neutral-200"></div>
         <div className="flex flex-col">
+          <div className="flex items-center gap-1.5">
            <h1 className='text-sm'>{email?.anther?.name} </h1>
+           <Image className='w-4' src={'/check.png'}  width={1000} height={1000} alt='logo'/>
+          </div>
            <span className='text-sm opacity-85'>{email?.anther?.email} </span>
 
         </div>
       </div>
-      <div className="">
+      <div className="w-20 flex justify-center items-center gap-2 h-9 rounded-2xl border border-neutral-100">
         cc : {onthers.length}
       </div>
       <div className="p-2">
       <h1 className='text-2xl'>{email?.message?.subject} </h1>
+      <p>
+        
+      </p>
       {email?.message.body} 
       </div>
      <div className="flex items-center gap-1.5">
-       <button className='w-30 flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
+       <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
         reply
-        <span><Reply/></span>
+        <span>
+          <Reply/>
+          
+          </span>
        </button>
-              <button className='w-30 flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
+              <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
+        <span>
         reply all
-        <span><ReplyAll/></span>
+          </span>
+          <ReplyAll/>
+       </button>
+         <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
+         
+         <Video/>
+        <span>Meeting</span>
        </button>
      </div>
       </div>
