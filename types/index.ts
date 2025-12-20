@@ -24,5 +24,6 @@ export interface reception{
        receptionId: string[],
        subject:string,
        body:string ,
-       file?:string[]
+       file?:string[] ,
+       userId:string
 }

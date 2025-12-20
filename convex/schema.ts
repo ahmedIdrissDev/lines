@@ -9,6 +9,7 @@ export default defineSchema({
     name: v.string(),
     role: v.string(),
     password:v.string(),
+    profile:v.optional(v.string()) ,
     project:v.array(v.id('Project')) ,
   }).index("project_id", ["project"]),
   
@@ -35,10 +36,15 @@ export default defineSchema({
     type:v.optional(v.string())
   }) ,
   emails: defineTable({
+    userId:v.id("users") ,
     receptionId: v.array(v.string()) ,
     subject:v.string(),
     body:v.string() ,
     file:v.optional(v.array(v.string()))
-  })
+  }) ,
 
+  seens: defineTable({
+       messageId:v.id("emails") ,
+       userId:v.id("users")
+  }).index("message_id", ["messageId"]).index("user_id", ["userId"])
 });

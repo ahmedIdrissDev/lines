@@ -8,6 +8,8 @@ import React, { FormEvent, useState } from "react";
 import TextArea from "../kits/TextEditor";
 import { reception } from "@/types";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
+import { Id } from "@/convex/_generated/dataModel";
 
 
 interface Userreception {
@@ -20,13 +22,15 @@ const Add = () => {
   const [open, setOpen] = useState(false);
   const [text, settext] = useState<string>("");
   const [reseption, setReception] = useState<Userreception[]>([]);
-
+  const [title , settitle]= useState<string>('')
+  const {data } = useSession()
   const openclose = () => (open ? setOpen(false) : setOpen(true));
   const user = useQuery(api.functions.login.getUsers) || [];
   const getbyname = user?.filter(({ name }) =>
     name.toLowerCase().includes(text.toLowerCase())
   );
 
+  const userId = data?.user?._id as Id<"users">
   const CreateReception = useMutation(api.functions.reception.createReception)
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,14 +39,13 @@ const Add = () => {
     const data = Object.fromEntries(formdata.entries());
     const Message :reception = {
       ...data  ,
+      userId ,
       receptionId:receptionEmails , 
       file:['']
 
     }
-    console.log(Message)
     CreateReception(Message)
     toast.success('email has been sent')
-    openclose()
     try {
     } catch (error) {}
   }
@@ -71,7 +74,8 @@ const Add = () => {
               className="bg-white relative flex flex-col gap-1.5 rounded-xl   w-1/2  min-h-[85dvh]  border border-neutral-200"
             >
               <div className="w-full p-2 rounded-t-xl justify-between flex items-center  h-12 bg-tgcc-50">
-                <h1>Nouveau message </h1>
+                {title.trim() ? <span>{title} </span> : <span> Nouveau message </span>}
+                
                 <X
                   className="cursor-pointer relative right-1 top-1 opacity-70 size-4"
                   onClick={openclose}
@@ -128,6 +132,7 @@ const Add = () => {
                   <input
                     type="text"
                     name="subject"
+                    onChange={e=> settitle(e.currentTarget.value) }
                     className="w-full font-bold outline-0 border-b border-neutral-100 h-11"
                     placeholder="Subject"
                   />
