@@ -1,11 +1,13 @@
 import React from 'react'
 import Loading from './ui/loading'
 import Reception from './reception'
+import { Inbox } from 'lucide-react'
 
 const Messages = () => {
   return (
     <div className='w-full rounded-xl h-full bg-white border border-neutral-100'>
-        <div className="p-2 border-b border-neutral-100">
+        <div className="p-2 flex items-center gap-1 border-b border-neutral-100">
+          <Inbox/>
             <h2>Inbox</h2>
         </div>
         <Reception/>

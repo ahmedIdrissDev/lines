@@ -57,7 +57,7 @@ const Moderh = () => {
     <Toaster richColors position="top-center"/>
       <button
         onClick={openclose}
-        className="w-50 hidden cursor-pointer  md:flex justify-center items-center gap-1.5 h-11  bg-tgcc-500 text-white"
+        className="w-50 hidden cursor-pointer  md:flex justify-center items-center gap-1.5 h-8  bg-tgcc-500 text-white"
       >
         <span> Manage la présence </span>
       </button>

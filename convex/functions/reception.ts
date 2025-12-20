@@ -26,3 +26,13 @@ export const createReception = mutation({
     await ctx.db.insert("emails", args);
   },
 });
+
+
+export const getRespoition = query({
+  args:{
+    id:v.id("emails")
+  } ,
+handler:async (ctx , args)=>{
+     return await ctx.db.get(args.id)
+}
+})

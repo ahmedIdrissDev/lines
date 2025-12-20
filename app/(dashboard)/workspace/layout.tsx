@@ -1,5 +1,6 @@
 import Messages from '@/components/inbox/Messages';
 import Message from '@/components/kits/message';
+import Navbar from '@/components/sections/nav';
 import React from 'react'
 
 const layout = ({

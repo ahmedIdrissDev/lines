@@ -9,7 +9,7 @@ label:"dashboard",
 path:'/dashboard'
     } ,
     {
-icon:<Mail/>,
+icon:<Users/>,
 label:"Workspace",
 path:'/workspace'
     } ,
