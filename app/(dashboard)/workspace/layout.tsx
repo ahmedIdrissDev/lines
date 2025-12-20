@@ -11,7 +11,7 @@ const layout = ({
   return (
 <div className='grid grid-cols-[400px_1fr]  gap-2 h-dvh'>
       <Messages/>
-      <div className="w-full border border-neutral-100 bg-white rounded-md  flex flex-col gap-2 p-3 overflow-y-scroll md:px-2 h-dvh">
+      <div className="w-full border border-neutral-100 bg-white rounded-md  flex flex-col gap-2  overflow-y-scroll md:px-2 h-dvh">
         {children}
       </div>
     </div> 

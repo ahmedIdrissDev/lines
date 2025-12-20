@@ -4,6 +4,7 @@ import { mutation, query } from "../_generated/server";
 export const reception = query({
   args: {
     email: v.string(),
+    
   },
   handler: async (ctx, args) => {
     const email = await ctx.db.query("emails").collect();
@@ -35,6 +36,12 @@ export const getRespoition = query({
     id:v.id("emails")
   } ,
 handler:async (ctx , args)=>{
-     return await ctx.db.get(args.id)
+     const message = await ctx.db.get(args.id)
+      if(!message) return []
+      const anther =  await ctx.db.get(message.userId)
+      return {
+        message ,
+        anther
+      }
 }
 })
