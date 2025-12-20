@@ -23,9 +23,12 @@ const page = () => {
   const onthers = email.message.receptionId as string[]
   return (
     <div className='w-full p-2'>
-      <div className="flex w-full py-2 border-b border-neutral-100 items-center gap-1.5">
-        <div className="w-10 h-10 rounded-full bg-neutral-200"></div>
-        <div className="flex flex-col">
+      <div className="flex w-full justify-between py-2 border-b border-neutral-100 items-center gap-1.5">
+        <div className="flex items-center gap-1.5">
+ <img
+        src={"/avatar.png"}
+        className="w-9 bg-white h-9 rounded-full cursor-pointer"
+      />        <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
            <h1 className='text-sm'>{email?.anther?.name} </h1>
            <Image className='w-4' src={'/check.png'}  width={1000} height={1000} alt='logo'/>
@@ -33,6 +36,9 @@ const page = () => {
            <span className='text-sm opacity-85'>{email?.anther?.email} </span>
 
         </div>
+
+        </div>
+        <span className='text-sm border border-n'>{email?.anther?.func} </span>
       </div>
       <div className="w-20 flex justify-center items-center gap-2 h-9 rounded-2xl border border-neutral-100">
         cc : {onthers.length}
@@ -40,9 +46,9 @@ const page = () => {
       <div className="p-2">
       <h1 className='text-2xl'>{email?.message?.subject} </h1>
       <p>
-        
-      </p>
+
       {email?.message.body} 
+      </p>
       </div>
      <div className="flex items-center gap-1.5">
        <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
