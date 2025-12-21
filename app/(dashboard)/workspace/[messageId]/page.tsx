@@ -38,7 +38,7 @@ const page = () => {
         </div>
 
         </div>
-        <span className='text-sm border border-n'>{email?.anther?.func} </span>
+        <span className='text-sm w-20 border-neutral-100 rounded-full border border-n'>{email?.anther?.func} </span>
       </div>
       <div className="w-20 flex justify-center items-center gap-2 h-9 rounded-2xl border border-neutral-100">
         <Users/> {onthers.length}

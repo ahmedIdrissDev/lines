@@ -7,7 +7,7 @@ export const reception = query({
     userId:v.id("users")
   },
   handler: async (ctx, {userId ,email}) => {
-    const messages = await ctx.db.query("emails").collect();
+    const messages = await ctx.db.query("emails").order('desc').collect();
     const myemails = messages.filter(({ receptionId }) =>
       receptionId.includes(email)
   );
