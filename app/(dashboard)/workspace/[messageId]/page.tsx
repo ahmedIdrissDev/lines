@@ -3,7 +3,7 @@ import Loading from '@/components/inbox/ui/loading'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useQuery } from 'convex/react'
-import { Reply, ReplyAll, Video } from 'lucide-react'
+import { Reply, ReplyAll, Users, Video } from 'lucide-react'
 import Image from 'next/image'
 import { useParams } from 'next/navigation'
 import React from 'react'
@@ -41,7 +41,7 @@ const page = () => {
         <span className='text-sm border border-n'>{email?.anther?.func} </span>
       </div>
       <div className="w-20 flex justify-center items-center gap-2 h-9 rounded-2xl border border-neutral-100">
-        cc : {onthers.length}
+        <Users/> {onthers.length}
       </div>
       <div className="p-2">
       <h1 className='text-2xl'>{email?.message?.subject} </h1>

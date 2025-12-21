@@ -4,14 +4,33 @@ import { mutation, query } from "../_generated/server";
 export const reception = query({
   args: {
     email: v.string(),
-    
+    userId:v.id("users")
   },
-  handler: async (ctx, args) => {
-    const email = await ctx.db.query("emails").collect();
-    const myemails = email.filter(({ receptionId }) =>
-      receptionId.includes(args.email)
-    );
-    return myemails;
+  handler: async (ctx, {userId ,email}) => {
+    const messages = await ctx.db.query("emails").collect();
+    const myemails = messages.filter(({ receptionId }) =>
+      receptionId.includes(email)
+  );
+  const  markreadsMessage = Promise.all(myemails.map( async (data , index)=>{
+const seen = await ctx.db
+  .query("seens")
+  .filter(q =>
+    q.and(
+      q.eq(q.field("userId"), userId),
+      q.eq(q.field("messageId"), data._id)
+    )
+  )
+  .first();
+       if(seen) return {
+         ...data ,
+         seens:true
+       }
+       return {
+        ...data ,
+        seens:false
+       }
+     }))
+    return markreadsMessage;
   },
 });
 
@@ -44,4 +63,23 @@ handler:async (ctx , args)=>{
         anther
       }
 }
+})
+
+
+/// handleseens
+export const markreadsMessage =mutation({
+  args:{
+       messageId:v.id("emails") ,
+       userId: v.id("users")
+  } ,
+  handler: async (ctx , args)=>{
+     const getMarksMessage = await ctx.db.query("seens").filter(q=> q.and(
+          q.eq(q.field('messageId'), args.messageId) ,
+          q.eq(q.field('userId'), args.userId)
+     ) ).first()
+
+     if(!getMarksMessage){
+         await ctx.db.insert("seens",args)
+     }
+  }
 })

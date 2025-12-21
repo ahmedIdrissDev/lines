@@ -5,6 +5,7 @@ import CardAI from '../kits/cardai'
 import UserButton from '../kits/UserButton'
 import Logo from '../ui/logo'
 import Add from '../inbox/compose'
+import Loading from '../inbox/ui/loading'
 
 const Sidebar = () => {
   return (
@@ -22,6 +23,13 @@ const Sidebar = () => {
     {links.map((data , key)=>(
         <Button key={key} {...data} />
     ))}
+
+  </div>
+</div>
+<div className="px-2">
+  <span>teams</span>
+  <div className="w-full">
+    <Loading/>
 
   </div>
 </div>
