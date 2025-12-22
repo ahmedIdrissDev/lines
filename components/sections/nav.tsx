@@ -18,9 +18,11 @@ const Navbar = () => {
   const isAuthorize = isincluds.has(data?.user?.role)
   const route = useRouter()
   return (
-    <div className='flex bg-white border border-neutral-100 rounded-xl  px-3 md:px-6 h-12 justify-end items-center w-full'>
+    <div className='flex  rounded-xl  px-3 md:px-6 h-12 justify-end items-center w-full'>
     <div className=" flex items-center gap-2.5">
      <Hr/>
+     <Moderh/>
+     <ProjectSelect/>
       <Search/>
       <PDF/>
       <Bell/>

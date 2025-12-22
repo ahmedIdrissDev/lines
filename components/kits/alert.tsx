@@ -5,11 +5,17 @@ import React from 'react'
 const Alert = () => {
   return (
     <div className='flex h-full gap-2 flex-col justify-center items-center'>
-        <Image src={'/bg.webp'} className='w-60' width={1000} height={1000} alt='log' />
+      <div className="flex items-center justify-center ">
+        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
+        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
+        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
+        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
+
+      </div>
         <div className="flex items-center flex-col gap-1">
-        <p>Fonction bientôt disponible</p>
-         <Link className='text-tgcc-500 underline' href={'/dashboard'}>retour au tableau de bord
-</Link>
+           <h1 className='font-bold'>Create your Team</h1>
+           <p className='text-sm '>Build and manage your team in one place</p>
+           <button  className='bg-tgcc-900 w-30 h-10 cursor-pointer text-white'> Create</button>
         </div>
     </div>
   )
