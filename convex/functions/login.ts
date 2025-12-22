@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query } from "../_generated/server";
+import { mutation, query } from "../_generated/server";
 
 export const get = query({
   args: {email:v.string() , password:v.string()},
@@ -36,4 +36,14 @@ export const getUsers= query({
         } )
         return allusers
     },
+})
+
+export const updateProfile= mutation({
+  args:{
+    imgURL: v.string() ,
+    id: v.id("users")
+  } ,
+  handler: async(ctx , args)=>{
+      await ctx.db.patch( args.id, {profile:args.imgURL})
+  }
 })

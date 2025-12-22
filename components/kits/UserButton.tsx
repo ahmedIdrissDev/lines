@@ -16,7 +16,7 @@ const UserButton = () => {
   
   return (
     <>
-    <div onClick={handleRouteNavigation} className="flex cursor-pointer h-20 items-center gap-2.5 w-full  border-neutral-100 shadow rounded-xl p-2 border ">
+    <div onClick={handleRouteNavigation} className="flex  cursor-pointer h-20 items-center gap-2.5 w-full  border-neutral-200 shadow rounded-xl p-2 border ">
       <img
         src={data?.user?.image?.trim() ? data.user.image : "/avatar.png"}
         className="w-9 bg-white h-9 rounded-full cursor-pointer"

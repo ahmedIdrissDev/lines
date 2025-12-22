@@ -1,7 +1,7 @@
 'use client'
 import { Camera } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import PopoverUI from './ui/popover'
 
 const Profile = () => {
   const {data} = useSession()
@@ -13,9 +13,7 @@ const Profile = () => {
                      src={data?.user?.image?.trim() ? data.user.image : "/avatar.png"}
                       className="w-full bg-white h-full rounded-full cursor-pointer"
                     />
-                    <button className='bg-tgcc-800 flex justify-center items-center cursor-pointer w-6 h-6  text-sm absolute bottom-0 right-0 text-white rounded-full'>
-                      <Camera size={20}/>
-                    </button>
+                    <PopoverUI/>
                  </div>
                  <div className="text-center">
                     <h1>{data?.user?.name} </h1>

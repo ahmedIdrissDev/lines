@@ -33,7 +33,7 @@ const Sidebar = () => {
 
   </div>
 </div>
-<div className="w-full py-4 h-full flex flex-col justify-end items-center ">
+<div className="w-full  p-4 h-full flex flex-col justify-end items-center ">
  <UserButton/>
 </div>
     </div>

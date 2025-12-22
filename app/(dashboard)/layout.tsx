@@ -8,10 +8,9 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='grid p-2 gap-2 bg-neutral-100/75 grid-cols-[240px_1fr] h-dvh'>
+    <div className='grid p-2 gap-2 bg-neutral-100/75 grid-cols-[290px_1fr] h-dvh'>
       <Sidebar/>
       <div className="w-full  flex flex-col gap-1 overflow-y-scroll  h-dvh">
-        
         {children}
       </div>
     </div>

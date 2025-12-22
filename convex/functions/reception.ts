@@ -12,6 +12,7 @@ export const reception = query({
       receptionId.includes(email)
   );
   const  markreadsMessage = Promise.all(myemails.map( async (data , index)=>{
+    const anther = await ctx.db.get(data.userId)
 const seen = await ctx.db
   .query("seens")
   .filter(q =>
@@ -23,11 +24,13 @@ const seen = await ctx.db
   .first();
        if(seen) return {
          ...data ,
-         seens:true
+         seens:true ,
+         anther
        }
        return {
         ...data ,
-        seens:false
+        seens:false ,
+        anther
        }
      }))
     return markreadsMessage;

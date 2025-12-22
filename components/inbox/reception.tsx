@@ -8,6 +8,7 @@ import moment from "moment";
 import { Id } from "@/convex/_generated/dataModel";
 import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
+import { ScrollArea } from "../ui/scroll-area";
 const Reception = () => {
   const { data } = useSession();
   const routeURL = useRouter();
@@ -60,15 +61,20 @@ const Reception = () => {
           placeholder="search"
         />
       </div>
-      {emails.map(({ subject, _id, _creationTime, seens }) => {
+      <ScrollArea className="h-dvh w-full  rounded-md ">
+
+
+      {emails.map(({ subject, _id, _creationTime, seens , anther}) => {
         const time = moment(_creationTime).fromNow();
         return (
           <div
             onClick={() => handleLink(_id, seens)}
             key={_id}
-            className="w-full hover:shadow relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start border-neutral-100  h-12 flex "
+            className="w-full hover:shadow py-2 relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start justify-start border-neutral-100  min-h-12 flex "
           >
+             
             <div className="flex w-full p-2.5 items-center justify-between ">
+             
               <span className={twMerge(seens ? "font-mono" : "font-bold")}>
                 {subject}{" "}
               </span>
@@ -77,10 +83,13 @@ const Reception = () => {
             {!seens && (
               <div className="w-2 h-2 bg-red-500 rounded-full absolute top-0 right-0" />
             )}
+            <span className="opacity-50 border text-sm p-1.5 border-neutral-200 rounded-full">          {anther?.name} </span>
           </div>
         );
       })}
+          </ScrollArea>
     </div>
+
   );
 };
 
