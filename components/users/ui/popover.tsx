@@ -12,27 +12,10 @@ import { toast, Toaster } from 'sonner'
 import { twMerge } from 'tailwind-merge'
 
 const PopoverUI = () => {
-    const updateUserProfile = useMutation(api.functions.login.updateProfile)
-    const [Profile , setProfile] = useState<string>('')
-    const {data , update}= useSession()
-   async function handleUpdateUserProfile(){
-          try {
-                  const args={
-                         imgURL:Profile ,
-                         id: data?.user?._id as Id<"users">
-                  }
-               updateUserProfile(args)
-               const updateSession = await update({image: Profile});
-               console.log(updateSession)
-               toast.success('thank you')
-            
-          } catch (error) {
-            console.log(error)
-          }
-    }
+    const {data }= useSession()
+
   return (
     <>
-    <Toaster/>
 <Popover >
   <PopoverTrigger className=' w-9 h-9 bg-white rounded-full cursor-pointer flex justify-center items-center bottom-0 right-0'>
       <img
@@ -47,9 +30,7 @@ const PopoverUI = () => {
                     />
                     <span>{data?.user?.name} </span>
       </div>    
-    <div className="w-full flex justify-end px-1.5 ">
-        <button  onClick={handleUpdateUserProfile} className='w-30 h-11 bg-tgcc-800 text-white rounded-full'>save</button>
-    </div>
+
   </PopoverContent>
 </Popover>
     </>

@@ -2,6 +2,7 @@ import Messages from '@/components/inbox/Messages';
 import Message from '@/components/kits/message';
 import Navbar from '@/components/sections/nav';
 import React from 'react'
+import { Toaster } from 'sonner';
 
 const layout = ({
   children,
@@ -14,6 +15,8 @@ const layout = ({
       <div className="w-full  bg-white   flex flex-col gap-2  overflow-y-scroll  h-dvh">
         {children}
       </div>
+          <Toaster/>
+
    </div> 
     )
 }
