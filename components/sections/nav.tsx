@@ -10,6 +10,8 @@ import Search from '../search'
 import PDF from '../kits/pdf'
 import Moderh from '../kits/hrmode'
 import ProjectSelect from '../project'
+import Profile from '../users/profile'
+import PopoverUI from '../users/ui/popover'
 
 const Navbar = () => {
   const {data } = useSession()
@@ -25,7 +27,7 @@ const Navbar = () => {
      <ProjectSelect/>
       <Search/>
       <PDF/>
-      <Bell/>
+      <PopoverUI/>
     </div>
     </div>
   )

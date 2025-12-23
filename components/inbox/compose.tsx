@@ -16,7 +16,8 @@ import ReplyButton from "./ui/reply";
 interface Userreception {
   name: string;
   email: string;
-  func: string;
+  image: string;
+  func:string
 }
 
 const Add = () => {
@@ -26,7 +27,7 @@ const Add = () => {
   const [title , settitle]= useState<string>('')
   const {data } = useSession()
   const openclose = () => (open ? setOpen(false) : setOpen(true));
-  const user = useQuery(api.functions.login.getUsers) || [];
+  const user = useQuery(api.functions.login.getUsers);
   const getbyname = user?.filter(({ name }) =>
     name.toLowerCase().includes(text.toLowerCase())
   );
@@ -81,7 +82,7 @@ const Add = () => {
                   className="cursor-pointer relative right-1 top-1 opacity-70 size-4"
                   onClick={openclose}
                 />
-                
+
               </div>
               {text && (
                 <div className="w-96 p-3 absolute top-32 bg-white z-40 h-max border border-neutral-100 rounded-2xl">
@@ -91,9 +92,7 @@ const Add = () => {
                       onClick={() => handleAddReception(data)}
                       className="w-full cursor-pointer p-2 hover:bg-neutral-50 rounded-2xl h-12 flex items-center gap-2"
                     >
-                      <div className="w-8 h-8 flex justify-center items-center text-white bg-red-500  rounded-full">
-                        {data.name.charAt(0)}
-                      </div>
+                      <img  src={data.image} className="w-11 h-11 rounded-full"/>
                       <div className="">
                         <h1 className="text-sm">{data.email} </h1>
                         <span className="text-sm opacity-90">{data.name} </span>
@@ -108,14 +107,13 @@ const Add = () => {
                 action=""
               >
                 <div className="grid px-2 py-1  grid-cols-3 items-center border-b border-neutral-100 gap-1">
-                  {reseption.map(({ name, email }, index) => (
+                  {reseption.map(({ name, email  ,image }, index) => (
                     <div
                       key={index}
                       className="w-full cursor-pointer p-2 border border-neutral-100 hover:bg-neutral-50 rounded-2xl h-12 flex items-center gap-2"
                     >
-                      <div className="w-8 h-8 flex justify-center items-center text-white bg-red-500  rounded-full">
-                        {name.charAt(0)}
-                      </div>
+                      <img  src={image} className="w-11 h-11 rounded-full"/>
+
                       <div className="">
                         <input type="text" readOnly value={email} name="receptionId" hidden />
                         <span className="text-sm opacity-90">{name.split(' ')[0].toLowerCase() } </span>
@@ -125,8 +123,8 @@ const Add = () => {
                   <input
                     type="text"
                     onChange={(e) => settext(e.currentTarget.value)}
-                    className="w-full outline-0   h-11"
-                    placeholder=""
+                    className="w-full outline-0 h-11"
+                    placeholder="reception"
                   />
                 </div>
                 <div className="w-full flex flex-col gap-1">

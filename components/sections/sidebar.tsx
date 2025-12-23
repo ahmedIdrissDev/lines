@@ -28,11 +28,7 @@ const Sidebar = () => {
   </div>
 </div>
 <div className="px-2">
-  <span>teams</span>
-  <div className="w-full">
-    <Loading/>
-
-  </div>
+ 
 </div>
 <div className="w-full  p-4 h-full flex flex-col justify-end items-start ">
  <span>help</span>

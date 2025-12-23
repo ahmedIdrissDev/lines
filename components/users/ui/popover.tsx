@@ -34,12 +34,14 @@ const PopoverUI = () => {
     <>
     <Toaster/>
 <Popover>
-  <PopoverTrigger className='absolute w-8 h-8 bg-white rounded-full cursor-pointer flex justify-center items-center bottom-0 right-0'>
-    <Camera/>
-  </PopoverTrigger>
+  <PopoverTrigger className=' w-11 h-11 bg-white rounded-full cursor-pointer flex justify-center items-center bottom-0 right-0'>
+      <img
+                     src={data?.user?.image as string}
+                      className="w-full bg-white h-full rounded-full cursor-pointer"
+                    />  </PopoverTrigger>
   <PopoverContent className='w-80 flex flex-col gap-1.5 justify-between h-96 '>
     <h1>select your Profile</h1>
-    <div className="grid grid-cols-4">
+    <div className="grid gap-1.5 grid-cols-4">
      {avatar.map(({src} , index)=>(
         <img onClick={()=> setProfile(src) } key={index} src={src} className={twMerge('w-full cursor-pointer h-full rounded-full' , Profile === src && 'border-2 border-tgcc-700')} />
      ) )}

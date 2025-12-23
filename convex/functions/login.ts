@@ -26,10 +26,11 @@ export const getUsers= query({
   args:{},
   handler:async (ctx, args)=> {
         const users = await ctx.db.query('users').collect();
-        const allusers = users.map(({email ,name ,func})=>{
+        const allusers = users.map(({email ,name ,func ,image})=>{
           return {
              email ,
              name , 
+             image ,
              func
           }
 
