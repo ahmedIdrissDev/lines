@@ -6,7 +6,7 @@ import { Id } from '@/convex/_generated/dataModel'
 import { profile } from 'console'
 import { useMutation } from 'convex/react'
 import { Camera } from 'lucide-react'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import React, { useState } from 'react'
 import { toast, Toaster } from 'sonner'
 import { twMerge } from 'tailwind-merge'
@@ -30,6 +30,7 @@ const PopoverUI = () => {
                     />
                     <span>{data?.user?.name} </span>
       </div>    
+      <button onClick={e=> signOut({redirect:true ,callbackUrl:'/'}) } > LogOut </button>
 
   </PopoverContent>
 </Popover>
