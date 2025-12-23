@@ -15,7 +15,7 @@ const Navbar = () => {
     const unseens = emails?.filter(({seens})=> seens== false )
   return (
     <nav className='flex items-center gap-2  h-12 p-2 border-b border-neutral-200'>
-       <button className=" cursor-pointer w-20 relative p-2 flex items-center gap-1 h-full bg-neutral-200 rounded-full">
+       <button className=" cursor-pointer w-20 relative p-2 flex items-center gap-1 h-full bg-neutral-100 rounded-full">
         <Inbox/>
         <span>Inbox</span>
         {unseens?.length > 0 && <span className=' cursor-pointer w-4 absolute top-0 right-0 h-4 bg-red-600 text-white rounded-full text-sm flex justify-center items-center'>{unseens.length} </span>}

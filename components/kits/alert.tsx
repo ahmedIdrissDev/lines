@@ -1,3 +1,4 @@
+import { avatar } from '@/constants/avatar'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -6,10 +7,9 @@ const Alert = () => {
   return (
     <div className='flex h-full gap-2 flex-col justify-center items-center'>
       <div className="flex items-center justify-center ">
-        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
-        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
-        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
-        <div className="w-11 h-11 bg-neutral-200 rounded-full"></div>
+          {avatar.map(({src} , index)=>(
+            <img key={index} src={src}  className='w-11 h-11 rounded-full'/>
+          ))}
 
       </div>
         <div className="flex items-center flex-col gap-1">

@@ -33,7 +33,7 @@ const Add = () => {
   );
 
   const userId = data?.user?._id as Id<"users">
-  const CreateReception = useMutation(api.functions.reception.createReception)
+  const CreateReception = useMutation(api.functions.reception.createReception) || []
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
@@ -54,6 +54,7 @@ const Add = () => {
   function handleAddReception(data: Userreception) {
     setReception((e) => [...e, data]);
     settext("");
+    settitle('')
   }
   return (
     <>
@@ -112,7 +113,7 @@ const Add = () => {
                       key={index}
                       className="w-full cursor-pointer p-2 border border-neutral-100 hover:bg-neutral-50 rounded-2xl h-12 flex items-center gap-2"
                     >
-                      <img  src={image} className="w-11 h-11 rounded-full"/>
+                      <img  src={image} className="w-10 h-10 rounded-full"/>
 
                       <div className="">
                         <input type="text" readOnly value={email} name="receptionId" hidden />
@@ -131,6 +132,7 @@ const Add = () => {
                   <input
                     type="text"
                     name="subject"
+                    value={title}
                     onChange={e=> settitle(e.currentTarget.value) }
                     className="w-full  outline-0 border-b border-neutral-100 h-11"
                     placeholder="Subject"
@@ -140,7 +142,7 @@ const Add = () => {
                 <TextArea />
                 <input type="file" hidden name="file" id="file" />
                 <div className="flex h-12  gap-2 justify-end items-center">
-                  <ReplyButton/>
+                  <ReplyButton text="write with Geminy"/>
                   <label htmlFor="file" className="cursor-pointer">
                     <Paperclip />
                   </label>
