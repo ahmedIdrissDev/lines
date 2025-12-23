@@ -41,7 +41,7 @@ export default function Home() {
            }
   }
   return (
-    <div className="flex justify-center items-center p-3 w-96 h-max bg-white rounded-xl">
+    <div className="flex justify-center border border-neutral-200 items-center p-3 w-96 h-max bg-white rounded-xl">
       <div className=" w-full  relative  border-tgcc-500/15  flex gap-3  p-3 justify-center items-center flex-col min-h-96 rounded-none">
       
         <div className="flex  justify-center items-center">
@@ -85,7 +85,7 @@ export default function Home() {
                 <input className="accent-tgcc-400 rounded-xl border border-neutral-200" onChange={handleChange} type="checkbox" name="" id="" />
                 <span className="text-sm opacity-90">Afficher le mot de passe</span>
               </div>
-              <button className="h-12 cursor-pointer w-full bg-tgcc-900 text-white rounded-xl">
+              <button className="h-12 cursor-pointer w-full bg-tgcc-600 border-t-2 border-tgcc-500 text-white rounded-xl">
                 login
               </button>
             </form>

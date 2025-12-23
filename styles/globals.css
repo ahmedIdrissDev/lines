@@ -112,7 +112,7 @@
     @apply text-sm opacity-80;
   }
   button {
-    @apply rounded-full;
+    @apply rounded-full ;
   }
 }
 @layer components {

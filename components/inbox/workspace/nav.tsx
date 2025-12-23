@@ -24,7 +24,7 @@ const Navbar = () => {
         <CircleDashed/>
         <span>Seen</span>
        </button>
-       <button className=" cursor-pointer min-w-20 bg-tgcc-800 text-white w-max p-2 flex items-center gap-1 h-full  rounded-full">
+       <button className=" cursor-pointer min-w-20 bg-tgcc-100  w-max p-2 flex items-center gap-1 h-full  rounded-full">
         <Video/>
         <span>Meeting</span>
        </button>

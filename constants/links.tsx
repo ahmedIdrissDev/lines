@@ -18,10 +18,6 @@ path:'/workspace'
     label:"Notifiction",
     path:'/effectifs'
     }  ,
-    {
-icon:<Settings/>,
-label:"Settings",
-path:'/effectifs'
-    } ,
+  
 
 ]

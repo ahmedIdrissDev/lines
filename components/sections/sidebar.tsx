@@ -6,6 +6,7 @@ import UserButton from '../kits/UserButton'
 import Logo from '../ui/logo'
 import Add from '../inbox/compose'
 import Loading from '../inbox/ui/loading'
+import { MessageCircleDashed, Settings } from 'lucide-react'
 
 const Sidebar = () => {
   return (
@@ -33,8 +34,20 @@ const Sidebar = () => {
 
   </div>
 </div>
-<div className="w-full  p-4 h-full flex flex-col justify-end items-center ">
- <UserButton/>
+<div className="w-full  p-4 h-full flex flex-col justify-end items-start ">
+ <span>help</span>
+ <Button 
+ icon={<Settings/>}
+ label='Settings'
+ path='/Settings'
+ 
+ />
+ <Button 
+ icon={<MessageCircleDashed/>}
+ label='Support'
+ path='/Support'
+ 
+ />
 </div>
     </div>
   )

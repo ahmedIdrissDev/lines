@@ -10,6 +10,7 @@ import { reception } from "@/types";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { Id } from "@/convex/_generated/dataModel";
+import ReplyButton from "./ui/reply";
 
 
 interface Userreception {
@@ -57,7 +58,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-full  gap-2.5 bg-tgcc-600 text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-md"
+        className="w-full  gap-2.5 bg-tgcc-600 text-white   border-t-2 border-tgcc-500  hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-md"
       >
         <SquarePen />
         <span>Compose</span>
@@ -74,12 +75,13 @@ const Add = () => {
               className="bg-white relative flex flex-col gap-1.5 rounded-xl   w-1/2  min-h-[85dvh]  border border-neutral-200"
             >
               <div className="w-full p-2 rounded-t-xl justify-between flex items-center  h-12 bg-tgcc-50">
-                {title.trim() ? <span>{title} </span> : <span> Nouveau message </span>}
+                {title.trim() ? <span>{title} </span> : <span> Nouveau message </span> }
                 
                 <X
                   className="cursor-pointer relative right-1 top-1 opacity-70 size-4"
                   onClick={openclose}
                 />
+                
               </div>
               {text && (
                 <div className="w-96 p-3 absolute top-32 bg-white z-40 h-max border border-neutral-100 rounded-2xl">
@@ -105,7 +107,6 @@ const Add = () => {
                 className="flex p-2  h-full flex-col gap-2"
                 action=""
               >
-                <p>groud by</p>
                 <div className="grid px-2 py-1  grid-cols-3 items-center border-b border-neutral-100 gap-1">
                   {reseption.map(({ name, email }, index) => (
                     <div
@@ -133,23 +134,24 @@ const Add = () => {
                     type="text"
                     name="subject"
                     onChange={e=> settitle(e.currentTarget.value) }
-                    className="w-full font-bold outline-0 border-b border-neutral-100 h-11"
+                    className="w-full  outline-0 border-b border-neutral-100 h-11"
                     placeholder="Subject"
                   />
                 </div>
 
                 <TextArea />
                 <input type="file" hidden name="file" id="file" />
-                <div className="flex h-12  gap-1.5 justify-end items-center">
-                  <label htmlFor="file">
+                <div className="flex h-12  gap-2 justify-end items-center">
+                  <ReplyButton/>
+                  <label htmlFor="file" className="cursor-pointer">
                     <Paperclip />
                   </label>
                   <button
                     type="submit"
-        className="  gap-2.5 bg-tgcc-700 p-2  text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-xl"
+        className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center border-t-2 border-tgcc-500 h-10  rounded-md"
                   >
                     <SendHorizonal />
-                    envoyer
+                    Send
                   </button>
                 </div>
               </form>
