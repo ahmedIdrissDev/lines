@@ -37,8 +37,10 @@ const Add = () => {
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
+    
     const receptionEmails = formdata.getAll('receptionId') as string[] 
     const data = Object.fromEntries(formdata.entries());
+    if(!data.subject || !data.receptionId || !data.body) return toast.error('all fields is ')
     const Message :reception = {
       ...data  ,
       userId ,
@@ -69,8 +71,6 @@ const Add = () => {
         {open && (
           <div className="w-full fixed z-20 bg-neutral-900/10 flex justify-center items-center inset-0">
             <motion.div
-              drag
-              dragMomentum={false}
               initial={{ scale: 1, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 1, opacity: 0 }}
@@ -91,7 +91,7 @@ const Add = () => {
                     <div
                       key={index}
                       onClick={() => handleAddReception(data)}
-                      className="w-full cursor-pointer p-2 hover:bg-neutral-50 rounded-2xl h-12 flex items-center gap-2"
+                      className="w-full cursor-pointer p-2 hover:bg-neutral-50 rounded-xl h-12 flex items-center gap-2"
                     >
                       <img  src={data.image} className="w-11 h-11 rounded-full"/>
                       <div className="">
@@ -111,7 +111,7 @@ const Add = () => {
                   {reseption.map(({ name, email  ,image }, index) => (
                     <div
                       key={index}
-                      className="w-full cursor-pointer p-2 border border-neutral-100 hover:bg-neutral-50 rounded-2xl h-12 flex items-center gap-2"
+                      className="w-full cursor-pointer p-1 border border-neutral-100 hover:bg-neutral-50 rounded-full h-12 flex items-center gap-2"
                     >
                       <img  src={image} className="w-10 h-10 rounded-full"/>
 
@@ -148,7 +148,7 @@ const Add = () => {
                   </label>
                   <button
                     type="submit"
-        className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center border-t-2 border-tgcc-500 h-10  rounded-md"
+                     className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center border-t-2 border-tgcc-500 h-10  rounded-full"
                   >
                     <SendHorizonal />
                     Send
