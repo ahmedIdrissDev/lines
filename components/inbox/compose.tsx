@@ -57,7 +57,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-full  gap-2.5 bg-tgcc-900 text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-md"
+        className="w-full  gap-2.5 bg-tgcc-600 text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-md"
       >
         <SquarePen />
         <span>Compose</span>
@@ -146,7 +146,7 @@ const Add = () => {
                   </label>
                   <button
                     type="submit"
-        className="  gap-2.5 bg-tgcc-700  text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-xl"
+        className="  gap-2.5 bg-tgcc-700 p-2  text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-xl"
                   >
                     <SendHorizonal />
                     envoyer

@@ -9,7 +9,7 @@ import Loading from '../inbox/ui/loading'
 
 const Sidebar = () => {
   return (
-    <div className='w-full  border-r border-neutral-200    h-full flex flex-col justify-start gap-3 items-left  py-2'>
+    <div className='w-full bg-white  border-r border-neutral-200    h-full flex flex-col justify-start gap-3 items-left  py-2'>
     <div className="w-full h-max p-2  ">
       <Logo/>
     </div>

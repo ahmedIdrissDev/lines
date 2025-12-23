@@ -1,5 +1,7 @@
 'use client'
+import { Editor } from '@/components/blocks/editor-00/editor'
 import Loading from '@/components/inbox/ui/loading'
+import ReplyButton from '@/components/inbox/ui/reply'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
 import { useQuery } from 'convex/react'
@@ -23,10 +25,10 @@ const page = () => {
   const onthers = email?.message?.receptionId as string[] || []
   return (
     <div className='w-full p-2'>
-      <div className="flex w-full justify-between py-2 border-b border-neutral-200 items-center gap-1.5">
+      <div className="flex w-full justify-between py-2 border-b border-neutral-00 items-center gap-1.5">
         <div className="flex items-center gap-1.5">
  <img
-        src={"/avatar.png"}
+        src={email?.anther?.image }
         className="w-9 bg-white h-9 rounded-full cursor-pointer"
       />        <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
@@ -52,24 +54,21 @@ const page = () => {
       </div>
      <div className="flex items-center gap-1.5">
        <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
-        reply
+        Reply
         <span>
           <Reply/>
           
           </span>
        </button>
-              <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
-        <span>
-        reply all
-          </span>
-          <ReplyAll/>
-       </button>
+
          <button className='w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full'>
          
          <Video/>
         <span>Meeting</span>
        </button>
+       <ReplyButton/>
      </div>
+
       </div>
   )
 }
