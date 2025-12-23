@@ -58,7 +58,7 @@ const Reception = () => {
       <div className="p-2  ">
         <input
           type="text"
-          className="input border-0   bg-neutral-100"
+          className="input border-0 focus:shadow   bg-neutral-100"
           placeholder="search"
         />
       </div>
@@ -87,7 +87,7 @@ const Reception = () => {
               <span className="text-sm opacity-40">{time} </span>
             </div>
             {!seens && (
-              <div className="w-2 h-2 bg-red-500 rounded-full absolute top-0 right-0" />
+              <div className="w-2 h-2 bg-red-500 absolute rounded-full  top-3 right-5" />
             )}
             <span className="opacity-50 border text-sm p-1.5 border-neutral-200 rounded-full">          {anther?.name} </span>
           </div>
