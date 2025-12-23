@@ -20,10 +20,10 @@ const page = () => {
        <div className="bg-neutral-100 h-full w-full  rounded-xl animate-pulse"></div>
     </div>
   )
-  const onthers = email.message.receptionId as string[]
+  const onthers = email?.message?.receptionId as string[] || []
   return (
     <div className='w-full p-2'>
-      <div className="flex w-full justify-between py-2 border-b border-neutral-100 items-center gap-1.5">
+      <div className="flex w-full justify-between py-2 border-b border-neutral-200 items-center gap-1.5">
         <div className="flex items-center gap-1.5">
  <img
         src={"/avatar.png"}

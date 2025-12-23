@@ -57,7 +57,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-full  gap-2.5 bg-tgcc-600 text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-xl"
+        className="w-full  gap-2.5 bg-tgcc-900 text-white    hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-xl"
       >
         <SquarePen />
         <span>Compose</span>

@@ -58,7 +58,7 @@ const Reception = () => {
       <div className="p-2  ">
         <input
           type="text"
-          className="input border-0  bg-neutral-100"
+          className="input border  bg-neutral-200"
           placeholder="search"
         />
       </div>
@@ -71,7 +71,7 @@ const Reception = () => {
           <div
             onClick={() => handleLink(_id, seens)}
             key={_id}
-            className="w-full hover:shadow py-2 relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start justify-start border-neutral-100  min-h-12 flex "
+            className="w-full hover:shadow py-2 relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start justify-start border-neutral-200  min-h-12 flex "
           >
              
             <div className="flex w-full p-2.5 items-center justify-between ">

@@ -7,9 +7,9 @@ import { Toaster } from 'sonner'
 
 const Messages = () => {
   return (
-    <div className='w-full  h-full bg-white border border-neutral-100'>
+    <div className='w-full  h-full bg-white border border-neutral-200'>
       <Toaster />
-        <div className="p-2 flex items-center gap-1 border-b border-neutral-100">
+        <div className="p-2 flex items-center gap-1 border-b border-neutral-200">
             <h2>Workspace</h2>
         </div>
         <Navbar/>
