@@ -65,7 +65,7 @@ const Reception = () => {
       <ScrollArea className="h-dvh w-full  rounded-md ">
 
 
-      {emails.map(({ subject, _id, _creationTime, seens , anther}) => {
+      {emails.map(({ subject, _id, _creationTime, seens , anther ,body}) => {
         const time = moment(_creationTime).fromNow();
         return (
           <div
@@ -74,11 +74,16 @@ const Reception = () => {
             className="w-full hover:shadow py-2 relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start justify-start border-neutral-200  min-h-12 flex "
           >
              
-            <div className="flex w-full p-2.5 items-center justify-between ">
-             
-              <span className={twMerge(seens ? "font-mono" : "font-bold")}>
-                {subject}{" "}
+            <div className="flex w-full p-2.5 items-start justify-between ">
+              <div className="">
+              <span className={twMerge(seens ? "font-mono" : "font-bold " )}>
+                {subject}
+
               </span>
+              <span className="line-clamp-1 opacity-80">{body} </span>
+                 
+              </div>
+
               <span className="text-sm opacity-40">{time} </span>
             </div>
             {!seens && (

@@ -24,8 +24,8 @@ const page = () => {
   )
   const onthers = email?.message?.receptionId as string[] || []
   return (
-    <div className='w-full p-2'>
-      <div className="flex w-full justify-between py-2 border-b border-neutral-00 items-center gap-1.5">
+    <div className='w-full '>
+      <div className="flex px-2 w-full justify-between py-2 border-b border-neutral-00 items-center gap-1.5">
         <div className="flex items-center gap-1.5">
  <img
         src={email?.anther?.image }
