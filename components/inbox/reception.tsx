@@ -58,7 +58,7 @@ const Reception = () => {
       <div className="p-2  ">
         <input
           type="text"
-          className="input border  bg-neutral-200"
+          className="input border-0   bg-neutral-100"
           placeholder="search"
         />
       </div>

@@ -24,7 +24,7 @@ const page = () => {
   )
   const onthers = email?.message?.receptionId as string[] || []
   return (
-    <div className='w-full '>
+    <div className='w-full flex flex-col gap-1.5  '>
       <div className="flex px-2 w-full justify-between py-2 border-b border-neutral-00 items-center gap-1.5">
         <div className="flex items-center gap-1.5">
  <img
@@ -42,9 +42,7 @@ const page = () => {
         </div>
         <span className='text-sm w-20 border-neutral-100 rounded-full border border-n'>{email?.anther?.func} </span>
       </div>
-      <div className="w-20 flex justify-center items-center gap-2 h-9 rounded-2xl border border-neutral-100">
-        <Users/> {onthers.length}
-      </div>
+
       <div className="p-2">
       <h1 className='text-2xl'>{email?.message?.subject} </h1>
       <p>
@@ -67,6 +65,9 @@ const page = () => {
         <span>Meeting</span>
        </button>
        <ReplyButton/>
+             <button className="w-20  bg-tgcc-100  text-tgcc-950 flex justify-center items-center gap-2 h-9 rounded-2xl px-2 ">
+        <Users/> {onthers.length}
+      </button>
      </div>
 
       </div>

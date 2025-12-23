@@ -1,4 +1,5 @@
 'use client'
+import PopoverUI from '@/components/users/ui/popover';
 import { api } from '@/convex/_generated/api';
 import { useQuery } from 'convex/react';
 import { CircleDashed, Inbox, RefreshCcwDot, Video } from 'lucide-react'
@@ -22,7 +23,7 @@ const Navbar = () => {
        </button>
        <button className=" cursor-pointer w-20 p-2 flex items-center gap-1 h-full bg-neutral-100 rounded-full">
         <CircleDashed/>
-        <span>Seen</span>
+        <span>unseen</span>
        </button>
        <button className=" cursor-pointer min-w-20 bg-tgcc-100  w-max p-2 flex items-center gap-1 h-full  rounded-full">
         <Video/>

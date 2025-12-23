@@ -34,7 +34,7 @@ const PopoverUI = () => {
     <>
     <Toaster/>
 <Popover >
-  <PopoverTrigger className=' w-10 h-10 bg-white rounded-full cursor-pointer flex justify-center items-center bottom-0 right-0'>
+  <PopoverTrigger className=' w-9 h-9 bg-white rounded-full cursor-pointer flex justify-center items-center bottom-0 right-0'>
       <img
                      src={data?.user?.image as string}
                       className="w-full bg-white h-full rounded-full cursor-pointer"
