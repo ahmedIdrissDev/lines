@@ -22,9 +22,9 @@ const PopoverUI = () => {
                          id: data?.user?._id as Id<"users">
                   }
                updateUserProfile(args)
-               update() 
-
-              }
+               
+            }
+            update() 
           } catch (error) {
             console.log(error)
           }

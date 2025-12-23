@@ -44,6 +44,6 @@ export const updateProfile= mutation({
     id: v.id("users")
   } ,
   handler: async(ctx , args)=>{
-      await ctx.db.patch( args.id, {profile:args.imgURL})
+      await ctx.db.patch( args.id, {image:args.imgURL})
   }
 })

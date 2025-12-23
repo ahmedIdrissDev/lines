@@ -9,7 +9,7 @@ export default defineSchema({
     name: v.string(),
     role: v.string(),
     password:v.string(),
-    profile:v.optional(v.string()) ,
+    image:v.optional(v.string()) ,
     project:v.array(v.id('Project')) ,
   }).index("project_id", ["project"]),
   

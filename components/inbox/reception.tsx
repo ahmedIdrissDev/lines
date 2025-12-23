@@ -53,6 +53,7 @@ const Reception = () => {
     }
   }
   return (
+    
     <div className="flex py-1.5 flex-col ">
       <div className="p-2  ">
         <input
