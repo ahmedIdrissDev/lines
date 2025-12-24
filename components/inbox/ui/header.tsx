@@ -13,7 +13,7 @@ const Header = ({title}:{title:string}) => {
       </button>
       <Tooltip>
                <TooltipTrigger asChild>
-                <button className="w-20 cursor-pointer  bg-neutral-400  text-white border-t-2  border-neutral-300 flex justify-center items-center gap-2 h-9 rounded-md px-2 ">
+                <button className="w-20 cursor-pointer  bg-yellow-400  text-white border-t-2  border-yellow-300 flex justify-center items-center gap-2 h-9 rounded-md px-2 ">
                 <Users /> {5}
               </button>      
               
