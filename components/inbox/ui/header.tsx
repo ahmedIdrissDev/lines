@@ -11,7 +11,7 @@ const Header = ({title}:{title:string}) => {
       <FlagTriangleRight/>
       <Tooltip>
                <TooltipTrigger asChild>
-                <button className="w-20 cursor-pointer  bg-red-500  text-white border-t-2  border-red-300 flex justify-center items-center gap-2 h-9 rounded-md px-2 ">
+                <button className="w-20 cursor-pointer  bg-neutral-950  text-white border-t-2  border-neutral-700 flex justify-center items-center gap-2 h-9 rounded-md px-2 ">
                 <Users /> {5}
               </button>      
               
