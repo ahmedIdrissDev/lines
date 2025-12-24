@@ -89,7 +89,7 @@ const Reception = () => {
             {!seens && (
               <div className="w-2 h-2 bg-red-500 absolute rounded-full  top-3 right-5" />
             )}
-            <span className="opacity-70 flex items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
+            <span className="opacity-70 flex items-center gap-1 border text-sm p-1.5 bg-tgcc-50 border-neutral-200 rounded-full">
                 <img src={anther?.image} width={100} height={100} className="w-5 h-5 rounded-full" />  
                       {anther?.name} </span>
           </div>
