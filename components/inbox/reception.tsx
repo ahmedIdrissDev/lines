@@ -54,8 +54,8 @@ const Reception = () => {
   }
   return (
     
-    <div className="flex py-1.5 flex-col ">
-      <div className="p-2  ">
+    <div className="flex  py-1.5 flex-col ">
+      <div className="p-2 border-b border-neutral-200 ">
         <input
           type="text"
           className="input border-0 focus:shadow   bg-neutral-100"
@@ -74,7 +74,7 @@ const Reception = () => {
             className="w-full hover:shadow py-2 relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start justify-start border-neutral-200  min-h-12 flex "
           >
              
-            <div className="flex w-full p-2.5 items-start justify-between ">
+            <div className="flex w-full  p-2.5 items-start justify-between ">
               <div className="">
               <span className={twMerge(seens ? "font-mono" : "font-bold " )}>
                 {subject}
