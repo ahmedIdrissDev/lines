@@ -77,7 +77,7 @@ const page = () => {
           <ReplyButton />
         </div>
         {openReply &&
-        <div className="w-full h-max shadow border p-2.5 border-neutral-100 rounded-2xl">
+        <div className="w-full h-max  border p-2.5 border-neutral-100 rounded-2xl">
             <span className="opacity-70 flex w-max items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
                 <img src={data?.user?.image as string} width={100} height={100} className="w-5 h-5 rounded-full" />  
                       {data?.user?.name} </span>

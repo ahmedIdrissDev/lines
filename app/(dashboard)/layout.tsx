@@ -7,7 +7,7 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='grid  bg-neutral-100/75 grid-cols-[230px_1fr] h-dvh'>
+    <div className='grid   grid-cols-[230px_1fr] h-dvh'>
       <Sidebar/>
       <div className="w-full bg-white  flex flex-col overflow-y-scroll  h-dvh">
         {children}
