@@ -1,5 +1,6 @@
 "use client";
 import { Editor } from "@/components/blocks/editor-00/editor";
+import Header from "@/components/inbox/ui/header";
 import Loading from "@/components/inbox/ui/loading";
 import ReplyButton from "@/components/inbox/ui/reply";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -26,8 +27,12 @@ const page = () => {
     );
   const onthers = (email?.message?.receptionId as string[]) || [];
   return (
-    <div className="w-full flex flex-col gap-1.5  ">
-      <div className="flex px-2 w-full justify-between py-2 border-b border-neutral-00 items-center gap-1.5">
+    <div className="w-full flex flex-col gap-1.5 p-1.5  ">
+      <Header title={email?.message?.subject as string} />
+  
+      <div className="p-2  flex flex-col gap-2">
+        <div className="border bg-tgcc-50 border-neutral-100 p-1.5 rounded-xl">
+            <div className="flex  w-full justify-between py-2  items-center gap-1.5">
         <div className="flex items-center gap-1.5">
           <img
             src={email?.anther?.image}
@@ -47,14 +52,8 @@ const page = () => {
             <span className="text-sm opacity-85">{email?.anther?.email} </span>
           </div>
         </div>
-        <span className="text-sm w-20 border-neutral-100 rounded-full border border-n">
-          {email?.anther?.func}{" "}
-        </span>
+        
       </div>
-
-      <div className="p-2 flex flex-col gap-2">
-        <div className="">
-        <h1 className="font-bold">{email?.message?.subject} </h1>
         <p>{email?.message.body}</p>
 
         </div>
@@ -71,17 +70,7 @@ const page = () => {
             <span>Meeting</span>
           </button>
           <ReplyButton />
-            <Tooltip>
-           <TooltipTrigger asChild>
-            <button className="w-20 cursor-pointer  bg-tgcc-100  text-tgcc-950 flex justify-center items-center gap-2 h-9 rounded-2xl px-2 ">
-            <Users /> {onthers.length}
-          </button>      
           
-          </TooltipTrigger>
-      <TooltipContent >
-        <p>make as Group</p>
-      </TooltipContent>
-    </Tooltip>
           
         </div>
       </div>
