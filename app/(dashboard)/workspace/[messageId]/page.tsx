@@ -11,7 +11,6 @@ import {
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
-import { Reply, ReplyAll, SendHorizonal, Users, Video } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -36,7 +35,7 @@ const page = () => {
       <Header title={email?.message?.subject as string} />
 
       <div className="p-2  flex flex-col gap-2">
-        <div className="border bg-tgcc-50 border-neutral-100 p-1.5 rounded-xl">
+        <div className="border  border-neutral-100 p-1.5 rounded-xl">
           <div className="flex  w-full justify-between py-2  items-center gap-1.5">
             <div className="flex items-center gap-1.5">
               <img
@@ -54,7 +53,7 @@ const page = () => {
                     alt="logo"
                   />
                 </div>
-                <span className="text-sm opacity-85">
+                <span className="text-sm underline opacity-85">
                   {email?.anther?.email}{" "}
                 </span>
               </div>
@@ -62,43 +61,9 @@ const page = () => {
           </div>
           <p>{email?.message.body}</p>
         </div>
-        <div className="flex items-center gap-1.5">
-          <button onClick={openclose} className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full">
-            Reply
-            <span>
-              <Reply />
-            </span>
-          </button>
+           <ReplyButton/>
 
-          <button className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-700/5 text-tgcc-950 rounded-full">
-            <Video />
-            <span>Meeting</span>
-          </button>
-          <ReplyButton />
-        </div>
-        {openReply &&
-        <div className="w-full h-max  border p-2.5 border-neutral-100 rounded-2xl">
-            <span className="opacity-70 flex w-max items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
-                <img src={data?.user?.image as string} width={100} height={100} className="w-5 h-5 rounded-full" />  
-                      {data?.user?.name} </span>
-        <div className="w-full  p-2 h-14 flex items-center ">
-          <textarea
-            className="w-full  h-full resize-none outline-0 p-2"
-            name=""
-            id=""
-            placeholder="reply"
-          ></textarea>
-          <button
-            type="submit"
-            className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center border-t-2 border-tgcc-500 h-10  rounded-xl"
-          >
-            <SendHorizonal />
-            Send
-          </button>
-        </div>
-
-        </div>
-        }
+      
       </div>
     </div>
   );

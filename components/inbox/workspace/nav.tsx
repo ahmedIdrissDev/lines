@@ -15,21 +15,16 @@ const Navbar = () => {
     const emails = useQuery(api.functions.reception.reception, args);
     const unseens = emails?.filter(({seens})=> seens== false )
   return (
-    <nav className='flex items-center gap-2  h-12 p-2 border-b border-neutral-200'>
-       <button className=" cursor-pointer w-20 relative p-2 flex items-center gap-1 h-full bg-neutral-100 rounded-full">
-        <Inbox/>
-        <span>Inbox</span>
-        {unseens?.length > 0 && <span className=' cursor-pointer w-4 absolute top-0 right-0 h-4 bg-red-600 text-white rounded-full text-sm flex justify-center items-center'>{unseens.length} </span>}
-       </button>
-       <button className=" cursor-pointer w-20 p-2 flex items-center gap-1 h-full bg-neutral-100 rounded-full">
-        <CircleDashed/>
-        <span>unseen</span>
-       </button>
-       <button className=" cursor-pointer min-w-20 bg-tgcc-100  w-max p-2 flex items-center gap-1 h-full  rounded-full">
-        <Video/>
-        <span>Meeting</span>
-       </button>
-
+    <nav className='flex items-center justify-between gap-2  h-14 p-2 border-b border-neutral-200'>
+       <span>Inbox</span>
+         <div className="p-2 w-96 border-b border-neutral-200 ">
+        <input
+          type="text"
+          className="input rounded-md focus:shadow   "
+          placeholder="search"
+        />
+      </div>
+       <PopoverUI/>
     </nav>
   )
 }

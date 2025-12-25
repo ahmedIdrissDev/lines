@@ -55,13 +55,7 @@ const Reception = () => {
   return (
     
     <div className="flex  py-1.5 flex-col ">
-      <div className="p-2 border-b border-neutral-200 ">
-        <input
-          type="text"
-          className="input border-0 focus:shadow   bg-neutral-100"
-          placeholder="search"
-        />
-      </div>
+    
       <ScrollArea className="h-dvh w-full  rounded-md ">
 
 

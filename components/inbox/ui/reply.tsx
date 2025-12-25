@@ -1,16 +1,63 @@
+'use client'
+import { Reply, SendHorizonal } from 'lucide-react'
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 
 const ReplyButton = ({text}:{text?:string}) => {
+    const [openReply , setopenReply] = useState<Boolean>(false)
+    const openclose =()=> openReply ? setopenReply(false) : setopenReply(true)
+      const {data} = useSession()
+    
   const handleAIdatawriting = ()=>{
         alert('hello')
   }
   return (
-    <div onClick={handleAIdatawriting} className='w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-tgcc-50   border-neutral-200  '>
+    <>
+       <div className="flex items-center gap-1.5">
+          <button onClick={openclose} className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-600 text-white rounded-full">
+            Reply
+            <span>
+              <Reply />
+            </span>
+          </button>
+
+         
+        </div>
+        {openReply &&
+        <div className="w-full h-max bg-tgcc-50  border p-2.5 border-neutral-100 rounded-2xl">
+            <span className=" flex w-max items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
+                <img src={data?.user?.image as string} width={100} height={100} className="w-5 h-5 rounded-full" />  
+                      {data?.user?.name} </span>
+        <div className="w-full  p-2 min-h-14 flex flex-col gap-0.5 items-center ">
+          <textarea
+            className="w-full  h-full resize-none outline-0 p-2"
+            name=""
+            id=""
+            placeholder="reply"
+          ></textarea>
+          <div className="flex justify-end  w-full items-center gap-2.5">
+
+            <div onClick={handleAIdatawriting} className='w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-tgcc-50   border-neutral-200  '>
              <Image src={'/ai.svg'} width={1000} height={1000} alt='logo' className='w-7  opacity-90 group-hover:rotate-90 duration-150' />
              {!text ?              <span> Reply with Geminy</span>:              <span> {text} </span>
 }
           </div>
+          <button
+            type="submit"
+            className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center  h-10  "
+          >
+            <SendHorizonal />
+            Send
+          </button>
+          </div>
+        </div>
+
+        </div>
+        }
+    
+    </>
+    
   )
 }
 
