@@ -17,9 +17,7 @@ import { useParams } from "next/navigation";
 import React, { useState } from "react";
 
 const page = () => {
-  const [openReply , setopenReply] = useState<Boolean>(false)
   const { messageId } = useParams<{ messageId: string }>();
-  const {data} = useSession()
   const id = (messageId ? messageId : undefined) as Id<"emails">;
   const email = useQuery(api.functions.reception.getRespoition, { id });
   const reply = useQuery(api.functions.reception.getMessagesReply , {messageId:id})
@@ -66,8 +64,10 @@ const page = () => {
 
       
       </div>
+      <div className="flex flex-col gap-2 ">
+
       {reply?.map(({body ,anther})=>(
-        <div className="">
+        <div className="px-6  flex flex-col gap-2.5   rounded-2xl p-2">
            <div className="flex items-center gap-1.5">
               <img
                 src={anther?.image}
@@ -89,9 +89,14 @@ const page = () => {
                 </span>
               </div>
             </div>
+            <div className="p-2 bg-tgcc-50 rounded-md">
+              
           <p>{body} </p>
+            </div>
         </div>
       ))}
+            </div>
+
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { api } from "@/convex/_generated/api";
-import { fetchMutation, fetchQuery } from "convex/nextjs";
-import { da } from "zod/v4/locales";
+import {  fetchQuery } from "convex/nextjs";
 interface AuthProps{
       email:string ,
       password:string
@@ -11,4 +10,21 @@ export default async function  Login(data :AuthProps) {
     } catch (error) {
         console.log(error)
     }
+}
+
+export async function CallAIReplyTools({text}:{text:string}){
+       try {
+          const url = '/api/ai/reply'
+          const request = await fetch(url , {
+            method:'POST' ,
+            headers:{
+                'Content-Type':'application/json'
+            } ,
+            body:JSON.stringify({text})
+          })
+            const data=  await request.json()
+            return data
+       } catch (error) {
+             console.log(error)
+       }
 }

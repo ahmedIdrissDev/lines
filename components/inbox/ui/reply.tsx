@@ -1,6 +1,7 @@
 'use client'
 import { api } from '@/convex/_generated/api'
 import { Id } from '@/convex/_generated/dataModel'
+import { CallAIReplyTools } from '@/functions'
 import { useMutation } from 'convex/react'
 import { Reply, SendHorizonal } from 'lucide-react'
 import { useSession } from 'next-auth/react'
@@ -28,6 +29,11 @@ const ReplyButton = ({message_Id}:{message_Id?:string}) => {
           
         }
   }
+  async function HandleGeminyReply() {
+       const replydata = await CallAIReplyTools({text})
+       console.log(replydata)
+       settext(replydata)
+  }
   return (
     <>
        <div className="flex items-center gap-1.5">
@@ -51,15 +57,16 @@ const ReplyButton = ({message_Id}:{message_Id?:string}) => {
             className="w-full  h-full resize-none outline-0 p-2"
             name=""
             id=""
+            value={text}
             placeholder="reply"
           ></textarea>
           <div className="flex justify-end  w-full items-center gap-2.5">
 
-            <div  className='w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-white   border-neutral-200  '>
+            <button onClick={HandleGeminyReply}  className='w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-white   border-neutral-200  '>
              <Image src={'/ai.svg'} width={1000} height={1000} alt='logo' className='w-7  opacity-90 group-hover:rotate-90 duration-150' />
-             {!text ?              <span> Reply with Geminy 👋</span>:              <span> {text} </span>
-}
-          </div>
+              <span> Reply with Geminy 👋</span>
+
+          </button>
           <button
             onClick={handleAIdatawriting}
             className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center  h-10  "
