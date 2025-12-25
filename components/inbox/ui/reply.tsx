@@ -1,16 +1,32 @@
 'use client'
+import { api } from '@/convex/_generated/api'
+import { Id } from '@/convex/_generated/dataModel'
+import { useMutation } from 'convex/react'
 import { Reply, SendHorizonal } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-const ReplyButton = ({text}:{text?:string}) => {
+const ReplyButton = ({message_Id}:{message_Id?:string}) => {
     const [openReply , setopenReply] = useState<Boolean>(false)
+    const [text , settext] = useState<string>('')
     const openclose =()=> openReply ? setopenReply(false) : setopenReply(true)
-      const {data} = useSession()
+    const handleReply = useMutation(api.functions.reception.PostMessagesReply)
+    const {data} = useSession()
     
-  const handleAIdatawriting = ()=>{
-        alert('hello')
+  const handleAIdatawriting = async ()=>{
+        try {
+          const Replydata = {
+               messageId: message_Id as Id<"emails">,
+               body: text,
+               antherId:data?.user?._id as Id<"users">
+          }
+
+          await handleReply(Replydata)
+          openclose()
+        } catch (error) {
+          
+        }
   }
   return (
     <>
@@ -31,6 +47,7 @@ const ReplyButton = ({text}:{text?:string}) => {
                       {data?.user?.name} </span>
         <div className="w-full  p-2 min-h-14 flex flex-col gap-0.5 items-center ">
           <textarea
+            onChange={e=> settext(e.currentTarget.value)}
             className="w-full  h-full resize-none outline-0 p-2"
             name=""
             id=""
@@ -38,13 +55,13 @@ const ReplyButton = ({text}:{text?:string}) => {
           ></textarea>
           <div className="flex justify-end  w-full items-center gap-2.5">
 
-            <div onClick={handleAIdatawriting} className='w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-white   border-neutral-200  '>
+            <div  className='w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-white   border-neutral-200  '>
              <Image src={'/ai.svg'} width={1000} height={1000} alt='logo' className='w-7  opacity-90 group-hover:rotate-90 duration-150' />
              {!text ?              <span> Reply with Geminy 👋</span>:              <span> {text} </span>
 }
           </div>
           <button
-            type="submit"
+            onClick={handleAIdatawriting}
             className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center  h-10  "
           >
             <SendHorizonal />

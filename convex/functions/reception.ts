@@ -98,7 +98,6 @@ export const  getMessagesReply = query({
   } ,
   handler:async (ctx , args)=>{
          try {
-          if(!args.messageId) return []
           const replys = await ctx.db.query('reply').filter(q=> q.eq(q.field('messageId'), args.messageId)).collect()
           return Promise.all(replys.map(async( data , index)=>{
             const anther = await ctx.db.get(data.antherId)
@@ -120,7 +119,6 @@ export const  PostMessagesReply = mutation({
   } ,
   handler:async (ctx , args)=>{
          try {
-          if(!args.messageId || args.body || args.antherId) return []
            await ctx.db.insert('reply' ,args)
          } catch (error) {
             console.log(error)

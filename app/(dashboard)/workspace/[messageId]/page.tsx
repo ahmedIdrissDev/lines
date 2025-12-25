@@ -22,8 +22,9 @@ const page = () => {
   const {data} = useSession()
   const id = (messageId ? messageId : undefined) as Id<"emails">;
   const email = useQuery(api.functions.reception.getRespoition, { id });
-  const openclose =()=> openReply ? setopenReply(false) : setopenReply(true)
-  if (!email)
+  const reply = useQuery(api.functions.reception.getMessagesReply , {messageId:id})
+
+  if (!email )
     return (
       <div className="w-full p-3.5 h-dvh flex flex-col gap-3">
         <Loading />
@@ -61,10 +62,36 @@ const page = () => {
           </div>
           <p>{email?.message.body}</p>
         </div>
-           <ReplyButton/>
+       <ReplyButton message_Id={messageId} />
 
       
       </div>
+      {reply?.map(({body ,anther})=>(
+        <div className="">
+           <div className="flex items-center gap-1.5">
+              <img
+                src={anther?.image}
+                className="w-9 bg-white h-9 rounded-full cursor-pointer"
+              />{" "}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5">
+                  <h1 className="text-sm">{anther?.name} </h1>
+                  <Image
+                    className="w-4"
+                    src={"/check.png"}
+                    width={1000}
+                    height={1000}
+                    alt="logo"
+                  />
+                </div>
+                <span className="text-sm underline opacity-85">
+                  {anther?.email}{" "}
+                </span>
+              </div>
+            </div>
+          <p>{body} </p>
+        </div>
+      ))}
     </div>
   );
 };
