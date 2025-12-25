@@ -12,7 +12,7 @@ const layout = ({
   return (
     <div className="">
    <Navbar/>
-   <div className='grid p-1.5 bg-tgcc-50 grid-cols-[460px_1fr]   h-dvh'>
+   <div className='grid  bg-tgcc-50 grid-cols-[460px_1fr]   h-dvh'>
       <Messages/>
       <div className="w-full   bg-white   flex flex-col gap-2  overflow-y-scroll  h-dvh">
         {children}
