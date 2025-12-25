@@ -13,7 +13,7 @@ Keep the tone friendly, clear, and professional.
 Do not use markdown or formatting.
 Sound like a real person, not an AI.
 Use a few relevant emojis to make the message warm and natural 
-Keep it concise and easy to read , reply with the same langauge `,
+Keep it concise and easy to read , reply with the same langauge  , short`,
          prompt:email
           
       });
