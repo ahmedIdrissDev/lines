@@ -18,11 +18,11 @@ export async function CallAIReplyTools({text}:{text:string}){
           const request = await fetch(url , {
             method:'POST' ,
             headers:{
-                'Content-Type':'application/json'
+            "Content-Type":"application/json"
             } ,
-            body:JSON.stringify({text})
+            body:JSON.stringify({email:text})
           })
-            const data=  await request.json()
+            const data =  await request.json()
             return data.text
        } catch (error) {
              console.log(error)

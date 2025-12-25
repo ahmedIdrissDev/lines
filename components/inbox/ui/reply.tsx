@@ -39,11 +39,12 @@ const ReplyButton = ({
   };
   async function HandleGeminyReply() {
     const template = `
-        ${subject} ,
+        ${subject}  ,
         ${body}
        `;
     setLoading(true);
     const replydata = await CallAIReplyTools({ text: template });
+    console.log(replydata)
     settext(replydata);
     setLoading(false);
   }
