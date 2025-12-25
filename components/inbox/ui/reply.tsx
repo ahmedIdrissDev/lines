@@ -53,7 +53,7 @@ const ReplyButton = ({
       <div className="flex items-center gap-1.5">
         <button
           onClick={openclose}
-          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-600 text-white rounded-md"
+          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-600 border-t-2 border-tgcc-500 text-white rounded-md"
         >
           Reply
           <span>
@@ -64,7 +64,7 @@ const ReplyButton = ({
       {openReply && (
         <>
           {loading ? (
-            <div className="w-full h-54 rounded-2xl bg-tgcc-50 flex justify-center items-center">
+            <div className="w-full h-54 rounded-2xl bg-tgcc-50/60 flex justify-center items-center">
               <Image
                 src={"/ai.svg"}
                 width={1000}
@@ -74,7 +74,7 @@ const ReplyButton = ({
               />
             </div>
           ) : (
-            <div className="w-full h-max bg-tgcc-50  border p-2.5 border-neutral-100 rounded-2xl">
+            <div className="w-full h-max bg-tgcc-50/10  border p-2.5 border-neutral-100 rounded-2xl">
               <span className=" flex w-max items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
                 <img
                   src={data?.user?.image as string}
@@ -109,7 +109,7 @@ const ReplyButton = ({
                   </button>
                   <button
                     onClick={handleAIdatawriting}
-                    className="  gap-2.5 bg-tgcc-700 p-2  px-3 text-white    hidden cursor-pointer   md:flex justify-center items-center  h-10  "
+                    className="  gap-2.5 bg-white p-2  px-3 text-tgcc-950    hidden cursor-pointer   md:flex justify-center items-center  h-10  "
                   >
                     <SendHorizonal />
                     Send
