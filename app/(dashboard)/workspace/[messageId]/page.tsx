@@ -60,7 +60,7 @@ const page = () => {
           </div>
           <p>{email?.message.body}</p>
         </div>
-       <ReplyButton message_Id={messageId} />
+       <ReplyButton message_Id={messageId} body={email?.message.body} subject={email?.message?.subject} />
 
       
       </div>

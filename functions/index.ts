@@ -23,7 +23,7 @@ export async function CallAIReplyTools({text}:{text:string}){
             body:JSON.stringify({text})
           })
             const data=  await request.json()
-            return data
+            return data.text
        } catch (error) {
              console.log(error)
        }

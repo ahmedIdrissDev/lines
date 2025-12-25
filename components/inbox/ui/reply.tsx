@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-const ReplyButton = ({message_Id}:{message_Id?:string}) => {
+const ReplyButton = ({message_Id , subject , body}:{message_Id?:string , subject:string , body:string}) => {
     const [openReply , setopenReply] = useState<Boolean>(false)
     const [text , settext] = useState<string>('')
     const openclose =()=> openReply ? setopenReply(false) : setopenReply(true)
@@ -30,7 +30,12 @@ const ReplyButton = ({message_Id}:{message_Id?:string}) => {
         }
   }
   async function HandleGeminyReply() {
-       const replydata = await CallAIReplyTools({text})
+       const template= `
+        ${subject} ,
+
+        ${body}
+       `
+       const replydata = await CallAIReplyTools({text:template})
        console.log(replydata)
        settext(replydata)
   }
@@ -51,7 +56,7 @@ const ReplyButton = ({message_Id}:{message_Id?:string}) => {
             <span className=" flex w-max items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
                 <img src={data?.user?.image as string} width={100} height={100} className="w-5 h-5 rounded-full" />  
                       {data?.user?.name} </span>
-        <div className="w-full  p-2 min-h-14 flex flex-col gap-0.5 items-center ">
+        <div className="w-full  p-2 h-54 flex flex-col gap-0.5 items-center ">
           <textarea
             onChange={e=> settext(e.currentTarget.value)}
             className="w-full  h-full resize-none outline-0 p-2"
