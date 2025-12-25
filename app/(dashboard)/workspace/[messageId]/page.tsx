@@ -30,7 +30,7 @@ const page = () => {
       </div>
     );
   return (
-    <div className="w-full flex flex-col gap-1.5 p-1.5  ">
+    <div className="w-full flex flex-col gap-1.5  ">
       <Header title={email?.message?.subject as string} />
 
       <div className="p-2  flex flex-col gap-2">

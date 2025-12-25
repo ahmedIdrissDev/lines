@@ -53,7 +53,7 @@ const ReplyButton = ({
       <div className="flex items-center gap-1.5">
         <button
           onClick={openclose}
-          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-600 text-white rounded-full"
+          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-600 text-white rounded-md"
         >
           Reply
           <span>
@@ -105,7 +105,7 @@ const ReplyButton = ({
                       alt="logo"
                       className="w-7  opacity-90 group-hover:rotate-90 duration-150"
                     />
-                    <span> Reply with Geminy 👋</span>
+                    <span> Reply with Geminy </span>
                   </button>
                   <button
                     onClick={handleAIdatawriting}

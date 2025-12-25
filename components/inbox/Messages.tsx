@@ -10,9 +10,7 @@ const Messages = () => {
   return (
     <div className='w-full  h-full bg-white border-r border-neutral-200'>
       <Toaster />
-        <div className="p-2 h-14 flex items-center justify-between gap-1 border-b border-neutral-200">
-            <h2>Inbox</h2>
-        </div>
+       
         <Reception/>
     </div>
   )
