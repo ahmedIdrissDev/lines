@@ -78,7 +78,7 @@ const Reception = () => {
                  
               </div>
                <div className="w-full flex  justify-end h-full">
-              <span className="text-sm opacity-40">{time} </span>
+              <span className="text-sm opacity-80">{time} </span>
                </div>
             </div>
             {!seens && (

@@ -18,7 +18,7 @@ const layout = ({
       <div className="w-full    bg-white   flex flex-col gap-2  overflow-y-scroll  h-dvh">
         {children}
       </div>
-          <Toaster/>
+    <Toaster/>
 
    </div> 
     </div>

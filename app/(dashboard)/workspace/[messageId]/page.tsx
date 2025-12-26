@@ -60,7 +60,7 @@ const page = () => {
                 </span>
               </div>
             </div>
-                <span className="text-sm opacity-80">{time} </span>
+                <span className="text-sm opacity-90">{time} </span>
           </div>
           <p>{email?.message.body}</p>
         </div>
