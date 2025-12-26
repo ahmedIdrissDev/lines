@@ -56,7 +56,7 @@ const Reception = () => {
     
     <div className="flex  py-1.5 flex-col ">
     
-      <ScrollArea className="h-dvh w-full  rounded-md ">
+      <ScrollArea className="h-dvh w-full p-1 rounded-md ">
 
 
       {emails.map(({ subject, _id, _creationTime, seens , anther ,body}) => {

@@ -9,7 +9,7 @@ const layout = ({
   return (
     <div className='grid   grid-cols-[230px_1fr] h-dvh'>
       <Sidebar/>
-      <div className="w-full bg-white  flex flex-col   h-dvh">
+      <div className="w-full  bg-white  flex flex-col   h-dvh">
         {children}
       </div>
     </div>

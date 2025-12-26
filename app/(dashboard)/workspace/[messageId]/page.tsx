@@ -11,6 +11,7 @@ import {
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
+import moment from "moment";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -21,7 +22,8 @@ const page = () => {
   const id = (messageId ? messageId : undefined) as Id<"emails">;
   const email = useQuery(api.functions.reception.getRespoition, { id });
   const reply = useQuery(api.functions.reception.getMessagesReply , {messageId:id})
-
+  const time = moment(email?.message?._creationTime).add('days').calendar();
+  const receptions = email?.message?.receptionId as string[]
   if (!email )
     return (
       <div className="w-full p-3.5 h-dvh flex flex-col gap-3">
@@ -36,7 +38,7 @@ const page = () => {
       <div className="p-2  flex flex-col gap-2">
         <div className="border  border-neutral-100 p-1.5 rounded-xl">
           <div className="flex  w-full justify-between py-2  items-center gap-1.5">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center  gap-1.5">
               <img
                 src={email?.anther?.image}
                 className="w-9 bg-white h-9 rounded-full cursor-pointer"
@@ -52,17 +54,17 @@ const page = () => {
                     alt="logo"
                   />
                 </div>
-                <span className="text-sm underline opacity-85">
-                  {email?.anther?.email}{" "}
+                <span className="text-sm  opacity-85">
+                  <span>to: { receptions[0] } and { receptions.length -1} others </span>
                 </span>
               </div>
             </div>
+                <span className="text-sm opacity-80">{time} </span>
           </div>
           <p>{email?.message.body}</p>
         </div>
        <ReplyButton message_Id={messageId} body={email?.message.body} subject={email?.message?.subject} />
-
-      
+      <button></button>
       </div>
       <div className="flex flex-col gap-2 ">
 
@@ -89,7 +91,7 @@ const page = () => {
                 </span>
               </div>
             </div>
-            <div className="p-2 bg-tgcc-50 rounded-md">
+            <div className="p-2  rounded-md">
               
           <p>{body} </p>
             </div>
