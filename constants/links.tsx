@@ -9,16 +9,8 @@ icon:<Inbox/>,
 label:"Inbox",
 path:'/workspace'
     } ,
-    {
-    icon:<Bell/>,
-    label:"Notifiction",
-    path:'/effectifs'
-    }  ,
-    {
-    icon:<CircleDashed/>,
-    label:"unseen",
-    path:'/effectifs'
-    }  ,
+   
+
      {
     icon:<Video/>,
     label:"Meeting",

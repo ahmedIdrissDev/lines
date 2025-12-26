@@ -1,5 +1,6 @@
 import PopoverUI from '@/components/users/ui/popover';
 import Inbox from '../ui/title';
+import Notification from '../ui/Notification';
 
 const Navbar = () => {
   
@@ -9,11 +10,14 @@ const Navbar = () => {
          <div className="p-2 w-96 border-b border-neutral-200 ">
         <input
           type="text"
-          className="input rounded-md focus:shadow   "
+          className="input border-0 bg-tgcc-50 w-96  rounded-md focus:shadow   "
           placeholder="search"
         />
       </div>
+        <div className="flex gap-2 items-center">
+         <Notification/>
        <PopoverUI/>
+        </div>
     </nav>
   )
 }

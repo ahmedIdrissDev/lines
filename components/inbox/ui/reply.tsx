@@ -53,9 +53,9 @@ const ReplyButton = ({
       <div className="flex items-center gap-1.5">
         <button
           onClick={openclose}
-          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-600 border-t-2 border-tgcc-500 text-white rounded-md"
+          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-50  text-tgcc-950 rounded-md"
         >
-          Reply
+          reply
           <span>
             <Reply />
           </span>
