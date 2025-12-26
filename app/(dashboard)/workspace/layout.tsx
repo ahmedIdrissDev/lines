@@ -15,9 +15,9 @@ const layout = ({
    <Navbar/>
    <div className='grid   bg-tgcc-50 grid-cols-[460px_1fr]   h-dvh'>
       <Messages/>
-      <ScrollArea className="w-full    bg-white   flex flex-col gap-2  overflow-y-scroll  h-dvh">
+      <div className="w-full    bg-white   flex flex-col gap-2  overflow-y-scroll  h-dvh">
         {children}
-      </ScrollArea>
+      </div>
           <Toaster/>
 
    </div> 

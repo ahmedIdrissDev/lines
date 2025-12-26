@@ -1,6 +1,7 @@
 import PopoverUI from '@/components/users/ui/popover';
 import Inbox from '../ui/title';
 import Notification from '../ui/Notification';
+import { Archive } from 'lucide-react';
 
 const Navbar = () => {
   

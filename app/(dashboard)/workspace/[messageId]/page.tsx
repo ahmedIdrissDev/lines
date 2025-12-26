@@ -11,6 +11,7 @@ import {
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useQuery } from "convex/react";
+import { Forward } from "lucide-react";
 import moment from "moment";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -32,7 +33,7 @@ const page = () => {
       </div>
     );
   return (
-    <div className="w-full flex flex-col gap-1.5  ">
+    <div className="w-full  flex flex-col gap-1.5  ">
       <Header title={email?.message?.subject as string} />
 
       <div className="p-2  flex flex-col gap-2">
@@ -63,8 +64,11 @@ const page = () => {
           </div>
           <p>{email?.message.body}</p>
         </div>
+        <div className="flex items-center gap-2">
+
        <ReplyButton message_Id={messageId} body={email?.message.body} subject={email?.message?.subject} />
-      <button></button>
+      
+        </div>
       </div>
       <div className="flex flex-col gap-2 ">
 
@@ -74,7 +78,7 @@ const page = () => {
               <img
                 src={anther?.image}
                 className="w-9 bg-white h-9 rounded-full cursor-pointer"
-              />{" "}
+              />
               <div className="flex flex-col">
                 <div className="flex items-center gap-1.5">
                   <h1 className="text-sm">{anther?.name} </h1>

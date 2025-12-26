@@ -53,7 +53,7 @@ const ReplyButton = ({
       <div className="flex items-center gap-1.5">
         <button
           onClick={openclose}
-          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-10 bg-tgcc-50  text-tgcc-950 rounded-md"
+          className="w-30 cursor-pointer flex items-center justify-center gap-2 h-11 bg-tgcc-50  text-tgcc-950 rounded-md"
         >
           reply
           <span>
