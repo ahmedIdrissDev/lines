@@ -65,7 +65,7 @@ const Add = () => {
         className="w-full  gap-2.5 bg-tgcc-600 text-white     hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-md"
       >
         <SquarePen />
-        <span>Compose</span>
+        <span>Workspace</span>
       </button>
       <AnimatePresence>
         {open && (
@@ -76,7 +76,7 @@ const Add = () => {
               exit={{ scale: 1, opacity: 0 }}
               className="bg-white relative flex flex-col gap-1.5 rounded-xl   w-1/2  min-h-[85dvh]  border border-neutral-200"
             >
-              <div className="w-full p-2 rounded-t-xl justify-between flex items-center  h-12 bg-tgcc-50">
+              <div className="w-full p-2 rounded-t-xl justify-between flex items-center  h-12 border-b border-neutral-200">
                 {title.trim() ? <span>{title} </span> : <span> Nouveau message </span> }
                 
                 <X

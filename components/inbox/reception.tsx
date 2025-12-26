@@ -68,17 +68,18 @@ const Reception = () => {
             className="w-full hover:shadow py-2 relative hover:bg-neutral-50 duration-150 px-2 border-b cursor-pointer flex-col items-start justify-start border-neutral-200  min-h-12 flex "
           >
              
-            <div className="flex w-full  p-2.5 items-start justify-between ">
-              <div className="">
-              <span className={twMerge(seens ? "font-mono" : "font-bold " )}>
+            <div className="grid grid-cols-[1fr_190px] w-full  p-2.5 items-start justify-between ">
+              <div className="w-full h-full">
+              <span className={twMerge(seens ? "font-mono" : "font-bold " , 'line-clamp-1')}>
                 {subject}
 
               </span>
               <span className="line-clamp-1 opacity-80">{body} </span>
                  
               </div>
-
+               <div className="w-full flex  justify-end h-full">
               <span className="text-sm opacity-40">{time} </span>
+               </div>
             </div>
             {!seens && (
               <div className="w-2 h-2 bg-red-500 absolute rounded-full  top-3 right-5" />
