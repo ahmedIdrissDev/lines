@@ -64,7 +64,7 @@ const page = () => {
           </div>
           <p>{email?.message.body}</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className=" gap-2">
 
        <ReplyButton message_Id={messageId} body={email?.message.body} subject={email?.message?.subject} />
       
