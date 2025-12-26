@@ -142,7 +142,6 @@ const Add = () => {
                 <TextArea />
                 <input type="file" hidden name="file" id="file" />
                 <div className="flex h-12  gap-2 justify-end items-center">
-                  <ReplyButton text="write with Geminy"/>
                   <label htmlFor="file" className="cursor-pointer">
                     <Paperclip />
                   </label>
