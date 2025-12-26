@@ -3,7 +3,7 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { CallAIReplyTools } from "@/functions";
 import { useMutation } from "convex/react";
-import { Reply, SendHorizonal } from "lucide-react";
+import { ForwardIcon, Reply, SendHorizonal } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -60,11 +60,15 @@ const ReplyButton = ({
             <Reply />
           </span>
         </button>
+        <button className="flex h-11 w-30 rounded-md justify-center items-center gap-1.5 bg-tgcc-600 text-white">
+          <span>Forword</span>
+          <ForwardIcon/>
+        </button>
       </div>
       {openReply && (
         <>
           {loading ? (
-            <div className="w-full h-54 rounded-2xl bg-tgcc-50/60 flex justify-center items-center">
+            <div className="w-full mt-2 h-54 rounded-2xl bg-tgcc-50/60 flex justify-center items-center">
               <Image
                 src={"/ai.svg"}
                 width={1000}
@@ -74,7 +78,7 @@ const ReplyButton = ({
               />
             </div>
           ) : (
-            <div className="w-full h-max bg-tgcc-50/10  border p-2.5 border-neutral-100 rounded-2xl">
+            <div className="w-full mt-6 h-max bg-tgcc-50/50  border p-2.5 border-neutral-100 rounded-2xl">
               <span className=" flex w-max items-center gap-1 border text-sm p-1.5 border-neutral-200 rounded-full">
                 <img
                   src={data?.user?.image as string}
