@@ -19,7 +19,7 @@ const Alert = () => {
            <p className='text-sm '>Build and manage your team in one place</p>
       <button
        onClick={openclose}
-        className="w-50 hidden cursor-pointer rounded-full md:flex justify-center items-center gap-1.5 h-11 border-t-2 border-tgcc-500/10  bg-tgcc-600  text-white"
+        className="w-50 hidden cursor-pointer rounded-md md:flex justify-center items-center gap-1.5 h-11 border-t-2 border-tgcc-500/10  bg-tgcc-600  text-white"
       >
         <span> new workspace </span>
       </button>        </div>
@@ -33,7 +33,7 @@ const Alert = () => {
             <p>Set Up Your Workspace </p>
          </div>
          <div className="w-full flex flex-col gap-2 ">
-          <input type="text" className="input" placeholder="title" />
+          <input type="text" className="input" placeholder="CHU RABAT etc.." />
           <div className="w-full h-80 rounded-xl border border-neutral-200"></div>
          </div>
          <div className="flex items-center gap-1.5">

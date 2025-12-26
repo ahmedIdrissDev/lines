@@ -37,7 +37,7 @@ const page = () => {
       <Header title={email?.message?.subject as string} />
 
       <div className="p-2  flex flex-col gap-2">
-        <div className="border  border-neutral-100 p-1.5 rounded-xl">
+        <div className="   p-1.5 rounded-xl">
           <div className="flex  w-full justify-between py-2  items-center gap-1.5">
             <div className="flex items-center  gap-1.5">
               <img
