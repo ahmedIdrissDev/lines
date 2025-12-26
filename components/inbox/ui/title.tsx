@@ -15,7 +15,7 @@ const Inbox = () => {
 
   return (
     <div>
-        <h1 className=''>Inbox</h1>
+        <h1 className=''>Messages</h1>
         <span className='text-sm opacity-80'> {emails?.length}  messages , {unreeds?.length} Unread </span>
     </div>
   )

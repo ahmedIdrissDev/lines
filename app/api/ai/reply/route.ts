@@ -7,7 +7,7 @@ export async function POST(req: Request) {
    try {
       const { email} = await req.json()
       const {text} = await generateText({
-         model: google('gemini-2.5-flash-lite'),
+         model: google('gemini-2.5-flash-preview-04-17'),
          system:`Write a natural, human-sounding email reply.
 Keep the tone friendly, clear, and professional.
 Do not use markdown or formatting.

@@ -1,12 +1,12 @@
 import { linksProps } from "@/types"
-import { Archive, Bell, Calendar, CircleDashed, FileMinus, Home, Inbox, Mail, MonitorCloud, Settings, Users, Video } from "lucide-react"
+import { Archive, Bell, Calendar, CircleDashed, FileMinus, Home, Inbox, Mail, MessageCircle, MonitorCloud, Settings, Users, Video } from "lucide-react"
 
 
 export const links:linksProps[] =[
    
     {
-icon:<Inbox/>,
-label:"Inbox",
+icon:<MessageCircle/>,
+label:"dms",
 path:'/workspace'
     } ,
    
