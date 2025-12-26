@@ -50,7 +50,6 @@ const Alert = () => {
       </button>  
          </div>
       </div>
-      <div className="w-full bg-tgcc-50 h-full "></div>
 
     </div>
     </div>
