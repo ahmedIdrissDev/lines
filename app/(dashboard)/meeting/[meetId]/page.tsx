@@ -89,7 +89,7 @@ function MyVideoConference() {
   );
   return (
     <GridLayout tracks={tracks}  className=' p-12 rounded-2xl' style={{ height: 'calc(100vh --var(--lk-control-bar-height))' }}>
-      <ParticipantTile draggable style={{borderRadius:12}} className='border border-neutral-200 rounded-2xl'  />
+      <ParticipantTile draggable style={{borderRadius:12}} className='border bg-white border-neutral-200 rounded-2xl'  />
     </GridLayout>
   );
 }
