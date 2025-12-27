@@ -17,7 +17,9 @@
 --color-tgcc-800: #0632cd;
 --color-tgcc-900: #10339f;
 --color-tgcc-950: #0a1c5c;
-
+ --lk-bg: #0f172a;
+  --lk-control-bg: #020617;
+  --lk-border-radius: 12px;
 
 --color-tgcc-red-50: #fff1f2;
 --color-tgcc-red-100: #ffe1e2;
@@ -118,7 +120,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-white text-neutral-900;
+    @apply bg-white;
   }
   label {
     @apply text-sm opacity-80;

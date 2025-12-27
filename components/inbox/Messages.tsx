@@ -8,7 +8,7 @@ import PopoverUI from '../users/ui/popover'
 
 const Messages = () => {
   return (
-    <div className='w-full  h-full bg-white border-r border-neutral-200'>
+    <div className='w-full  h-full border-r border-neutral-200'>
       <Toaster />
        
         <Reception/>

@@ -14,7 +14,7 @@ path:'/workspace'
      {
     icon:<Video/>,
     label:"Meeting",
-    path:'/Meeting'
+    path:'/meeting'
     }  ,
   
 
