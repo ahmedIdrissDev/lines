@@ -9,7 +9,7 @@ const Alert = () => {
   return (
     <>
     
-    <div className='flex h-full gap-2 flex-col justify-center items-center'>
+    <div className='flex bg-tgcc-50 h-full gap-2 flex-col justify-center items-center'>
       <div className="flex items-center justify-center ">
         <img src={'/teams.png'}  className='w-20 h-20 rounded-full'/>
 

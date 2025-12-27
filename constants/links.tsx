@@ -5,15 +5,15 @@ import { Archive, Bell, Calendar, CircleDashed, FileMinus, Home, Inbox, Mail, Me
 export const links:linksProps[] =[
    
     {
-icon:<MessageCircle/>,
-label:"dms",
+icon:<Inbox/>,
+label:"Inbox",
 path:'/workspace'
     } ,
    
 
      {
     icon:<Video/>,
-    label:"Meeting",
+    label:"Meetings",
     path:'/meeting'
     }  ,
   

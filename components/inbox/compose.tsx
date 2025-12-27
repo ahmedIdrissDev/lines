@@ -62,10 +62,10 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-full  gap-2.5 bg-tgcc-600 text-white     hidden cursor-pointer   md:flex justify-center items-center gap-1. h-10  rounded-md"
+        className="w-full  gap-2.5 bg-tgcc-50     hidden cursor-pointer   md:flex justify-center items-center gap-1. h-11  rounded-md"
       >
         <SquarePen />
-        <span>Workspace</span>
+        <span>Compose</span>
       </button>
       <AnimatePresence>
         {open && (
