@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "material-symbols";
 
 @theme inline {
   --color-background: var(--background);

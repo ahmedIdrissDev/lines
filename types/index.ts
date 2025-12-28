@@ -11,7 +11,7 @@ export interface Employee {
   _creationTime:number
 }
 export interface linksProps{
-    icon: React.ReactNode ,
+    icon: string ,
     path:string ,
     label:string
 }

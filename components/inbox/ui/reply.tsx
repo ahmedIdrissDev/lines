@@ -57,13 +57,15 @@ const ReplyButton = ({
         >
           reply
           <span>
-            <Reply />
-          </span>
+<span className="material-symbols-outlined">
+reply
+</span>          </span>
         </button>
         <button className="flex h-11 w-30 rounded-md justify-center items-center gap-1.5 bg-tgcc-600 text-white">
           <span>Forword</span>
-          <ForwardIcon/>
-        </button>
+<span className="material-symbols-outlined">
+forward
+</span>        </button>
       </div>
       {openReply && (
         <>

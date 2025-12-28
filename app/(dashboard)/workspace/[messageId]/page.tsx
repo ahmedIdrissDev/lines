@@ -38,7 +38,7 @@ const page = () => {
 
       <div className="p-2  flex flex-col gap-2">
         <div className="   p-1.5 rounded-xl">
-          <div className="flex  w-full justify-between py-2  items-center gap-1.5">
+          <div className="flex  w-full justify-between py-2  items-start gap-1.5">
             <div className="flex items-center  gap-1.5">
               <img
                 src={email?.anther?.image}

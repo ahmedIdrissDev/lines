@@ -14,6 +14,9 @@ const Sidebar = () => {
     <div className="w-full h-14 border-b border-neutral-200 p-2  ">
       <Logo/>
     </div>
+    <span className="material-symbols-outlined  ">
+
+</span>
 <div className="flex   h-full flex-col gap-4">
   <div className="px-2">
   <Add/>
@@ -21,7 +24,7 @@ const Sidebar = () => {
   </div>
   <div className="flex px-2 flex-col gap-2">
     <Button 
- icon={<Home/>}
+ icon={'home'}
  label='Dashboard'
  path='/dashboard'
  
@@ -44,13 +47,13 @@ const Sidebar = () => {
 <div className="w-full  p-4 h-full flex flex-col justify-end items-start ">
  <span className='px-1 opacity-60'> help</span>
  <Button 
- icon={<Settings/>}
+ icon={'settings'}
  label='Settings'
  path='/Settings'
  
  />
  <Button 
- icon={<MessageCircleDashed/>}
+ icon={'chat_dashed'}
  label='Help center'
  path='/Support'
  
