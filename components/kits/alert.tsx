@@ -35,9 +35,9 @@ const Alert = () => {
       {open && (
         <div className="inset-0  fixed flex justify-center items-center w-full h-full bg-neutral-950/20">
           <motion.div 
-           initial={{opacity:0 , translateX:0}}
-           animate={{opacity:1 , translateX:2}}
-           exit={{opacity:0 , translateX:0}}
+           initial={{opacity:0 , translateY:0}}
+           animate={{opacity:1 , translateY:2}}
+           exit={{opacity:0 , translateY:0}}
 
           className="w-1/2  min-h-96 bg-white rounded-md">
             <div className="w-full p-3 gap-2 flex flex-col justify-center h-full ">
@@ -61,8 +61,11 @@ const Alert = () => {
                 >
                   <span> cancel </span>
                 </button>
-                <button className="w-50 hidden cursor-pointer rounded-md md:flex justify-center items-center gap-1.5 h-11 border-t-2 border-tgcc-500/10  bg-tgcc-600  text-white">
-                  <span> create </span>
+                <button className="w-50 hidden cursor-pointer rounded-md md:flex justify-center items-center gap-1.5 h-11  border-t-2 border-tgcc-500    bg-tgcc-600  text-white">
+                  <span className="material-symbols-outlined">
+create_new_folder
+</span>
+                  <span> Create </span>
                 </button>
               </div>
             </div>

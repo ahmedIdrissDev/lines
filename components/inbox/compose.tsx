@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { Id } from "@/convex/_generated/dataModel";
 import ReplyButton from "./ui/reply";
+import Image from "next/image";
 
 interface Userreception {
   name: string;
@@ -113,11 +114,11 @@ const Add = () => {
                 className="flex p-2  h-full flex-col gap-2"
                 action=""
               >
-                <div className="grid px-2 py-1  grid-cols-3 items-center border-b border-neutral-100 gap-1">
+                <div className="grid  py-1  grid-cols-2 items-center border-b border-neutral-100 gap-1">
                   {reseption.map(({ name, email, image }, index) => (
                     <div
                       key={index}
-                      className="w-full cursor-pointer p-1 border border-neutral-100 hover:bg-neutral-50 rounded-full h-12 flex items-center gap-2"
+                      className="w-max  cursor-pointer bg-tgcc-50 p-1 border border-neutral-100 hover:bg-neutral-50 rounded-full h-12 flex items-center gap-2"
                     >
                       <img src={image} className="w-10 h-10 rounded-full" />
 
@@ -130,9 +131,16 @@ const Add = () => {
                           hidden
                         />
                         <span className="text-sm opacity-90">
-                          {name.split(" ")[0].toLowerCase()}{" "}
+                        {name}
                         </span>
                       </div>
+                        <Image
+                                            className="w-4"
+                                            src={"/check.png"}
+                                            width={1000}
+                                            height={1000}
+                                            alt="logo"
+                                          />
                     </div>
                   ))}
                   <input

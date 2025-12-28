@@ -5,7 +5,7 @@ import { Archive, Bell, Calendar, CircleDashed, FileMinus, Home, Inbox, Mail, Me
 export const links:linksProps[] =[
    
     {
-icon:'inbox',
+icon:'move_to_inbox',
 label:"Inbox",
 path:'/workspace'
     } ,
