@@ -26,7 +26,7 @@ const Alert = () => {
     </div>
     {open && 
     <div className="inset-0 p-30 fixed flex justify-center items-center w-full h-full bg-neutral-950/10">
-    <div className="w-full grid grid-cols-[1fr_100px] h-full bg-white rounded-md">
+    <div className="w-full  h-full bg-white rounded-md">
       <div className="w-full p-3 gap-2 flex flex-col justify-center h-full ">
          <div className="">
             <h1>Create workspace</h1>
