@@ -12,7 +12,7 @@ path:'/workspace'
    
 
      {
-    icon:'video_chat',
+    icon:'duo',
     label:"Meetings",
     path:'/meeting'
     }  ,
