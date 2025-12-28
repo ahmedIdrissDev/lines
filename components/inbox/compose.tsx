@@ -62,7 +62,7 @@ const Add = () => {
     <>
       <button
         onClick={openclose}
-        className="w-full  gap-2.5 bg-tgcc-50     hidden cursor-pointer   md:flex justify-center items-center gap-1. h-11  rounded-md"
+        className="w-max p-3  gap-2.5 bg-tgcc-50     hidden cursor-pointer   md:flex justify-start px-3 items-center gap-1. h-11  rounded-md"
       >
         <span className="material-symbols-outlined">edit_square</span>{" "}
         <span>Compose</span>

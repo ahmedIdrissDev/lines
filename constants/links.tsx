@@ -16,6 +16,12 @@ path:'/workspace'
     label:"Meetings",
     path:'/meeting'
     }  ,
+
+     {
+    icon:'send',
+    label:"Sent",
+    path:'/sent'
+    }  ,
   
 
 ]

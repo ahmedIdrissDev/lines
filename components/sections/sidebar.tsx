@@ -10,7 +10,7 @@ import { Home, MessageCircleDashed, Settings } from 'lucide-react'
 
 const Sidebar = () => {
   return (
-    <div className='w-full   border-r border-neutral-200    h-full flex flex-col justify-start gap-3 items-left  '>
+    <div className='w-full  bg-neutral-50 border-r border-neutral-200    h-full flex flex-col justify-start gap-3 items-left  '>
     <div className="w-full h-14 border-b border-neutral-200 p-2  ">
       <Logo/>
     </div>
