@@ -11,7 +11,7 @@ const Alert = () => {
     <>
       <div className="flex  h-full gap-2 flex-col justify-center items-center">
         <div className="flex items-center justify-center ">
-          <span className="material-symbols-outlined scale-200">crowdsource</span>
+          <span className="material-symbols-outlined text-tgcc-500 scale-200">crowdsource</span>
         </div>
         <div className="flex items-center flex-col gap-2">
           <div className="flex flex-col justify-center items-center">

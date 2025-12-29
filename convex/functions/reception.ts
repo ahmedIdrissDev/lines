@@ -125,3 +125,30 @@ export const  PostMessagesReply = mutation({
          }
   }
 })
+
+//get user sent messages 
+export const getSentsMessages = query({
+  args:{
+        userId: v.id("users"),
+  } ,
+  handler: async (ctx , args)=>{
+        try {
+          const messages =  await ctx.db.query('emails').filter(
+            q=> q.eq(q.field('userId') , args.userId)
+          ).collect()
+          if(!messages) return []      
+          const sentMessages = Promise.all(
+            messages.map (async (message) =>{
+              const anther = await ctx.db.get(message.userId)
+              return {
+                    ...message , 
+                  anther
+              }
+            })  
+           )
+        return  sentMessages     
+        } catch (error) {
+            console.log(error)
+        }
+  }
+})
