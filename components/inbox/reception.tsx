@@ -70,7 +70,7 @@ const Reception = () => {
              
             <div className="grid grid-cols-[1fr_190px] w-full  p-2.5 items-start justify-between ">
               <div className="w-full  h-full">
-              <span className={twMerge(seens ? "font-mono" : "font-bold " , 'line-clamp-1')}>
+              <span className={twMerge(seens ? "font-mono" : "font-bold " , 'line-clamp-2')}>
                  { type ? 'You has new Meeting call':subject}
 
               </span>
