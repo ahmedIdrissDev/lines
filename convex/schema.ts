@@ -39,6 +39,7 @@ export default defineSchema({
     subject: v.string(),
     body: v.string(),
     file: v.optional(v.array(v.string())),
+    type:v.optional(v.boolean())
   }),
 
   seens: defineTable({

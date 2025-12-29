@@ -47,6 +47,8 @@ export const createReception = mutation({
     body: v.string(),
     file: v.optional(v.array(v.string())),
     userId: v.id("users"),
+    type:v.optional(v.boolean())
+
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("emails", args);

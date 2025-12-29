@@ -25,5 +25,6 @@ export interface reception{
        subject:string,
        body:string ,
        file?:string[] ,
-       userId:string
+       userId:string ,
+       type?:Boolean
 }

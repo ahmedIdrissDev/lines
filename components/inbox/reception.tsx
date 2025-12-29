@@ -59,7 +59,7 @@ const Reception = () => {
       <ScrollArea className="h-dvh w-full p-1 rounded-md ">
 
 
-      {emails.map(({ subject, _id, _creationTime, seens , anther ,body}) => {
+      {emails.map(({ subject, _id, _creationTime, seens , anther ,body ,type}) => {
         const time = moment(_creationTime).add('days').calendar();
         return (
           <div
@@ -84,9 +84,19 @@ const Reception = () => {
             {!seens && (
               <div className="w-2 h-2 bg-red-500 absolute rounded-full  top-3 right-5" />
             )}
+            <div className="flex items-center gap-2">
+
             <span className=" flex items-center gap-1 border text-sm p-1.5  rounded-full">
                 <img src={anther?.image} width={100} height={100} className="w-5 h-5 rounded-full" />  
-                      {anther?.name} </span>
+                {anther?.name} </span>
+
+                {
+                  type &&   <div  className={'w-40 rounded-full bg-neutral-950 cursor-pointer h-9 flex justify-center items-center animate-p text-green-600 ' }>
+                                        <span className="material-symbols-outlined opacity-80">duo</span>
+                                        <span className="opacity-80" >Meeting</span>
+                                    </div>
+                }
+            </div>
           </div>
         );
       })}
