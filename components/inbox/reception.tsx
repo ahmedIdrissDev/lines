@@ -75,7 +75,7 @@ const Reception = () => {
 
               </span>
 
-              <span className="line-clamp-1 opacity-70 text-sm">      { type ? `You and ${receptionId.length - 1} Tag to call `:body}
+              <span className="line-clamp-1 opacity-70 text-sm">      { type ? `You and ${receptionId.length - 1}o thers are tagged to join the call`:body}
              </span>
                  
               </div>
