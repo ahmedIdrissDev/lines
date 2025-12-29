@@ -59,22 +59,24 @@ const Reception = () => {
       <ScrollArea className="h-dvh w-full p-1 rounded-md ">
 
 
-      {emails.map(({ subject, _id, _creationTime, seens , anther ,body ,type}) => {
+      {emails.map(({ subject, _id, _creationTime, seens , anther ,body ,type ,receptionId}) => {
         const time = moment(_creationTime).add('days').calendar();
         return (
           <div
-            onClick={() => handleLink(_id, seens)}
+            onClick={() => type ? routeURL.push(`/meeting/${_id}`) : handleLink(_id, seens)}
             key={_id}
-            className="w-full hover:shadow py-2 relative rounded-xl hover:bg-neutral-100 duration-150 px-2  cursor-pointer flex-col items-start justify-start   min-h-12 flex "
+            className={twMerge("w-full hover:shadow py-2 relative rounded-xl duration-150 px-2  cursor-pointer flex-col items-start justify-start   min-h-12 flex " , type ?'bg-neutral-900 text-white ':' hover:bg-neutral-100')}
           >
              
             <div className="grid grid-cols-[1fr_190px] w-full  p-2.5 items-start justify-between ">
-              <div className="w-full h-full">
+              <div className="w-full  h-full">
               <span className={twMerge(seens ? "font-mono" : "font-bold " , 'line-clamp-1')}>
-                {subject}
+                 { type ? 'You has new Meeting call':subject}
 
               </span>
-              <span className="line-clamp-1 opacity-80">{body} </span>
+
+              <span className="line-clamp-1 opacity-70 text-sm">      { type ? `You and ${receptionId.length - 1} Tag to call `:body}
+             </span>
                  
               </div>
                <div className="w-full flex  justify-end h-full">
@@ -86,12 +88,12 @@ const Reception = () => {
             )}
             <div className="flex items-center gap-2">
 
-            <span className=" flex items-center gap-1 border text-sm p-1.5  rounded-full">
+            <span className=" flex items-center gap-1  text-sm p-1.5  rounded-full">
                 <img src={anther?.image} width={100} height={100} className="w-5 h-5 rounded-full" />  
                 {anther?.name} </span>
 
                 {
-                  type &&   <div  className={'w-40 rounded-full bg-neutral-950 cursor-pointer h-9 flex justify-center items-center animate-p text-green-600 ' }>
+                  type &&   <div  className={'w-40 gap-2 rounded-full bg-neutral-950 cursor-pointer h-9 flex justify-center items-center animate-p text-green-600 ' }>
                                         <span className="material-symbols-outlined opacity-80">duo</span>
                                         <span className="opacity-80" >Meeting</span>
                                     </div>
