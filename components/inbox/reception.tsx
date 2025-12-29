@@ -56,7 +56,7 @@ const Reception = () => {
     
     <div className="flex bg-tgcc-50/25 py-1.5 flex-col ">
     
-      <ScrollArea className="h-dvh w-full p-1 rounded-md ">
+      <ScrollArea  className="h-dvh w-full p-1 rounded-md ">
 
 
       {emails.map(({ subject, _id, _creationTime, seens , anther ,body ,type ,receptionId}) => {
@@ -65,7 +65,7 @@ const Reception = () => {
           <div
             onClick={() => type ? routeURL.push(`/meeting/${_id}`) : handleLink(_id, seens)}
             key={_id}
-            className={twMerge("w-full hover:shadow py-2 relative rounded-xl duration-150 px-2  cursor-pointer flex-col items-start justify-start   min-h-12 flex " , type ?'bg-neutral-900 text-white ':' hover:bg-neutral-100')}
+            className={twMerge("w-full hover:shadow py-2 relative rounded-xl duration-150 px-2  cursor-pointer flex-col items-start justify-start   min-h-12 flex " , type ?'bg-neutral-900 text-white  mt-1':' hover:bg-neutral-100')}
           >
              
             <div className="grid grid-cols-[1fr_190px] w-full  p-2.5 items-start justify-between ">
