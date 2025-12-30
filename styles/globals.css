@@ -9,7 +9,7 @@
   --font-mono: var(--font-geist-mono);
   --color-tgcc-50: #e8f6ff;
   --color-tgcc-100: #d5edff;
-  --color-tgcc-200: #b3dcff;
+  --color-tgcc-200: #BC99FE;
   --color-tgcc-300: #85c2ff;
   --color-tgcc-400: #5699ff;
   --color-tgcc-500: #2f70ff;
@@ -17,7 +17,7 @@
   --color-tgcc-700: #0035ff;
   --color-tgcc-800: #0632cd;
   --color-tgcc-900: #10339f;
-  --color-tgcc-950: #0a1c5c;
+  --color-tgcc-950: #1D0255;
   --lk-bg: #0f172a;
   --lk-control-bg: #020617;
   --lk-border-radius: 12px;
@@ -117,9 +117,7 @@
   label {
     @apply text-sm opacity-80;
   }
-  button {
-    @apply rounded-full;
-  }
+
 }
 @layer components {
   .input {

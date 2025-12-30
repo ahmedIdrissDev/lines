@@ -23,7 +23,7 @@ interface Userreception {
 
 const Add = () => {
   const [open, setOpen] = useState(false);
-  const [type , settype] = useState<Boolean>(false)
+  const [type, settype] = useState<Boolean>(false);
   const [text, settext] = useState<string>("");
   const [reseption, setReception] = useState<Userreception[]>([]);
   const [title, settitle] = useState<string>("");
@@ -37,7 +37,8 @@ const Add = () => {
   );
 
   const userId = data?.user?._id as Id<"users">;
-  const CreateReception = useMutation(api.functions.reception.createReception) || [];
+  const CreateReception =
+    useMutation(api.functions.reception.createReception) || [];
   async function HendleAddEmployes(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const formdata = new FormData(e.currentTarget);
@@ -50,7 +51,7 @@ const Add = () => {
       userId,
       receptionId: receptionEmails,
       file: [""],
-      type ,
+      type,
     };
     CreateReception(Message);
     toast.success("email has been sent");
@@ -133,21 +134,18 @@ const Add = () => {
                           name="receptionId"
                           hidden
                         />
-                        <span className="text-sm opacity-90">
-                        {name}
-                        </span>
+                        <span className="text-sm opacity-90">{name}</span>
                       </div>
-                        <Image
-                                            className="w-4"
-                                            src={"/check.png"}
-                                            width={1000}
-                                            height={1000}
-                                            alt="logo"
-                                          />
+                      <Image
+                        className="w-4"
+                        src={"/check.png"}
+                        width={1000}
+                        height={1000}
+                        alt="logo"
+                      />
                     </div>
                   ))}
                   <input
-                    
                     type="text"
                     onChange={(e) => settext(e.currentTarget.value)}
                     className="w-full hidden group-hover:block outline-0 h-11"
@@ -168,15 +166,22 @@ const Add = () => {
                 <TextArea />
                 <input type="file" hidden name="file" id="file" />
                 <div className="flex h-12  gap-2 justify-end items-center">
-                  
-                  <div onClick={()=> SetTyoes()} className={twMerge('w-40 rounded-2xl cursor-pointer h-11 flex justify-center items-center ' , type && 'border text-tgcc-700 border-tgcc-600') }>
-                      <span className="material-symbols-outlined opacity-80">duo</span>
-                      <span className="opacity-80" >Meeting</span>
+                  <div
+                    onClick={() => SetTyoes()}
+                    className={twMerge(
+                      "w-40 rounded-2xl cursor-pointer h-11 flex justify-center items-center ",
+                      type && "border text-tgcc-700 border-tgcc-600"
+                    )}
+                  >
+                    <span className="material-symbols-outlined opacity-80">
+                      duo
+                    </span>
+                    <span className="opacity-80">Meeting</span>
                   </div>
                   <label htmlFor="file" className="cursor-pointer">
                     <div className="flex gap-2 rounded-2xl justify-center items-center h-11 w-40 border border-neutral-200">
-                    <Paperclip />
-                    <span>Add files</span>
+                      <Paperclip />
+                      <span>Add files</span>
                     </div>
                   </label>
                   <button
