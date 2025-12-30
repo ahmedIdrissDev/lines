@@ -49,7 +49,7 @@ const Sidebar = () => {
  <Button 
  icon={'settings'}
  label='Settings'
- path='/Settings'
+ path='/settings'
  
  />
  <Button 
