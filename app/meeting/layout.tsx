@@ -11,8 +11,11 @@ const layout = ({
                           {children}
 
                 </div>
-
+        <div className="w-full h-full flex flex-col gap-2">
         <div className="w-full h-96 bg-neutral-800/65 rounded-2xl"></div>
+        <div className="w-full h-96 bg-neutral-800/65 rounded-2xl"></div>
+
+        </div>
     </div>
   )
 }
