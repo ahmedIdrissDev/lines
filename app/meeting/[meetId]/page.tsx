@@ -70,7 +70,7 @@ export default function Page() {
 
   return (
     <RoomContext.Provider value={roomInstance}>
-      <div data-lk-theme="light" style={{ height: '100dvh' }}>
+      <div data-lk-theme="default" className='bg-neutral-900' style={{ height: '100dvh' }}>
         <MyVideoConference  />
         <RoomAudioRenderer />
         <ControlBar />
@@ -88,8 +88,8 @@ function MyVideoConference() {
     { onlySubscribed: false },
   );
   return (
-    <GridLayout tracks={tracks}  className=' p-12 rounded-2xl' style={{ height: 'calc(100vh --var(--lk-control-bar-height))' }}>
-      <ParticipantTile draggable style={{borderRadius:12}} className='border bg-white border-neutral-200 rounded-2xl'  />
+    <GridLayout tracks={tracks}  className=' rounded-2xl' style={{ height: '100dvh' }}>
+      <ParticipantTile draggable style={{borderRadius:12 }} className=' border-neutral-800/30 rounded-2xl'  />
     </GridLayout>
   );
 }

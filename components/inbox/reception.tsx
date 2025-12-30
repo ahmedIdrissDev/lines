@@ -75,7 +75,7 @@ const Reception = () => {
 
               </span>
 
-              <span className="line-clamp-1 opacity-70 text-sm">      { type ? `You and ${receptionId.length - 1}o thers are tagged to join the call`:body}
+              <span className="line-clamp-2 opacity-70 text-sm">      { type ? `You and ${receptionId.length - 1} others are tagged to join the call`:body}
              </span>
                  
               </div>
@@ -86,8 +86,7 @@ const Reception = () => {
             {!seens && (
               <div className="w-2 h-2 bg-red-500 absolute rounded-full  top-3 right-5" />
             )}
-            <div className="flex items-center gap-2">
-
+            <div className="flex  opacity-80 items-center gap-2">
             <span className=" flex items-center gap-1  text-sm p-1.5  rounded-full">
                 <img src={anther?.image} width={100} height={100} className="w-5 h-5 rounded-full" />  
                 {anther?.name} </span>
