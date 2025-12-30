@@ -28,3 +28,9 @@ export interface reception{
        userId:string ,
        type?:Boolean
 }
+ export interface Userreception {
+  name: string;
+  email: string;
+  image: string;
+  func: string;
+}

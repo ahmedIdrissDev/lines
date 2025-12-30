@@ -1,12 +1,26 @@
 "use client";
 
+import { api } from "@/convex/_generated/api";
+import { Userreception } from "@/types";
+import { useQuery } from "convex/react";
 import { AnimatePresence , motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 
 const Alert = () => {
   const [open, setOpen] = useState(false);
   const openclose = () => (open ? setOpen(false) : setOpen(true));
-
+  const [text, settext] = useState<string>("");
+  
+  const [reseption, setReception] = useState<Userreception[]>([]);
+const user = useQuery(api.functions.login.getUsers);
+  const getbyname = user?.filter(({ name }) =>
+    name.toLowerCase().includes(text.toLowerCase())
+  );
+    function handleAddReception(data: Userreception) {
+    setReception((e) => [...e, data]);
+    settext("");
+  }
   return (
     <>
       <div className="flex  h-full gap-2 flex-col justify-center items-center">
@@ -47,8 +61,8 @@ const Alert = () => {
            animate={{opacity:1 , translateY:2}}
            exit={{opacity:0 , translateY:0}}
 
-          className="w-1/2  min-h-96 bg-white rounded-md">
-            <div className="w-full p-3 gap-2 flex flex-col justify-center h-full ">
+          className="w-1/2  min-h-11 h-max bg-white rounded-md">
+            <div className="w-full p-3 gap-2 flex flex-col justify-between h-full ">
               <div className="">
                 <h1>Create workspace</h1>
               </div>
@@ -58,8 +72,62 @@ const Alert = () => {
                   className="input"
                   placeholder="CHU RABAT etc.."
                 />
-                <div className="w-full p-1.5 h-80 rounded-xl border border-neutral-200">
-                   
+                <input
+                    
+                    type="text"
+                    onChange={(e) => settext(e.currentTarget.value)}
+                    className="w-full h-11 border border-neutral-200   outline-0  rounded-2xl px-2"
+                    placeholder="User"
+                  />
+                <div className="w-full p-1.5 grid grid-cols-2 gap-2 min-h-12 h-max rounded-xl border border-neutral-200">
+              {text && (
+                <div className="w-96 p-3 absolute top-32 bg-white z-40 h-max border border-neutral-100 rounded-2xl">
+                  {getbyname.map((data, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleAddReception(data)}
+                      className="w-full cursor-pointer p-2 hover:bg-neutral-50 rounded-xl h-12 flex items-center gap-2"
+                    >
+                      <img
+                        src={data.image}
+                        className="w-11 h-11 rounded-full"
+                      />
+                      <div className="">
+                        <h1 className="text-sm">{data.email} </h1>
+                        <span className="text-sm opacity-90">{data.name} </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+                                {reseption.map(({ name, email, image }, index) => (
+                                  <div
+                                    key={index}
+                                    className="w-max  cursor-pointer bg-tgcc-50 p-1 border border-neutral-100 hover:bg-neutral-50 rounded-full h-12 flex items-center gap-2"
+                                  >
+                                    <img src={image} className="w-10 h-10 rounded-full" />
+              
+                                    <div className="">
+                                      <input
+                                        type="text"
+                                        readOnly
+                                        value={email}
+                                        name="receptionId"
+                                        hidden
+                                      />
+                                      <span className="text-sm opacity-90">
+                                      {name}
+                                      </span>
+                                    </div>
+                                      <Image
+                                                          className="w-4"
+                                                          src={"/check.png"}
+                                                          width={1000}
+                                                          height={1000}
+                                                          alt="logo"
+                                                        />
+                                  </div>
+                                ))}
                 </div>
               </div>
               <div className="flex items-center gap-1.5">
