@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 function randomString(length: number): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
@@ -59,13 +60,17 @@ export default function Page() {
   }, [roomInstance]);
 
   if (token === '') {
-    return <div className='grid grid-cols-4 gap-2 w-full h-full'>
-           <div className="bg-neutral-200 w-full h-full"></div>
-           <div className="bg-neutral-200 w-full h-full"></div>
-           <div className="bg-neutral-200 w-full h-full"></div>
-           <div className="bg-neutral-200 w-full h-full"></div>
+    return <div className='flex justify-center items-center gap-2 w-full h-full'>
+            <Image
+                       src={"/icon.svg"}
+                       width={1000}
+                       height={1000}
+                       className="w-9
+                        object-cover"
+                       alt="logo"
+                     />
 
-    </div>;
+    </div>
   }
 
   return (

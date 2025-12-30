@@ -14,7 +14,7 @@ const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 const Provider = ({children ,session }:AuthProviderProps) => {
   return (
     <SessionProvider session={session}>
- <ConvexProvider client={convex}>{children}</ConvexProvider>;
+ <ConvexProvider client={convex}>{children}</ConvexProvider>
 
     </SessionProvider >
   )
