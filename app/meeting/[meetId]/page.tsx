@@ -78,7 +78,7 @@ export default function Page() {
       <div data-lk-theme="default" className='bg-neutral-900' style={{ height: '100%' }}>
         <MyVideoConference  />
         <RoomAudioRenderer />
-        <ControlBar />
+        <ControlBar className='border-0 border-neutral-800 bg-neutral-700/15 rounded-2xl' />
       </div>
     </RoomContext.Provider>
   );
@@ -93,7 +93,7 @@ function MyVideoConference() {
     { onlySubscribed: false },
   );
   return (
-    <GridLayout tracks={tracks}  className=' rounded-2xl' style={{ height: '100dvh' }}>
+    <GridLayout tracks={tracks}  className=' rounded-2xl' style={{ height: '90%' }}>
       <ParticipantTile draggable style={{borderRadius:12 }} className=' border-neutral-800/30 rounded-2xl'  />
     </GridLayout>
   );
