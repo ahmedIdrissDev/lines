@@ -92,7 +92,7 @@ const Reception = () => {
                 {anther?.name} </span>
 
                 {
-                  type &&   <div  className={'w-40 gap-2 rounded-full bg-neutral-950 cursor-pointer h-9 flex justify-center items-center animate-p text-green-600 ' }>
+                  type &&   <div  className={'w-40 gap-2 rounded-full bg-tgcc-100 cursor-pointer h-9 flex justify-center items-center animate-p text-tgcc-800 ' }>
                                         <span className="material-symbols-outlined opacity-80">duo</span>
                                         <span className="opacity-80" >Meeting</span>
                                     </div>

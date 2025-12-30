@@ -76,7 +76,7 @@ forward
                 width={1000}
                 height={1000}
                 alt="logo"
-                className="w-7  animate-bounce opacity-90 group-hover:rotate-90 duration-150"
+                className="w-7  animate-pulse opacity-90 group-hover:rotate-90 duration-150"
               />
             </div>
           ) : (
@@ -102,16 +102,13 @@ forward
                 <div className="flex justify-end  w-full items-center gap-2.5">
                   <button
                     onClick={HandleGeminyReply}
-                    className="w-max px-2 text-tgcc-950 group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 bg-white   border-neutral-200  "
+                    className="w-max px-2 bg-tgcc-700  group cursor-pointer rounded-full h-10 flex  justify-center items-center gap-1.5 text-white   border-neutral-200  "
                   >
-                    <Image
-                      src={"/ai.svg"}
-                      width={1000}
-                      height={1000}
-                      alt="logo"
-                      className="w-7  opacity-90 group-hover:rotate-90 duration-150"
-                    />
-                    <span> Reply with Geminy </span>
+                    <span className="material-symbols-outlined">
+bolt
+</span>
+                   
+                    <span>auto reply </span>
                   </button>
                   <button
                     onClick={handleAIdatawriting}
