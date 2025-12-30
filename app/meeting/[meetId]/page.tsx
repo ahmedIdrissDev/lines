@@ -70,7 +70,7 @@ export default function Page() {
 
   return (
     <RoomContext.Provider value={roomInstance}>
-      <div data-lk-theme="default" className='bg-neutral-900' style={{ height: '100dvh' }}>
+      <div data-lk-theme="default" className='bg-neutral-900' style={{ height: '100%' }}>
         <MyVideoConference  />
         <RoomAudioRenderer />
         <ControlBar />
