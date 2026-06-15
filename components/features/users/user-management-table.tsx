@@ -78,6 +78,8 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
   const availablePermissions = [
     { id: "user:access:admin", label: "Admin (Full Control)" },
     { id: "user:access:all", label: "Manager (Projects & Employees)" },
+    { id: "user:access:view", label: "Adminstration Acess" },
+
   ];
 
   const handleEditClick = (user: ClerkUser) => {

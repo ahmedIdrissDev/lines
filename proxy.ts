@@ -11,8 +11,71 @@ const isProtectedRoute = createRouteMatcher([
   "/add(.*)"
 ]);
 
+// Route matchers for specific permission levels
+const isViewAllowed = createRouteMatcher([
+  "/dashboard(.*)",
+  "/rapport-general(.*)"
+]);
+
+const isManagerAllowed = createRouteMatcher([
+  "/dashboard(.*)",
+  "/sous-traitants(.*)",
+    "/rapport-general(.*)"
+
+
+]);
+
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) await auth.protect();
+  if (isProtectedRoute(req)) {
+    const { sessionClaims, userId } = await auth();
+
+    // 1. Ensure the user is authenticated
+    if (!userId) {
+      await auth.protect();
+      return;
+    }
+
+    // 2. Extract permissions from Clerk session claims (publicMetadata)
+    // Note: Ensure your Clerk JWT template is configured to include publicMetadata
+    const permissions = (sessionClaims?.publicMetadata as any)?.permissions || 
+                        (sessionClaims?.metadata as any)?.permissions || [];
+
+    // 3. Admin (Full Control) - Can access all protected routes
+    if (permissions.includes("user:access:admin")) {
+      return;
+    }
+
+    // 4. Permission-based access control logic
+    const hasManagerAccess = permissions.includes("user:access:all");
+    const hasViewAccess = permissions.includes("user:access:view");
+
+    let isAllowed = false;
+    
+    // Check Manager access (sous-traitants & dashboard)
+    if (hasManagerAccess && isManagerAllowed(req)) {
+      isAllowed = true;
+    }
+    
+    // Check View access (rapport-general & dashboard)
+    if (hasViewAccess && isViewAllowed(req)) {
+      isAllowed = true;
+    }
+
+    // 5. Authorization Enforcement
+    if (!isAllowed) {
+      // If the user has some access level, redirect to their default home (dashboard)
+      if (hasManagerAccess || hasViewAccess) {
+        // Prevent infinite redirect if they are already on the dashboard
+        if (!req.nextUrl.pathname.startsWith("/dashboard")) {
+          return Response.redirect(new URL("/no-access", req.url));
+        }
+        return;
+      }
+
+      // If the user has no recognized permissions, redirect to a landing page or sign-in
+      return Response.redirect(new URL("/", req.url));
+    }
+  }
 });
 
 export const config = {
