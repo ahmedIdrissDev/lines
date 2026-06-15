@@ -66,14 +66,14 @@ export default clerkMiddleware(async (auth, req) => {
       // If the user has some access level, redirect to their default home (dashboard)
       if (hasManagerAccess || hasViewAccess) {
         // Prevent infinite redirect if they are already on the dashboard
-        if (!req.nextUrl.pathname.startsWith("/dashboard")) {
+        if (!req.nextUrl.pathname.startsWith("/no-access")) {
           return Response.redirect(new URL("/no-access", req.url));
         }
         return;
       }
 
-      // If the user has no recognized permissions, redirect to a landing page or sign-in
-      return Response.redirect(new URL("/", req.url));
+      // If the user has no recognized permissions, redirect to demand-access
+      return Response.redirect(new URL("/demand-acess", req.url));
     }
   }
 });
