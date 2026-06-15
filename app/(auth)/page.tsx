@@ -1,30 +1,22 @@
 "use client";
-import { SignIn } from "@clerk/nextjs";
 import Logo from "@/components/ui/logo";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const rouet = useRouter()
+  const SignIn=()=> rouet.push('/sign-in')
   return (
-    <div className="flex flex-col justify-center items-center p-6 w-full max-w-md bg-white rounded-2xl border border-hairline shadow-sm">
+    
+    <div className="flex flex-col justify-center items-center p-6  w-96 bg rounded-2xl border border-hairline shadow-sm">
       <div className="mb-8 text-center flex flex-col items-center">
         <Logo />
-        <p className="text-sm text-ash mt-2">Plateforme intelligente de gestion de projets</p>
+        <p className="text-sm text-ash mt-2">Lines est un outil collaboratif de gestion des ressources humaines.</p>
       </div>
+        <button onClick={SignIn} className="w-full cursor-pointer h-11 rounded-md bg-primary text-white">
+          Continuer
+        </button>
       
-      <SignIn 
-        appearance={{
-          elements: {
-            rootBox: "w-full",
-            card: "shadow-none border-none p-0",
-            headerTitle: "hidden",
-            headerSubtitle: "hidden",
-            footer: "hidden",
-            formButtonPrimary: "bg-primary hover:bg-primary-deep text-sm h-11 rounded-full",
-            formFieldInput: "rounded-full border-hairline h-11",
-            dividerRow: "hidden",
-            socialButtonsBlockButton: "hidden",
-          }
-        }}
-      />
+      
     </div>
   );
 }
