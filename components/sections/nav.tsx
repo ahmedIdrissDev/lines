@@ -3,8 +3,6 @@ import { UserButton, useUser } from '@clerk/nextjs'
 import dynamic from 'next/dynamic'
 import ProjectSelect from '../features/projects/project-selector'
 
-const Search = dynamic(() => import('../features/employees/employee-search'), { ssr: false })
-const PDF = dynamic(() => import('../features/reporting/pdf-exporter'), { ssr: false })
 
 const Navbar = () => {
   const { user } = useUser()
