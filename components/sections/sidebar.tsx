@@ -24,6 +24,12 @@ const Sidebar = () => {
               label='AI Agent'
               path='/dashboard'
             />
+            
+            <Button
+              icon={<Users size={18} />}
+              label='Gestion Personnel'
+              path='/personnel'
+            />
             <Button
               icon={<Construction size={18} />}
               label='Sous-traitants'
