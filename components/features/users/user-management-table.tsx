@@ -5,8 +5,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -21,11 +19,11 @@ import {
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { User as UserIcon, Settings2, Loader2, RefreshCw } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { User as UserIcon, Settings2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ClerkUser {
   id: string;
@@ -43,6 +41,40 @@ interface ClerkUser {
 interface UserManagementTableProps {
   initialUsers?: ClerkUser[];
 }
+
+const UserManagementSkeleton = () => {
+  return (
+    <>
+      {[...Array(5)].map((_, i) => (
+        <TableRow key={i} className="border-b border-hairline">
+          <TableCell>
+            <Skeleton className="h-10 w-10 rounded-full" />
+          </TableCell>
+          <TableCell>
+            <Skeleton className="h-4 w-32" />
+          </TableCell>
+          <TableCell>
+            <Skeleton className="h-4 w-48" />
+          </TableCell>
+          <TableCell>
+            <div className="flex gap-1">
+              <Skeleton className="h-6 w-16 rounded-full" />
+              <Skeleton className="h-6 w-16 rounded-full" />
+            </div>
+          </TableCell>
+          <TableCell>
+            <div className="flex gap-1">
+              <Skeleton className="h-6 w-20" />
+            </div>
+          </TableCell>
+          <TableCell className="text-right">
+            <Skeleton className="h-8 w-8 rounded-md ml-auto" />
+          </TableCell>
+        </TableRow>
+      ))}
+    </>
+  );
+};
 
 export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) => {
   const [users, setUsers] = useState<ClerkUser[]>(initialUsers || []);
@@ -139,11 +171,7 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
       <Table>
         <TableBody>
           {loading ? (
-            <TableRow>
-              <TableCell colSpan={6} className="text-center py-20">
-                <Loader2 className="h-8 w-8 animate-spin mx-auto text-primary opacity-20" />
-              </TableCell>
-            </TableRow>
+            <UserManagementSkeleton />
           ) : users.length === 0 ? (
             <TableRow>
               <TableCell colSpan={6} className="text-center py-10 text-ash italic">

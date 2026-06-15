@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import Provider from "@/hooks/auth";
 
 export const metadata: Metadata = {
-  title: "Lines -Tgcc ",
+  title: "Lines - tgcc ",
   description: "Lines is a collaborative tool for human resources management, designed to streamline employee administration, attendance tracking, and workforce coordination ",
   icons:'/logo.svg',
 };
