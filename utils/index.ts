@@ -31,6 +31,7 @@ export function getToday(){
 
 }
 export function handlePresentsUpdate({Matricule  , data}:handlePresentsUpdateProps){
+    if (!Array.isArray(data)) return [];
     const today= getToday()
     const employees = new Set(Matricule.map((id)=>id))
     const output = data?.map((user)=> employees.has(user.Matricule) ? {...user ,status:'active'} : {...user ,status:'inactive'} )

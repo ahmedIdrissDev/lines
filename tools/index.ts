@@ -2,7 +2,35 @@ import { baseUrl } from '@/constants';
 import { Employee } from '@/types';
 import { tool as createTool } from 'ai';
 import { z } from 'zod';
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
 
+const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+
+export const GetSubcontractorAttendance = createTool({
+  description: `
+  Get attendance report for subcontractors in a specific date range for a given project.
+  Returns a list of subcontractors with their daily attendance counts.
+  `,
+  inputSchema: z.object({
+    projectId: z.string().describe('The project ID (e.g. jx7...)'),
+    startDate: z.string().describe('Start date in YYYY-MM-DD format'),
+    endDate: z.string().describe('End date in YYYY-MM-DD format'),
+  }),
+  execute: async function ({ projectId, startDate, endDate }) {
+    try {
+      const data = await convex.query(api.functions.subcontractors.getProjectSubcontractorsAttendance, {
+        projectId: projectId as any,
+        startDate,
+        endDate
+      });
+      return data;
+    } catch (error) {
+      console.error('Error fetching attendance:', error);
+      return { error: 'Failed to fetch attendance data' };
+    }
+  },
+});
 
 export const handelProvideData = createTool({
   description: `
@@ -85,5 +113,6 @@ export const tools = {
   show:  handelProvideData,
   specific: Answering,
   add: Adding,
-  generateDoc:DocBuilder
+  generateDoc:DocBuilder,
+  getAttendance: GetSubcontractorAttendance
 };

@@ -1,64 +1,65 @@
-import { links } from '@/constants/links'
-import React from 'react'
-import Button from '../kits/button'
-import CardAI from '../kits/cardai'
-import UserButton from '../kits/UserButton'
+'use client'
+import Button from './sidebar-button'
 import Logo from '../ui/logo'
-import Add from '../inbox/compose'
-import Loading from '../inbox/ui/loading'
-import { Home, MessageCircleDashed, Settings } from 'lucide-react'
+import { LayoutDashboard, Users, Construction, ShieldCheck, UserPlus, Settings, HelpCircle, MessageSquareDashed, File } from 'lucide-react'
+import dynamic from 'next/dynamic'
+import { store } from '@/store'
+
 
 const Sidebar = () => {
+  const { ProjectID } = store()
+
   return (
-    <div className='w-full   border-r border-neutral-200    h-full flex flex-col justify-start gap-3 items-left  '>
-    <div className="w-full h-14 border-b border-neutral-200 p-2  ">
-      <Logo/>
-    </div>
-    <span className="material-symbols-outlined  ">
+    <div className='w-full bg-canvas border-r border-hairline h-full flex flex-col justify-start gap-6 py-2'>
+      <div className="w-full px-6 flex items-center ">
+        <Logo />
+      </div>
+      
+      <div className="flex flex-col gap-8 flex-1">
+        <div className="flex flex-col gap-3">
+          
+          <div className="flex px-3 flex-col gap-1">
+            <Button
+              icon={<LayoutDashboard size={18} />}
+              label='AI Agent'
+              path='/dashboard'
+            />
+            <Button
+              icon={<Construction size={18} />}
+              label='Sous-traitants'
+              path='/sous-traitants'
+            />
+             <Button
+              icon={<File size={18} />}
+              label='Rapport Général '
+              path='/rapport-general'
+            />
+            <Button
+              icon={<UserPlus size={18} />}
+              label='Administration'
+              path='/add'
+            />
+          </div>
+        </div>
 
-</span>
-<div className="flex   h-full flex-col gap-4">
-  <div className="px-2">
-  <Add/>
-
-  </div>
-  <div className="flex px-2 flex-col gap-2">
-    <Button 
- icon={'home'}
- label='Dashboard'
- path='/dashboard'
- 
- />
-
- <span className='px-1 opacity-60'> workspace</span>
- <div className="">
-
-    {links.slice(0) .map((data , key)=>(
-        <Button key={key} {...data} />
-    ))}
-
- </div>
-
-  </div>
-</div>
-<div className="px-2">
- 
-</div>
-<div className="w-full  p-4 h-full flex flex-col justify-end items-start ">
- <span className='px-1 opacity-60'> help</span>
- <Button 
- icon={'settings'}
- label='Settings'
- path='/settings'
- 
- />
- <Button 
- icon={'chat_dashed'}
- label='Help center'
- path='/Support'
- 
- />
-</div>
+        <div className="flex flex-col gap-3 mt-auto">
+          <div className="px-6">
+            <span className='caption-tight text-ash uppercase tracking-widest'>Support</span>
+          </div>
+          <div className="flex px-3 flex-col gap-1">
+            <Button
+              icon={<Settings size={18} />}
+              label='Paramètres'
+              path='/settings'
+            />
+            <Button
+              icon={<HelpCircle size={18} />}
+              label='Aide'
+              path='/help'
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

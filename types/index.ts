@@ -11,7 +11,7 @@ export interface Employee {
   _creationTime:number
 }
 export interface linksProps{
-    icon: string ,
+    icon: React.ReactNode ,
     path:string ,
     label:string
 }
@@ -19,18 +19,4 @@ export interface Proejct{
   _id:string ,
   name:string ,
   type:string
-}
-export interface reception{
-       receptionId: string[],
-       subject:string,
-       body:string ,
-       file?:string[] ,
-       userId:string ,
-       type?:Boolean
-}
- export interface Userreception {
-  name: string;
-  email: string;
-  image: string;
-  func: string;
 }

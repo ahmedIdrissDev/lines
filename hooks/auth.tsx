@@ -1,23 +1,18 @@
 'use client'
 import React from 'react'
-import { SessionProvider } from "next-auth/react"
+import { ClerkProvider, useAuth } from "@clerk/nextjs"
+import { ConvexProviderWithClerk } from "convex/react-clerk"
+import { ConvexReactClient } from "convex/react"
+import { shadcn } from "@clerk/ui/themes"
 
-import type { Session } from 'next-auth'
-import { ConvexProvider, ConvexReactClient } from 'convex/react'
-
-interface AuthProviderProps{
-    children:React.ReactNode ,
-    session:Session | null
-}
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
-const Provider = ({children ,session }:AuthProviderProps) => {
+export default function Provider({ children }: { children: React.ReactNode }) {
   return (
-    <SessionProvider session={session}>
- <ConvexProvider client={convex}>{children}</ConvexProvider>
-
-    </SessionProvider >
+    <ClerkProvider appearance={{ theme: shadcn }}>
+      <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+        {children}
+      </ConvexProviderWithClerk>
+    </ClerkProvider>
   )
 }
-
-export default Provider

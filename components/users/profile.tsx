@@ -1,13 +1,10 @@
 'use client'
-import { Camera } from 'lucide-react'
-import { signOut, useSession } from 'next-auth/react'
-import PopoverUI from './ui/popover'
+import { useUser } from '@clerk/nextjs'
 
 const Profile = () => {
-  const {data} = useSession()
+  const { user } = useUser()
   return (
-
-  <></>
+    <></>
   )
 }
 

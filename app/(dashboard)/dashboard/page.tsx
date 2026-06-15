@@ -1,15 +1,11 @@
-import Chat from '@/components/Chat'
-import Employees from '@/components/employees'
-import { EffectifGeneral } from '@/components/charts/General'
-import Super from '@/components/super'
+import { ChatPanel } from '@/components/features/ai/chat-panel'
+
 const page = () => {
   
   return (
-   <>
-         <Chat/>
-         <EffectifGeneral/>
-         <Super/> 
-   </>
+   <div className='flex flex-col gap-4 p-4 h-[calc(100dvh-100px)]'>
+            <ChatPanel />
+   </div>
   )
 }
 
