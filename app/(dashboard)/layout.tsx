@@ -16,7 +16,7 @@ const layout = ({
     <div className='grid grid-cols-[270px_1fr] h-dvh overflow-hidden'>
       
       <Sidebar/>
-      <ScrollArea className="w-full p-2 bg-white flex flex-col h-dvh">
+      <ScrollArea className="w-full p-2 bg-canvas flex flex-col h-dvh">
                 <Navbar/>
         
         {children}

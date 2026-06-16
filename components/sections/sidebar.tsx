@@ -10,7 +10,7 @@ const Sidebar = () => {
   const { ProjectID } = store()
 
   return (
-    <div className='w-full bg-canvas border-r border-hairline h-full flex flex-col justify-start gap-6 py-2'>
+    <div className='w-full bg-white border-r border-hairline h-full flex flex-col justify-start gap-6 py-2'>
       <div className="w-full px-6 flex items-center ">
         <Logo />
       </div>
@@ -27,8 +27,8 @@ const Sidebar = () => {
             
             <Button
               icon={<Users size={18} />}
-              label='Gestion Personnel'
-              path='/personnel'
+              label='Gestion Bus'
+              path='/bus'
             />
             <Button
               icon={<Construction size={18} />}

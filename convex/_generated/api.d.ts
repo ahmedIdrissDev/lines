@@ -9,6 +9,7 @@
  */
 
 import type * as functions_attendance from "../functions/attendance.js";
+import type * as functions_buses from "../functions/buses.js";
 import type * as functions_clerk from "../functions/clerk.js";
 import type * as functions_employees from "../functions/employees.js";
 import type * as functions_present from "../functions/present.js";
@@ -25,6 +26,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   "functions/attendance": typeof functions_attendance;
+  "functions/buses": typeof functions_buses;
   "functions/clerk": typeof functions_clerk;
   "functions/employees": typeof functions_employees;
   "functions/present": typeof functions_present;
