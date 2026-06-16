@@ -13,6 +13,14 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import moment from 'moment'
 import 'moment/locale/fr'
 import { cn } from '@/lib/utils'
@@ -109,99 +117,97 @@ const RapportGeneralPage = () => {
       <div className="bg-slate-50/50 px-6 py-2 border-b border-slate-200">
         <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{title}</span>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
-          <thead>
-            <tr className="bg-slate-50">
-              <th className="sticky left-0 z-20 min-w-[180px] border-b border-r bg-slate-50 px-4 py-3 text-left font-medium text-slate-700">
-                Sous-traitant
-              </th>
-              {days.map(day => (
-                <th key={day.format('DD')} className={cn(
-                  "min-w-[50px] border-b border-r border-slate-100 px-2 py-3 text-center text-slate-600 font-medium",
-                  day.isoWeekday() > 5 ? "bg-red-50/30" : ""
-                )}>
-                  {day.format('DD')}
-                </th>
-              ))}
-              <th className="sticky right-0 z-20 min-w-[100px] border-b border-l bg-slate-50 px-4 py-3 text-center font-semibold text-slate-900 shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredData.length === 0 ? (
-              <tr>
-                <td colSpan={days.length + 2} className="p-12 text-center   text-neutral-950">
-                  Aucun sous-traitant trouvé.
-                </td>
-              </tr>
-            ) : (
-              filteredData.map((row) => {
-                let rowTotal = 0
-                return (
-                  <tr key={row.subcontractorId} className="hover:bg-slate-50 group">
-                    <td className="sticky left-0 z-10 bg-white border-b border-r px-4 py-3 font-medium text-slate-700 group-hover:bg-slate-50 transition-colors">
-                      <span className="capitalize">{row.name.toLowerCase()}</span>
-                    </td>
-                    {days.map(day => {
-                      const dateStr = day.format('YYYY-MM-DD')
-                      const entry = row.attendance.find(a => a.date === dateStr)
-                      const count = entry?.count || 0
-                      rowTotal += count
-                      
-                      return (
-                        <td key={dateStr} className={cn(
-                          "border-b border-r border-slate-50 text-center px-2 py-3",
-                          day.isoWeekday() > 5 ? "bg-red-50/10" : "",
-                          count > 0 ? "text-slate-900" : "text-slate-300"
-                        )}>
-                          {count > 0 ? count : '-'}
-                        </td>
-                      )
-                    })}
-                    <td className="sticky right-0 z-10 bg-white border-b border-l text-center font-semibold text-slate-900 group-hover:bg-slate-50 transition-colors shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
-                      {rowTotal}
-                    </td>
-                  </tr>
-                )
-              })
-            )}
-            
-            {filteredData.length > 0 && (
-              <tr className="bg-slate-100 font-semibold text-slate-900">
-                <td className="sticky left-0 z-10 bg-slate-100 border-r px-4 py-3">
-                  Total journalier
-                </td>
-                {days.map(day => {
-                  const dateStr = day.format('YYYY-MM-DD')
-                  const dayTotal = attendanceData.reduce((acc, row) => {
+      <Table className="border-collapse text-sm">
+        <TableHeader>
+          <TableRow className="bg-slate-50 hover:bg-slate-50">
+            <TableHead className="sticky left-0 z-20 min-w-[180px] border-b border-r bg-slate-50 px-4 py-3 text-left font-medium text-slate-700 h-auto">
+              Sous-traitant
+            </TableHead>
+            {days.map(day => (
+              <TableHead key={day.format('DD')} className={cn(
+                "min-w-[50px] border-b border-r border-slate-100 px-2 py-3 text-center text-slate-600 font-medium h-auto",
+                day.isoWeekday() > 5 ? "bg-red-50/30" : ""
+              )}>
+                {day.format('DD')}
+              </TableHead>
+            ))}
+            <TableHead className="sticky right-0 z-20 min-w-[100px] border-b border-l bg-slate-50 px-4 py-3 text-center font-semibold text-slate-900 shadow-[-4px_0_8px_rgba(0,0,0,0.02)] h-auto">
+              Total
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {filteredData.length === 0 ? (
+            <TableRow>
+              <TableCell colSpan={days.length + 2} className="p-12 text-center text-neutral-950">
+                Aucun sous-traitant trouvé.
+              </TableCell>
+            </TableRow>
+          ) : (
+            filteredData.map((row) => {
+              let rowTotal = 0
+              return (
+                <TableRow key={row.subcontractorId} className="hover:bg-slate-50 group">
+                  <TableCell className="sticky left-0 z-10 bg-white border-b border-r px-4 py-3 font-medium text-slate-700 group-hover:bg-slate-50 transition-colors">
+                    <span className="capitalize">{row.name.toLowerCase()}</span>
+                  </TableCell>
+                  {days.map(day => {
+                    const dateStr = day.format('YYYY-MM-DD')
                     const entry = row.attendance.find(a => a.date === dateStr)
-                    return acc + (entry?.count || 0)
-                  }, 0)
-                  
-                  return (
-                    <td key={dateStr} className="text-center px-2 py-3">
-                      {dayTotal > 0 ? dayTotal : '-'}
-                    </td>
-                  )
-                })}
-                <td className="sticky right-0 z-10 bg-primary text-white border-l text-center shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
-                  {attendanceData.reduce((acc, row) => {
-                    return acc + row.attendance.filter(a => days.some(d => d.format('YYYY-MM-DD') === a.date)).reduce((sum, a) => sum + a.count, 0)
-                  }, 0)}
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+                    const count = entry?.count || 0
+                    rowTotal += count
+                    
+                    return (
+                      <TableCell key={dateStr} className={cn(
+                        "border-b border-r border-slate-50 text-center px-2 py-3",
+                        day.isoWeekday() > 5 ? "bg-red-50/10" : "",
+                        count > 0 ? "text-slate-900" : "text-slate-300"
+                      )}>
+                        {count > 0 ? count : '-'}
+                      </TableCell>
+                    )
+                  })}
+                  <TableCell className="sticky right-0 z-10 bg-white border-b border-l text-center font-semibold text-slate-900 group-hover:bg-slate-50 transition-colors shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
+                    {rowTotal}
+                  </TableCell>
+                </TableRow>
+              )
+            })
+          )}
+          
+          {filteredData.length > 0 && (
+            <TableRow className="bg-slate-100 font-semibold text-slate-900 hover:bg-slate-100">
+              <TableCell className="sticky left-0 z-10 bg-slate-100 border-r px-4 py-3">
+                Total journalier
+              </TableCell>
+              {days.map(day => {
+                const dateStr = day.format('YYYY-MM-DD')
+                const dayTotal = attendanceData.reduce((acc, row) => {
+                  const entry = row.attendance.find(a => a.date === dateStr)
+                  return acc + (entry?.count || 0)
+                }, 0)
+                
+                return (
+                  <TableCell key={dateStr} className="text-center px-2 py-3">
+                    {dayTotal > 0 ? dayTotal : '-'}
+                  </TableCell>
+                )
+              })}
+              <TableCell className="sticky right-0 z-10 bg-primary text-white border-l text-center shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
+                {attendanceData.reduce((acc, row) => {
+                  return acc + row.attendance.filter(a => days.some(d => d.format('YYYY-MM-DD') === a.date)).reduce((sum, a) => sum + a.count, 0)
+                }, 0)}
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   )
 
   return (
     <div className="p-2 w-full print:p-0">
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 max-w-5xl mx-auto">
         
         {/* Main Styled Container */}
         <div className="rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden">

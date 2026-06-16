@@ -126,7 +126,7 @@ const BusPage = () => {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-8">
+    <div className="p-4 md:p-2 w-full max-w-5xl mx-auto space-y-8">
       <div>
         <h1 className="text-3xl  text-ink">Gestion des Bus</h1>
         <p className="text-ash mt-2">Suivi quotidien et gestion de la flotte par site</p>
@@ -135,7 +135,7 @@ const BusPage = () => {
       {/* KPI Cards */}
       
       {/* Filters & Actions */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-end bg-white p-4 rounded-lg border border-hairline shadow-sm">
+      <div className="flex flex-col md:flex-row gap-4 justify-between w-full items-end bg-white p-4 rounded-lg border border-hairline shadow-sm">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 flex-1">
           <div className="space-y-1.5">
             <Label className="text-xs text-ash">Recherche</Label>
@@ -186,7 +186,7 @@ const BusPage = () => {
       </div>
 
       {/* Bus Table */}
-      <Card className="overflow-hidden border-hairline shadow-sm">
+      <Card className="overflow-hidden w-full border-hairline shadow-sm">
         <Table>
           <TableHeader className="bg-ash/5">
             <TableRow>
@@ -197,7 +197,6 @@ const BusPage = () => {
               <TableHead>KM</TableHead>
               <TableHead>Statut</TableHead>
               <TableHead>En service aujourd'hui</TableHead>
-              <TableHead>Dernière Mise à jour</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -235,9 +234,7 @@ const BusPage = () => {
                       {bus.workingToday ? "Oui" : "Non"}
                     </Toggle>
                   </TableCell>
-                  <TableCell className="text-xs text-ash">
-                    {moment(bus._creationTime).format("DD/MM/YYYY HH:mm")}
-                  </TableCell>
+                  
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Button 

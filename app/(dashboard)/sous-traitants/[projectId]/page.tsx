@@ -206,7 +206,7 @@ const ProjectDetailsPage = () => {
       )}
 
       <Card className="overflow-hidden border-hairline shadow-sm rounded-md bg-surface-card">
-        <table className="w-full border-collapse">
+        <table className="min-w-full border-collapse">
           <thead>
             <tr className="bg-surface-bone/30 border-b border-hairline">
               <th className="p-5 text-left caption-tight text-ash uppercase tracking-wider">Employé</th>

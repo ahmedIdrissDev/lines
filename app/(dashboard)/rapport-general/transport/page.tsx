@@ -89,7 +89,7 @@ const RapportTransportPage = () => {
         <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">{title}</span>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-sm">
+        <table className="min-w-full border-collapse text-sm">
           <thead>
             <tr className="bg-slate-50">
               <th className="sticky left-0 z-20 min-w-[180px] border-b border-r bg-slate-50 px-4 py-3 text-left font-medium text-slate-700">
