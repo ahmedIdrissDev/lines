@@ -20,8 +20,8 @@ const isViewAllowed = createRouteMatcher([
 const isManagerAllowed = createRouteMatcher([
   "/dashboard(.*)",
   "/sous-traitants(.*)",
-    "/rapport-general(.*)"
-
+    "/rapport-general(.*)",
+    "/bus(.*)",
 
 ]);
 
