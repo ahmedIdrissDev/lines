@@ -11,7 +11,7 @@ const page = () => {
     </div>
     <div className='grid grid-cols-5 gap-2'>
         <Link href={'/rapport-general/presonnel'} className="w-full flex-col  bg  border border-neutral-200 flex rounded-md justify-center items-center h-70">
-            <UserRound/>
+            <UserRound className='bg bg-clip-text'/>
             <h1>Gestion Presonnel</h1>
         </Link>
         <Link href={'/rapport-general/transport'} className="w-full flex-col bg border border-neutral-200 flex rounded-md justify-center items-center h-70">

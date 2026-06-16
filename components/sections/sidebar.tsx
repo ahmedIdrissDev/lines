@@ -50,7 +50,7 @@ const Sidebar = () => {
 
         <div className="flex flex-col gap-3 mt-auto">
           <div className="px-6">
-            <span className='caption-tight text-ash uppercase tracking-widest'>Support</span>
+            <span className='caption-tight text-ash  '>Support</span>
           </div>
           <div className="flex px-3 flex-col gap-1">
             <Button

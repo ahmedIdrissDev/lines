@@ -77,11 +77,11 @@ const SubcontractorsPage = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             <AddSubcontractorDialog />
             {subcontractors.map((sub) => (
               <Link key={sub._id} href={`/sous-traitants/sub/${sub._id}`}>
-                <Card className="h-44 flex flex-col items-center justify-center p-6 bg-linear-0 from-white via-white via-75% to-primary/20  border-hairline cursor-pointer group rounded-md hover:border-primary/50 transition-all shadow-sm">
+                <Card className="h-44 flex flex-col items-center justify-center p-6 bg-linear-0 from-white via-white via-75% to-primary/20  b cursor-pointer group rounded-md hover:border-primary/50 transition-all shadow-sm">
                   <span className="body-md text-ink text-center capitalize">
                     {sub.name.toLowerCase()}
                   </span>
