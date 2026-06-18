@@ -239,7 +239,7 @@
     @apply bg-surface-dark text-on-dark font-mono text-[14px] font-normal leading-[1.43] tracking-normal rounded-md p-6;
   }
   .bg{
-    @apply bg-primary text-white
+    @apply bg-white 
   }
 }
 
