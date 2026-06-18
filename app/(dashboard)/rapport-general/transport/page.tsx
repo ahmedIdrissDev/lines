@@ -68,8 +68,20 @@ const RapportTransportPage = () => {
   if (!projectId) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px] text-ash">
-        <Bus className="w-12 h-12 opacity-20 mb-4" />
-        <p className="text-sm">Veuillez sélectionner un projet pour voir le rapport de transport.</p>
+<svg
+          className="w-12 h-11 opacity-20"
+          width="457"
+          height="268"
+          viewBox="0 0 457 268"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.7523 221.748C130.997 224.167 159.239 246.1 197.289 177.128C217.19 141.056 187.597 107.922 208.143 72.214C253.226 -6.13942 438.972 85.3512 438.972 85.3512"
+            stroke="currentColor"
+            strokeWidth="81"
+          />
+        </svg>        <p className="text-sm">Veuillez sélectionner un projet pour voir le rapport de transport.</p>
       </div>
     )
   }
