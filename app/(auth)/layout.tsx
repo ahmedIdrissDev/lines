@@ -7,7 +7,7 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className='flex justify-center relative items-center bg-white  w-full h-dvh  '>
+    <div className='flex justify-center relative items-center bg-canvas  w-full h-dvh  '>
       <div className="z-10">
 
               {children}

@@ -110,7 +110,7 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
   const availablePermissions = [
     { id: "user:access:admin", label: "Admin (Full Control)" },
     { id: "user:access:all", label: "Manager (Projects & Employees)" },
-    { id: "user:access:view", label: "Adminstration Acess" },
+    { id: "user:access:view", label: "Administration Access" },
 
   ];
 
@@ -244,7 +244,7 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
       <Dialog open={!!editingUser} onOpenChange={(open) => !open && setEditingUser(null)}>
         <DialogContent   className="!max-w-1/2 bg">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-ink">Manage Access</DialogTitle>
+            <DialogTitle className="text-2xl font-normal text-ink">Manage Access</DialogTitle>
             <DialogDescription className="text-ash">
               {editingUser?.fullName || editingUser?.username}
               <br />
@@ -263,7 +263,7 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
                       checked={selectedPermissions.includes(perm.id)}
                       onCheckedChange={() => togglePermission(perm.id)}
                     />
-                    <Label htmlFor={perm.id} className="text-sm font-medium cursor-pointer flex-1">
+                    <Label htmlFor={perm.id} className="text-sm font-medium text-black cursor-pointer flex-1">
                       {perm.label}
                     </Label>
                   </div>
@@ -273,7 +273,7 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
 
             <div className="space-y-3">
               <Label className="text-ink font-semibold">Project Assignments</Label>
-              <div className="max-h-[200px] overflow-y-auto pr-2 space-y-2">
+              <div className="max-h-[200px] overflow-y-auto text-black pr-2 space-y-2">
                 {!projects ? (
                   <div className="flex justify-center p-4">
                     <Loader2 className="h-5 w-5 animate-spin text-ash" />
