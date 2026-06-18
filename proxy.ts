@@ -8,7 +8,9 @@ const isProtectedRoute = createRouteMatcher([
   "/sous-traitants(.*)",
   "/responsable(.*)",
   "/rapport(.*)",
-  "/add(.*)"
+  "/add(.*)" ,
+  "/bus(.*)",
+
 ]);
 
 // Route matchers for specific permission levels
