@@ -259,6 +259,7 @@ export const getProjectBusesAttendance = query({
     endDate: v.string(),
   },
   handler: async (ctx, args) => {
+    const project = await ctx.db.get(args.projectId);
     const buses = await ctx.db
       .query("buses")
       .withIndex("by_site", (q) => q.eq("siteId", args.projectId))
@@ -277,6 +278,10 @@ export const getProjectBusesAttendance = query({
           busId: bus._id,
           matricule: bus.matricule,
           busType: bus.busType,
+          destination: bus.destination,
+          km: bus.km,
+          status: bus.status,
+          siteName: project?.site || project?.name || "Unknown",
           attendance: attendance.map(a => ({
             date: a.date,
             isWorking: a.isWorking

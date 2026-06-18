@@ -175,13 +175,7 @@ const SubcontractorDetailsPage = () => {
                 </div>
               </div>
               <div className="flex items-center gap-4">
-                <button 
-                  onClick={handleShare}
-                  className="btn-outline gap-2 h-11"
-                >
-                  <Share2 className="size-4" />
-                  <span className="button-sm">partager</span>
-                </button>
+               
                 <div className="flex items-center bg-surface-card border border-hairline rounded-full p-1 shadow-sm h-11">
                   <button onClick={prevMonth} className="size-9 rounded-full hover:bg-canvas transition-colors flex items-center justify-center">
                     <ChevronLeft className="size-4" />
@@ -201,8 +195,8 @@ const SubcontractorDetailsPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Calendar & Stats */}
           <div className="lg:col-span-3 flex flex-col gap-8">
-            <Card className="p-1  overflow-hidden bg-linear-0 from-white via-white via-75% to-primary/20 ">
-              <div className="grid grid-cols-7 border-b border-hairline bg-surface-bone/30">
+            <Card className="p-1  overflow-hidden bg-white ">
+              <div className="grid grid-cols-7 border-b border-hairline ">
                 {['lun', 'mar', 'mer', 'jeu', 'ven', 'sam', 'dim'].map(d => (
                   <div key={d} className="p-4 text-center caption-tight text-ash ">
                     {d}
@@ -224,7 +218,7 @@ const SubcontractorDetailsPage = () => {
                       className={cn(
                         "min-h-[120px] p-3 border-r border-b border-hairline last:border-r-0 relative transition-all",
                         !isCurrentMonth ? "bg-surface-bone/20 opacity-40" : "bg-surface-card hover:bg-canvas cursor-pointer",
-                        isToday ? "bg-blue-50/30" : ""
+                        isToday ? "bg-primary text-white" : ""
                       )}
                     >
                       <div className="flex justify-between items-start">
