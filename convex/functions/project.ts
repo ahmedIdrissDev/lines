@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
-import { createAuditLog } from "./security";
 
 /**
  * Publicly accessible list of all projects for management purposes.
@@ -59,12 +58,7 @@ export const SetProject = mutation({
   handler: async (ctx, args) => {
     const projectId = await ctx.db.insert("Project", args);
 
-    await createAuditLog(ctx, {
-      action: "create_project",
-      targetId: projectId,
-      metadata: args,
-    });
-
+   
     return { success: true, id: projectId };
   },
 });
@@ -83,11 +77,7 @@ export const updateProject = mutation({
     const { id, ...rest } = args;
     await ctx.db.patch(id, rest);
 
-    await createAuditLog(ctx, {
-      action: "update_project",
-      targetId: id,
-      metadata: rest,
-    });
+   
     
     return { success: true };
   },
@@ -107,11 +97,7 @@ export const deleteProject = mutation({
 
     await ctx.db.delete(args.id);
 
-    await createAuditLog(ctx, {
-      action: "delete_project",
-      targetId: args.id,
-    });
-
+   
     return { success: true };
   },
 });

@@ -1,7 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
 import { Id } from "../_generated/dataModel";
-import { createAuditLog } from "./security";
 
 // --- Bus Management ---
 
@@ -86,12 +85,7 @@ export const createBus = mutation({
       isArchived: false,
     });
 
-    await createAuditLog(ctx, {
-      clerkId: identity?.subject,
-      action: "create_bus",
-      targetId: busId,
-      metadata: args,
-    });
+ 
 
     return { success: true, id: busId };
   },
@@ -130,13 +124,7 @@ export const updateBus = mutation({
 
     await ctx.db.patch(id, updates);
 
-    await createAuditLog(ctx, {
-      clerkId: identity?.subject,
-      action: "update_bus",
-      targetId: id,
-      metadata: updates,
-    });
-
+   
     return { success: true };
   },
 });
@@ -148,11 +136,7 @@ export const archiveBus = mutation({
 
     await ctx.db.patch(args.id, { isArchived: true });
 
-    await createAuditLog(ctx, {
-      clerkId: identity?.subject,
-      action: "archive_bus",
-      targetId: args.id,
-    });
+
 
     return { success: true };
   },
@@ -196,12 +180,7 @@ export const recordDailyTracking = mutation({
       });
     }
 
-    await createAuditLog(ctx, {
-      clerkId: clerkId,
-      action: "record_bus_tracking",
-      targetId: args.busId,
-      metadata: { date: args.date, isWorking: args.isWorking },
-    });
+   
 
     return { success: true };
   },

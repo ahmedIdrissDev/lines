@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
-import { createAuditLog } from "./security";
 
 export const getSubcontractors = query({
   args: {},
@@ -50,11 +49,7 @@ export const createSubcontractor = mutation({
   handler: async (ctx, args) => {
     const subId = await ctx.db.insert("subcontractors", args);
 
-    await createAuditLog(ctx, {
-      action: "create_subcontractor",
-      targetId: subId,
-      metadata: args,
-    });
+   
 
     return { success: true, id: subId };
   },
@@ -73,12 +68,7 @@ export const updateSubcontractor = mutation({
     const { id, ...rest } = args;
     await ctx.db.patch(id, rest);
 
-    await createAuditLog(ctx, {
-      action: "update_subcontractor",
-      targetId: id,
-      metadata: rest,
-    });
-
+   
     return { success: true };
   },
 });
@@ -98,10 +88,7 @@ export const deleteSubcontractor = mutation({
   handler: async (ctx, args) => {
     await ctx.db.delete(args.id);
 
-    await createAuditLog(ctx, {
-      action: "delete_subcontractor",
-      targetId: args.id,
-    });
+
 
     return { success: true };
   },
@@ -181,32 +168,19 @@ export const setDailyCount = mutation({
       if (args.count === 0) {
         await ctx.db.delete(existing._id);
         
-        await createAuditLog(ctx, {
-          action: "delete_subcontractor_attendance",
-          targetId: existing._id,
-          metadata: { date: args.date },
-        });
+      
 
         return { success: true, deleted: true };
       } else {
         await ctx.db.patch(existing._id, { count: args.count });
 
-        await createAuditLog(ctx, {
-          action: "update_subcontractor_attendance",
-          targetId: existing._id,
-          metadata: args,
-        });
-
+       
         return { success: true, id: existing._id };
       }
     } else if (args.count > 0) {
       const id = await ctx.db.insert("subcontractorDailyAttendance", args);
 
-      await createAuditLog(ctx, {
-        action: "create_subcontractor_attendance",
-        targetId: id,
-        metadata: args,
-      });
+
 
       return { success: true, id };
     }
