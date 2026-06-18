@@ -11,16 +11,16 @@ const page = () => {
     </div>
     <div className='grid grid-cols-4 gap-2'>
         <Link href={'/rapport-general/presonnel'} className="w-full flex-col gap-1.5  bg-white border border-neutral-200 flex rounded-md justify-center items-center h-70">
-           <div className="w-11 h-11 bg-pink-700 rounded-full flex justify-center items-center">
+           <div className="w-11 h-11 bg-pink-700 text-white rounded-full flex justify-center items-center">
             <UserRound className='bg bg-clip-text'/>
            </div>
             <h1>Gestion Presonnel</h1>
         </Link>
       <Link href={'/rapport-general/transport'} className="w-full flex-col gap-1.5  bg-white  border border-neutral-200 flex rounded-md justify-center items-center h-70">
-           <div className="w-11 h-11 bg-pink-700 rounded-full flex justify-center items-center">
+           <div className="w-11 h-11 bg-pink-700 text-white rounded-full flex justify-center items-center">
             <Bus className='bg bg-clip-text'/>
            </div>
-            <h1>Gestion Presonnel</h1>
+            <h1>Gestion du Bus</h1>
         </Link>
     </div>
     </div>
