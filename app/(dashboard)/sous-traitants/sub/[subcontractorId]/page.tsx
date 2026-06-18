@@ -217,7 +217,7 @@ const SubcontractorDetailsPage = () => {
                       onClick={() => isCurrentMonth && setEditingDay(dateStr)}
                       className={cn(
                         "min-h-[120px] p-3 border-r border-b border-hairline last:border-r-0 relative transition-all",
-                        !isCurrentMonth ? "bg-surface-bone/20 opacity-40" : "bg-surface-card hover:bg-canvas cursor-pointer",
+                        !isCurrentMonth ? "bg-surface-bone/20 opacity-40" : "bg-white cursor-pointer",
                         isToday ? "bg-primary text-white" : ""
                       )}
                     >
@@ -236,7 +236,7 @@ const SubcontractorDetailsPage = () => {
                       </div>
 
                       {isEditing ? (
-                        <div className="mt-4 flex flex-col gap-2 animate-in fade-in zoom-in duration-200" onClick={e => e.stopPropagation()}>
+                        <div className="mt-4 flex text-black flex-col gap-2 animate-in fade-in zoom-in duration-200" onClick={e => e.stopPropagation()}>
                           <input 
                             autoFocus
                             type="text" 
