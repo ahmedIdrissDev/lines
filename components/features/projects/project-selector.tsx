@@ -43,49 +43,15 @@ export default function ProjectSelect() {
   const isLoading = !isLoaded || allProjects === undefined;
   const projectId = ProjectID as Id<"Project"> | undefined;
    
-  const presents = useQuery(
-    api.functions.present.Presents,
-    projectId ? { Project: projectId } : "skip"
-  );
-
-  const employees = useQuery(
-    api.functions.employees.employees,
-    projectId ? { Project: projectId } : "skip"
-  );
-
+  
   useEffect(() => {
     if (!projectId && projects.length > 0) {
       setProjectId(projects[0]._id);
     }
   }, [projectId, projects, setProjectId]);
 
-  const updatedData = useMemo(() => {
-    if (!presents || !employees) return [];
+ 
     
-    // Check for security error objects
-    if ("error" in presents || "error" in employees) {
-      return [];
-    }
-
-    const today = getToday();
-
-    const lastPresent =
-      [...presents].reverse().find(Boolean) ?? null;
-
-    const todayPresent =
-      presents.find((p) => p.date === today) ?? lastPresent;
-
-    if (!todayPresent) return [];
-
-    return handlePresentsUpdate({
-      Matricule: todayPresent.employees,
-      data: employees,
-    });
-  }, [presents, employees]);
-
-  useEffect(() => {
-    setdata(updatedData);
-  }, [updatedData, setdata]);
 
   return (
     <Select
