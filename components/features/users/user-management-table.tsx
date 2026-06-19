@@ -89,7 +89,9 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/users');
+      const response = await fetch('/api/users', {
+        headers: { 'X-App-Source': 'tgcc-app' },
+      });
       if (!response.ok) throw new Error('Failed to fetch users');
       const data = await response.json();
       setUsers(data);
@@ -129,6 +131,7 @@ export const UserManagementTable = ({ initialUsers }: UserManagementTableProps) 
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          'X-App-Source': 'tgcc-app',
         },
         body: JSON.stringify({
           userId: editingUser.id,

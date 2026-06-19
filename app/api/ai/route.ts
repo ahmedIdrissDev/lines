@@ -2,8 +2,20 @@ import { google } from '@ai-sdk/google';
 import { convertToModelMessages, generateText, stepCountIs, streamText , UIMessage, zodSchema } from 'ai';
 import { tools } from '@/tools';
 import { prompt } from '@/constants';
+import { auth } from '@clerk/nextjs/server';
+
 export async function POST(req: Request) {
    try {
+      // Reject direct browser access — only our app includes this header
+      if (req.headers.get('X-App-Source') !== 'tgcc-app') {
+         return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      const { userId } = await auth();
+      if (!userId) {
+         return new Response(JSON.stringify({ error: 'Unauthorized' }), { status: 401, headers: { 'Content-Type': 'application/json' } });
+      }
+
       const { messages, projectId }: { messages: UIMessage[], projectId?: string } = await req.json();
       
       const systemPrompt = projectId 
