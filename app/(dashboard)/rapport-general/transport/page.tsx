@@ -30,6 +30,21 @@ const RapportTransportPage = () => {
     projectId ? { projectId, startDate: monthStart, endDate: monthEnd } : "skip"
   )
 
+  const tripsQueryResult = useQuery(
+    api.functions.buses.getSupplementaires,
+    projectId ? { siteId: projectId } : "skip"
+  )
+  const trips = Array.isArray(tripsQueryResult) ? tripsQueryResult : []
+
+  const filteredTrips = useMemo(() => {
+    if (!trips) return []
+    return trips.filter(trip => {
+      const tripDate = moment(trip.date)
+      return tripDate.isSameOrAfter(currentMonth.clone().startOf('month')) && 
+             tripDate.isSameOrBefore(currentMonth.clone().endOf('month'))
+    })
+  }, [trips, currentMonth])
+
   const daysFirst = useMemo(() => {
     const days = []
     const start = currentMonth.clone().startOf('month')
@@ -290,6 +305,43 @@ const RapportTransportPage = () => {
                           {row.status}
                         </span>
                       </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* Supplementary Trips Table */}
+        <div className="rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden mt-2">
+          <div className="bg-slate-50/50 px-6 py-3 border-b border-slate-200">
+            <h3 className="text-sm font-normal text-slate-700 uppercase tracking-wider">Trajets Supplémentaires</h3>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full border-collapse text-sm font-normal">
+              <thead>
+                <tr className="bg-slate-50/50">
+                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Matricule</th>
+                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Date</th>
+                  <th className="border-b px-4 py-3 text-left font-normal text-slate-600">Heure</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredTrips.length === 0 ? (
+                  <tr>
+                    <td colSpan={3} className="px-4 py-8 text-center text-slate-400 font-normal">
+                      Aucun trajet supplémentaire pour ce mois.
+                    </td>
+                  </tr>
+                ) : (
+                  filteredTrips.map((trip: any) => (
+                    <tr key={trip._id} className="hover:bg-slate-50 transition-colors">
+                      <td className="border-b border-r px-4 py-2 font-normal text-slate-700 uppercase">{trip.matricule}</td>
+                      <td className="border-b border-r px-4 py-2 font-normal text-slate-600">
+                        {moment(trip.date).format("DD/MM/YYYY")}
+                      </td>
+                      <td className="border-b px-4 py-2 font-normal text-slate-600">{trip.time}</td>
                     </tr>
                   ))
                 )}
