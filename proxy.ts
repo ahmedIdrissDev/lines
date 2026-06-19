@@ -71,7 +71,7 @@ export default clerkMiddleware(async (auth, req) => {
       }
 
       // If the user has no recognized permissions, redirect to demand-access
-      return Response.redirect(new URL("/demand-acess", req.url));
+      return Response.redirect(new URL("/demande-access", req.url));
     }
   }
 });

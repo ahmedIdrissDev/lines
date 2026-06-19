@@ -166,7 +166,7 @@ const SubcontractorDetailsPage = () => {
           <div className="flex flex-col flex-1">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-4">
-                 <Image className='w-12' src={'/Project.png'} width={1000} height={1000} alt='logo' />
+                 {/* <Image className='w-12' src={'/Project.png'} width={1000} height={1000} alt='logo' /> */}
                 <div>
                   <h1 className="heading-xl text-ink">
                     {subcontractorDoc.name}
