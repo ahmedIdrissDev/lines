@@ -14,7 +14,7 @@ const tw = createTw({
     sans: ["Helvetica"],
   },
   colors: {
-    primary: "#0c3aff",
+    primary: "#7E1212",
     ink: "#202020",
     canvas: "#f9f7f3",
     hairline: "rgba(32, 32, 32, 0.12)",

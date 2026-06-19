@@ -8,11 +8,14 @@ import {
   ChevronLeft, 
   ChevronRight,
   Search,
-  Bus
+  Bus,
+  FileDown,
+  Loader2,
 } from 'lucide-react'
 import moment from 'moment'
 import 'moment/locale/fr'
 import { cn } from '@/lib/utils'
+import { downloadTransportPDF } from './transport-pdf'
 
 moment.locale('fr')
 
@@ -21,6 +24,7 @@ const RapportTransportPage = () => {
   const projectId = ProjectID as Id<"Project"> | undefined
   const [currentMonth, setCurrentMonth] = useState(moment().startOf('month'))
   const [searchTerm, setSearchTerm] = useState('')
+  const [isExporting, setIsExporting] = useState(false)
 
   const monthStart = useMemo(() => currentMonth.clone().startOf('month').format('YYYY-MM-DD'), [currentMonth])
   const monthEnd = useMemo(() => currentMonth.clone().endOf('month').format('YYYY-MM-DD'), [currentMonth])
@@ -252,6 +256,33 @@ const RapportTransportPage = () => {
                   className="h-10 bg-white rounded-lg border border-slate-200 pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 w-64 font-normal"
                 />
               </div>
+
+              {/* PDF Export Button */}
+              <button
+                onClick={async () => {
+                  if (!transportData || !Array.isArray(transportData)) return
+                  setIsExporting(true)
+                  try {
+                    await downloadTransportPDF({
+                      month: currentMonth,
+                      buses: transportData,
+                      trips: filteredTrips,
+                      daysFirst,
+                      daysSecond,
+                    })
+                  } finally {
+                    setIsExporting(false)
+                  }
+                }}
+                disabled={isExporting || !transportData || !Array.isArray(transportData)}
+                className="h-10 px-4 flex items-center gap-2 rounded-lg border border-primary bg-primary text-white text-sm font-normal hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isExporting
+                  ? <Loader2 className="size-4 animate-spin" />
+                  : <FileDown className="size-4" />
+                }
+                {isExporting ? 'Export...' : 'Exporter PDF'}
+              </button>
             </div>
           </div>
 

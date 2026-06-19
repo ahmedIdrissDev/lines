@@ -9,8 +9,11 @@ import {
   ChevronRight,
   Printer,
   Building2,
-  Search
+  Search,
+  FileDown,
+  Loader2
 } from 'lucide-react'
+import { downloadPersonnelPDF } from './personnel-pdf'
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group"
 import {
@@ -34,6 +37,7 @@ const RapportGeneralPage = () => {
   const projectId = ProjectID as Id<"Project"> | undefined
   const [currentMonth, setCurrentMonth] = useState(moment().startOf('month'))
   const [searchTerm, setSearchTerm] = useState('')
+  const [pdfLoading, setPdfLoading] = useState(false)
 
   const monthStart = useMemo(() => currentMonth.clone().startOf('month').format('YYYY-MM-DD'), [currentMonth])
   const monthEnd = useMemo(() => currentMonth.clone().endOf('month').format('YYYY-MM-DD'), [currentMonth])
@@ -80,6 +84,21 @@ const RapportGeneralPage = () => {
 
   const handlePrint = () => {
     window.print()
+  }
+
+  const handleDownloadPDF = async () => {
+    if (!attendanceData) return
+    setPdfLoading(true)
+    try {
+      await downloadPersonnelPDF({
+        month: currentMonth,
+        data: attendanceData,
+        daysFirst,
+        daysSecond,
+      })
+    } finally {
+      setPdfLoading(false)
+    }
   }
 
   if (!projectId) {
@@ -247,7 +266,19 @@ const RapportGeneralPage = () => {
                 />
               </div>
 
-              
+              <Button
+                size="sm"
+                onClick={handleDownloadPDF}
+                disabled={pdfLoading || !attendanceData || attendanceData.length === 0}
+                className="h-10 gap-2 bg-primary text-white border-none rounded-md hover:bg-primary/90"
+              >
+                {pdfLoading ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <FileDown className="size-4" />
+                )}
+                {pdfLoading ? 'Génération...' : 'Exporter PDF'}
+              </Button>
             </div>
           </div>
 

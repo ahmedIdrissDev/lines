@@ -8,7 +8,7 @@ const tw = createTw({
     sans: ["Helvetica"],
   },
   colors: {
-    primary: "#0c3aff",
+    primary: "#7E1212",
     ink: "#202020",
     charcoal: "#575757",
     ash: "#8d8d8d",
