@@ -81,7 +81,8 @@ const AttendanceTable = ({
   allDays?: moment.Moment[]
   isLast?: boolean
 }) => {
-  const colW = Math.max(16, Math.floor(440 / (days.length + 2)))
+  const showMonthly = isLast && allDays
+  const colW = Math.max(16, Math.floor(684 / (days.length + (showMonthly ? 3 : 2))))
   const labelW = 110
 
   return (
@@ -107,9 +108,14 @@ const AttendanceTable = ({
             <Text style={{ fontSize: 6, color: '#fff' }}>{day.format('DD')}</Text>
           </View>
         ))}
-        <View style={{ width: colW, padding: '4px 2px', alignItems: 'center' }}>
+        <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', borderRight: showMonthly ? `1px solid rgba(255,255,255,0.2)` : undefined }}>
           <Text style={{ fontSize: 7, color: '#fff' }}>Total</Text>
         </View>
+        {showMonthly && (
+          <View style={{ width: colW, padding: '4px 2px', alignItems: 'center' }}>
+            <Text style={{ fontSize: 5, color: '#fff', textAlign: 'center' }}>Total Mensuel</Text>
+          </View>
+        )}
       </View>
 
       {/* Subcontractor rows */}
@@ -146,9 +152,21 @@ const AttendanceTable = ({
                 </View>
               )
             })}
-            <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', justifyContent: 'center', borderRight: showMonthly ? `1px solid ${HAIRLINE}` : undefined }}>
               <Text style={{ fontSize: 7, color: INK }}>{rowTotal}</Text>
             </View>
+            {showMonthly && (() => {
+              const monthlyTotal = allDays.reduce((sum, day) => {
+                const d = day.format('YYYY-MM-DD')
+                const entry = row.attendance.find((a: AttendanceEntry) => a.date === d)
+                return sum + (entry?.count || 0)
+              }, 0)
+              return (
+                <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff5f5' }}>
+                  <Text style={{ fontSize: 7, color: PRIMARY }}>{monthlyTotal}</Text>
+                </View>
+              )
+            })()}
           </View>
         )
       })}
@@ -171,36 +189,42 @@ const AttendanceTable = ({
               </View>
             )
           })}
-          <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', backgroundColor: PRIMARY }}>
+          <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', backgroundColor: PRIMARY, borderRight: showMonthly ? `1px solid rgba(255,255,255,0.2)` : undefined }}>
             <Text style={{ fontSize: 7, color: '#fff' }}>
               {data.reduce((acc, row) => {
                 return acc + row.attendance.filter((a: AttendanceEntry) => days.some(d => d.format('YYYY-MM-DD') === a.date)).reduce((sum, a) => sum + (a.count || 0), 0)
               }, 0)}
             </Text>
           </View>
+          {showMonthly && (
+            <View style={{ width: colW, padding: '4px 2px', alignItems: 'center', backgroundColor: PRIMARY }}>
+              <Text style={{ fontSize: 7, color: '#fff' }}>
+                {data.reduce((acc, row) => {
+                  return acc + row.attendance.filter((a: AttendanceEntry) => allDays.some(d => d.format('YYYY-MM-DD') === a.date)).reduce((sum, a) => sum + (a.count || 0), 0)
+                }, 0)}
+              </Text>
+            </View>
+          )}
         </View>
       )}
 
       {/* Total Mensuel — only on last table */}
       {isLast && allDays && data.length > 0 && (
-        <View style={{ flexDirection: 'row', backgroundColor: PRIMARY, borderTop: `2px solid ${PRIMARY}` }}>
-          <View style={{ width: labelW, padding: '5px 6px', borderRight: `1px solid rgba(255,255,255,0.2)` }}>
-            <Text style={{ fontSize: 8, color: '#fff' }}>Total Mensuel</Text>
-          </View>
-          {days.map(day => (
-            <View key={day.format('DD')} style={{ width: colW, padding: '4px 2px', alignItems: 'center', borderRight: `1px solid rgba(255,255,255,0.2)` }}>
-              <Text style={{ fontSize: 6, color: 'rgba(255,255,255,0.4)' }}> </Text>
-            </View>
-          ))}
-          <View style={{ width: colW, padding: '4px 2px', alignItems: 'center' }}>
-            <Text style={{ fontSize: 8, color: '#fff' }}>
-              {data.reduce((acc, row) => acc + allDays.reduce((sum, day) => {
-                const d = day.format('YYYY-MM-DD')
-                const entry = row.attendance.find((a: AttendanceEntry) => a.date === d)
-                return sum + (entry?.count || 0)
-              }, 0), 0)}
-            </Text>
-          </View>
+        <View style={{ 
+          flexDirection: 'row', 
+          backgroundColor: PRIMARY, 
+          borderTop: `2px solid ${PRIMARY}`, 
+          justifyContent: 'center', 
+          padding: '6px 10px',
+          width: labelW + colW * (days.length + 3)
+        }}>
+          <Text style={{ fontSize: 8, color: '#fff', textAlign: 'center' }}>
+            Total Mensuel : {data.reduce((acc, row) => acc + allDays.reduce((sum, day) => {
+              const d = day.format('YYYY-MM-DD')
+              const entry = row.attendance.find((a: AttendanceEntry) => a.date === d)
+              return sum + (entry?.count || 0)
+            }, 0), 0)}
+          </Text>
         </View>
       )}
     </View>
