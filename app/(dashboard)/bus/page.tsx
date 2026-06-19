@@ -50,6 +50,34 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import moment from "moment";
 import { Toggle } from "@/components/ui/toggle";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { cn } from "@/lib/utils";
+
+// ─── Zod Schemas ────────────────────────────────────────────────────────────
+
+const busSchema = z.object({
+  matricule: z.string().min(1, "La matricule est obligatoire").regex(
+    /^[A-Za-z0-9\-\s]+$/,
+    "Format invalide (ex: 12345-A-6)"
+  ),
+  busType: z.enum(["Bus", "Minibus"], { required_error: "Le type est obligatoire" }),
+  status: z.enum(["Active", "Maintenance", "Out of Service"], { required_error: "Le statut est obligatoire" }),
+  capacity: z.coerce.number().int().positive("Doit être un nombre positif").optional().or(z.literal("")),
+  destination: z.string().optional(),
+  km: z.coerce.number().int().nonnegative("Doit être un nombre positif ou zéro").optional().or(z.literal("")),
+  notes: z.string().optional(),
+});
+
+const tripSchema = z.object({
+  matricule: z.string().min(1, "Veuillez sélectionner un bus"),
+  date: z.string().min(1, "La date est obligatoire"),
+  time: z.string().min(1, "L'heure est obligatoire"),
+});
+
+type BusFormValues = z.infer<typeof busSchema>;
+type TripFormValues = z.infer<typeof tripSchema>;
 
 const BusPage = () => {
   const { ProjectID } = store();
@@ -63,6 +91,12 @@ const BusPage = () => {
   const [editingBus, setEditingBus] = useState<any>(null);
   const [activeTab, setActiveTab] = useState<"fleet" | "trips">("fleet");
   const [isAddTripDialogOpen, setIsAddTripDialogOpen] = useState(false);
+  const [isCreatingTrip, setIsCreatingTrip] = useState(false);
+  const [deletingTripId, setDeletingTripId] = useState<Id<"supplementaires"> | null>(null);
+  const [isDeletingTrip, setIsDeletingTrip] = useState(false);
+  const [deletingBusId, setDeletingBusId] = useState<Id<"buses"> | null>(null);
+  const [isDeletingBus, setIsDeletingBus] = useState(false);
+  const [isSubmittingBus, setIsSubmittingBus] = useState(false);
 
   const today = moment().format("YYYY-MM-DD");
 
@@ -104,6 +138,7 @@ const BusPage = () => {
   const deleteTrip = useMutation(api.functions.buses.deleteSupplementaire);
 
   const handleAddTrip = async (data: any) => {
+    setIsCreatingTrip(true);
     try {
       await addTrip({
         matricule: data.matricule,
@@ -115,17 +150,22 @@ const BusPage = () => {
       setIsAddTripDialogOpen(false);
     } catch (error: any) {
       toast.error(error.message || "Erreur lors de l'ajout");
+    } finally {
+      setIsCreatingTrip(false);
     }
   };
 
-  const handleDeleteTrip = async (id: Id<"supplementaires">) => {
-    if (confirm("Êtes-vous sûr de vouloir supprimer ce trajet ?")) {
-      try {
-        await deleteTrip({ id });
-        toast.success("Trajet supprimé");
-      } catch (error: any) {
-        toast.error(error.message || "Erreur lors de la suppression");
-      }
+  const handleDeleteTrip = async () => {
+    if (!deletingTripId) return;
+    setIsDeletingTrip(true);
+    try {
+      await deleteTrip({ id: deletingTripId });
+      toast.success("Trajet supprimé");
+      setDeletingTripId(null);
+    } catch (error: any) {
+      toast.error(error.message || "Erreur lors de la suppression");
+    } finally {
+      setIsDeletingTrip(false);
     }
   };
 
@@ -142,14 +182,17 @@ const BusPage = () => {
     }
   };
 
-  const handleArchiveBus = async (id: Id<"buses">) => {
-    if (confirm("Êtes-vous sûr de vouloir supprimer ce bus ?")) {
-      try {
-        await archiveBus({ id });
-        toast.success("Bus supprimé");
-      } catch (error: any) {
-        toast.error(error.message || "Erreur lors de la suppression");
-      }
+  const handleArchiveBus = async () => {
+    if (!deletingBusId) return;
+    setIsDeletingBus(true);
+    try {
+      await archiveBus({ id: deletingBusId });
+      toast.success("Bus supprimé");
+      setDeletingBusId(null);
+    } catch (error: any) {
+      toast.error(error.message || "Erreur lors de la suppression");
+    } finally {
+      setIsDeletingBus(false);
     }
   };
 
@@ -320,8 +363,8 @@ const BusPage = () => {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 !rounded-md"
-                        onClick={() => handleArchiveBus(bus._id)}
+                        className="h-8 w-8 !rounded-md text-red-500 hover:text-red-600 hover:bg-red-50"
+                        onClick={() => setDeletingBusId(bus._id)}
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -339,13 +382,17 @@ const BusPage = () => {
         open={isAddDialogOpen}
         onOpenChange={setIsAddDialogOpen}
         title="Ajouter un nouveau bus"
+        isLoading={isSubmittingBus}
         onSubmit={async (data: any) => {
+          setIsSubmittingBus(true);
           try {
             await createBus({ ...data, siteId: projectId });
             toast.success("Bus ajouté avec succès");
             setIsAddDialogOpen(false);
           } catch (error: any) {
             toast.error(error.message || "Erreur lors de l'ajout");
+          } finally {
+            setIsSubmittingBus(false);
           }
         }}
       />
@@ -357,17 +404,57 @@ const BusPage = () => {
           onOpenChange={setIsEditDialogOpen}
           title="Modifier le bus"
           initialData={editingBus}
+          isLoading={isSubmittingBus}
           onSubmit={async (data: any) => {
+            setIsSubmittingBus(true);
             try {
               await updateBus({ id: editingBus._id, ...data });
               toast.success("Bus mis à jour");
               setIsEditDialogOpen(false);
             } catch (error: any) {
               toast.error(error.message || "Erreur lors de la mise à jour");
+            } finally {
+              setIsSubmittingBus(false);
             }
           }}
         />
       )}
+
+      {/* Delete Bus Confirmation Dialog */}
+      <Dialog open={!!deletingBusId} onOpenChange={(open) => { if (!open && !isDeletingBus) setDeletingBusId(null); }}>
+        <DialogContent className="sm:max-w-[380px]">
+          <DialogHeader>
+            <DialogTitle className="font-normal flex items-center gap-2">
+              <div className="flex items-center justify-center w-9 h-9 rounded-full bg-red-100">
+                <Trash2 className="w-4 h-4 text-red-600" />
+              </div>
+              Supprimer le bus
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-ash py-2">
+            Êtes-vous sûr de vouloir supprimer ce bus ? Cette action est irréversible.
+          </p>
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              className="!rounded-md"
+              onClick={() => setDeletingBusId(null)}
+              disabled={isDeletingBus}
+            >
+              Annuler
+            </Button>
+            <Button
+              variant="destructive"
+              className="!rounded-md gap-2"
+              onClick={handleArchiveBus}
+              disabled={isDeletingBus}
+            >
+              {isDeletingBus && <Loader2 className="w-4 h-4 animate-spin" />}
+              Supprimer
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
         </>
       )}
 
@@ -422,8 +509,8 @@ const BusPage = () => {
                         <Button 
                           variant="ghost" 
                           size="icon" 
-                          className="h-8 w-8 !rounded-md"
-                          onClick={() => handleDeleteTrip(trip._id)}
+                          className="h-8 w-8 !rounded-md text-red-500 hover:text-red-600 hover:bg-red-50"
+                          onClick={() => setDeletingTripId(trip._id)}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -443,79 +530,161 @@ const BusPage = () => {
         onOpenChange={setIsAddTripDialogOpen}
         buses={buses}
         onSubmit={handleAddTrip}
+        isLoading={isCreatingTrip}
       />
+
+      {/* Delete Trip Confirmation Dialog */}
+      <Dialog open={!!deletingTripId} onOpenChange={(open) => { if (!open && !isDeletingTrip) setDeletingTripId(null); }}>
+        <DialogContent className="sm:max-w-[380px]">
+          <DialogHeader>
+            <DialogTitle className="font-normal flex items-center gap-2">
+              <div className="flex items-center justify-center w-9 h-9 rounded-full bg-red-100">
+                <Trash2 className="w-4 h-4 text-red-600" />
+              </div>
+              Supprimer le trajet
+            </DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-ash py-2">
+            Êtes-vous sûr de vouloir supprimer ce trajet supplémentaire ? Cette action est irréversible.
+          </p>
+          <DialogFooter className="gap-2">
+            <Button
+              variant="outline"
+              className="!rounded-md"
+              onClick={() => setDeletingTripId(null)}
+              disabled={isDeletingTrip}
+            >
+              Annuler
+            </Button>
+            <Button
+              variant="destructive"
+              className="!rounded-md gap-2"
+              onClick={handleDeleteTrip}
+              disabled={isDeletingTrip}
+            >
+              {isDeletingTrip && <Loader2 className="w-4 h-4 animate-spin" />}
+              Supprimer
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
 
-const AddTripDialog = ({ open, onOpenChange, buses, onSubmit }: any) => {
-  const [formData, setFormData] = useState({
-    matricule: "",
-    date: moment().format("YYYY-MM-DD"),
-    time: moment().format("HH:mm"),
+const AddTripDialog = ({ open, onOpenChange, buses, onSubmit, isLoading }: any) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<TripFormValues>({
+    resolver: zodResolver(tripSchema),
+    defaultValues: {
+      matricule: "",
+      date: moment().format("YYYY-MM-DD"),
+      time: moment().format("HH:mm"),
+    },
   });
 
   React.useEffect(() => {
     if (open) {
-      setFormData({
+      reset({
         matricule: buses[0]?.matricule || "",
         date: moment().format("YYYY-MM-DD"),
         time: moment().format("HH:mm"),
       });
     }
-  }, [open, buses]);
+  }, [open, buses, reset]);
+
+  if (isLoading) {
+    return (
+      <Dialog open={true}>
+        <DialogContent className="sm:max-w-[260px] flex flex-col items-center justify-center gap-4 py-10" showCloseButton={false}>
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+          <p className="text-sm text-ash text-center">Enregistrement en cours...</p>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[400px] ">
+      <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
           <DialogTitle className="font-normal">Ajouter un trajet supplémentaire</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
+          {/* Matricule */}
           <div className="grid gap-2">
             <Label htmlFor="trip-matricule">Matricule du Bus</Label>
-            <Select 
-              value={formData.matricule} 
-              onValueChange={(v) => setFormData({ ...formData, matricule: v })}
-            >
-              <SelectTrigger id="trip-matricule" className="!rounded-md">
-                <SelectValue placeholder="Sélectionner un bus" />
-              </SelectTrigger>
-              <SelectContent>
-                {buses.map((bus: any) => (
-                  <SelectItem key={bus._id} value={bus.matricule}>
-                    {bus.matricule} ({bus.busType})
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Controller
+              name="matricule"
+              control={control}
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger
+                    id="trip-matricule"
+                    className={cn("!rounded-md", errors.matricule && "border-red-500 focus:ring-red-500")}
+                  >
+                    <SelectValue placeholder="Sélectionner un bus" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {buses.map((bus: any) => (
+                      <SelectItem key={bus._id} value={bus.matricule}>
+                        {bus.matricule} ({bus.busType})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+            {errors.matricule && (
+              <p className="text-xs text-red-500 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />{errors.matricule.message}
+              </p>
+            )}
           </div>
+
+          {/* Date */}
           <div className="grid gap-2">
             <Label htmlFor="trip-date">Date</Label>
             <Input
               id="trip-date"
               type="date"
-              className="!rounded-md"
-              value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+              className={cn("!rounded-md", errors.date && "border-red-500 focus:ring-red-500")}
+              {...register("date")}
             />
+            {errors.date && (
+              <p className="text-xs text-red-500 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />{errors.date.message}
+              </p>
+            )}
           </div>
+
+          {/* Heure */}
           <div className="grid gap-2">
             <Label htmlFor="trip-time">Heure</Label>
             <Input
               id="trip-time"
               type="time"
-              className="!rounded-md"
-              value={formData.time}
-              onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+              className={cn("!rounded-md", errors.time && "border-red-500 focus:ring-red-500")}
+              {...register("time")}
             />
+            {errors.time && (
+              <p className="text-xs text-red-500 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />{errors.time.message}
+              </p>
+            )}
           </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit" className="!rounded-md" onClick={() => onSubmit(formData)}>
-            Ajouter le trajet
-          </Button>
-        </DialogFooter>
+
+          <DialogFooter>
+            <Button type="submit" className="!rounded-md">
+              Ajouter le trajet
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );
@@ -529,136 +698,197 @@ const StatusBadge = ({ status }: { status: string }) => {
   
 };
 
-const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) => {
-  const [formData, setFormData] = useState({
-    matricule: initialData?.matricule || "",
-    busType: initialData?.busType || "Bus",
-    status: initialData?.status || "Active",
-    capacity: initialData?.capacity || undefined,
-    notes: initialData?.notes || "",
-    km: initialData?.km || undefined,
-    destination: initialData?.destination || "",
+const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData, isLoading }: any) => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<BusFormValues>({
+    resolver: zodResolver(busSchema),
+    defaultValues: {
+      matricule: "",
+      busType: "Bus",
+      status: "Active",
+      capacity: "",
+      destination: "",
+      km: "",
+      notes: "",
+    },
   });
 
   React.useEffect(() => {
     if (open && initialData) {
-      setFormData({
+      reset({
         matricule: initialData.matricule,
         busType: initialData.busType,
         status: initialData.status,
-        capacity: initialData.capacity,
+        capacity: initialData.capacity ?? "",
         notes: initialData.notes || "",
-        km: initialData.km,
+        km: initialData.km ?? "",
         destination: initialData.destination || "",
       });
     } else if (open && !initialData) {
-      setFormData({
+      reset({
         matricule: "",
         busType: "Bus",
         status: "Active",
-        capacity: undefined,
+        capacity: "",
         notes: "",
-        km: undefined,
+        km: "",
         destination: "",
       });
     }
-  }, [open, initialData]);
+  }, [open, initialData, reset]);
+
+  if (isLoading) {
+    return (
+      <Dialog open={true}>
+        <DialogContent className="sm:max-w-[260px] flex flex-col items-center justify-center gap-4 py-10" showCloseButton={false}>
+          <Loader2 className="w-10 h-10 animate-spin text-primary" />
+          <p className="text-sm text-ash text-center">Enregistrement en cours...</p>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl ">
+      <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="font-normal">{title}</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
+
+          {/* Matricule */}
           <div className="grid gap-2">
-            <Label htmlFor="matricule">Matricule</Label>
+            <Label htmlFor="matricule">Matricule <span className="text-red-500">*</span></Label>
             <Input
               id="matricule"
-              className="!rounded-md"
-              value={formData.matricule}
-              onChange={(e) => setFormData({ ...formData, matricule: e.target.value })}
+              className={cn("!rounded-md", errors.matricule && "border-red-500 focus:ring-red-500")}
               placeholder="ex: 12345-A-6"
+              {...register("matricule")}
             />
+            {errors.matricule && (
+              <p className="text-xs text-red-500 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />{errors.matricule.message}
+              </p>
+            )}
           </div>
+
+          {/* Type + Statut */}
           <div className="grid grid-cols-2 gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="type">Type</Label>
-              <Select 
-                value={formData.busType} 
-                onValueChange={(v) => setFormData({ ...formData, busType: v as any })}
-              >
-                <SelectTrigger id="type" className="!rounded-md">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Bus">Bus</SelectItem>
-                  <SelectItem value="Minibus">Minibus</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label htmlFor="type">Type <span className="text-red-500">*</span></Label>
+              <Controller
+                name="busType"
+                control={control}
+                render={({ field }) => (
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger id="type" className={cn("!rounded-md", errors.busType && "border-red-500")}>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Bus">Bus</SelectItem>
+                      <SelectItem value="Minibus">Minibus</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {errors.busType && (
+                <p className="text-xs text-red-500 flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" />{errors.busType.message}
+                </p>
+              )}
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="status">Statut</Label>
-              <Select 
-                value={formData.status} 
-                onValueChange={(v) => setFormData({ ...formData, status: v as any })}
-              >
-                <SelectTrigger id="status" className="!rounded-md">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Active">Actif</SelectItem>
-                  <SelectItem value="Maintenance">Maintenance</SelectItem>
-                  <SelectItem value="Out of Service">Hors Service</SelectItem>
-                </SelectContent>
-              </Select>
+              <Label htmlFor="status">Statut <span className="text-red-500">*</span></Label>
+              <Controller
+                name="status"
+                control={control}
+                render={({ field }) => (
+                  <Select value={field.value} onValueChange={field.onChange}>
+                    <SelectTrigger id="status" className={cn("!rounded-md", errors.status && "border-red-500")}>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Active">Actif</SelectItem>
+                      <SelectItem value="Maintenance">Maintenance</SelectItem>
+                      <SelectItem value="Out of Service">Hors Service</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {errors.status && (
+                <p className="text-xs text-red-500 flex items-center gap-1">
+                  <AlertCircle className="w-3 h-3" />{errors.status.message}
+                </p>
+              )}
             </div>
           </div>
+
+          {/* Capacité */}
           <div className="grid gap-2">
             <Label htmlFor="capacity">Capacité (optionnel)</Label>
             <Input
               id="capacity"
-              className="!rounded-md"
               type="number"
-              value={formData.capacity || ""}
-              onChange={(e) => setFormData({ ...formData, capacity: e.target.value ? parseInt(e.target.value) : undefined })}
+              min={1}
+              className={cn("!rounded-md", errors.capacity && "border-red-500")}
+              {...register("capacity")}
             />
+            {errors.capacity && (
+              <p className="text-xs text-red-500 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />{errors.capacity.message as string}
+              </p>
+            )}
           </div>
+
+          {/* Destination */}
           <div className="grid gap-2">
             <Label htmlFor="destination">Destination (optionnel)</Label>
             <Input
               id="destination"
               className="!rounded-md"
-              value={formData.destination}
-              onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
               placeholder="ex: Sidi shaf -> chu rabat"
+              {...register("destination")}
             />
           </div>
+
+          {/* KM */}
           <div className="grid gap-2">
             <Label htmlFor="km">KM (optionnel)</Label>
             <Input
               id="km"
-              className="!rounded-md"
               type="number"
-              value={formData.km || ""}
-              onChange={(e) => setFormData({ ...formData, km: e.target.value ? parseInt(e.target.value) : undefined })}
+              min={0}
+              className={cn("!rounded-md", errors.km && "border-red-500")}
+              {...register("km")}
             />
+            {errors.km && (
+              <p className="text-xs text-red-500 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />{errors.km.message as string}
+              </p>
+            )}
           </div>
+
+          {/* Notes */}
           <div className="grid gap-2">
             <Label htmlFor="notes">Notes (optionnel)</Label>
             <Input
               id="notes"
               className="!rounded-md"
-              value={formData.notes}
-              onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+              {...register("notes")}
             />
           </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit" className="!rounded-md" onClick={() => onSubmit(formData)}>
-            {initialData ? "Enregistrer les modifications" : "Ajouter le bus"}
-          </Button>
-        </DialogFooter>
+
+          <DialogFooter>
+            <Button type="submit" className="!rounded-md">
+              {initialData ? "Enregistrer les modifications" : "Ajouter le bus"}
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

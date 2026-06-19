@@ -10,13 +10,13 @@ const page = () => {
       <p className='text-sm '>Gestion centralisée des sous-traitants en temps réel</p>
     </div>
     <div className='grid grid-cols-4 gap-2'>
-        <Link href={'/rapport-general/presonnel'} className="w-full flex-col gap-1.5   bg-white hover:border-primary group duration-150 border border-neutral-200 flex rounded-md justify-center items-center h-70">
+        <Link href={'/rapport-general/presonnel'} className="w-full flex-col gap-1.5   bg-white hover:border-primary group duration-150 border border-neutral-200 shadow-xl shadow-neutral-800 flex rounded-md justify-center items-center h-70">
            <div className="w-11 h-11 bg-pink-700 text-white group-hover:bg-primary duration-150  rounded-full flex justify-center items-center">
             <UserRound className='bg bg-clip-text'/>
            </div>
             <h1>Gestion Presonnel</h1>
         </Link>
-      <Link href={'/rapport-general/transport'} className="w-full flex-col gap-1.5   bg-white hover:border-primary group duration-150  border border-neutral-200 flex rounded-md justify-center items-center h-70">
+      <Link href={'/rapport-general/transport'} className="w-full flex-col gap-1.5   bg-white hover:border-primary group duration-150  border border-neutral-200 shadow-md shadow-neutral-800 flex rounded-md justify-center items-center h-70">
            <div className="w-11 h-11 bg-pink-700 text-white group-hover:bg-primary duration-150  rounded-full flex justify-center items-center">
             <Bus className='bg bg-clip-text'/>
            </div>
