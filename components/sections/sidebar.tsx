@@ -1,7 +1,7 @@
 'use client'
 import Button from './sidebar-button'
 import Logo from '../ui/logo'
-import { LayoutDashboard, Users, Construction, ShieldCheck, UserPlus, Settings, HelpCircle, MessageSquareDashed, File } from 'lucide-react'
+import { LayoutDashboard, Users, Construction, ShieldCheck, UserPlus, Settings, HelpCircle, MessageSquareDashed, File, Bus } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import { store } from '@/store'
 
@@ -26,7 +26,7 @@ const Sidebar = () => {
             />
             
             <Button
-              icon={<Users size={18} />}
+              icon={<Bus size={18} />}
               label='Gestion Bus'
               path='/bus'
             />

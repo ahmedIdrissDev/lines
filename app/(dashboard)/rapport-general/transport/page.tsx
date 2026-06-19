@@ -118,19 +118,19 @@ const RapportTransportPage = () => {
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse text-sm">
           <thead>
-            <tr className="bg-slate-50">
-              <th className="sticky left-0 z-20 min-w-[180px] border-b border-r bg-slate-50 px-4 py-3 text-left font-normal text-slate-700">
+            <tr className="bg-primary">
+              <th className="sticky left-0 z-20 min-w-[180px] border-b border-r bg-primary px-4 py-3 text-left font-normal text-white">
                 Bus / Matricule
               </th>
               {days.map(day => (
                 <th key={day.format('DD')} className={cn(
-                  "min-w-[50px] border-b border-r border-slate-100 px-2 py-3 text-center text-slate-600 font-normal",
-                  day.isoWeekday() > 5 ? "bg-red-50/30" : ""
+                  "min-w-[50px] border-b border-r border-primary/30 px-2 py-3 text-center text-white font-normal",
+                  day.isoWeekday() > 5 ? "bg-primary/80" : ""
                 )}>
                   {day.format('DD')}
                 </th>
               ))}
-              <th className="sticky right-0 z-20 min-w-[100px] border-b border-l bg-slate-50 px-4 py-3 text-center font-normal text-slate-900 shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
+              <th className="sticky right-0 z-20 min-w-[100px] border-b border-l bg-primary px-4 py-3 text-center font-normal text-white shadow-[-4px_0_8px_rgba(0,0,0,0.02)]">
                 Total Jours
               </th>
             </tr>
@@ -269,13 +269,13 @@ const RapportTransportPage = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse text-sm font-normal">
               <thead>
-                <tr className="bg-slate-50/50">
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Matricule</th>
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Type</th>
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Site</th>
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Destination</th>
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">KM</th>
-                  <th className="border-b px-4 py-3 text-left font-normal text-slate-600">Statut</th>
+                <tr className="bg-primary">
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Matricule</th>
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Type</th>
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Site</th>
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Destination</th>
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">KM</th>
+                  <th className="border-b border-primary/30 px-4 py-3 text-left font-normal text-white">Statut</th>
                 </tr>
               </thead>
               <tbody>
@@ -321,10 +321,10 @@ const RapportTransportPage = () => {
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse text-sm font-normal">
               <thead>
-                <tr className="bg-slate-50/50">
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Matricule</th>
-                  <th className="border-b border-r px-4 py-3 text-left font-normal text-slate-600">Date</th>
-                  <th className="border-b px-4 py-3 text-left font-normal text-slate-600">Heure</th>
+                <tr className="bg-primary">
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Matricule</th>
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Date</th>
+                  <th className="border-b border-primary/30 px-4 py-3 text-left font-normal text-white">Heure</th>
                 </tr>
               </thead>
               <tbody>
