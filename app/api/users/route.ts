@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   try {
     // Reject direct browser access — only our app includes this header
-    if (request.headers.get('X-App-Source') !== 'tgcc-app') {
+    if (request.headers.get('X-App-Source') !== process.env.NEXT_PUBLIC_APP_SOURCE_KEY) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -46,7 +46,7 @@ export async function GET(request: Request) {
 export async function PATCH(request: Request) {
   try {
     // Reject direct browser access — only our app includes this header
-    if (request.headers.get('X-App-Source') !== 'tgcc-app') {
+    if (request.headers.get('X-App-Source') !== process.env.NEXT_PUBLIC_APP_SOURCE_KEY) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

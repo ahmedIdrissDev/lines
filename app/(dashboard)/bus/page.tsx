@@ -128,8 +128,8 @@ const BusPage = () => {
   return (
     <div className="p-4 md:p-2 w-full max-w-5xl mx-auto space-y-8">
       <div>
-        <h1 className="text-3xl  text-ink">Gestion des Bus</h1>
-        <p className="text-ash mt-2">Suivi quotidien et gestion de la flotte par site</p>
+        <h1 className="text-xl  text-ink">Gestion des Bus</h1>
+        <p className="text-ash text-sm mt-1">Suivi quotidien et gestion de la flotte par site</p>
       </div>
 
       {/* KPI Cards */}
@@ -143,7 +143,7 @@ const BusPage = () => {
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-ash" />
               <Input
                 placeholder="Matricule..."
-                className="pl-8 h-9"
+                className="pl-8 h-9 !rounded-md"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
@@ -152,7 +152,7 @@ const BusPage = () => {
           <div className="space-y-1.5">
             <Label className="text-xs text-ash">Type</Label>
             <Select value={typeFilter} onValueChange={setTypeFilter}>
-              <SelectTrigger className="h-9">
+              <SelectTrigger className="h-9 !rounded-md">
                 <SelectValue placeholder="Type" />
               </SelectTrigger>
               <SelectContent>
@@ -165,7 +165,7 @@ const BusPage = () => {
           <div className="space-y-1.5">
             <Label className="text-xs text-ash">Statut</Label>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="h-9">
+              <SelectTrigger className="h-9 !rounded-md">
                 <SelectValue placeholder="Statut" />
               </SelectTrigger>
               <SelectContent>
@@ -178,7 +178,7 @@ const BusPage = () => {
           </div>
         </div>
         <Button 
-          className="h-9 gap-2" 
+          className="h-9 gap-2 !rounded-md" 
           onClick={() => setIsAddDialogOpen(true)}
         >
           <Plus className="w-4 h-4" /> Nouveau Bus
@@ -228,7 +228,7 @@ const BusPage = () => {
                     <Toggle
                       pressed={bus.workingToday}
                       onPressedChange={(pressed) => handleRecordTracking(bus._id, pressed)}
-                      className={`h-8 px-3 gap-2 data-[state=on]:bg-primary data-[state=on]:text-white`}
+                      className={`h-8 px-3 gap-2 data-[state=on]:bg-primary data-[state=on]:text-white !rounded-md`}
                       disabled={bus.status !== "Active"}
                     >
                       {bus.workingToday ? "Oui" : "Non"}
@@ -240,7 +240,7 @@ const BusPage = () => {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8"
+                        className="h-8 w-8 !rounded-md"
                         onClick={() => {
                           setEditingBus(bus);
                           setIsEditDialogOpen(true);
@@ -251,7 +251,7 @@ const BusPage = () => {
                       <Button 
                         variant="ghost" 
                         size="icon" 
-                        className="h-8 w-8 "
+                        className="h-8 w-8 !rounded-md"
                         onClick={() => handleArchiveBus(bus._id)}
                       >
                         <Trash2 className="w-4 h-4" />
@@ -357,6 +357,7 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
             <Label htmlFor="matricule">Matricule</Label>
             <Input
               id="matricule"
+              className="!rounded-md"
               value={formData.matricule}
               onChange={(e) => setFormData({ ...formData, matricule: e.target.value })}
               placeholder="ex: 12345-A-6"
@@ -369,7 +370,7 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
                 value={formData.busType} 
                 onValueChange={(v) => setFormData({ ...formData, busType: v as any })}
               >
-                <SelectTrigger id="type">
+                <SelectTrigger id="type" className="!rounded-md">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -384,7 +385,7 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
                 value={formData.status} 
                 onValueChange={(v) => setFormData({ ...formData, status: v as any })}
               >
-                <SelectTrigger id="status">
+                <SelectTrigger id="status" className="!rounded-md">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -399,6 +400,7 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
             <Label htmlFor="capacity">Capacité (optionnel)</Label>
             <Input
               id="capacity"
+              className="!rounded-md"
               type="number"
               value={formData.capacity || ""}
               onChange={(e) => setFormData({ ...formData, capacity: e.target.value ? parseInt(e.target.value) : undefined })}
@@ -408,6 +410,7 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
             <Label htmlFor="destination">Destination (optionnel)</Label>
             <Input
               id="destination"
+              className="!rounded-md"
               value={formData.destination}
               onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
               placeholder="ex: Sidi shaf -> chu rabat"
@@ -417,6 +420,7 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
             <Label htmlFor="km">KM (optionnel)</Label>
             <Input
               id="km"
+              className="!rounded-md"
               type="number"
               value={formData.km || ""}
               onChange={(e) => setFormData({ ...formData, km: e.target.value ? parseInt(e.target.value) : undefined })}
@@ -426,13 +430,14 @@ const BusDialog = ({ open, onOpenChange, title, onSubmit, initialData }: any) =>
             <Label htmlFor="notes">Notes (optionnel)</Label>
             <Input
               id="notes"
+              className="!rounded-md"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
             />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={() => onSubmit(formData)}>
+          <Button type="submit" className="!rounded-md" onClick={() => onSubmit(formData)}>
             {initialData ? "Enregistrer les modifications" : "Ajouter le bus"}
           </Button>
         </DialogFooter>

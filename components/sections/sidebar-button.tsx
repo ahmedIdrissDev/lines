@@ -14,10 +14,10 @@ const Button = ({icon , label ,path}:linksProps) => {
    <button 
     onClick={handleNavigation} 
     className={twMerge(
-        'w-full relative duration-200 h-12 px-4 flex rounded-full cursor-pointer items-center justify-start gap-3 ', 
+        'w-full relative duration-200 h-11 px-4 flex rounded-md cursor-pointer items-center justify-start gap-3 ', 
         isActive 
-            ? 'bg-primary border-4 border-neutral-200 text-white shadow-lg shadow-primary/20' 
-            : "text-charcoal border-4 border-neutral-200/0 hover:bg-canvas hover:text-ink"
+            ? 'bg-primary  text-white shadow-lg shadow-primary/20' 
+            : "text-charcoal  hover:bg-canvas hover:text-ink"
     )}
    >
         <div className="flex items-center justify-center size-5">

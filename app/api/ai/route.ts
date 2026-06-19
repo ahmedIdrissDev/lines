@@ -7,7 +7,7 @@ import { auth } from '@clerk/nextjs/server';
 export async function POST(req: Request) {
    try {
       // Reject direct browser access — only our app includes this header
-      if (req.headers.get('X-App-Source') !== 'tgcc-app') {
+      if (req.headers.get('X-App-Source') !== process.env.NEXT_PUBLIC_APP_SOURCE_KEY) {
          return new Response(JSON.stringify({ error: 'Forbidden' }), { status: 403, headers: { 'Content-Type': 'application/json' } });
       }
 

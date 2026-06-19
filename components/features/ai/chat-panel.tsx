@@ -46,7 +46,7 @@ export const ChatPanel = () => {
   const { messages, sendMessage, stop, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/ai",
-      headers: { 'X-App-Source': 'tgcc-app' },
+      headers: { 'X-App-Source': process.env.NEXT_PUBLIC_APP_SOURCE_KEY || '' },
     }),
     body: {
       projectId: ProjectID
