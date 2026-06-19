@@ -55,4 +55,12 @@ export default defineSchema({
   }).index("by_bus_date", ["busId", "date"])
     .index("by_site_date", ["siteId", "date"])
     .index("by_date", ["date"]),
+
+  supplementaires: defineTable({
+    matricule: v.string(),
+    siteId: v.id("Project"),
+    date: v.string(),
+    time: v.string(),
+  }).index("by_site", ["siteId"])
+    .index("by_date", ["date"]),
 });

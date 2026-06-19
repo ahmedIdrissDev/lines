@@ -272,3 +272,41 @@ export const getProjectBusesAttendance = query({
     return results;
   },
 });
+
+// --- Supplementary Trips (Trajets Supplémentaires) ---
+
+export const getSupplementaires = query({
+  args: {
+    siteId: v.id("Project"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("supplementaires")
+      .withIndex("by_site", (q) => q.eq("siteId", args.siteId))
+      .collect();
+  },
+});
+
+export const addSupplementaire = mutation({
+  args: {
+    matricule: v.string(),
+    siteId: v.id("Project"),
+    date: v.string(), // YYYY-MM-DD
+    time: v.string(), // HH:MM
+  },
+  handler: async (ctx, args) => {
+    const tripId = await ctx.db.insert("supplementaires", args);
+    return { success: true, id: tripId };
+  },
+});
+
+export const deleteSupplementaire = mutation({
+  args: {
+    id: v.id("supplementaires"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
+    return { success: true };
+  },
+});
+

@@ -61,6 +61,8 @@ const BusPage = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editingBus, setEditingBus] = useState<any>(null);
+  const [activeTab, setActiveTab] = useState<"fleet" | "trips">("fleet");
+  const [isAddTripDialogOpen, setIsAddTripDialogOpen] = useState(false);
 
   const today = moment().format("YYYY-MM-DD");
 
@@ -86,11 +88,46 @@ const BusPage = () => {
 
   const allProjects = useQuery(api.functions.project.getProjects);
 
+  // Trips Queries
+  const tripsQueryResult = useQuery(
+    api.functions.buses.getSupplementaires,
+    projectId ? { siteId: projectId } : "skip"
+  );
+  const trips = Array.isArray(tripsQueryResult) ? tripsQueryResult : [];
+
   // Mutations
   const createBus = useMutation(api.functions.buses.createBus);
   const updateBus = useMutation(api.functions.buses.updateBus);
   const archiveBus = useMutation(api.functions.buses.archiveBus);
   const recordTracking = useMutation(api.functions.buses.recordDailyTracking);
+  const addTrip = useMutation(api.functions.buses.addSupplementaire);
+  const deleteTrip = useMutation(api.functions.buses.deleteSupplementaire);
+
+  const handleAddTrip = async (data: any) => {
+    try {
+      await addTrip({
+        matricule: data.matricule,
+        siteId: projectId as any,
+        date: data.date,
+        time: data.time,
+      });
+      toast.success("Trajet supplémentaire ajouté");
+      setIsAddTripDialogOpen(false);
+    } catch (error: any) {
+      toast.error(error.message || "Erreur lors de l'ajout");
+    }
+  };
+
+  const handleDeleteTrip = async (id: Id<"supplementaires">) => {
+    if (confirm("Êtes-vous sûr de vouloir supprimer ce trajet ?")) {
+      try {
+        await deleteTrip({ id });
+        toast.success("Trajet supprimé");
+      } catch (error: any) {
+        toast.error(error.message || "Erreur lors de la suppression");
+      }
+    }
+  };
 
   const handleRecordTracking = async (busId: Id<"buses">, isWorking: boolean) => {
     try {
@@ -132,10 +169,30 @@ const BusPage = () => {
         <p className="text-ash text-sm mt-1">Suivi quotidien et gestion de la flotte par site</p>
       </div>
 
-      {/* KPI Cards */}
-      
-      {/* Filters & Actions */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between w-full items-end bg-white p-4 rounded-lg border border-hairline shadow-sm">
+      {/* View Switcher */}
+      <div className="flex gap-2 bg-ash/5 p-1 rounded-md w-fit">
+        <button
+          onClick={() => setActiveTab("fleet")}
+          className={`px-4 py-1.5 text-sm transition-all !rounded-md ${
+            activeTab === "fleet" ? "bg-white shadow-sm text-ink font-medium" : "text-ash hover:text-ink"
+          }`}
+        >
+          Flotte de Bus
+        </button>
+        <button
+          onClick={() => setActiveTab("trips")}
+          className={`px-4 py-1.5 text-sm transition-all !rounded-md ${
+            activeTab === "trips" ? "bg-white shadow-sm text-ink font-medium" : "text-ash hover:text-ink"
+          }`}
+        >
+          Trajets Supplémentaires
+        </button>
+      </div>
+
+      {activeTab === "fleet" && (
+        <>
+          {/* Filters & Actions */}
+          <div className="flex flex-col md:flex-row gap-4 justify-between w-full items-end bg-white p-4 rounded-lg border border-hairline shadow-sm">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 flex-1">
           <div className="space-y-1.5">
             <Label className="text-xs text-ash">Recherche</Label>
@@ -299,7 +356,156 @@ const BusPage = () => {
           }}
         />
       )}
+        </>
+      )}
+
+      {activeTab === "trips" && (
+        <div className="space-y-6">
+          {/* Actions */}
+          <div className="flex justify-between w-full items-center bg-white p-4 rounded-lg border border-hairline shadow-sm">
+            <div>
+              <h2 className="text-sm font-medium text-ink">Trajets Supplémentaires</h2>
+              <p className="text-xs text-ash">Liste des trajets supplémentaires enregistrés pour ce projet</p>
+            </div>
+            <Button 
+              className="h-9 gap-2 !rounded-md" 
+              onClick={() => setIsAddTripDialogOpen(true)}
+              disabled={buses.length === 0}
+            >
+              <Plus className="w-4 h-4" /> Nouveau Trajet
+            </Button>
+          </div>
+
+          {/* Trips Table */}
+          <Card className="overflow-hidden w-full border-hairline shadow-sm">
+            <Table>
+              <TableHeader className="bg-ash/5">
+                <TableRow>
+                  <TableHead>Matricule</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead>Heure</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {tripsQueryResult === undefined ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="h-24 text-center">
+                      <Loader2 className="w-6 h-6 animate-spin mx-auto text-ash/40" />
+                    </TableCell>
+                  </TableRow>
+                ) : trips.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="h-24 text-center text-ash">
+                      Aucun trajet supplémentaire enregistré.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  trips.map((trip) => (
+                    <TableRow key={trip._id}>
+                      <TableCell className="font-medium">{trip.matricule}</TableCell>
+                      <TableCell>{moment(trip.date).format("DD/MM/YYYY")}</TableCell>
+                      <TableCell>{trip.time}</TableCell>
+                      <TableCell className="text-right">
+                        <Button 
+                          variant="ghost" 
+                          size="icon" 
+                          className="h-8 w-8 !rounded-md"
+                          onClick={() => handleDeleteTrip(trip._id)}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </Card>
+        </div>
+      )}
+
+      {/* Add Trip Dialog */}
+      <AddTripDialog
+        open={isAddTripDialogOpen}
+        onOpenChange={setIsAddTripDialogOpen}
+        buses={buses}
+        onSubmit={handleAddTrip}
+      />
     </div>
+  );
+};
+
+const AddTripDialog = ({ open, onOpenChange, buses, onSubmit }: any) => {
+  const [formData, setFormData] = useState({
+    matricule: "",
+    date: moment().format("YYYY-MM-DD"),
+    time: moment().format("HH:mm"),
+  });
+
+  React.useEffect(() => {
+    if (open) {
+      setFormData({
+        matricule: buses[0]?.matricule || "",
+        date: moment().format("YYYY-MM-DD"),
+        time: moment().format("HH:mm"),
+      });
+    }
+  }, [open, buses]);
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[400px] ">
+        <DialogHeader>
+          <DialogTitle className="font-normal">Ajouter un trajet supplémentaire</DialogTitle>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid gap-2">
+            <Label htmlFor="trip-matricule">Matricule du Bus</Label>
+            <Select 
+              value={formData.matricule} 
+              onValueChange={(v) => setFormData({ ...formData, matricule: v })}
+            >
+              <SelectTrigger id="trip-matricule" className="!rounded-md">
+                <SelectValue placeholder="Sélectionner un bus" />
+              </SelectTrigger>
+              <SelectContent>
+                {buses.map((bus: any) => (
+                  <SelectItem key={bus._id} value={bus.matricule}>
+                    {bus.matricule} ({bus.busType})
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="trip-date">Date</Label>
+            <Input
+              id="trip-date"
+              type="date"
+              className="!rounded-md"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+            />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="trip-time">Heure</Label>
+            <Input
+              id="trip-time"
+              type="time"
+              className="!rounded-md"
+              value={formData.time}
+              onChange={(e) => setFormData({ ...formData, time: e.target.value })}
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button type="submit" className="!rounded-md" onClick={() => onSubmit(formData)}>
+            Ajouter le trajet
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 
