@@ -101,7 +101,7 @@ const AttendanceTable = ({
       {/* Header row */}
       <View style={{ flexDirection: 'row', backgroundColor: PRIMARY }}>
         <View style={{ width: labelW, padding: '4px 6px', borderRight: `1px solid rgba(255,255,255,0.2)` }}>
-          <Text style={{ fontSize: 7, color: '#fff' }}>Bus / Matricule</Text>
+          <Text style={{ fontSize: 7, color: '#fff' }}>Destination</Text>
         </View>
         {days.map(day => (
           <View
@@ -131,8 +131,7 @@ const AttendanceTable = ({
             style={{ flexDirection: 'row', backgroundColor: idx % 2 === 0 ? '#ffffff' : CANVAS, borderBottom: `1px solid ${HAIRLINE}` }}
           >
             <View style={{ width: labelW, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
-              <Text style={{ fontSize: 7, color: INK, textTransform: 'uppercase' }}>{row.matricule}</Text>
-              <Text style={{ fontSize: 5, color: ASH }}>{row.busType}</Text>
+              <Text style={{ fontSize: 8, color: INK }}>{row.destination?.trim() || '-'}</Text>
             </View>
             {days.map(day => {
               const dateStr = day.format('YYYY-MM-DD')
@@ -151,7 +150,7 @@ const AttendanceTable = ({
                   }}
                 >
                   <Text style={{ fontSize: 7, color: isWorking ? PRIMARY : '#ccc' }}>
-                    {isWorking ? '●' : '-'}
+                    {isWorking ? '*' : ''}
                   </Text>
                 </View>
               )
@@ -237,32 +236,117 @@ const TransportPDFDocument = ({ month, buses, trips, daysFirst, daysSecond }: Tr
         <AttendanceTable days={daysSecond} buses={buses} title="Deuxième Quinzaine (16 – Fin)" allDays={[...daysFirst, ...daysSecond]} />
 
 
-        {/* ── Supplementary Trips Table ── */}
-        {trips.length > 0 && (
-          <View>
-            <SectionHeader>Trajets Supplémentaires</SectionHeader>
-            <View style={{ flexDirection: 'row', backgroundColor: PRIMARY }}>
-              {['Matricule', 'Date', 'Heure'].map(h => (
-                <View key={h} style={{ flex: 1, padding: '4px 6px', borderRight: `1px solid rgba(255,255,255,0.2)` }}>
-                  <Text style={{ fontSize: 7, color: '#fff' }}>{h}</Text>
+        {/* ── Destination Statistics & Supplementary Trips ── */}
+        {(() => {
+          const stats: Record<string, number> = {}
+          const allDays = [...daysFirst, ...daysSecond]
+
+          const matriculeToDest: Record<string, string> = {}
+          buses.forEach(row => {
+            if (row.matricule) {
+              matriculeToDest[row.matricule] = row.destination?.trim() || 'Non spécifié'
+            }
+          })
+
+          buses.forEach(row => {
+            const dest = row.destination?.trim() || 'Non spécifié'
+            const totalDays = row.attendance.filter(a => a.isWorking && allDays.some(d => d.format('YYYY-MM-DD') === a.date)).length
+            stats[dest] = (stats[dest] || 0) + totalDays
+          })
+
+          trips.forEach(trip => {
+            const dest = matriculeToDest[trip.matricule] || 'Non spécifié'
+            stats[dest] = (stats[dest] || 0) + 1
+          })
+
+          const entries = Object.entries(stats).sort((a, b) => b[1] - a[1])
+          const destTotal = entries.reduce((acc, [, c]) => acc + c, 0)
+
+          const tripsByDayMap: Record<string, number> = {}
+          trips.forEach(trip => {
+            tripsByDayMap[trip.date] = (tripsByDayMap[trip.date] || 0) + 1
+          })
+          const tripsByDay = Object.entries(tripsByDayMap).sort((a, b) => a[0].localeCompare(b[0]))
+          const tripsTotal = tripsByDay.reduce((acc, [, c]) => acc + c, 0)
+
+          return (
+            <View style={{ marginBottom: 12 }}>
+              <SectionHeader>Statistiques par Destination</SectionHeader>
+              <View style={{ flexDirection: 'row', backgroundColor: PRIMARY }}>
+                <View style={{ flex: 3, padding: '4px 6px', borderRight: `1px solid rgba(255,255,255,0.2)` }}>
+                  <Text style={{ fontSize: 7, color: '#fff' }}>Destination</Text>
                 </View>
-              ))}
-            </View>
-            {trips.map((trip, idx) => (
-              <View key={trip._id} style={{ flexDirection: 'row', backgroundColor: idx % 2 === 0 ? '#fff' : CANVAS, borderBottom: `1px solid ${HAIRLINE}` }}>
-                <View style={{ flex: 1, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
-                  <Text style={{ fontSize: 7, color: INK, textTransform: 'uppercase' }}>{trip.matricule}</Text>
-                </View>
-                <View style={{ flex: 1, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
-                  <Text style={{ fontSize: 7, color: CHARCOAL }}>{moment(trip.date).format('DD/MM/YYYY')}</Text>
-                </View>
-                <View style={{ flex: 1, padding: '4px 6px' }}>
-                  <Text style={{ fontSize: 7, color: CHARCOAL }}>{trip.time}</Text>
+                <View style={{ flex: 1, padding: '4px 6px', alignItems: 'flex-end' }}>
+                  <Text style={{ fontSize: 7, color: '#fff' }}>Total du Mois</Text>
                 </View>
               </View>
-            ))}
-          </View>
-        )}
+              {entries.length === 0 ? (
+                <View style={{ padding: '8px 6px', borderBottom: `1px solid ${HAIRLINE}` }}>
+                  <Text style={{ fontSize: 7, color: CHARCOAL, textAlign: 'center' }}>Aucune donnée disponible.</Text>
+                </View>
+              ) : (
+                <>
+                  {entries.map(([dest, count], idx) => (
+                    <View key={dest} style={{ flexDirection: 'row', backgroundColor: idx % 2 === 0 ? '#fff' : CANVAS, borderBottom: `1px solid ${HAIRLINE}` }}>
+                      <View style={{ flex: 3, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
+                        <Text style={{ fontSize: 7, color: INK }}>{dest}</Text>
+                      </View>
+                      <View style={{ flex: 1, padding: '4px 6px', alignItems: 'flex-end' }}>
+                        <Text style={{ fontSize: 7, color: PRIMARY }}>{count}</Text>
+                      </View>
+                    </View>
+                  ))}
+                  <View style={{ flexDirection: 'row', backgroundColor: BONE, borderTop: `1px solid ${HAIRLINE}` }}>
+                    <View style={{ flex: 3, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
+                      <Text style={{ fontSize: 7, color: CHARCOAL }}>Total</Text>
+                    </View>
+                    <View style={{ flex: 1, padding: '4px 6px', alignItems: 'flex-end' }}>
+                      <Text style={{ fontSize: 7, color: INK }}>{destTotal}</Text>
+                    </View>
+                  </View>
+                </>
+              )}
+
+              <View style={{ marginTop: 8 }}>
+                <SectionHeader>Trajets Supplémentaires</SectionHeader>
+                <View style={{ flexDirection: 'row', backgroundColor: PRIMARY }}>
+                  <View style={{ flex: 3, padding: '4px 6px', borderRight: `1px solid rgba(255,255,255,0.2)` }}>
+                    <Text style={{ fontSize: 7, color: '#fff' }}>Date</Text>
+                  </View>
+                  <View style={{ flex: 1, padding: '4px 6px', alignItems: 'flex-end' }}>
+                    <Text style={{ fontSize: 7, color: '#fff' }}>Nombre de Trajets</Text>
+                  </View>
+                </View>
+                {tripsByDay.length === 0 ? (
+                  <View style={{ padding: '8px 6px', borderBottom: `1px solid ${HAIRLINE}` }}>
+                    <Text style={{ fontSize: 7, color: CHARCOAL, textAlign: 'center' }}>Aucun trajet supplémentaire pour ce mois.</Text>
+                  </View>
+                ) : (
+                  <>
+                    {tripsByDay.map(([date, count], idx) => (
+                      <View key={date} style={{ flexDirection: 'row', backgroundColor: idx % 2 === 0 ? '#fff' : CANVAS, borderBottom: `1px solid ${HAIRLINE}` }}>
+                        <View style={{ flex: 3, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
+                          <Text style={{ fontSize: 7, color: INK }}>{moment(date).format('DD/MM/YYYY')}</Text>
+                        </View>
+                        <View style={{ flex: 1, padding: '4px 6px', alignItems: 'flex-end' }}>
+                          <Text style={{ fontSize: 7, color: PRIMARY }}>{count}</Text>
+                        </View>
+                      </View>
+                    ))}
+                    <View style={{ flexDirection: 'row', backgroundColor: BONE, borderTop: `1px solid ${HAIRLINE}` }}>
+                      <View style={{ flex: 3, padding: '4px 6px', borderRight: `1px solid ${HAIRLINE}` }}>
+                        <Text style={{ fontSize: 7, color: CHARCOAL }}>Total</Text>
+                      </View>
+                      <View style={{ flex: 1, padding: '4px 6px', alignItems: 'flex-end' }}>
+                        <Text style={{ fontSize: 7, color: INK }}>{tripsTotal}</Text>
+                      </View>
+                    </View>
+                  </>
+                )}
+              </View>
+            </View>
+          )
+        })()}
 
         {/* ── Footer ── */}
         <View style={{ position: 'absolute', bottom: 16, left: 24, right: 24, borderTop: `1px solid ${HAIRLINE}`, paddingTop: 6, flexDirection: 'row', justifyContent: 'space-between' }}>

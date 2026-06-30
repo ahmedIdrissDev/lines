@@ -147,8 +147,11 @@ export const archiveBus = mutation({
 export const recordDailyTracking = mutation({
   args: {
     busId: v.id("buses"),
-    date: v.string(), // YYYY-MM-DD
+    date: v.string(),
     isWorking: v.boolean(),
+    driverName: v.optional(v.string()),
+    employeeCount: v.optional(v.number()),
+    destination: v.optional(v.string()),
     comment: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
@@ -166,6 +169,9 @@ export const recordDailyTracking = mutation({
     if (existing) {
       await ctx.db.patch(existing._id, {
         isWorking: args.isWorking,
+        driverName: args.driverName,
+        employeeCount: args.employeeCount,
+        destination: args.destination,
         comment: args.comment,
         recordedBy: clerkId,
       });
@@ -175,12 +181,13 @@ export const recordDailyTracking = mutation({
         date: args.date,
         isWorking: args.isWorking,
         siteId: bus.siteId,
+        driverName: args.driverName,
+        employeeCount: args.employeeCount,
+        destination: args.destination,
         comment: args.comment,
         recordedBy: clerkId,
       });
     }
-
-   
 
     return { success: true };
   },
@@ -280,10 +287,24 @@ export const getSupplementaires = query({
     siteId: v.id("Project"),
   },
   handler: async (ctx, args) => {
-    return await ctx.db
+    const trips = await ctx.db
       .query("supplementaires")
       .withIndex("by_site", (q) => q.eq("siteId", args.siteId))
       .collect();
+
+    return await Promise.all(
+      trips.map(async (trip) => {
+        const bus = await ctx.db
+          .query("buses")
+          .withIndex("by_matricule", (q) => q.eq("matricule", trip.matricule))
+          .first();
+
+        return {
+          ...trip,
+          destination: bus?.destination || "",
+        };
+      })
+    );
   },
 });
 
@@ -310,3 +331,120 @@ export const deleteSupplementaire = mutation({
   },
 });
 
+// --- Pointage (Daily Attendance) CRUD ---
+
+export const getPointageByDate = query({
+  args: {
+    siteId: v.id("Project"),
+    date: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const site = await ctx.db.get(args.siteId);
+    const buses = await ctx.db
+      .query("buses")
+      .withIndex("by_site", (q) => q.eq("siteId", args.siteId))
+      .filter((q) => q.neq(q.field("isArchived"), true))
+      .collect();
+
+    const pointages = await ctx.db
+      .query("busTracking")
+      .withIndex("by_site_date", (q) => q.eq("siteId", args.siteId).eq("date", args.date))
+      .collect();
+
+    const pointageMap = new Map(pointages.map(p => [p.busId.toString(), p]));
+
+    return buses.map(bus => {
+      const pointage = pointageMap.get(bus._id.toString());
+      return {
+        busId: bus._id,
+        matricule: bus.matricule,
+        busType: bus.busType,
+        busDestination: bus.destination,
+        status: bus.status,
+        siteName: site?.name || "Unknown",
+        pointage: pointage ? {
+          _id: pointage._id,
+          isWorking: pointage.isWorking,
+          driverName: pointage.driverName,
+          employeeCount: pointage.employeeCount,
+          destination: pointage.destination,
+          comment: pointage.comment,
+        } : null,
+      };
+    });
+  },
+});
+
+export const createPointage = mutation({
+  args: {
+    busId: v.id("buses"),
+    siteId: v.id("Project"),
+    date: v.string(),
+    isWorking: v.boolean(),
+    driverName: v.optional(v.string()),
+    employeeCount: v.optional(v.number()),
+    destination: v.optional(v.string()),
+    comment: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    const clerkId = identity?.subject || "anonymous";
+
+    const existing = await ctx.db
+      .query("busTracking")
+      .withIndex("by_bus_date", (q) => q.eq("busId", args.busId).eq("date", args.date))
+      .first();
+
+    if (existing) {
+      return { error: "A pointage record already exists for this bus on this date." };
+    }
+
+    const id = await ctx.db.insert("busTracking", {
+      busId: args.busId,
+      date: args.date,
+      isWorking: args.isWorking,
+      siteId: args.siteId,
+      driverName: args.driverName,
+      employeeCount: args.employeeCount,
+      destination: args.destination,
+      comment: args.comment,
+      recordedBy: clerkId,
+    });
+
+    return { success: true, id };
+  },
+});
+
+export const updatePointage = mutation({
+  args: {
+    id: v.id("busTracking"),
+    isWorking: v.optional(v.boolean()),
+    driverName: v.optional(v.string()),
+    employeeCount: v.optional(v.number()),
+    destination: v.optional(v.string()),
+    comment: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    const clerkId = identity?.subject || "anonymous";
+
+    const { id, ...updates } = args;
+
+    await ctx.db.patch(id, {
+      ...updates,
+      recordedBy: clerkId,
+    });
+
+    return { success: true };
+  },
+});
+
+export const deletePointage = mutation({
+  args: {
+    id: v.id("busTracking"),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
+    return { success: true };
+  },
+});

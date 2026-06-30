@@ -49,6 +49,16 @@ const RapportTransportPage = () => {
     })
   }, [trips, currentMonth])
 
+  const tripsByDay = useMemo(() => {
+    const map: Record<string, number> = {}
+    filteredTrips.forEach(trip => {
+      map[trip.date] = (map[trip.date] || 0) + 1
+    })
+    return Object.entries(map)
+      .map(([date, count]) => ({ date, count }))
+      .sort((a, b) => a.date.localeCompare(b.date))
+  }, [filteredTrips])
+
   const daysFirst = useMemo(() => {
     const days = []
     const start = currentMonth.clone().startOf('month')
@@ -72,6 +82,35 @@ const RapportTransportPage = () => {
     }
     return days
   }, [currentMonth])
+
+  const destinationStats = useMemo(() => {
+    if (!transportData || !Array.isArray(transportData)) return []
+
+    const matriculeToDest: Record<string, string> = {}
+    transportData.forEach((row: any) => {
+      if (row.matricule) {
+        matriculeToDest[row.matricule] = row.destination?.trim() || "Non spécifié"
+      }
+    })
+
+    const stats: Record<string, number> = {}
+    const allDays = [...daysFirst, ...daysSecond]
+
+    transportData.forEach((row: any) => {
+      const dest = row.destination?.trim() || "Non spécifié"
+      const totalDays = row.attendance.filter((a: any) => a.isWorking && allDays.some(d => d.format('YYYY-MM-DD') === a.date)).length
+      stats[dest] = (stats[dest] || 0) + totalDays
+    })
+
+    filteredTrips.forEach((trip: any) => {
+      const dest = matriculeToDest[trip.matricule] || "Non spécifié"
+      stats[dest] = (stats[dest] || 0) + 1
+    })
+
+    return Object.entries(stats)
+      .map(([destination, count]) => ({ destination, count }))
+      .sort((a, b) => b.count - a.count)
+  }, [transportData, daysFirst, daysSecond, filteredTrips])
 
   const filteredData = useMemo(() => {
     if (!transportData || !Array.isArray(transportData)) return []
@@ -124,7 +163,7 @@ const RapportTransportPage = () => {
           <thead>
             <tr className="bg-primary">
               <th className="sticky left-0 z-20 min-w-[180px] border-b border-r bg-primary px-4 py-3 text-left font-normal text-white">
-                Bus / Matricule
+                Destination
               </th>
               {days.map(day => (
                 <th key={day.format('DD')} className={cn(
@@ -151,11 +190,8 @@ const RapportTransportPage = () => {
                 let rowTotal = 0
                 return (
                   <tr key={row.busId} className="hover:bg-slate-50 group">
-                    <td className="sticky left-0 z-10 bg-white border-b border-r px-4 py-3 font-normal text-slate-700 group-hover:bg-slate-50 transition-colors">
-                      <div className="flex flex-col">
-                        <span className="uppercase font-normal">{row.matricule}</span>
-                        <span className="text-[10px] text-slate-400">{row.busType}</span>
-                      </div>
+                    <td className="sticky left-0 z-10 bg-white border-b border-r px-4 py-3 text-slate-700 group-hover:bg-slate-50 transition-colors">
+                      <span>{row.destination?.trim() || "-"}</span>
                     </td>
                     {days.map(day => {
                       const dateStr = day.format('YYYY-MM-DD')
@@ -344,40 +380,104 @@ const RapportTransportPage = () => {
           </div>
         </div>
 
-        {/* Supplementary Trips Table */}
+        {/* Destination Statistics & Supplementary Trips */}
         <div className="rounded-xl bg-white border border-slate-200 shadow-sm overflow-hidden mt-2">
           <div className="bg-slate-50/50 px-6 py-3 border-b border-slate-200">
-            <h3 className="text-sm font-normal text-slate-700 uppercase tracking-wider">Trajets Supplémentaires</h3>
+            <h3 className="text-sm font-normal text-slate-700 uppercase tracking-wider">Statistiques par Destination</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full border-collapse text-sm font-normal">
               <thead>
                 <tr className="bg-primary">
-                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Matricule</th>
-                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Date</th>
-                  <th className="border-b border-primary/30 px-4 py-3 text-left font-normal text-white">Heure</th>
+                  <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Destination</th>
+                  <th className="border-b border-primary/30 px-4 py-3 text-right font-normal text-white">Total du Mois</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredTrips.length === 0 ? (
+                {destinationStats.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="px-4 py-8 text-center text-slate-400 font-normal">
-                      Aucun trajet supplémentaire pour ce mois.
+                    <td colSpan={2} className="px-4 py-8 text-center text-slate-400 font-normal">
+                      Aucune donnée disponible.
                     </td>
                   </tr>
                 ) : (
-                  filteredTrips.map((trip: any) => (
-                    <tr key={trip._id} className="hover:bg-slate-50 transition-colors">
-                      <td className="border-b border-r px-4 py-2 font-normal text-slate-700 uppercase">{trip.matricule}</td>
-                      <td className="border-b border-r px-4 py-2 font-normal text-slate-600">
-                        {moment(trip.date).format("DD/MM/YYYY")}
+                  destinationStats.map((stat, idx) => (
+                    <tr key={stat.destination} className={cn(
+                      "hover:bg-slate-50 transition-colors",
+                      idx === destinationStats.length - 1 ? "border-b-0" : ""
+                    )}>
+                      <td className="border-b border-r px-4 py-2.5 font-normal text-slate-700">{stat.destination}</td>
+                      <td className="border-b px-4 py-2.5 text-right font-normal">
+                        <span className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-full bg-amber-50 text-amber-700 text-sm font-medium">
+                          {stat.count}
+                        </span>
                       </td>
-                      <td className="border-b px-4 py-2 font-normal text-slate-600">{trip.time}</td>
                     </tr>
                   ))
                 )}
+                {destinationStats.length > 0 && (
+                  <tr className="bg-slate-50 font-normal">
+                    <td className="border-t px-4 py-2.5 font-medium text-slate-800">Total</td>
+                    <td className="border-t px-4 py-2.5 text-right font-medium">
+                      <span className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                        {destinationStats.reduce((acc, s) => acc + s.count, 0)}
+                      </span>
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
+          </div>
+
+          <div className="border-t border-slate-200">
+            <div className="bg-slate-50/50 px-6 py-3 border-b border-slate-200">
+              <h3 className="text-sm font-normal text-slate-700 uppercase tracking-wider">Trajets Supplémentaires</h3>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-collapse text-sm font-normal">
+                <thead>
+                  <tr className="bg-primary">
+                    <th className="border-b border-r border-primary/30 px-4 py-3 text-left font-normal text-white">Date</th>
+                    <th className="border-b border-primary/30 px-4 py-3 text-right font-normal text-white">Nombre de Trajets</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tripsByDay.length === 0 ? (
+                    <tr>
+                      <td colSpan={2} className="px-4 py-8 text-center text-slate-400 font-normal">
+                        Aucun trajet supplémentaire pour ce mois.
+                      </td>
+                    </tr>
+                  ) : (
+                    tripsByDay.map((day, idx) => (
+                      <tr key={day.date} className={cn(
+                        "hover:bg-slate-50 transition-colors",
+                        idx === tripsByDay.length - 1 ? "border-b-0" : ""
+                      )}>
+                        <td className="border-b border-r px-4 py-2.5 font-normal text-slate-700">
+                          {moment(day.date).format("DD/MM/YYYY")}
+                        </td>
+                        <td className="border-b px-4 py-2.5 text-right font-normal">
+                          <span className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-full bg-primary/5 text-primary text-sm font-medium">
+                            {day.count}
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                  {tripsByDay.length > 0 && (
+                    <tr className="bg-slate-50 font-normal">
+                      <td className="border-t px-4 py-2.5 font-medium text-slate-800">Total</td>
+                      <td className="border-t px-4 py-2.5 text-right font-medium">
+                        <span className="inline-flex items-center justify-center min-w-[28px] h-7 px-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
+                          {tripsByDay.reduce((acc, d) => acc + d.count, 0)}
+                        </span>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

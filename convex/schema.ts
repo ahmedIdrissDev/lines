@@ -47,11 +47,14 @@ export default defineSchema({
 
   busTracking: defineTable({
     busId: v.id("buses"),
-    date: v.string(), // YYYY-MM-DD
+    date: v.string(),
     isWorking: v.boolean(),
     siteId: v.id("Project"),
+    driverName: v.optional(v.string()),
+    employeeCount: v.optional(v.number()),
+    destination: v.optional(v.string()),
     comment: v.optional(v.string()),
-    recordedBy: v.string(), // clerkId
+    recordedBy: v.string(),
   }).index("by_bus_date", ["busId", "date"])
     .index("by_site_date", ["siteId", "date"])
     .index("by_date", ["date"]),
