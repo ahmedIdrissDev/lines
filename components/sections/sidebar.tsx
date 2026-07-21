@@ -1,14 +1,10 @@
 'use client'
 import Button from './sidebar-button'
 import Logo from '../ui/logo'
-import { LayoutDashboard, Users, Construction, ShieldCheck, UserPlus, Settings, HelpCircle, MessageSquareDashed, File, Bus } from 'lucide-react'
-import dynamic from 'next/dynamic'
-import { store } from '@/store'
+import { LayoutDashboard, Construction, UserPlus, Settings, HelpCircle, File, Bus, Building2 } from 'lucide-react'
 
 
 const Sidebar = () => {
-  const { ProjectID } = store()
-
   return (
     <div className='w-full bg-white border-r border-hairline h-full flex flex-col justify-start gap-6 py-2'>
       <div className="w-full px-6 flex items-center ">
@@ -21,7 +17,7 @@ const Sidebar = () => {
           <div className="flex px-3 flex-col gap-1">
             <Button
               icon={<LayoutDashboard size={18} />}
-              label='AI Agent'
+              label='Gestion personnel'
               path='/dashboard'
             />
             
@@ -29,6 +25,11 @@ const Sidebar = () => {
               icon={<Bus size={18} />}
               label='Gestion Bus'
               path='/bus'
+            />
+            <Button
+              icon={<Building2 size={18} />}
+              label='Chantier'
+              path='/chantier'
             />
             <Button
               icon={<Construction size={18} />}

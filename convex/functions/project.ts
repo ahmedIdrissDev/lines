@@ -1,6 +1,14 @@
 import { v } from "convex/values";
 import { mutation, query } from "../_generated/server";
 
+function normalizeAttendanceRadius(radius?: number) {
+  if (typeof radius !== "number") {
+    return undefined;
+  }
+
+  return Math.min(300, Math.max(200, radius));
+}
+
 /**
  * Publicly accessible list of all projects for management purposes.
  */
@@ -17,12 +25,12 @@ export const getProjects = query({
 });
 
 export const getProjectsByIds = query({
-  args: { ids: v.array(v.string()) },
+  args: { ids: v.array(v.id("Project")) },
   handler: async (ctx, args) => {
     const projects = await Promise.all(
       args.ids.map(async (id) => {
         try {
-          return await ctx.db.get(id as any);
+          return await ctx.db.get(id);
         } catch {
           return null;
         }
@@ -49,14 +57,30 @@ export const getProject = query({
 export const SetProject = mutation({
   args: {
     name: v.string(),
+    description: v.optional(v.string()),
+    address: v.optional(v.string()),
+    city: v.optional(v.string()),
     type: v.optional(v.string()),
     site: v.optional(v.string()),
     status: v.optional(v.string()),
     startDate: v.optional(v.string()),
     endDate: v.optional(v.string()),
+    xCoordinate: v.optional(v.number()),
+    yCoordinate: v.optional(v.number()),
+    attendanceRadiusMeters: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
-    const projectId = await ctx.db.insert("Project", args);
+    const name = args.name.trim();
+
+    if (!name) {
+      throw new Error("Project name is required");
+    }
+
+    const projectId = await ctx.db.insert("Project", {
+      ...args,
+      name,
+      attendanceRadiusMeters: normalizeAttendanceRadius(args.attendanceRadiusMeters),
+    });
 
    
     return { success: true, id: projectId };
@@ -67,17 +91,33 @@ export const updateProject = mutation({
   args: {
     id: v.id("Project"),
     name: v.optional(v.string()),
+    description: v.optional(v.string()),
+    address: v.optional(v.string()),
+    city: v.optional(v.string()),
     type: v.optional(v.string()),
     site: v.optional(v.string()),
     status: v.optional(v.string()),
     startDate: v.optional(v.string()),
     endDate: v.optional(v.string()),
+    xCoordinate: v.optional(v.number()),
+    yCoordinate: v.optional(v.number()),
+    attendanceRadiusMeters: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const { id, ...rest } = args;
-    await ctx.db.patch(id, rest);
+    const patch = {
+      ...rest,
+      name: rest.name?.trim(),
+      attendanceRadiusMeters: normalizeAttendanceRadius(rest.attendanceRadiusMeters),
+    };
 
-   
+    if (patch.name !== undefined && !patch.name) {
+      throw new Error("Project name is required");
+    }
+
+    await ctx.db.patch(id, patch);
+
+  
     
     return { success: true };
   },

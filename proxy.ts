@@ -9,6 +9,8 @@ const isProtectedRoute = createRouteMatcher([
 
 ]);
 
+const isBadgeRoute = createRouteMatcher(["/badge(.*)"]);
+
 // Route matchers for specific permission levels
 const isViewAllowed = createRouteMatcher([
   "/dashboard(.*)",
@@ -23,7 +25,23 @@ const isManagerAllowed = createRouteMatcher([
 
 ]);
 
+function getPermissions(metadata: unknown): string[] {
+  if (!metadata || typeof metadata !== "object") {
+    return [];
+  }
+
+  const permissions = (metadata as { permissions?: unknown }).permissions;
+  return Array.isArray(permissions)
+    ? permissions.filter((permission): permission is string => typeof permission === "string")
+    : [];
+}
+
 export default clerkMiddleware(async (auth, req) => {
+  if (isBadgeRoute(req)) {
+    await auth.protect();
+    return;
+  }
+
   if (isProtectedRoute(req)) {
     const { sessionClaims, userId } = await auth();
 
@@ -35,8 +53,10 @@ export default clerkMiddleware(async (auth, req) => {
 
     // 2. Extract permissions from Clerk session claims (publicMetadata)
     // Note: Ensure your Clerk JWT template is configured to include publicMetadata
-    const permissions = (sessionClaims?.publicMetadata as any)?.permissions || 
-                        (sessionClaims?.metadata as any)?.permissions || [];
+    const permissions = [
+      ...getPermissions(sessionClaims?.publicMetadata),
+      ...getPermissions(sessionClaims?.metadata),
+    ];
 
     // 3. Admin (Full Control) - Can access all protected routes
     if (permissions.includes("user:access:admin")) {
@@ -61,17 +81,7 @@ export default clerkMiddleware(async (auth, req) => {
 
     // 5. Authorization Enforcement
     if (!isAllowed) {
-      // If the user has some access level, redirect to their default home (dashboard)
-      if (hasManagerAccess || hasViewAccess) {
-        // Prevent infinite redirect if they are already on the dashboard
-        if (!req.nextUrl.pathname.startsWith("/no-access")) {
-          return Response.redirect(new URL("/no-access", req.url));
-        }
-        return;
-      }
-
-      // If the user has no recognized permissions, redirect to demand-access
-      return Response.redirect(new URL("/demande-access", req.url));
+      return Response.redirect(new URL("/badge", req.url));
     }
   }
 });
