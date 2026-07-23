@@ -1,6 +1,6 @@
 import { ConvexError, v } from "convex/values";
 import { mutation, query, QueryCtx, MutationCtx } from "../_generated/server";
-import { Id } from "../_generated/dataModel";
+import { Doc, Id } from "../_generated/dataModel";
 
 type AttendanceAction = "check-in" | "check-out";
 type BadgeProfileArgs = {
@@ -9,8 +9,136 @@ type BadgeProfileArgs = {
   matricule?: string;
 };
 
+const LOCATION_MAX_AGE_MS = 60_000;
+const MAX_LOCATION_ACCURACY_METERS = 100;
+const DEFAULT_ATTENDANCE_RADIUS_METERS = 250;
+
 function normalizeMatricule(matricule: string): string {
   return matricule.trim().replace(/\s+/g, "").toUpperCase();
+}
+
+function resolveAllowedRadius(radius?: number): number {
+  if (typeof radius !== "number" || !Number.isFinite(radius)) {
+    return DEFAULT_ATTENDANCE_RADIUS_METERS;
+  }
+
+  return Math.min(300, Math.max(200, radius));
+}
+
+function validateCoordinates(latitude: number, longitude: number): void {
+  if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90) {
+    throw new ConvexError("INVALID_LATITUDE");
+  }
+
+  if (!Number.isFinite(longitude) || longitude < -180 || longitude > 180) {
+    throw new ConvexError("INVALID_LONGITUDE");
+  }
+}
+
+function isValidCoordinatePair(latitude: number, longitude: number): boolean {
+  return (
+    Number.isFinite(latitude) &&
+    latitude >= -90 &&
+    latitude <= 90 &&
+    Number.isFinite(longitude) &&
+    longitude >= -180 &&
+    longitude <= 180
+  );
+}
+
+function calculateDistanceMeters(
+  latitude1: number,
+  longitude1: number,
+  latitude2: number,
+  longitude2: number,
+): number {
+  const earthRadiusMeters = 6_371_000;
+  const toRadians = (value: number) => (value * Math.PI) / 180;
+
+  const latitudeDelta = toRadians(latitude2 - latitude1);
+  const longitudeDelta = toRadians(longitude2 - longitude1);
+  const firstLatitude = toRadians(latitude1);
+  const secondLatitude = toRadians(latitude2);
+
+  const a =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(firstLatitude) *
+      Math.cos(secondLatitude) *
+      Math.sin(longitudeDelta / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return earthRadiusMeters * c;
+}
+
+function getNearestProjectDistanceMeters(
+  latitude: number,
+  longitude: number,
+  project: Doc<"Project">,
+): number {
+  const candidateCoordinates = [
+    {
+      latitude: project.yCoordinate,
+      longitude: project.xCoordinate,
+    },
+    {
+      latitude: project.xCoordinate,
+      longitude: project.yCoordinate,
+    },
+  ].filter(
+    (coordinates): coordinates is { latitude: number; longitude: number } =>
+      typeof coordinates.latitude === "number" &&
+      typeof coordinates.longitude === "number" &&
+      isValidCoordinatePair(coordinates.latitude, coordinates.longitude),
+  );
+
+  if (candidateCoordinates.length === 0) {
+    throw new ConvexError("PROJECT_LOCATION_MISSING");
+  }
+
+  return Math.min(
+    ...candidateCoordinates.map((coordinates) =>
+      calculateDistanceMeters(
+        latitude,
+        longitude,
+        coordinates.latitude,
+        coordinates.longitude,
+      ),
+    ),
+  );
+}
+
+function validatePointageLocation(args: {
+  latitude: number;
+  longitude: number;
+  accuracy: number;
+  capturedAt: number;
+  project: Doc<"Project">;
+  now: number;
+}) {
+  validateCoordinates(args.latitude, args.longitude);
+
+  if (!Number.isFinite(args.capturedAt) || args.now - args.capturedAt > LOCATION_MAX_AGE_MS) {
+    throw new ConvexError("LOCATION_EXPIRED");
+  }
+
+  if (
+    !Number.isFinite(args.accuracy) ||
+    args.accuracy <= 0 ||
+    args.accuracy > MAX_LOCATION_ACCURACY_METERS
+  ) {
+    throw new ConvexError("LOCATION_ACCURACY_TOO_LOW");
+  }
+
+  const distanceMeters = getNearestProjectDistanceMeters(
+    args.latitude,
+    args.longitude,
+    args.project,
+  );
+  const radiusMeters = resolveAllowedRadius(args.project?.attendanceRadiusMeters);
+
+  if (distanceMeters > radiusMeters) {
+    throw new ConvexError("OUTSIDE_CHANTIER_ZONE");
+  }
 }
 
 function getCasablancaAttendanceDate(timestamp = Date.now()): string {
@@ -157,6 +285,14 @@ export const recordBadgeAttendance = mutation({
     const now = Date.now();
     const profile = await resolveBadgeProfile(ctx, args);
     const project = await resolveAttendanceProject(ctx, args.projectId);
+    validatePointageLocation({
+      latitude: args.latitude,
+      longitude: args.longitude,
+      accuracy: args.accuracy,
+      capturedAt: args.capturedAt,
+      project,
+      now,
+    });
 
     const attendanceDate = getCasablancaAttendanceDate(now);
     const existingAttendance = await getTodayAttendance(

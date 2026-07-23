@@ -8,7 +8,6 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import {
   AlertCircle,
   BadgeCheck,
-  Building2,
   CheckCircle2,
   Loader2,
   LogIn,
@@ -19,6 +18,7 @@ import {
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -38,6 +38,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 
 type AttendanceAction = "check-in" | "check-out";
 type AttendanceStatus = "not-checked-in" | "checked-in" | "checked-out";
@@ -356,11 +357,15 @@ function validatePointageLocation(
     typeof project?.yCoordinate !== "number" ||
     typeof project.xCoordinate !== "number"
   ) {
-    return;
+    throw new Error("PROJECT_LOCATION_MISSING");
   }
 
-  getNearestProjectDistanceMeters(location, project);
-  resolveAllowedRadius(project.attendanceRadiusMeters);
+  const distanceMeters = getNearestProjectDistanceMeters(location, project);
+  const radiusMeters = resolveAllowedRadius(project.attendanceRadiusMeters);
+
+  if (distanceMeters > radiusMeters) {
+    throw new Error("OUTSIDE_CHANTIER_ZONE");
+  }
 }
 
 function requestCurrentLocation(): Promise<LocationSnapshot> {
@@ -438,7 +443,7 @@ const StepBadge = ({
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-2">
+    <div className="grid grid-cols-4 gap-2 rounded-md border border-hairline bg-surface-card p-2">
       {steps.map((step, index) => {
         const isActive = activeStep === step.id;
         const isDone =
@@ -447,13 +452,12 @@ const StepBadge = ({
         return (
           <div
             key={step.id}
-            className={`flex min-h-10 items-center justify-center rounded-full border px-2 caption-tight ${
-              isActive
-                ? "border-primary bg-primary text-on-primary"
-                : isDone
-                  ? "border-badge-success bg-badge-success text-on-dark"
-                  : "border-hairline bg-surface-card text-ash"
-            }`}
+            className={cn(
+              "flex min-h-10 items-center justify-center rounded-full border px-2 caption-tight",
+              isActive && "border-primary bg-primary text-on-primary",
+              isDone && "border-badge-success bg-badge-success text-on-dark",
+              !isActive && !isDone && "border-transparent bg-surface-bone text-ash",
+            )}
           >
             {isDone ? <CheckCircle2 /> : step.label}
           </div>
@@ -464,7 +468,7 @@ const StepBadge = ({
 };
 
 const BadgeBarcode = () => (
-  <div className="flex h-8 items-end gap-1" aria-hidden="true">
+  <div className="flex h-9 items-end gap-1 rounded-sm bg-surface-bone px-3 py-2" aria-hidden="true">
     {[3, 7, 4, 10, 5, 8, 3, 11, 6, 4, 9, 5, 7, 3, 10, 4].map(
       (height, index) => (
         <span
@@ -476,6 +480,30 @@ const BadgeBarcode = () => (
     )}
   </div>
 );
+
+function getAttendanceStatusContent(status: AttendanceStatus) {
+  if (status === "checked-in") {
+    return {
+      label: "Présent",
+      description: "Présent sur le chantier",
+      variant: "success" as const,
+    };
+  }
+
+  if (status === "checked-out") {
+    return {
+      label: "Terminé",
+      description: "Journée terminée",
+      variant: "secondary" as const,
+    };
+  }
+
+  return {
+    label: "À pointer",
+    description: "Entrée non enregistrée",
+    variant: "outline" as const,
+  };
+}
 
 const BadgePage = () => {
   const router = useRouter();
@@ -621,6 +649,7 @@ const BadgePage = () => {
     user?.fullName ||
     user?.primaryEmailAddress?.emailAddress ||
     "Mon compte";
+  const statusContent = getAttendanceStatusContent(activeAttendance.status);
   const actionLabel = useMemo(() => {
     if (actionState === "requesting-location") return "Vérification de votre position…";
     if (actionState === "submitting-attendance") return "Enregistrement du pointage…";
@@ -794,10 +823,15 @@ const BadgePage = () => {
   }
 
   return (
-    <main className="min-h-dvh overflow-x-hidden bg-primary">
-      <div className="mx-auto flex min-h-dvh w-full max-w-[430px] min-w-0 flex-col gap-5 bg-background p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] pt-[calc(env(safe-area-inset-top)+1.25rem)]">
-        <div className="flex min-h-12 items-center justify-between gap-3 rounded-md bg-primary px-4 text-on-primary">
-          <p className="min-w-0 truncate body-sm">{accountName}</p>
+    <main className="min-h-dvh overflow-x-hidden bg-surface-dark">
+      <div className="mx-auto flex min-h-dvh w-full max-w-[430px] min-w-0 flex-col gap-5 bg-canvas p-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)] pt-[calc(env(safe-area-inset-top)+1.25rem)]">
+        <div className="flex min-h-12 items-center justify-between gap-3 rounded-full border border-divider-dark bg-surface-dark px-4 text-on-dark">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary text-on-primary">
+              <ShieldCheck />
+            </div>
+            <p className="min-w-0 truncate body-sm">{accountName}</p>
+          </div>
           <UserButton
             appearance={{
               elements: {
@@ -809,32 +843,68 @@ const BadgePage = () => {
 
         <header className="flex items-center justify-between">
           <div>
+            <p className="caption-tight text-primary">TGCC Lines</p>
             <h1 className="heading-lg text-ink">Badge numérique</h1>
-            <p className="body-sm text-ash">Pointage sécurisé</p>
           </div>
-          <div className="flex size-12 items-center justify-center rounded-full bg-surface-bone">
+          <div className="flex size-12 items-center justify-center rounded-full border border-hairline bg-surface-card text-primary">
             <BadgeCheck />
           </div>
         </header>
 
-        <Card className="gap-0 bg-transparent p-0">
+        <Card className="overflow-hidden border-hairline bg-surface-card p-0">
           <CardContent className="p-0">
-            <div className="rounded-md bg-white p-4">
-              <p className="caption-tight text-ash">TGCC Lines</p>
-              <h2 className="heading-md truncate text-ink">Pointage</h2>
+            <div className="border-b border-hairline bg-primary px-4 py-3 text-on-primary">
+              <div className="flex items-center justify-between gap-3">
+                <p className="caption-tight">Pointage sécurisé</p>
+                <Badge
+                  variant={statusContent.variant}
+                  className="shrink-0 border-divider-dark bg-surface-card text-ink"
+                >
+                  {statusContent.label}
+                </Badge>
+              </div>
+            </div>
 
-              <div className="mt-3">
-                <p className="body-md text-ink">
-                  {setupCompleted ? activeEmployee.name : accountName}
-                </p>
-                <p className="caption text-ash">
-                  {setupCompleted
-                    ? activeEmployee.matricule
-                    : "Activation requise"}
-                </p>
+            <div className="flex flex-col gap-5 p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="caption text-ash">Titulaire</p>
+                  <h2 className="heading-md truncate text-ink">
+                    {setupCompleted ? activeEmployee.name : accountName}
+                  </h2>
+                  <p className="code-md text-charcoal">
+                    {setupCompleted
+                      ? activeEmployee.matricule
+                      : "Activation requise"}
+                  </p>
+                </div>
+                <div className="flex size-16 shrink-0 items-center justify-center rounded-md border border-hairline bg-surface-bone text-primary">
+                  <BadgeCheck />
+                </div>
               </div>
 
-              <BadgeBarcode />
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-md border border-hairline bg-canvas p-3">
+                  <p className="caption text-ash">Statut</p>
+                  <p className="body-sm font-medium text-ink">
+                    {statusContent.description}
+                  </p>
+                </div>
+                <div className="rounded-md border border-hairline bg-canvas p-3">
+                  <p className="caption text-ash">Chantier</p>
+                  <p className="body-sm font-medium text-ink truncate">
+                    {selectedProject?.name ?? badgeState?.project?.name ?? "À choisir"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <BadgeBarcode />
+                <div className="flex items-center justify-between caption text-ash">
+                  <span>{activeAttendance.attendanceDate}</span>
+                  <span>{formatBadgeTime(activeAttendance.checkInTime)}</span>
+                </div>
+              </div>
 
               <Drawer
                 open={flowOpen}
@@ -849,13 +919,13 @@ const BadgePage = () => {
                 <DrawerTrigger asChild>
                   <Button
                     type="button"
-                    className="mt-4 h-10 w-full rounded-md text-base"
+                    className="h-14 w-full border-0 bg-gradient-to-r from-primary via-primary to-surface-dark text-base text-on-primary hover:opacity-95"
                   >
-                    <ShieldCheck />
+                    <ShieldCheck data-icon="inline-start" />
                     Commencer
                   </Button>
                 </DrawerTrigger>
-                <DrawerContent className="max-h-[92dvh]">
+                <DrawerContent className="max-h-[92dvh] bg-canvas">
                   <DrawerHeader>
                     <DrawerTitle>Pointage</DrawerTitle>
                     <DrawerDescription>
@@ -865,7 +935,7 @@ const BadgePage = () => {
 
                   <div className="flex flex-col gap-5 overflow-y-auto px-5 pb-[calc(env(safe-area-inset-bottom)+1.25rem)]">
                     {!setupCompleted ? (
-                      <Card className="gap-0 bg-transparent p-0">
+                      <Card className="gap-0 p-0">
                         <CardHeader className="p-5">
                           <CardTitle>Activation du badge</CardTitle>
                           <CardDescription>
@@ -893,7 +963,7 @@ const BadgePage = () => {
                               className="h-14"
                               disabled={setupLoading}
                             >
-                              {setupLoading ? <Loader2 className="animate-spin" /> : <ShieldCheck />}
+                              {setupLoading ? <Loader2 className="animate-spin" /> : <ShieldCheck data-icon="inline-start" />}
                               Activer mon badge
                             </Button>
                           </form>
@@ -905,20 +975,23 @@ const BadgePage = () => {
                       <>
                         <StepBadge activeStep={activeFlowStep === "start" ? "project" : activeFlowStep} />
 
-                        <Card className="gap-0 bg-transparent p-0">
+                        <Card className="gap-0 p-0">
                           <CardHeader className="p-5">
-                            <CardTitle>Statut du jour</CardTitle>
-                            <CardDescription>
-                              {activeAttendance.status === "not-checked-in"
-                                ? "Entrée non enregistrée"
-                                : activeAttendance.status === "checked-in"
-                                  ? "Présent sur le chantier"
-                                  : "Journée terminée"}
-                            </CardDescription>
+                            <div className="flex items-start justify-between gap-3">
+                              <div>
+                                <CardTitle>Statut du jour</CardTitle>
+                                <CardDescription>
+                                  {statusContent.description}
+                                </CardDescription>
+                              </div>
+                              <Badge variant={statusContent.variant}>
+                                {statusContent.label}
+                              </Badge>
+                            </div>
                           </CardHeader>
                           <CardContent className="flex flex-col gap-3 p-5 pt-0">
                             {activeAttendance.checkInTime ? (
-                              <div className="flex justify-between body-sm">
+                              <div className="flex items-center justify-between rounded-md bg-canvas px-3 py-2 body-sm">
                                 <span className="text-ash">Entrée</span>
                                 <span className="font-medium text-ink">
                                   {formatBadgeTime(activeAttendance.checkInTime)}
@@ -926,13 +999,22 @@ const BadgePage = () => {
                               </div>
                             ) : null}
                             {activeAttendance.checkOutTime ? (
-                              <div className="flex justify-between body-sm">
+                              <div className="flex items-center justify-between rounded-md bg-canvas px-3 py-2 body-sm">
                                 <span className="text-ash">Sortie</span>
                                 <span className="font-medium text-ink">
                                   {formatBadgeTime(activeAttendance.checkOutTime)}
                                 </span>
                               </div>
-                            ) : null}
+                            ) : activeAttendance.checkInTime ? (
+                              <div className="flex items-center justify-between rounded-md bg-canvas px-3 py-2 body-sm">
+                                <span className="text-ash">Sortie</span>
+                                <span className="font-medium text-ash">--:--</span>
+                              </div>
+                            ) : (
+                              <div className="rounded-md bg-canvas px-3 py-3 body-sm text-ash">
+                                Aucun pointage enregistré aujourd’hui.
+                              </div>
+                            )}
                           </CardContent>
                         </Card>
 
@@ -958,7 +1040,7 @@ const BadgePage = () => {
                         ) : null}
 
                         {activeFlowStep === "project" ? (
-                          <Card className="gap-0 bg-transparent p-0">
+                          <Card className="gap-0 p-0">
                             <CardHeader className="p-5">
                               <CardTitle>Chantier</CardTitle>
                               <CardDescription>
@@ -998,26 +1080,18 @@ const BadgePage = () => {
                                         setFlowStep("location");
                                         setFeedback(null);
                                       }}
-                                      className={`flex min-h-16 w-full items-center justify-between gap-3 rounded-md border p-4 text-left transition-colors disabled:opacity-60 ${
+                                      className={cn(
+                                        "flex min-h-16 w-full items-center justify-between gap-3 rounded-md border p-4 text-left transition-colors disabled:opacity-60",
                                         isSelected
                                           ? "border-primary bg-primary/10 text-ink"
-                                          : "border-hairline bg-surface-card hover:bg-surface-bone"
-                                      }`}
+                                          : "border-hairline bg-canvas hover:bg-surface-bone",
+                                      )}
                                     >
-                                      <div className="flex min-w-0 items-center gap-3">
-                                        <div
-                                          className={`flex size-10 shrink-0 items-center justify-center rounded-full ${
-                                            isSelected ? "bg-primary text-on-primary" : "bg-surface-bone text-ash"
-                                          }`}
-                                        >
-                                          {isSelected ? <CheckCircle2 /> : <Building2 />}
-                                        </div>
-                                        <div className="min-w-0">
-                                          <p className="body-md font-medium text-ink">{project.name}</p>
-                                          <p className="caption text-ash">
-                                            {hasLocation ? "Localisation configurée" : "Localisation manquante"}
-                                          </p>
-                                        </div>
+                                      <div className="min-w-0">
+                                        <p className="body-md font-medium text-ink">{project.name}</p>
+                                        <p className="caption text-ash">
+                                          {hasLocation ? "Localisation configurée" : "Localisation manquante"}
+                                        </p>
                                       </div>
                                       <MapPin
                                         className={hasLocation ? "shrink-0 text-badge-success" : "shrink-0 text-ash"}
@@ -1031,7 +1105,7 @@ const BadgePage = () => {
                         ) : null}
 
                         {activeFlowStep === "location" ? (
-                          <Card className="gap-0 bg-transparent p-0">
+                          <Card className="gap-0 p-0">
                             <CardHeader className="p-5">
                               <div className="flex items-start justify-between gap-3">
                                 <div>
@@ -1092,7 +1166,7 @@ const BadgePage = () => {
                         ) : null}
 
                         {activeFlowStep === "attendance" ? (
-                          <Card className="gap-0 bg-transparent p-0">
+                          <Card className="gap-0 p-0">
                             <CardHeader className="p-5">
                               <div className="flex items-start justify-between gap-3">
                                 <div>
