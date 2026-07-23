@@ -146,7 +146,7 @@ const clampAttendanceRadius = (radius?: number) => {
     return undefined;
   }
 
-  return Math.min(300, Math.max(200, radius));
+  return Math.min(1000, Math.max(0, radius));
 };
 
 const getErrorMessage = (error: unknown, fallback: string) =>
@@ -310,11 +310,11 @@ const ProjectForm = ({
           id="project-radius"
           name="attendanceRadiusMeters"
           type="number"
-          min={200}
-          max={300}
+          min={0}
+          max={1000}
           step={1}
           defaultValue={defaultValues?.attendanceRadiusMeters ?? 250}
-          placeholder="200 à 300"
+          placeholder="0 à 1000"
         />
       </div>
     </div>

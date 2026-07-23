@@ -6,7 +6,7 @@ function normalizeAttendanceRadius(radius?: number) {
     return undefined;
   }
 
-  return Math.min(300, Math.max(200, radius));
+  return Math.min(1000, Math.max(0, radius));
 }
 
 /**

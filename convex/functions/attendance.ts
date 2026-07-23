@@ -22,7 +22,7 @@ function resolveAllowedRadius(radius?: number): number {
     return DEFAULT_ATTENDANCE_RADIUS_METERS;
   }
 
-  return Math.min(300, Math.max(200, radius));
+  return Math.min(1000, Math.max(0, radius));
 }
 
 function validateCoordinates(latitude: number, longitude: number): void {
@@ -75,35 +75,22 @@ function getNearestProjectDistanceMeters(
   longitude: number,
   project: Doc<"Project">,
 ): number {
-  const candidateCoordinates = [
-    {
-      latitude: project.yCoordinate,
-      longitude: project.xCoordinate,
-    },
-    {
-      latitude: project.xCoordinate,
-      longitude: project.yCoordinate,
-    },
-  ].filter(
-    (coordinates): coordinates is { latitude: number; longitude: number } =>
-      typeof coordinates.latitude === "number" &&
-      typeof coordinates.longitude === "number" &&
-      isValidCoordinatePair(coordinates.latitude, coordinates.longitude),
-  );
+  const projectLatitude = project.yCoordinate;
+  const projectLongitude = project.xCoordinate;
 
-  if (candidateCoordinates.length === 0) {
+  if (
+    typeof projectLatitude !== "number" ||
+    typeof projectLongitude !== "number" ||
+    !isValidCoordinatePair(projectLatitude, projectLongitude)
+  ) {
     throw new ConvexError("PROJECT_LOCATION_MISSING");
   }
 
-  return Math.min(
-    ...candidateCoordinates.map((coordinates) =>
-      calculateDistanceMeters(
-        latitude,
-        longitude,
-        coordinates.latitude,
-        coordinates.longitude,
-      ),
-    ),
+  return calculateDistanceMeters(
+    latitude,
+    longitude,
+    projectLatitude,
+    projectLongitude,
   );
 }
 

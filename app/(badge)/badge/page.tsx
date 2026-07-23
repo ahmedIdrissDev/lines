@@ -250,7 +250,7 @@ function resolveAllowedRadius(radius?: number): number {
     return 250;
   }
 
-  return Math.min(300, Math.max(200, radius));
+  return Math.min(1000, Math.max(0, radius));
 }
 
 function validateCoordinates(latitude: number, longitude: number): void {
@@ -303,35 +303,22 @@ function getNearestProjectDistanceMeters(
   location: LocationSnapshot,
   project: ProjectSummary,
 ): number {
-  const candidateCoordinates = [
-    {
-      latitude: project.yCoordinate,
-      longitude: project.xCoordinate,
-    },
-    {
-      latitude: project.xCoordinate,
-      longitude: project.yCoordinate,
-    },
-  ].filter(
-    (coordinates): coordinates is { latitude: number; longitude: number } =>
-      typeof coordinates.latitude === "number" &&
-      typeof coordinates.longitude === "number" &&
-      isValidCoordinatePair(coordinates.latitude, coordinates.longitude),
-  );
+  const projectLatitude = project.yCoordinate;
+  const projectLongitude = project.xCoordinate;
 
-  if (candidateCoordinates.length === 0) {
+  if (
+    typeof projectLatitude !== "number" ||
+    typeof projectLongitude !== "number" ||
+    !isValidCoordinatePair(projectLatitude, projectLongitude)
+  ) {
     throw new Error("INVALID_LATITUDE");
   }
 
-  return Math.min(
-    ...candidateCoordinates.map((coordinates) =>
-      calculateDistanceMeters(
-        location.latitude,
-        location.longitude,
-        coordinates.latitude,
-        coordinates.longitude,
-      ),
-    ),
+  return calculateDistanceMeters(
+    location.latitude,
+    location.longitude,
+    projectLatitude,
+    projectLongitude,
   );
 }
 
