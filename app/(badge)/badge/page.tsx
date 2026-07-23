@@ -164,6 +164,8 @@ type AttendanceApi = {
 const attendanceApi = api as unknown as AttendanceApi;
 const LOCATION_MAX_AGE_MS = 60_000;
 const MAX_LOCATION_ACCURACY_METERS = 100;
+const TARGET_LOCATION_ACCURACY_METERS = 30;
+const LOCATION_ACQUISITION_TIMEOUT_MS = 12_000;
 
 const ERROR_MESSAGES: Record<string, string> = {
   EMPLOYEE_NOT_FOUND:
@@ -221,6 +223,17 @@ function isProjectsResult(result: ProjectsResult | undefined): result is Project
 
 function getErrorMessage(error: unknown): string {
   const text = error instanceof Error ? error.message : String(error);
+
+  if (text.includes("OUTSIDE_CHANTIER_ZONE:")) {
+    const [, distance, radius, accuracy] = text.match(
+      /OUTSIDE_CHANTIER_ZONE:(\d+):(\d+):(\d+)/,
+    ) ?? [];
+
+    if (distance && radius && accuracy) {
+      return `Vous êtes en dehors de la zone autorisée du chantier. Distance estimée : ${distance} m, zone : ${radius} m, précision GPS : ${accuracy} m.`;
+    }
+  }
+
   const key = Object.keys(ERROR_MESSAGES).find((code) => text.includes(code));
   return key ? ERROR_MESSAGES[key] : "Une erreur est survenue pendant le pointage. Veuillez réessayer.";
 }
@@ -360,7 +373,9 @@ function validatePointageLocation(
   const toleranceMeters = getLocationToleranceMeters(location.accuracy);
 
   if (distanceMeters > radiusMeters + toleranceMeters) {
-    throw new Error("OUTSIDE_CHANTIER_ZONE");
+    throw new Error(
+      `OUTSIDE_CHANTIER_ZONE:${Math.round(distanceMeters)}:${Math.round(radiusMeters)}:${Math.round(location.accuracy)}`,
+    );
   }
 }
 
@@ -376,19 +391,89 @@ function requestCurrentLocation(): Promise<LocationSnapshot> {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        resolve({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          accuracy: position.coords.accuracy,
-          capturedAt: position.timestamp || Date.now(),
-        });
-      },
-      (error) => reject(error),
+    let settled = false;
+    let bestLocation: LocationSnapshot | null = null;
+    let watchId: number | null = null;
+    let timeoutId: number | null = null;
+
+    const cleanup = () => {
+      if (watchId !== null) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+
+    const finish = (location: LocationSnapshot) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(location);
+    };
+
+    const fail = (error: GeolocationPositionError) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(error);
+    };
+
+    const capture = (position: GeolocationPosition) => {
+      const location = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        accuracy: position.coords.accuracy,
+        capturedAt: position.timestamp || Date.now(),
+      };
+
+      if (!bestLocation || location.accuracy < bestLocation.accuracy) {
+        bestLocation = location;
+      }
+
+      if (location.accuracy <= TARGET_LOCATION_ACCURACY_METERS) {
+        finish(location);
+      }
+    };
+
+    timeoutId = window.setTimeout(() => {
+      if (bestLocation) {
+        finish(bestLocation);
+        return;
+      }
+
+      fail({
+        code: 3,
+        message: "Geolocation timed out",
+        PERMISSION_DENIED: 1,
+        POSITION_UNAVAILABLE: 2,
+        TIMEOUT: 3,
+      });
+    }, LOCATION_ACQUISITION_TIMEOUT_MS);
+
+    watchId = navigator.geolocation.watchPosition(
+      capture,
+      fail,
       {
         enableHighAccuracy: true,
-        timeout: 15_000,
+        timeout: LOCATION_ACQUISITION_TIMEOUT_MS,
+        maximumAge: 0,
+      },
+    );
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        capture(position);
+      },
+      (error) => {
+        if (!bestLocation) {
+          fail(error);
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: LOCATION_ACQUISITION_TIMEOUT_MS,
         maximumAge: 0,
       },
     );

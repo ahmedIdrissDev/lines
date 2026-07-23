@@ -133,7 +133,9 @@ function validatePointageLocation(args: {
   const toleranceMeters = getLocationToleranceMeters(args.accuracy);
 
   if (distanceMeters > radiusMeters + toleranceMeters) {
-    throw new ConvexError("OUTSIDE_CHANTIER_ZONE");
+    throw new ConvexError(
+      `OUTSIDE_CHANTIER_ZONE:${Math.round(distanceMeters)}:${Math.round(radiusMeters)}:${Math.round(args.accuracy)}`,
+    );
   }
 }
 
