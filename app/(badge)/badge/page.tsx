@@ -253,6 +253,14 @@ function resolveAllowedRadius(radius?: number): number {
   return Math.min(1000, Math.max(0, radius));
 }
 
+function getLocationToleranceMeters(accuracy: number): number {
+  if (!Number.isFinite(accuracy) || accuracy <= 0) {
+    return 0;
+  }
+
+  return Math.min(MAX_LOCATION_ACCURACY_METERS, accuracy);
+}
+
 function validateCoordinates(latitude: number, longitude: number): void {
   if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90) {
     throw new Error("INVALID_LATITUDE");
@@ -349,8 +357,9 @@ function validatePointageLocation(
 
   const distanceMeters = getNearestProjectDistanceMeters(location, project);
   const radiusMeters = resolveAllowedRadius(project.attendanceRadiusMeters);
+  const toleranceMeters = getLocationToleranceMeters(location.accuracy);
 
-  if (distanceMeters > radiusMeters) {
+  if (distanceMeters > radiusMeters + toleranceMeters) {
     throw new Error("OUTSIDE_CHANTIER_ZONE");
   }
 }

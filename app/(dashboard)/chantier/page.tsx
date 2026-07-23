@@ -265,7 +265,7 @@ const ProjectForm = ({
         </Select>
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="project-x">Coordonnée X</Label>
+        <Label htmlFor="project-x">Longitude (X)</Label>
         <Input
           id="project-x"
           name="xCoordinate"
@@ -281,11 +281,11 @@ const ProjectForm = ({
                   }),
               }
             : { defaultValue: defaultValues?.xCoordinate ?? "" })}
-          placeholder="Optionnel"
+          placeholder="-7.5898432"
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Label htmlFor="project-y">Coordonnée Y</Label>
+        <Label htmlFor="project-y">Latitude (Y)</Label>
         <Input
           id="project-y"
           name="yCoordinate"
@@ -301,7 +301,7 @@ const ProjectForm = ({
                   }),
               }
             : { defaultValue: defaultValues?.yCoordinate ?? "" })}
-          placeholder="Optionnel"
+          placeholder="33.5731104"
         />
       </div>
       <div className="flex flex-col gap-2">

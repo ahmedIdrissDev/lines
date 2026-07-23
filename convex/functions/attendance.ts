@@ -25,6 +25,14 @@ function resolveAllowedRadius(radius?: number): number {
   return Math.min(1000, Math.max(0, radius));
 }
 
+function getLocationToleranceMeters(accuracy: number): number {
+  if (!Number.isFinite(accuracy) || accuracy <= 0) {
+    return 0;
+  }
+
+  return Math.min(MAX_LOCATION_ACCURACY_METERS, accuracy);
+}
+
 function validateCoordinates(latitude: number, longitude: number): void {
   if (!Number.isFinite(latitude) || latitude < -90 || latitude > 90) {
     throw new ConvexError("INVALID_LATITUDE");
@@ -122,8 +130,9 @@ function validatePointageLocation(args: {
     args.project,
   );
   const radiusMeters = resolveAllowedRadius(args.project?.attendanceRadiusMeters);
+  const toleranceMeters = getLocationToleranceMeters(args.accuracy);
 
-  if (distanceMeters > radiusMeters) {
+  if (distanceMeters > radiusMeters + toleranceMeters) {
     throw new ConvexError("OUTSIDE_CHANTIER_ZONE");
   }
 }
