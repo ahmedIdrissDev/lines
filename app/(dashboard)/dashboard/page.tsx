@@ -1,171 +1,126 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import { FunctionReference } from "convex/server";
-import { Clock3, UsersRound } from "lucide-react";
+import {
+  Bus,
+  Construction,
+  FileText,
+  FolderKanban,
+  Settings,
+  type LucideIcon,
+  UserPlus,
+  UsersRound,
+} from "lucide-react";
+import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-} from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import { Card, CardContent } from "@/components/ui/card";
 
-type TodayPointageEntry = {
-  _id: Id<"attendance">;
-  projectId: Id<"Project">;
-  matricule: string;
-  employeeName: string;
-  attendanceDate: string;
-  checkInTime: number;
-  checkOutTime?: number;
-  status: "checked-in" | "checked-out";
-};
-
-type TodayPointageGroup = {
-  projectId: Id<"Project">;
-  projectName: string;
-  count: number;
-  checkedInCount: number;
-  checkedOutCount: number;
-  entries: TodayPointageEntry[];
-};
-
-type DashboardApi = {
-  functions: {
-    attendance: {
-      getTodayAttendanceGroupedByProject: FunctionReference<
-        "query",
-        "public",
-        Record<string, never>,
-        TodayPointageGroup[]
-      >;
-    };
-  };
-};
-
-const dashboardApi = api as unknown as DashboardApi;
-
-function formatTime(timestamp?: number): string {
-  if (!timestamp) return "--:--";
-
-  return new Intl.DateTimeFormat("fr-MA", {
-    timeZone: "Africa/Casablanca",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date(timestamp));
-}
-
-function formatToday(): string {
-  return new Intl.DateTimeFormat("fr-MA", {
-    timeZone: "Africa/Casablanca",
-    weekday: "long",
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-  }).format(new Date());
-}
+const modules = [
+  {
+    code: "HCM",
+    label: "Gestion personnel",
+    description: "Pointage, présence et suivi des équipes.",
+    path: "/personnel",
+    icon: UsersRound,
+  },
+  {
+    code: "TRN",
+    label: "Gestion Bus",
+    description: "Transport, bus et affectations.",
+    path: "/bus",
+    icon: Bus,
+  },
+  {
+    code: "PRJ",
+    label: "Chantier",
+    description: "Sites, coordonnées et zones de pointage.",
+    path: "/chantier",
+    icon: FolderKanban,
+  },
+  {
+    code: "SUB",
+    label: "Sous-traitants",
+    description: "Entreprises partenaires et présence.",
+    path: "/sous-traitants",
+    icon: Construction,
+  },
+  {
+    code: "RPT",
+    label: "Rapport Général",
+    description: "Rapports personnel et transport.",
+    path: "/rapport-general",
+    icon: FileText,
+  },
+  {
+    code: "ADM",
+    label: "Administration",
+    description: "Création et gestion des accès.",
+    path: "/add",
+    icon: UserPlus,
+  },
+  {
+    code: "CFG",
+    label: "Paramètres",
+    description: "Configuration de l’application.",
+    path: "/settings",
+    icon: Settings,
+  },
+] satisfies Array<{
+  code: string;
+  label: string;
+  description: string;
+  path: string;
+  icon: LucideIcon;
+}>;
 
 const DashboardPage = () => {
-  const pointageGroups = useQuery(
-    dashboardApi.functions.attendance.getTodayAttendanceGroupedByProject,
-    {},
-  );
-  const totalPointages = Array.isArray(pointageGroups)
-    ? pointageGroups.reduce((total, group) => total + group.count, 0)
-    : 0;
-  const pointageRows = Array.isArray(pointageGroups)
-    ? pointageGroups
-        .flatMap((group) =>
-          group.entries.map((entry) => ({
-            ...entry,
-            projectName: group.projectName,
-          })),
-        )
-        .sort((first, second) => second.checkInTime - first.checkInTime)
-    : [];
-
   return (
-    <div className="flex flex-col gap-4 p-4 md:p-8">
-      <Card className="gap-0 p-0">
-        <CardHeader className="p-5">
-          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+    <main className="min-h-[calc(100dvh-3.75rem)] bg-canvas p-4 md:p-8">
+      <Card className="gap-0 overflow-hidden border-0 bg-transparent p-0">
+        <div className="bg-primary px-5 py-4 text-on-primary">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
-              <h1 className="body-md font-medium text-ink">Pointage du jour</h1>
-              <CardDescription className="capitalize">
-                {formatToday()}
-              </CardDescription>
+              <p className="caption-tight text-on-dark-mute">TGCC Lines</p>
+              <h1 className="heading-md text-on-primary">Accueil modules</h1>
             </div>
             <Badge variant="secondary" className="w-fit">
-              <UsersRound />
-              {totalPointages} pointage{totalPointages > 1 ? "s" : ""}
+              {modules.length} modules
             </Badge>
           </div>
-        </CardHeader>
-        <CardContent className="p-0">
-          {pointageGroups === undefined ? (
-            <div className="space-y-2 p-5 pt-0">
-              <Skeleton className="h-12 w-full rounded-md" />
-              <Skeleton className="h-12 w-full rounded-md" />
-              <Skeleton className="h-12 w-full rounded-md" />
-            </div>
-          ) : pointageRows.length === 0 ? (
-            <div className="flex min-h-72 flex-col items-center justify-center gap-2 p-6 text-center text-ash">
-              <Clock3 />
-              <p className="body-sm">Aucun pointage enregistré aujourd’hui.</p>
-            </div>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Employé</TableHead>
-                  <TableHead>Matricule</TableHead>
-                  <TableHead>Entrée</TableHead>
-                  <TableHead>Sortie</TableHead>
-                  <TableHead>Statut</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {pointageRows.map((entry) => (
-                  <TableRow key={entry._id}>
-                    <TableCell className="font-medium text-ink">
-                      {entry.employeeName}
-                    </TableCell>
-                    <TableCell className="text-ash">{entry.matricule}</TableCell>
-                    <TableCell>{formatTime(entry.checkInTime)}</TableCell>
-                    <TableCell>{formatTime(entry.checkOutTime)}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={
-                          entry.status === "checked-out"
-                            ? "success"
-                            : "secondary"
-                        }
-                      >
-                        {entry.status === "checked-out" ? "Terminé" : "Présent"}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
+        </div>
+
+        <CardContent className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 xl:grid-cols-4">
+          {modules.map((module) => {
+            const Icon = module.icon;
+
+            return (
+              <Link
+                key={module.code}
+                href={module.path}
+                className="group rounded-md border border-transparent bg-surface-card p-4 transition-colors hover:bg-surface-bone"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex size-11 shrink-0 items-center justify-center text-primary">
+                    <Icon />
+                  </div>
+                  <span className="rounded-sm border border-hairline px-2 py-1 code-sm text-ash">
+                    {module.code}
+                  </span>
+                </div>
+                <div className="mt-4">
+                  <h2 className="body-md font-medium text-ink">
+                    {module.label}
+                  </h2>
+                  <p className="mt-1 min-h-10 body-sm text-charcoal">
+                    {module.description}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 };
 

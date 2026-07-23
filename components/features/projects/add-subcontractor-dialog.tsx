@@ -1,5 +1,5 @@
 'use client'
-import { Plus, X, Loader2, Building2, Mail, Phone, MapPin, FolderGit2 } from 'lucide-react';
+import { Plus, X, Loader2, Building2, MapPin, FolderGit2 } from 'lucide-react';
 import React, { FormEvent, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react';
 import { useMutation, useQuery } from 'convex/react';
@@ -47,10 +47,20 @@ const AddSubcontractorDialog = () => {
         <>
             <button 
                 onClick={openclose}
-                className="flex bg cursor-pointer items-center justify-center flex-col gap-2 p-6 bg-surface-card border border-hairline rounded-md text-charcoal hover:bg-canvas hover:border-primary/50 transition-all shadow-sm group"
+                className="group flex min-h-36 cursor-pointer flex-col rounded-md border-0 bg-surface-card p-4 text-left transition-colors hover:bg-surface-bone"
             >
-                    <Plus className="size-6 text-ash group-hover:text-primary transition-colors" />
-                <span className="">ajouter un sous-traitant</span>
+                <div className="flex items-start justify-between gap-3">
+                    <div className="flex size-11 shrink-0 items-center justify-center text-primary">
+                        <Plus />
+                    </div>
+                    <span className="rounded-sm border border-hairline px-2 py-1 code-sm text-ash">
+                        NEW
+                    </span>
+                </div>
+                <div className="mt-4">
+                    <span className="body-md font-medium text-ink">Ajouter un sous-traitant</span>
+                    <p className="mt-1 min-h-10 body-sm text-charcoal">Créer une nouvelle fiche.</p>
+                </div>
             </button>
 
             <AnimatePresence>

@@ -4,17 +4,16 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { store } from "@/store";
 import { Id } from "@/convex/_generated/dataModel";
-import { Loader2, Building2 } from "lucide-react";
+import { Building2, Loader2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import AddSubcontractorDialog from "@/components/features/projects/add-subcontractor-dialog";
 import { SubcontractorSkeleton } from "@/components/features/projects/subcontractor-skeleton";
-import { useUser } from "@clerk/nextjs";
+import { Badge } from "@/components/ui/badge";
 
 const SubcontractorsPage = () => {
   const { ProjectID } = store();
   const projectId = ProjectID as Id<"Project"> | undefined;
-  const user = useUser();
   const subcontractors = useQuery(
     api.functions.subcontractors.getSubcontractorsByProject,
     projectId ? { projectId } : "skip",
@@ -45,19 +44,26 @@ const SubcontractorsPage = () => {
   }
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <div className="mb-12">
-        <h1 className="heading-xl text-ink">Sous-traitants</h1>
-        <p className="body-sm text-ash mt-2">
-          Liste des sous-traitants pour le projet sélectionné
-        </p>
-      </div>
+    <main className="flex flex-col gap-4 bg-canvas p-4 md:p-8">
+      <Card className="gap-0 overflow-hidden border-0 bg-transparent p-0">
+        <div className="bg-primary px-5 py-4 text-on-primary">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="caption-tight text-on-dark-mute">SUB</p>
+              <h1 className="heading-md text-on-primary">Sous-traitants</h1>
+            </div>
+            <Badge variant="secondary" className="w-fit">
+              Module
+            </Badge>
+          </div>
+        </div>
+      </Card>
 
       {subcontractors === undefined ? (
         <SubcontractorSkeleton />
       ) : Array.isArray(subcontractors) ? (
         subcontractors.length === 0 ? (
-          <div className="flex flex-col items-center justify-center min-h-[300px] bg-white rounded-md border border-hairline border-dashed">
+          <div className="flex flex-col items-center justify-center min-h-[300px] bg-surface-card rounded-md">
             <svg
               className="w-12 h-11 opacity-20"
               width="457"
@@ -77,21 +83,34 @@ const SubcontractorsPage = () => {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <AddSubcontractorDialog />
             {subcontractors.map((sub) => (
               <Link key={sub._id} href={`/sous-traitants/sub/${sub._id}`}>
-                <Card className="h-44 flex flex-col items-center justify-center p-6 bg-white  b cursor-pointer group rounded-md hover:border-primary/50 transition-all shadow-sm">
-                  <span className="text-md text-ink text-center capitalize">
-                    {sub.name.toLowerCase()}
-                  </span>
+                <Card className="min-h-36 cursor-pointer rounded-md border-0 bg-surface-card p-4 transition-colors hover:bg-surface-bone">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex size-11 shrink-0 items-center justify-center text-primary">
+                      <Building2 />
+                    </div>
+                    <span className="rounded-sm border border-hairline px-2 py-1 code-sm text-ash">
+                      SUB
+                    </span>
+                  </div>
+                  <div className="mt-4">
+                    <h2 className="body-md font-medium text-ink capitalize">
+                      {sub.name.toLowerCase()}
+                    </h2>
+                    <p className="mt-1 min-h-10 body-sm text-charcoal">
+                      Fiche sous-traitant
+                    </p>
+                  </div>
                 </Card>
               </Link>
             ))}
           </div>
         )
       ) : (
-        <div className="flex flex-col items-center justify-center min-h-[300px] bg-white rounded-2xl border border-hairline border-dashed px-6 text-center">
+        <div className="flex flex-col items-center justify-center min-h-[300px] rounded-md bg-surface-card px-6 text-center">
           <div className="text-red-500 mb-2">
             <Loader2 className="size-8 mx-auto animate-spin opacity-20" />
           </div>
@@ -99,12 +118,12 @@ const SubcontractorsPage = () => {
             {typeof subcontractors === "object" &&
             subcontractors !== null &&
             "error" in subcontractors
-              ? (subcontractors as any).error
+              ? String(subcontractors.error)
               : "Une erreur est survenue lors de la récupération des sous-traitants."}
           </p>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 

@@ -6,63 +6,73 @@ import { LayoutDashboard, Construction, UserPlus, Settings, HelpCircle, File, Bu
 
 const Sidebar = () => {
   return (
-    <div className='w-full bg-white border-r border-hairline h-full flex flex-col justify-start gap-6 py-2'>
-      <div className="w-full px-6 flex items-center ">
+    <div className='w-full bg-canvas border-r border-hairline h-full flex flex-col justify-start gap-5 py-4'>
+      <div className="w-full px-5 flex items-center ">
         <Logo />
       </div>
       
-      <div className="flex flex-col gap-8 flex-1">
+      <div className="flex flex-col gap-6 flex-1 overflow-y-auto px-3">
         <div className="flex flex-col gap-3">
-          
-          <div className="flex px-3 flex-col gap-1">
+          <div className="px-2">
+            <span className='caption-tight text-ash'>Modules métier</span>
+          </div>
+          <div className="flex flex-col gap-2">
             <Button
               icon={<LayoutDashboard size={18} />}
               label='Gestion personnel'
-              path='/dashboard'
+              path='/personnel'
+              moduleCode='HCM'
             />
             
             <Button
               icon={<Bus size={18} />}
               label='Gestion Bus'
               path='/bus'
+              moduleCode='TRN'
             />
             <Button
               icon={<Building2 size={18} />}
               label='Chantier'
               path='/chantier'
+              moduleCode='PRJ'
             />
             <Button
               icon={<Construction size={18} />}
               label='Sous-traitants'
               path='/sous-traitants'
+              moduleCode='SUB'
             />
              <Button
               icon={<File size={18} />}
               label='Rapport Général '
               path='/rapport-general'
+              moduleCode='RPT'
             />
             <Button
               icon={<UserPlus size={18} />}
               label='Administration'
               path='/add'
+              moduleCode='ADM'
             />
           </div>
         </div>
 
         <div className="flex flex-col gap-3 mt-auto">
-          <div className="px-6">
-            <span className='caption-tight text-ash  '>Support</span>
+          <div className="px-2">
+            <span className='caption-tight text-ash'>Support</span>
           </div>
-          <div className="flex px-3 flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <Button
               icon={<Settings size={18} />}
               label='Paramètres'
               path='/settings'
+              moduleCode='CFG'
             />
             <Button
               icon={<HelpCircle size={18} />}
               label='Aide'
               path='/help'
+              moduleCode='HLP'
             />
           </div>
         </div>

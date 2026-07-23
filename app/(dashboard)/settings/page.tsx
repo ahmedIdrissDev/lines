@@ -1,25 +1,47 @@
-import React from 'react'
+import { Settings } from "lucide-react";
 
-const page = () => {
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+
+const SettingsPage = () => {
   return (
- <div className='flex justify-center h-dvh flex-col gap-0.5 items-center'>
-           <svg
-          className="w-12 h-11 opacity-20"
-          width="457"
-          height="268"
-          viewBox="0 0 457 268"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.7523 221.748C130.997 224.167 159.239 246.1 197.289 177.128C217.19 141.056 187.597 107.922 208.143 72.214C253.226 -6.13942 438.972 85.3512 438.972 85.3512"
-            stroke="currentColor"
-            strokeWidth="81"
-          />
-        </svg>
-       <h2 className='text-xl'>Cette fonctionnalité arrive bientôt</h2>
-       <p className='text-sm opacity-80' >Notre équipe finalise actuellement son développement.</p>
-    </div>  )
-}
+    <main className="flex flex-col gap-4 bg-canvas p-4 md:p-8">
+      <Card className="gap-0 overflow-hidden border-0 bg-transparent p-0">
+        <div className="bg-primary px-5 py-4 text-on-primary">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="caption-tight text-on-dark-mute">CFG</p>
+              <h1 className="heading-md text-on-primary">Paramètres</h1>
+            </div>
+            <Badge variant="secondary" className="w-fit">
+              Module
+            </Badge>
+          </div>
+        </div>
 
-export default page
+        <CardContent className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="rounded-md bg-surface-card p-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex size-11 shrink-0 items-center justify-center text-primary">
+                <Settings />
+              </div>
+              <span className="rounded-sm border border-hairline px-2 py-1 code-sm text-ash">
+                CFG
+              </span>
+            </div>
+            <div className="mt-4">
+              <h2 className="body-md font-medium text-ink">
+                Cette fonctionnalité arrive bientôt
+              </h2>
+              <p className="mt-1 min-h-10 body-sm text-charcoal">
+                Notre équipe finalise actuellement son développement.
+              </p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </main>
+  );
+};
+
+export default SettingsPage;
