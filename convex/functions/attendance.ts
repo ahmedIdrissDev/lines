@@ -94,12 +94,25 @@ function getNearestProjectDistanceMeters(
     throw new ConvexError("PROJECT_LOCATION_MISSING");
   }
 
-  return calculateDistanceMeters(
+  const directDistanceMeters = calculateDistanceMeters(
     latitude,
     longitude,
     projectLatitude,
     projectLongitude,
   );
+
+  if (isValidCoordinatePair(projectLongitude, projectLatitude)) {
+    const swappedDistanceMeters = calculateDistanceMeters(
+      latitude,
+      longitude,
+      projectLongitude,
+      projectLatitude,
+    );
+
+    return Math.min(directDistanceMeters, swappedDistanceMeters);
+  }
+
+  return directDistanceMeters;
 }
 
 function validatePointageLocation(args: {

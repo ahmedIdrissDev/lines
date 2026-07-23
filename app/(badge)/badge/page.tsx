@@ -335,12 +335,25 @@ function getNearestProjectDistanceMeters(
     throw new Error("INVALID_LATITUDE");
   }
 
-  return calculateDistanceMeters(
+  const directDistanceMeters = calculateDistanceMeters(
     location.latitude,
     location.longitude,
     projectLatitude,
     projectLongitude,
   );
+
+  if (isValidCoordinatePair(projectLongitude, projectLatitude)) {
+    const swappedDistanceMeters = calculateDistanceMeters(
+      location.latitude,
+      location.longitude,
+      projectLongitude,
+      projectLatitude,
+    );
+
+    return Math.min(directDistanceMeters, swappedDistanceMeters);
+  }
+
+  return directDistanceMeters;
 }
 
 function validatePointageLocation(
